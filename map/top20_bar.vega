@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 350,
+  "height": 200,
+  "data": {
+    "url": "Cost_of_Living_Index_2022.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "Cost of Living Index", "order": "descending"}]
+    },
+    {
+      "filter": {"field": "rank", "lte": 20}
+    },
+    {
+      "filter": {"field": "Cost of Living Index", "gte": 30}
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Country",
+      "type": "ordinal",
+      "axis": {"title": "Country"},
+      "sort": {"field": "Cost of Living Index", "order": "descending"}
+    },
+    "y": {
+      "field": "Cost of Living Index", 
+      "type": "quantitative",
+      "axis": {"title": "Cost of Living Index"},
+      "scale": {"domain": [0, 150]}
+    },
+    "color": {
+      "condition": {"test": "datum.Country === 'Australia'", "value": "blue"},
+      "value": "pink"
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Cost of Living Index", "type": "quantitative", "format": ".2f"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  }
+}

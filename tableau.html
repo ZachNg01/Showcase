@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+
+</head>
+
+<body>    
+  <div id="top-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="employment.html">Employment</a></li>
+        <li><a href="visualisations.html"class="active">Visualisations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cow.html">Cows</a></li>
+        <!-- Add more menu items as needed -->
+      </ul>
+    </div>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <marquee behavior="scroll" direction="left" scrollamount="15">
+      <h1> <u>Tableau</u></h1>
+  </marquee>
+    <div class='tableauPlaceholder' id='viz1701837247328' style='position: relative'>
+      <noscript>
+        <a href='#'>
+          <img alt='Dashboard 1' src='https://public.tableau.com/static/images/Da/DataVisualisation1_16936355451420/Dashboard1/1_rss.png' style='border: none' />
+        </a>
+      </noscript>
+      <object class='tableauViz' style='display:none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+        <param name='embed_code_version' value='3' />
+        <param name='site_root' value='' />
+        <param name='name' value='DataVisualisation1_16936355451420&#47;Dashboard1' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+        <param name='static_image' value='https://public.tableau.com/static/images/Da/DataVisualisation1_16936355451420/Dashboard1/1.png' />
+        <param name='animate_transition' value='yes' />
+        <param name='display_static_image' value='yes' />
+        <param name='display_spinner' value='yes' />
+        <param name='display_overlay' value='yes' />
+        <param name='display_count' value='yes' />
+        <param name='language' value='en-GB' />
+      </object>
+    </div>
+      <script type='text/javascript'>
+        var divElement = document.getElementById('viz1701837247328');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        
+        function setVizSize() {
+            var containerWidth = divElement.offsetWidth;
+            var containerHeight = window.innerHeight; // Adjust as needed
+        
+            vizElement.style.width = '100%';
+            vizElement.style.height = containerHeight + 'px';
+        }
+        
+        setVizSize(); // Set initial size
+        
+        window.addEventListener('resize', function () {
+            setVizSize(); // Update size on window resize
+        });
+        
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+
+
+        
+
+        
+      </script>
+    </div>
+
+
+  
+
+  <!-- Your existing Tableau script and closing body/html tags -->
+</body>
+
+</html>

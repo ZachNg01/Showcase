@@ -1,0 +1,123 @@
+<!DOCTYPE html>    
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+  <script>
+    vegaEmbed("#world-vega-vis", "world_vega.vega", { mode: "vega", actions: false });
+    vegaEmbed("#bar-vega-vis", "top20_bar.vega", { mode: "vega", actions: false });
+    vegaEmbed("#food-price-vega-vis", "area.vega", { mode: "vega", actions: false });
+    vegaEmbed("#scatter-vega-vis", "scatter.vega", { mode: "vega", actions: false });
+    vegaEmbed("#heatmap-vega-vis", "heatmap.vega", { mode: "vega", actions: false });
+    vegaEmbed("#area-vega-vis", "stacked_donut_chart.vega", { mode: "vega", actions: false });
+    vegaEmbed("#table-vega-vis", "ageTable.vega", { mode: "vega", actions: false });
+  </script>
+  
+<html lang="en">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+<body>
+  <div id=".title-container">
+
+  <title>Cost of Living Worldwide</title>
+  </div>
+  <div id="top-menu">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../education.html">Education</a></li>
+      <li><a href="../employment.html">Employment</a></li>
+      <li><a href="../visualisations.html"class="active">Visualisations</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../cow.html">Cows</a></li>
+        <!-- Add more menu items as needed -->
+    </ul>
+</div>
+<marquee behavior="scroll" direction="left" scrollamount="15">
+  <h1> <u>Visualisations</u></h1>
+</marquee>
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<h1>The Cost of Living Crisis in Australia</h1>
+
+  <div class="container">
+    <div class="graph-container">
+      <div class="graph-container">
+      <div class="flex-container">
+        <h2>Figure 1: Worldwide Cost of Living Index (2022)</h2>
+        <div class="content-container">
+          <div class="visualization" id="world-vega-vis">
+            <!-- Your visualization content goes here -->
+          </div>
+          <p>
+            According to figure 1, Australia has one of the <b>highest cost of living indexes</b> relative
+             to the rest of the world. 
+          </p>
+        </div>
+    </div>
+  </div>
+    <div class="graph-container">
+    <div class="flex-container">
+    <h2>Figure 2: Highest Cost of Living Index (2022)</h2>
+    <div class="content-container">
+      
+        <div class="visualization" id="bar-vega-vis"></div>     
+      <p>Australia is one of the country's with the highest cost of living, ranking at <b>15th place</b> in terms of Cost of Living Index.</p>
+    </div>
+  </div>
+  </div>
+    
+    <div class="graph-container">
+      <div class="flex-container">
+      <h2>Figure 3: Average Price of Food in Australia (2018-2022)</h2>
+      <div class="content-container">
+
+      <div class="visualization" id="food-price-vega-vis"></div>
+      <p>In Australia, the average price of food essentials such as bread, milk, potatoes and eggs have recently exploded in price. Based on figure 3, Eggs alone have <b>doubled in price</b> since 2018. </p>
+    </div>
+
+    </div>
+  </div>
+
+
+    <div class="graph-container">
+      <h2>Figure 4: Living Cost Index VS Consumer Price Index % Change</h2>
+      <p>In Figure 4, It shows the Living Cost Index VS Consumer Price Index % Change.</p>
+      <p>If the LCI is less than the PCI, the value of the dollar has decreased.</p>
+      <p>Resulting in the person's income to be of less value. </p>
+      <div class = "visualization" id="scatter-vega-vis"></div>
+    </div>
+
+
+    <div class="graph-container">
+      <div class="flex-container">
+
+      <h2>Figure 5: Cost of Living Index by City in Australia</h2>
+      <div class="content-container">
+
+      <div class="visualization" id="heatmap-vega-vis"></div>
+      <p>Figure 5 shows that all Australian cities have a relatively similar high cost of living indexes. Where <b>Sydney is the most expensive city in Australia </b>.</p>
+    </div>
+  </div>
+</div>
+
+    <div class="pie-container">  
+      <h2>FIgure 6: Distribution of Weekly Income for each Age-Range</h2>
+      <div class="visualization1" id="area-vega-vis"></div>
+      
+      <div class="flex-container">  
+      <div class="content-container">         
+        <div class="visualization" id="table-vega-vis"></div>
+          <img src="legendPie.jpg" alt="legend" width="210" height="130">
+
+        <p>Figure 6 shows the distribution of income levels per week for each age group.
+        Those <b>aged 45-54, are more likely to earn $3000 or more per week.</b>
+        Whereas those <b>aged 20-24 are more likely to earn the least at $500-$899 per week.</b></p>
+      </div>
+    </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A radar chart example, showing multiple dimensions in a radial layout.",
+  "width": 400,
+  "height": 400,
+  "padding": 40,
+  "autosize": {"type": "none", "contains": "padding"},
+  "signals": [
+    {"name": "radius", "update": "width / 2"}
+  ],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"key": "Cost of Living Index", "value": 72.92, "category": "Adelaide"},
+        {"key": "Rent Index", "value": 31.99, "category": "Adelaide"},
+        {"key": "Groceries Index", "value": 67.23, "category": "Adelaide"},
+        {"key": "Restaurant Price Index", "value": 68.26, "category": "Adelaide"},
+        {"key": "Local Purchasing Power Index", "value": 127.17, "category": "Adelaide"},
+      
+        {"key": "Cost of Living Index", "value": 70.46, "category": "Brisbane"},
+        {"key": "Rent Index", "value": 39.13, "category": "Brisbane"},
+        {"key": "Groceries Index", "value": 60.45, "category": "Brisbane"},
+        {"key": "Restaurant Price Index", "value": 69.33, "category": "Brisbane"},
+        {"key": "Local Purchasing Power Index", "value": 134.54, "category": "Brisbane"},
+      
+        {"key": "Cost of Living Index", "value": 69.88, "category": "Canberra"},
+        {"key": "Rent Index", "value": 40.63, "category": "Canberra"},
+        {"key": "Groceries Index", "value": 63.26, "category": "Canberra"},
+        {"key": "Restaurant Price Index", "value": 70.06, "category": "Canberra"},
+        {"key": "Local Purchasing Power Index", "value": 153.77, "category": "Canberra"},
+      
+        {"key": "Cost of Living Index", "value": 72.47, "category": "Darwin"},
+        {"key": "Rent Index", "value": 35.59, "category": "Darwin"},
+        {"key": "Groceries Index", "value": 64.71, "category": "Darwin"},
+        {"key": "Restaurant Price Index", "value": 78.11, "category": "Darwin"},
+        {"key": "Local Purchasing Power Index", "value": 122.21, "category": "Darwin"},
+      
+        {"key": "Cost of Living Index", "value": 64.53, "category": "Gold Coast"},
+        {"key": "Rent Index", "value": 37.37, "category": "Gold Coast"},
+        {"key": "Groceries Index", "value": 59.94, "category": "Gold Coast"},
+        {"key": "Restaurant Price Index", "value": 64.12, "category": "Gold Coast"},
+        {"key": "Local Purchasing Power Index", "value": 129.83, "category": "Gold Coast"},
+      
+        {"key": "Cost of Living Index", "value": 69.1, "category": "Hobart"},
+        {"key": "Rent Index", "value": 27.95, "category": "Hobart"},
+        {"key": "Groceries Index", "value": 64.66, "category": "Hobart"},
+        {"key": "Restaurant Price Index", "value": 76.92, "category": "Hobart"},
+        {"key": "Local Purchasing Power Index", "value": 124.03, "category": "Hobart"},
+      
+        {"key": "Cost of Living Index", "value": 74.53, "category": "Melbourne"},
+        {"key": "Rent Index", "value": 42.73, "category": "Melbourne"},
+        {"key": "Groceries Index", "value": 67.1, "category": "Melbourne"},
+        {"key": "Restaurant Price Index", "value": 70.76, "category": "Melbourne"},
+        {"key": "Local Purchasing Power Index", "value": 131.85, "category": "Melbourne"},
+      
+        {"key": "Cost of Living Index", "value": 71.42, "category": "Newcastle"},
+        {"key": "Rent Index", "value": 37.63, "category": "Newcastle"},
+        {"key": "Groceries Index", "value": 63.56, "category": "Newcastle"},
+        {"key": "Restaurant Price Index", "value": 79.19, "category": "Newcastle"},
+        {"key": "Local Purchasing Power Index", "value": 142.12, "category": "Newcastle"},
+      
+        {"key": "Cost of Living Index", "value": 75.09, "category": "Perth"},
+        {"key": "Rent Index", "value": 33.44, "category": "Perth"},
+        {"key": "Groceries Index", "value": 65.24, "category": "Perth"},
+        {"key": "Restaurant Price Index", "value": 79.28, "category": "Perth"},
+        {"key": "Local Purchasing Power Index", "value": 139.93, "category": "Perth"},
+      
+        {"key": "Cost of Living Index", "value": 79.93, "category": "Sydney"},
+        {"key": "Rent Index", "value": 62.58, "category": "Sydney"},
+        {"key": "Groceries Index", "value": 68.63, "category": "Sydney"},
+        {"key": "Restaurant Price Index", "value": 69.34, "category": "Sydney"},
+        {"key": "Local Purchasing Power Index", "value": 128.25, "category": "Sydney"}
+      ]
+      
+    },
+    {
+      "name": "keys",
+      "source": "table",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["key"]
+        }
+      ]
+    }],
+    "scales": [
+      {
+        "name": "angular",
+        "type": "point",
+        "range": {"signal": "[-PI, PI]"},
+        "padding": 0.5,
+        "domain": {"data": "table", "field": "key"}
+      },
+      {
+        "name": "radial",
+        "type": "linear",
+        "range": {"signal": "[0, radius]"},
+        "zero": true,
+        "nice": false,
+        "domain": {"data": "table", "field": "value"},
+        "domainMin": 0
+      },
+      {
+        "name": "color",
+        "type": "ordinal",
+        "domain": {"data": "table", "field": "category"},
+        "range": {"scheme": "category10"}
+      }
+    ],
+    "encode": {
+      "enter": {
+        "x": {"signal": "radius"},
+        "y": {"signal": "radius"}
+      }
+    },
+    "legends": [
+      {
+        "fill": "color",
+        "title": "Category Legend"
+      }
+    ],
+
+  "marks": [
+    {
+      "type": "group",
+      "name": "categories",
+      "zindex": 1,
+      "from": {
+        "facet": {"data": "table", "name": "facet", "groupby": ["category"]}
+      },
+      "marks": [
+        {
+          "type": "line",
+          "name": "category-line",
+          "from": {"data": "facet"},
+          "encode": {
+            "enter": {
+              "interpolate": {"value": "linear-closed"},
+              "x": {"signal": "scale('radial', datum.value) * cos(scale('angular', datum.key))"},
+              "y": {"signal": "scale('radial', datum.value) * sin(scale('angular', datum.key))"},
+              "stroke": {"scale": "color", "field": "category"},
+              "strokeWidth": {"value": 1},
+              "fill": {"scale": "color", "field": "category"},
+              "fillOpacity": {"value": 0.1}
+            }
+          }
+        },
+        {
+          "type": "text",
+          "name": "value-text",
+          "from": {"data": "category-line"},
+          "encode": {
+            "enter": {
+              "x": {"signal": "datum.x"},
+              "y": {"signal": "datum.y"},
+              "text": {"signal": "datum.datum.value"},
+              "align": {"value": "center"},
+              "baseline": {"value": "middle"},
+              "fill": {"value": "black"}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "rule",
+      "name": "radial-grid",
+      "from": {"data": "keys"},
+      "zindex": 0,
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"value": 0},
+          "x2": {"signal": "radius * cos(scale('angular', datum.key))"},
+          "y2": {"signal": "radius * sin(scale('angular', datum.key))"},
+          "stroke": {"value": "lightgray"},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "key-label",
+      "from": {"data": "keys"},
+      "zindex": 1,
+      "encode": {
+        "enter": {
+          "x": {"signal": "(radius + 5) * cos(scale('angular', datum.key))"},
+          "y": {"signal": "(radius + 5) * sin(scale('angular', datum.key))"},
+          "text": {"field": "key"},
+          "align": [
+            {
+              "test": "abs(scale('angular', datum.key)) > PI / 2",
+              "value": "right"
+            },
+            {
+              "value": "left"
+            }
+          ],
+          "baseline": [
+            {
+              "test": "scale('angular', datum.key) > 0", "value": "top"
+            },
+            {
+              "test": "scale('angular', datum.key) == 0", "value": "middle"
+            },
+            {
+              "value": "bottom"
+            }
+          ],
+          "fill": {"value": "black"},
+          "fontWeight": {"value": "bold"}
+        }
+      }
+    },
+    {
+      "type": "line",
+      "name": "outer-line",
+      "from": {"data": "radial-grid"},
+      "encode": {
+        "enter": {
+          "interpolate": {"value": "linear-closed"},
+          "x": {"field": "x2"},
+          "y": {"field": "y2"},
+          "stroke": {"value": "lightgray"},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    }
+  ]
+}

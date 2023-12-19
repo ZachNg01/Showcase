@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheel Spinner</title>
+  <style>
+    #spinner-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    #spinner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #ff5733 0% 10%,
+        #ffc300 10% 20%,
+        #33ff57 20% 30%,
+        #3380ff 30% 40%,
+        #8533ff 40% 50%,
+        #ff33a6 50% 60%,
+        #ff5733 60% 70%,
+        #ffc300 70% 80%,
+        #33ff57 80% 90%,
+        #3380ff 90% 100%
+      );
+      transition: transform 2s cubic-bezier(0.4, 2.5, 0.4, 0.8);
+    }
+
+    #result {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #close-btn {
+      cursor: pointer;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="spinner-container">
+    <div id="spinner" onclick="spinWheel()"></div>
+  </div>
+
+  <div id="result">
+    <h2>Landed Value: <span id="landed-value"></span></h2>
+  </div>
+
+  <div id="modal">
+    <h2>Card Title</h2>
+    <p>This is the content of the card.</p>
+    <div id="close-btn" onclick="closeModal()">Close</div>
+  </div>
+
+  <script>
+    let spinning = false;
+
+    function spinWheel() {
+      if (spinning) return;
+
+      const spinner = document.getElementById('spinner');
+      const landedValueElement = document.getElementById('landed-value');
+      const resultDiv = document.getElementById('result');
+      const modal = document.getElementById('modal');
+
+      const spinResult = getRandomInt(1, 10);
+      const spins = 10 * spinResult;
+
+      spinner.style.transform = `rotate(${spins * 360}deg)`;
+      spinning = true;
+
+      setTimeout(() => {
+        spinning = false;
+
+        landedValueElement.textContent = spinResult;
+        resultDiv.style.display = 'block';
+
+        if (spinResult === 5) {
+          showModal();
+        }
+
+        console.log('Spin result:', spinResult);
+      }, 2000);
+    }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function showModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

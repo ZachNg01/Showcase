@@ -1,0 +1,35 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "values": [
+        {"Age-Range": "15-19 years"},
+        {"Age-Range": "20-24 years"},
+        {"Age-Range": "25-34 years"},
+        {"Age-Range": "35-44 years"},
+        {"Age-Range": "45-54 years"},
+        {"Age-Range": "55-64 years"},
+        {"Age-Range": "65-74 years"},
+        {"Age-Range": "75-84 years"},
+        {"Age-Range": "85 years and over"}
+      ]
+    },
+    "mark": "text",
+    "encoding": {
+      "y": {
+        "field": "Age-Range",
+        "type": "ordinal",
+        "axis": {"labels": false},
+        "title": null
+      },
+      "text": {
+        "field": "Age-Range",
+        "type": "ordinal"
+      }
+    },
+    "config": {
+      "view": {
+        "strokeWidth": 0
+      }
+    }
+  }
+  

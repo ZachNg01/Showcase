@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="magicscroll/magicscroll.css"/>
+  <script src="magicscroll/magicscroll.js"></script>
+</head>
+<body>
+  <div id="top-menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="employment.html"class="active">Employment</a></li>
+      <li><a href="visualisations.html">Visualisations</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cow.html">Cows</a></li>
+      <!-- Add more menu items as needed -->
+    </ul>
+  </div>
+  <marquee behavior="scroll" direction="left" scrollamount="15">
+    <h1> <u>About</u></h1>
+</marquee>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+  <div class="MagicScroll" data-options="mode: carousel; height: 275px;">
+    <div id="card-container">
+      <div class="card" onclick="handleCardClick('Card Title 1', 'about.html')">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/e498db06-4921-464e-922a-b076e42f6c22/cf6Bp9GyFt.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>About this website</h2>
+              <p>Further details about the purpose of this website</p>
+          </div>
+      </div>
+
+      <div class="card" onclick="handleCardClick('Card Title 2', 'education.html')">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/d7ed68d1-b137-4ed3-b0cd-fd630d8111fd/eJsrA00xJX.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>Education</h2>
+              <p>My Education History</p>
+          </div>
+      </div>
+      <div class="card" onclick="handleCardClick('work', 'employment.html')">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/e858b6ec-6ab2-46ce-ab3e-c6cc90df8c31/K7BG8T1u8K.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>Employment</h2>
+              <p>Details of my current and past employment history</p>
+          </div>
+      </div>
+      <div class="card" onclick="handleCardClick('Visualizations', 'visualisations.html')">
+          <!-- Assuming you want to show an image from the Tableau visualization -->
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/16da00a3-d53d-4c8e-8519-026a3a172390/aYoZ2hErGU.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>Visualisations</h2>
+              <p>Click here to see visualisations I have made during my University days.</p>
+          </div>
+      </div>
+      
+      <div class="card" onclick="handleCardClick('Contact', 'contact.html')">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/12245398-3060-46de-b14a-9066066377ad/nLKSPc12BW.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>Contact</h2>
+              <p>How you can reach me</p>
+          </div>
+      </div>
+      <div class="card" onclick="handleCardClick('cow', 'cow.html')">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/6ba3a0ee-cc06-49ab-9430-921c41ac132f/ZNsfx7uwRR.json"  speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
+          <div class="card-content">
+              <h2>Cows</h2>
+              <p>Click HERE for more cows :0</p>
+          </div>
+      </div>
+      
+      <!-- Add more cards as needed -->
+  </div>
+</div>
+
+</body>
+<script>
+
+
+  AOS.init();
+  </script>
+</script>
+</html>

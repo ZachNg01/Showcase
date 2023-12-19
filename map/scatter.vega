@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "AusLCIandCPI.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "Pensioner and beneficiary LCI (% change)",
+        "Employee LCI (% change)",
+        "Age pensioner LCI (% change)",
+        "Other government transfer recipient LCI (% change)",
+        "Self-funded retiree LCI (% change)"
+      ],
+      "as": ["Variable", "Value"]
+    },
+    {
+      "window": [{"op": "row_number", "as": "row_number"}]
+    },
+    {
+      "calculate": "replace(datum.Variable, ' LCI (% change)', '')",
+      "as": "Variable"
+    }
+  ],
+  "vconcat": [
+    {
+      "params": [{"name": "brush", "select": "interval"}],
+      "hconcat": [
+        {
+          "mark": "circle",
+          "encoding": {
+            "x": {
+              "field": "Consumer Price Index (CPI) (% change)",
+              "type": "quantitative",
+              "title": "Consumer Price Index (CPI)"
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "Living Cost Index Value"
+            },
+            "color": {
+              "field": "Variable",
+              "type": "nominal",
+              "title": "Variable"
+            },
+            "tooltip": [
+              {"field": "Variable", "title": "Variable"},
+              {"field": "Value", "title": "Value"},
+              {"field": "Consumer Price Index (CPI) (% change)", "title": "CPI"},
+              {"field": "Date", "title": "Date", "timeUnit": "yearmonthdate", "format": "%-d/%-m/%Y"}
+            ]
+            
+          },
+          "width": 600,
+          "height": 600
+        }
+      ]
+    },
+    {
+      "transform": [
+        {"filter": {"param": "brush"}},
+        {"window": [{"op": "rank", "as": "rank"}]},
+        {"filter": {"field": "rank", "lt": 10}}
+      ],
+      "hconcat": [
+        {
+          "title": "Variable",
+          "width": 150,
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "Variable", "type": "nominal"},
+            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+          }
+        },
+        {
+          "title": "LCI (%Change)",
+          "width": 150,
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "Value", "type": "quantitative"},
+            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+          }
+        },
+        {
+          "title": "Selected Date",
+          "width": 150,
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "Date", "type": "temporal"},
+            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+          }
+        },
+        {
+          "title": "Selected CPI",
+          "width": 150,
+          "mark": "text",
+          "encoding": {
+            "text": {"field": "Consumer Price Index (CPI) (% change)", "type": "quantitative"},
+            "y": {"field": "row_number", "type": "ordinal", "axis": null}
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {"legend": {"color": "independent"}},
+  "width": 400,
+  "height": 400,
+  "config": {
+    "view": {"stroke": null}
+  }
+}

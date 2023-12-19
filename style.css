@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css?family=YourFontName');
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+iframe {
+  width: 100%;
+  height: 50%; /* Set height to 100% to make it non-scrollable */
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  clip: rect(1000, 0, 1000, 0);
+
+}
+#card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+  width: 300px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out, background-color 0.3s ease-in-out; /* Added background-color to the transition property */
+  animation: floatCard 3s infinite alternate;
+}
+.bigcard {
+  width: 800px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out, background-color 0.3s ease-in-out; /* Added background-color to the transition property */
+  animation: floatCard 3s infinite alternate;
+}
+.card:hover {
+  background-color: #f0f0f0c2; /* Change the background color on hover */
+  border: 2px solid #000000; /* Change the border color and thickness on hover */
+
+}
+
+@keyframes floatCard {
+  0% {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+      transform: translateY(-20px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+h2 {
+    margin-bottom: 8px;
+}
+
+h1{
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+    color: #555;
+}
+
+#popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+#close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Add this to your style.css file or within a <style> tag in the HTML head */
+
+
+
+
+#top-menu ul {
+  font-family: 'Roboto', sans-serif;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+#top-menu {
+  background-color: #333;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
+}
+
+@media only screen and (max-width: 600px) {
+  #top-menu ul {
+      max-height: 200px; /* Adjust the maximum height as needed */
+      overflow-y: auto;
+  }
+  #top-menu li {
+      display: block;
+      width: 100%;
+  }
+  body {
+      padding-top: 40px; /* Adjust the padding as needed */
+  }
+}
+
+body {
+  /* Add some top margin to the content to prevent it from being hidden behind the fixed menu on larger screens */
+  margin-top: 40px; /* Adjust the margin as needed */
+}
+
+
+#pagename {
+  background-color: #ffffff;
+  width: 100%;
+}
+#top-menu ul {
+  font-family: 'Roboto', sans-serif;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+#top-menu {
+  background-color: #333;
+  overflow: hidden;
+  width: 100%;
+}
+
+
+#top-menu li {
+    float: left;
+}
+#top-menu a.active {
+  background-color: 	#f5f5f5;
+  color: black;
+}
+
+li::before {  
+    transform: scaleX(0);
+    transform-origin: bottom right;
+  }
+  
+  li:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  li::before {
+    font-family: 'Roboto', sans-serif;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0 0 0 0;
+    background: #FF69B4(0, 99%, 37%);
+    z-index: -1;
+    transition: transform 1s ease;
+  }
+
+
+
+#top-menu a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 25px 30px; /* Increased padding to make the menu items bigger */
+    text-decoration: none;
+    font-size: 18px; /* Increased font size for the menu items */
+}
+
+#top-menu a:hover {
+    background-color: #f5f5f5;
+    color: black;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    #top-menu a {
+        padding: 15px;
+    }
+}
+
+  
+html {
+    height:100%;
+  }
+  
+  body {
+    margin:0;
+  }
+  
+  .bg {
+    animation: slide 4s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #ccc 50%, #f5f5f5 50%); /* Neutral tones */
+    bottom: 0;
+    left: -50%;
+    opacity: 0.5;
+    position: fixed;
+    right: -50%;
+    top: 0;
+    z-index: -1;
+  }
+  
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+  
+  .bg3 {
+    animation-duration:5s;
+  }
+  
+  .content {
+    background-color:rgba(255,255,255,.8);
+    border-radius:.25em;
+    box-shadow:0 0 .25em rgba(0,0,0,.25);
+    box-sizing:border-box;
+    left:50%;
+    padding:10vmin;
+    position:fixed;
+    text-align:center;
+    top:50%;
+    transform:translate(-50%, -50%);
+  }
+
+  
+  @keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
+    }
+  }
+  
+
+
+  #container {
+    padding-top: 300px;
+    max-width: 1500px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto; /* Center the container horizontally */
+    display: flex;
+    flex-direction: column; /* Ensure child elements are aligned in a column */
+    align-items: center; /* Center child elements horizontally */
+}
+
+
+/* Apply these styles to the scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Change the color on hover */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Set the color of the scrollbar handle */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Set the color of the scrollbar track */
+}
+
+
+
+HTML,BODY{cursor: url("https://downloads.totallyfreecursors.com/cursor_files/cow.ani"), url("https://downloads.totallyfreecursors.com/thumbnails/cow.gif"), auto;}
+
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 220px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}

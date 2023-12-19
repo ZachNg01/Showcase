@@ -1,0 +1,420 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "range": {
+      "category": [
+        "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728",
+        "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "15-19 years",
+            "Negative or Nil income (%)": 44,
+            "$1-$249 (%)": 32.5,
+            "$250-$499 (%)": 13.8,
+            "$500-$999 (%)": 8.2,
+            "$1,000-$1,499 (%)": 0.9,
+            "$1,500-$1,999 (%)": 0.3,
+            "$2,000-$2,999 (%)": 0.2,
+            "$3,000 or more (%)": 0.2
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+        
+      ],
+      "mark": {"type": "arc", "innerRadius": 10, "radius": 30},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal", "title": "Age Range"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"},
+        "color": {"field": "Income Range", "type": "nominal", "legend": null}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "20-24 years",
+            "Negative or Nil income (%)": 4.7,
+            "$1-$249 (%)": 8,
+            "$250-$499 (%)": 21.2,
+            "$500-$999 (%)": 42.4,
+            "$1,000-$1,499 (%)": 17.2,
+            "$1,500-$1,999 (%)": 4.4,
+            "$2,000-$2,999 (%)": 1.6,
+            "$3,000 or more (%)": 0.6
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 50, "radius": 70},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "25-34 years",
+            "Negative or Nil income (%)": 3.6,
+            "$1-$249 (%)": 4,
+            "$250-$499 (%)": 9.7,
+            "$500-$999 (%)": 26,
+            "$1,000-$1,499 (%)": 26.2,
+            "$1,500-$1,999 (%)": 16.3,
+            "$2,000-$2,999 (%)": 10.9,
+            "$3,000 or more (%)": 3.4
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 90, "radius": 110},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "35-44 years",
+            "Negative or Nil income (%)": 4.1,
+            "$1-$249 (%)": 3.7,
+            "$250-$499 (%)": 7.7,
+            "$500-$999 (%)": 20.5,
+            "$1,000-$1,499 (%)": 21.1,
+            "$1,500-$1,999 (%)": 15.9,
+            "$2,000-$2,999 (%)": 17.3,
+            "$3,000 or more (%)": 9.6
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 130, "radius": 150},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "45-54 years",
+            "Negative or Nil income (%)": 4.9,
+            "$1-$249 (%)": 3.7,
+            "$250-$499 (%)": 8.8,
+            "$500-$999 (%)": 20.8,
+            "$1,000-$1,499 (%)": 19.5,
+            "$1,500-$1,999 (%)": 14.5,
+            "$2,000-$2,999 (%)": 16.6,
+            "$3,000 or more (%)": 11.3
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 170, "radius": 190},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "55-64 years",
+            "Negative or Nil income (%)": 8.6,
+            "$1-$249 (%)": 6.4,
+            "$250-$499 (%)": 15.1,
+            "$500-$999 (%)": 22,
+            "$1,000-$1,499 (%)": 17.1,
+            "$1,500-$1,999 (%)": 11.3,
+            "$2,000-$2,999 (%)": 11.8,
+            "$3,000 or more (%)": 7.6
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 210, "radius": 230},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "65-74 years",
+            "Negative or Nil income (%)": 12.3,
+            "$1-$249 (%)": 14.5,
+            "$250-$499 (%)": 39.5,
+            "$500-$999 (%)": 17.6,
+            "$1,000-$1,499 (%)": 6.8,
+            "$1,500-$1,999 (%)": 3.6,
+            "$2,000-$2,999 (%)": 3.2,
+            "$3,000 or more (%)": 2.5
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 250, "radius": 270},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "75-84 years",
+            "Negative or Nil income (%)": 9.3,
+            "$1-$249 (%)": 11.4,
+            "$250-$499 (%)": 60.7,
+            "$500-$999 (%)": 13.3,
+            "$1,000-$1,499 (%)": 2.4,
+            "$1,500-$1,999 (%)": 1,
+            "$2,000-$2,999 (%)": 0.9,
+            "$3,000 or more (%)": 0.9
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 290, "radius": 310},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal"},
+
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Age-Range": "85 years and over",
+            "Negative or Nil income (%)": 10.9,
+            "$1-$249 (%)": 6.1,
+            "$250-$499 (%)": 64.6,
+            "$500-$999 (%)": 13.4,
+            "$1,000-$1,499 (%)": 2.3,
+            "$1,500-$1,999 (%)": 0.9,
+            "$2,000-$2,999 (%)": 0.8,
+            "$3,000 or more (%)": 0.9
+          }
+        ]
+      },
+      "transform": [
+        {
+          "fold": [
+            "Negative or Nil income (%)",
+            "$1-$249 (%)",
+            "$250-$499 (%)",
+            "$500-$999 (%)",
+            "$1,000-$1,499 (%)",
+            "$1,500-$1,999 (%)",
+            "$2,000-$2,999 (%)",
+            "$3,000 or more (%)"
+          ],
+          "as": ["Income Range", "Percentage"]
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 330, "radius": 350},
+      "encoding": {
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "color": {"field": "Income Range", "type": "nominal"},
+        "legend": {"title": "Legend", "orient": "bottom", "center": true},
+        "tooltip": [
+          {"field": "Age-Range", "type": "nominal", "title": "Age Range"},
+          {"field": "Income Range", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "text": {"field": "Percentage", "type": "quantitative"}
+      },
+      "view": {"stroke": null}
+    }
+  ]
+}
