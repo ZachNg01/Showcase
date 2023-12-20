@@ -8,6 +8,14 @@ body {
     justify-content: center;
     margin: 0;
 }
+.horicontainer {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 80px; /* Adjust as needed */
+  padding-left: 800px;
+
+}
 
 iframe {
   width: 100%;
