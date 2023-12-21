@@ -22,6 +22,7 @@
   #top-menu {
     max-height: 150px; /* Adjust the maximum height as needed */
     overflow-y: auto;
+    overflow-x: auto;
   }
   #top-menu li {
     display: block;
