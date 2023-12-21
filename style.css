@@ -364,7 +364,6 @@ input[type="range"] {
   background-color: #2980b9;
 }
 
-
 .horicontainer {
   display: flex;
   overflow-x: auto; /* Enable vertical scrolling */
@@ -372,12 +371,17 @@ input[type="range"] {
   padding: 120px; /* Adjust as needed */
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1500px) {
   .horicontainer {
-    padding: 25px;
-    padding-left: 1000px; /* Remove left padding for smaller screens */
-    overflow-x: hidden; /* Disable horizontal scrolling */
+    padding-top: 90px;
+    max-width: 1500px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto; /* Center the container horizontally */
+    display: flex;
+    flex-direction: column; /* Ensure child elements are aligned in a column */
+    align-items: center; /* Center child elements horizontally */
   }
+
+
 }
-
-
