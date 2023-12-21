@@ -364,9 +364,10 @@ input[type="range"] {
   background-color: #2980b9;
 }
 
+
 .horicontainer {
   display: flex;
-  overflow-x: auto;
+  overflow-x: auto; /* Enable vertical scrolling */
   white-space: nowrap;
   padding: 120px; /* Adjust as needed */
 }
@@ -374,7 +375,9 @@ input[type="range"] {
 @media screen and (max-width: 600px) {
   .horicontainer {
     padding: 25px;
-    padding-left: 1000px; /* Adjust the left padding for smaller screens */
+    padding-left: 1000px; /* Remove left padding for smaller screens */
+    overflow-x: hidden; /* Disable horizontal scrolling */
   }
 }
+
 
