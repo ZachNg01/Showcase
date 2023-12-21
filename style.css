@@ -1,20 +1,74 @@
 @import url('https://fonts.googleapis.com/css?family=YourFontName');
 
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
+#top-menu ul {
+  font-family: 'Roboto', sans-serif;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bold;
 }
-.horicontainer {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 80px; /* Adjust as needed */
-  padding-left: 800px;
 
+#top-menu {
+  background-color: #333;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
+}
+
+@media only screen and (max-width: 600px) {
+  #top-menu {
+    max-height: 150px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+  }
+  #top-menu li {
+    display: block;
+    width: 100%;
+  }
+  body {
+    padding-top: 120px; /* Adjust padding to accommodate fixed menu */
+  }
+}
+
+#top-menu li {
+  float: left;
+}
+
+#top-menu a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 25px 30px; /* Increased padding to make the menu items bigger */
+  text-decoration: none;
+  font-size: 18px; /* Increased font size for the menu items */
+}
+
+#top-menu a.active,
+#top-menu a:hover {
+  background-color: #f5f5f5;
+  color: black;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  #top-menu a {
+    padding: 15px;
+  }
+}
+
+
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 iframe {
@@ -28,7 +82,22 @@ iframe {
   clip: rect(1000, 0, 1000, 0);
 
 }
-#card-container {
+#        <div class="card" > 
+<div class="card-content">
+    <h2><u>Administrator</u> </h2>
+    <b><p>IIPM Pty Ltd</b>
+    <br>(Oct 2023 - Dec 2023)</p>
+    
+        <li>Handle student requests <br> 
+        &nbsp&nbsp&nbsp&nbsp about their course  </li> 
+    
+        <li>Explore and work on front-end <br> 
+        &nbsp&nbsp&nbsp&nbsp and back-end development</li>
+    
+        <li>Handling user requests and <br> 
+        &nbsp&nbsp&nbsp&nbsp resolve  issues.</li>
+</div>
+</div> {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -101,7 +170,7 @@ h1{
 }
 
 p {
-    color: #555;
+    color: #555;font-family: 'Roboto', sans-serif;
 }
 
 #popup-container {
@@ -129,71 +198,14 @@ p {
 
 
 
-#top-menu ul {
-  font-family: 'Roboto', sans-serif;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-weight: bold;
-}
 
-#top-menu {
-  background-color: #333;
-  overflow: hidden;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
-}
-
-@media only screen and (max-width: 600px) {
-  #top-menu ul {
-      max-height: 200px; /* Adjust the maximum height as needed */
-      overflow-y: auto;
-  }
-  #top-menu li {
-      display: block;
-      width: 100%;
-  }
-  body {
-      padding-top: 40px; /* Adjust the padding as needed */
-  }
-}
-
-body {
-  /* Add some top margin to the content to prevent it from being hidden behind the fixed menu on larger screens */
-  margin-top: 40px; /* Adjust the margin as needed */
-}
 
 
 #pagename {
   background-color: #ffffff;
   width: 100%;
 }
-#top-menu ul {
-  font-family: 'Roboto', sans-serif;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-weight: bold;
-}
 
-#top-menu {
-  background-color: #333;
-  overflow: hidden;
-  width: 100%;
-}
-
-
-#top-menu li {
-    float: left;
-}
-#top-menu a.active {
-  background-color: 	#f5f5f5;
-  color: black;
-}
 
 li::before {  
     transform: scaleX(0);
@@ -219,26 +231,8 @@ li::before {
 
 
 
-#top-menu a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 25px 30px; /* Increased padding to make the menu items bigger */
-    text-decoration: none;
-    font-size: 18px; /* Increased font size for the menu items */
-}
 
-#top-menu a:hover {
-    background-color: #f5f5f5;
-    color: black;
-}
 
-/* Responsive styles */
-@media screen and (max-width: 600px) {
-    #top-menu a {
-        padding: 15px;
-    }
-}
 
   
 html {
@@ -261,7 +255,10 @@ html {
     z-index: -1;
   }
   
-  
+  li{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 3px;  
+  }
   .bg2 {
     animation-direction:alternate-reverse;
     animation-duration:4s;
@@ -366,3 +363,18 @@ input[type="range"] {
 .button:hover {
   background-color: #2980b9;
 }
+
+.horicontainer {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 120px; /* Adjust as needed */
+}
+
+@media screen and (max-width: 600px) {
+  .horicontainer {
+    padding: 25px;
+    padding-left: 1000px; /* Adjust the left padding for smaller screens */
+  }
+}
+
