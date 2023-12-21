@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+
+    <meta charset="UTF-8">
+    <!-- Add this link tag to the head of your HTML document -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+    
+    <div id="top-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="employment.html"class="active">Employment</a></li>
+            <li><a href="visualisations.html">Visualisations</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cow.html">Cows</a></li>
+            <!-- Add more menu items as needed -->
+        </ul>
+    </div>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <body> 
+    <marquee behavior="scroll" direction="left" scrollamount="15">
+        <h1> <u>Employment History</u></h1>
+    </marquee>
+        
+
+    <div class="container"> 
+      <div class="horicontainer">
+        <div class="card" > 
+            <div class="card-content">
+                <h2><u>IT Intern</u> </h2>
+                <b><p>Nera Telecommunications</b>
+                <br>(Dec 2023 - Mar 2024)</p>
+                
+                    <li>Hands-on experience in <br> 
+                    &nbsp&nbsp&nbsp&nbsp IT daily operational work.</li> 
+                
+                    <li>Explore and work on front-end <br> 
+                    &nbsp&nbsp&nbsp&nbsp and back-end development.</li>
+                
+                    <li>Handling user requests and <br> 
+                    &nbsp&nbsp&nbsp&nbsp resolve  issues.</li>
+            </div>
+        </div>
+        <div class="arrow">
+            <span></span>
+            <span></span>
+        </div>
+    
+        <div class="card" > 
+            <div class="card-content">
+                <h2><u>Administrator</u> </h2>
+                <b><p>IIPM Pty Ltd</b>
+                <br>(Oct 2023 - Dec 2023)</p>
+                
+                    <li>Involved with creating updating <br> 
+                    &nbsp&nbsp&nbsp&nbsp  physical and digital student files.  </li> 
+                
+                    <li>Assisting students and collegues <br> 
+                    &nbsp&nbsp&nbsp&nbsp with administrative and IT tasks.</li>
+                
+                    <li>Dealing with financial payment. <br> 
+                    &nbsp&nbsp&nbsp&nbsp </li>
+            </div>
+        </div>
+
+        <div class="card" > 
+            <div class="card-content">
+                <h2><u>Cleaner</u> </h2>
+                <b><p>Kmart</b>
+                <br>(Oct 2023 - Dec 2023)</p>
+                
+                    <li>Handle industrail chemicals <br> 
+                    &nbsp&nbsp&nbsp&nbsp to clean surfaces. </li> 
+                
+                    <li>Use heavy machinery to clean, <br> 
+                    &nbsp&nbsp&nbsp&nbsp and buff floors</li>
+                
+                    
+            </div>
+        </div>
+        
+        <div class="card" > 
+            <div class="card-content">
+                <h2><u>Waiter</u> </h2>
+                <b><p>Restaurants/Hotels in Singapore</b>
+                <br>(Oct 2023 - Dec 2023)</p>
+                
+                    <li>Handle student requests <br> 
+                    &nbsp&nbsp&nbsp&nbsp about their course  </li> 
+                
+                    <li>Explore and work on front-end <br> 
+                    &nbsp&nbsp&nbsp&nbsp and back-end development</li>
+                
+                    <li>Handling user requests and <br> 
+                    &nbsp&nbsp&nbsp&nbsp resolve  issues.</li>
+            </div>
+        </div>
+        
+
+        
+        <!-- Add more cards as needed -->
+        </div>
+    </div>
+   </div>
+
+    <script>
+        
+        function handleCardClick(cardTitle, targetPage) {
+            window.location.href = targetPage;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var cards = document.querySelectorAll('.card');
+        
+            // Function to add 'visible' class to each card with a delay
+            function showCardsSequentially(index) {
+                if (index < cards.length) {
+                    cards[index].classList.add('visible');
+                    setTimeout(function () {
+                        showCardsSequentially(index + 1);
+                    }, 200); // Adjust the delay as needed
+                }
+            }
+        
+            // Start showing cards sequentially when the page loads
+            showCardsSequentially(0);
+        });
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the current page URL
+            var currentPage = window.location.pathname;
+        
+            // Get all menu items
+            var menuItems = document.querySelectorAll('#top-menu a');
+        
+            // Loop through each menu item
+            menuItems.forEach(function (menuItem) {
+                // Get the href attribute of the menu item
+                var menuItemHref = menuItem.getAttribute('href');
+        
+                // Check if the current page URL matches the menu item URL
+                if (currentPage === menuItemHref) {
+                    // Add the "active" class to highlight the menu item
+                    menuItem.classList.add('active');
+                }
+            });
+        
+            // Rest of your existing code...
+        
+            var cards = document.querySelectorAll('.card');
+            function showCardsSequentially(index) {
+                // ...
+            }
+            showCardsSequentially(0);
+        });
+        
+        AOS.init();
+    </script>
+
+</body>
+</html>
