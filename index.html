@@ -1,197 +1,38 @@
+--- file: index.html ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</n>
-
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-
-  <!-- Slick Carousel CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
-
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <nav>
+    <div class="logo"><a href="index.html">MyPortfolio</a></div>
+    <input type="checkbox" id="menu-checkbox">
+    <label for="menu-checkbox" class="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="skills.html">My Skillset</a></li>
+      <li><a href="projects.html">My Projects</a></li>
+    </ul>
+  </nav>
   <header>
-    <nav id="top-menu" role="navigation">
-      <ul>
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="employment.html">Employment</a></li>
-        <li><a href="visualisations.html">Visualisations</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="cow.html">Cows</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1>Welcome to My Portfolio</h1>
+      <p>Crafting responsive and stylish web experiences.</p>
+    </div>
   </header>
-
-  <main>
-    <!-- Hero Section (replace marquee) -->
-    <section class="hero">
-      <h1>Home</h1>
-    </section>
-
-    <!-- Card Grid / Carousel -->
-    <section id="card-container" class="cards">
-      <!-- Form Card -->
-      <article class="card">
-        <div class="card-content">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfouqgTimeYVKeGUbrmWz1T_-b5Mdh0urdKDR9MEJwW7Ia5iQ/viewform?embedded=true"
-            title="Rate My Website"
-            loading="lazy"
-            frameborder="0"
-            marginheight="0"
-            marginwidth="0">
-            Loading…
-          </iframe>
-        </div>
-        <h2>Rate My Website</h2>
-      </article>
-
-      <!-- Dynamic Cards -->
-      <article class="card" tabindex="0" role="button" data-target="about.html">
-        <lottie-player
-          src="https://lottie.host/e498db06-4921-464e-922a-b076e42f6c22/cf6Bp9GyFt.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>About this Website</h2>
-          <p>Further details about the purpose of this website</p>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0" role="button" data-target="education.html">
-        <lottie-player
-          src="https://lottie.host/d7ed68d1-b137-4ed3-b0cd-fd630d8111fd/eJsrA00xJX.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>Education</h2>
-          <p>My education history</p>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0" role="button" data-target="employment.html">
-        <lottie-player
-          src="https://lottie.host/e858b6ec-6ab2-46ce-ab3e-c6cc90df8c31/K7BG8T1u8K.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>Employment</h2>
-          <p>Details of my current and past roles</p>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0" role="button" data-target="visualisations.html">
-        <lottie-player
-          src="https://lottie.host/16da00a3-d53d-4c8e-8519-026a3a172390/aYoZ2hErGU.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>Visualisations</h2>
-          <p>Explore my university projects</p>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0" role="button" data-target="contact.html">
-        <lottie-player
-          src="https://lottie.host/12245398-3060-46de-b14a-9066066377ad/nLKSPc12BW.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>Contact</h2>
-          <p>Get in touch with me</p>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0" role="button" data-target="cow.html">
-        <lottie-player
-          src="https://lottie.host/6ba3a0ee-cc06-49ab-9430-921c41ac132f/ZNsfx7uwRR.json"
-          background="transparent"
-          speed="1"
-          style="width:300px; height:255px"
-          loop
-          autoplay>
-        </lottie-player>
-        <div class="card-content">
-          <h2>Cows</h2>
-          <p>See more bovine fun</p>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
-  </footer>
-
-  <!-- Lottie Player (loaded once) -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
-  <!-- jQuery (required by Slick) -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-  <!-- Slick Carousel JS -->
-  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
-  <!-- AOS (Animate On Scroll) -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-
-  <!-- Initialization Scripts -->
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Highlight active nav link
-      const current = window.location.pathname.split('/').pop();
-      document.querySelectorAll('#top-menu a').forEach(a => {
-        if (a.getAttribute('href') === current) a.classList.add('active');
-      });
-
-      // Fade-in cards sequentially
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card, i) => {
-        setTimeout(() => card.classList.add('visible'), i * 200);
-        // Click & keypress to navigate
-        card.addEventListener('click', () => location.href = card.dataset.target);
-        card.addEventListener('keypress', e => {
-          if (e.key === 'Enter') location.href = card.dataset.target;
-        });
-      });
-
-      // Initialize AOS
-      AOS.init({ duration: 800, once: true });
-
-      // Initialize Slick if needed
-      if (window.jQuery) {
-        $('#card-container').slick({
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          responsive: [{ breakpoint: 768, settings: { slidesToShow: 1 } }]
-        });
-      }
-    });
-  </script>
+  <section class="container">
+    <h2>Introduction</h2>
+    <p>This is the home page of my professional portfolio. Feel free to explore and learn more about me.</p>
+  </section>
 </body>
 </html>
