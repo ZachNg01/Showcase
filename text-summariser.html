@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Summariser – Your Name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { display:flex; justify-content:center; align-items:center; padding:4vw; }
+    .card {
+      width:100%; max-width:420px; background:#fff; border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.08); padding:clamp(16px,4vw,32px);
+      display:flex; flex-direction:column; gap:clamp(12px,4vw,18px);
+    }
+    textarea {
+      width:100%; min-height:120px; resize:vertical;
+      padding:.7rem; font-size:.95rem;
+      border:1px solid #d1d5db; border-radius:8px;
+    }
+    button {
+      background:var(--accent); color:#fff; border:none; border-radius:8px;
+      padding:.55rem 1.2rem; font-weight:600; cursor:pointer;
+      font-size:clamp(.9rem,3.5vw,1rem); transition:background .2s;
+      align-self:center;
+    }
+    button:hover { background:#004ddb; }
+    #result {
+      padding:1rem; background:#fefefe; border-radius:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,.08);
+      max-height:200px; overflow-y:auto; font-size:.95rem;
+    }
+    #status {
+      color:var(--text); font-size:clamp(.8rem,3.2vw,.95rem);
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Your Name</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="skills.html">My Skillset</a></li>
+      <li><a href="projects.html">My Projects</a></li>
+    </ul>
+    <div class="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="card">
+    <h1>Text Summariser</h1>
+    <textarea id="input" placeholder="Paste or type your text…"></textarea>
+    <button id="summariseBtn">Summarise</button>
+    <div id="status">Ready to summarise.</div>
+    <div id="result"></div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const btn    = document.getElementById('summariseBtn');
+    const input  = document.getElementById('input');
+    const status = document.getElementById('status');
+    const result = document.getElementById('result');
+
+    btn.addEventListener('click', async () => {
+      const text = input.value.trim();
+      if (!text) {
+        status.textContent = 'Please enter some text first.';
+        return;
+      }
+      status.textContent = 'Generating summary…';
+      btn.disabled = true;
+      result.textContent = '';
+
+      try {
+        const resp = await fetch('/api/summarise', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        if (!resp.ok) throw new Error(`${resp.status} ${resp.statusText}`);
+        const data = await resp.json();
+        const summary = data[0]?.summary_text || 'No summary returned.';
+        result.textContent = summary;
+        status.textContent = 'Done ✔';
+      } catch (err) {
+        status.textContent = 'Error: ' + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
