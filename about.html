@@ -2,141 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me – Zach Ng</title>
+  <title>About Me – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Japanese‑inspired font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="main-nav">
-    <div class="logo">Zach Ng</div>
+    <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About Me</a></li>
+      <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
       <li class="has-dropdown">
-        <button class="drop-btn">My Projects ▼</button>
-        <ul class="dropdown">
+        <button class="drop-btn" aria-haspopup="true">My Projects ▼</button>
+        <ul class="dropdown" role="menu">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
           <li><a href="text-summariser.html">Text Summariser</a></li>
         </ul>
       </li>
     </ul>
-    <div class="burger"><span></span><span></span><span></span></div>
+    <div class="burger" aria-label="Open Navigation"><span></span><span></span><span></span></div>
   </nav>
 
   <main class="container">
-    <!-- Hero -->
     <div class="card">
-      <h1>Hello, I’m Zach Ng</h1>
-      <p style="text-align:center; color:#555; margin-top:0.5rem;">
-        Master of Data Science candidate | Data Analyst | Bioinformatics Enthusiast
+      <h1>About Me</h1>
+      <p class="text-center">I'm Zach Ng, a <strong>Master of Data Science</strong> student at Monash University, passionate about <strong>bioinformatics, machine learning</strong>, and <strong>browser-based AI tools</strong>.</p>
+
+      <h2>🌟 Career Highlights</h2>
+      <ul>
+        <li>📊 Automated 80% of data collection at IIPM Pty Ltd</li>
+        <li>📈 Processed & visualized 6.5M census records to support investment</li>
+        <li>📌 Developed Looker dashboards tracking company-wide software adoption</li>
+        <li>🔁 Integrated APIs (BoldDesk, Sophos) to automate ticketing & analytics</li>
+      </ul>
+
+      <h2>🧠 Core Competencies</h2>
+      <div class="skills-tags">
+        <span class="tag">Python</span>
+        <span class="tag">R</span>
+        <span class="tag">SQL</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Looker Studio</span>
+      </div>
+
+      <h2>🚀 Projects & Research</h2>
+      <ul>
+        <li>📍 Bioinformatics Thesis: AI for spatial transcriptomics segmentation</li>
+        <li>🧬 Medical DB Project: Built with JS + Python + LLM APIs</li>
+        <li>🌱 SROI Model: Green Wira Programme impact assessment</li>
+      </ul>
+
+      <h2>📬 Contact</h2>
+      <p class="text-center">
+        Melbourne, VIC<br>
+        <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a><br>
+        <a href="https://linkedin.com/in/zach--ng" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/ZachNg01" target="_blank">GitHub</a>
       </p>
     </div>
-
-    <!-- Core Competencies -->
-    <section style="margin-top:2rem;">
-      <h2>Core Competencies</h2>
-      <div class="projects-grid">
-        <span class="project-card">Python</span>
-        <span class="project-card">R</span>
-        <span class="project-card">SQL</span>
-        <span class="project-card">JavaScript</span>
-        <span class="project-card">Machine Learning</span>
-        <span class="project-card">NLP</span>
-      </div>
-    </section>
-
-    <!-- Bio -->
-    <section style="margin-top:2rem;">
-      <h2>Professional Bio</h2>
-      <div class="card">
-        <p>
-          I’m a Master of Data Science student at Monash University, where I specialise in bioinformatics and browser‑based ML tools. I’ve automated pipelines​, visualised 6.5 M census records, and built interactive dashboards to drive data‑driven decisions.
-        </p>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section style="margin-top:2rem;">
-      <h2>Experience & Expertise</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Data Analyst @ IIPM</h3>
-          <ul>
-            <li>Automated 80% of data‑collection workflows</li>
-            <li>Processed & modelled 6.5 M census records</li>
-            <li>Built interactive Tableau dashboards</li>
-          </ul>
-        </div>
-        <div class="project-card">
-          <h3>IT Intern @ Nera Telecom</h3>
-          <ul>
-            <li>Developed API‑driven ticket automations</li>
-            <li>Created Looker Studio adoption dashboards</li>
-            <li>Engineered SQL logging pipelines</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Journey Timeline -->
-    <section style="margin-top:2rem;">
-      <h2>My Journey</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h4>2018</h4>
-          <p>Started BCompSci (Data Science) at Monash</p>
-        </div>
-        <div class="project-card">
-          <h4>2024</h4>
-          <p>Graduated with honours & began MDataSci</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Selected Projects -->
-    <section style="margin-top:2rem;">
-      <h2>Selected Projects</h2>
-      <div class="projects-grid">
-        <a class="project-card" href="image-classifier.html">
-          <h3>Spatial Transcriptomics AI</h3>
-          <p>Deep‑learning segmentation for Xenium imaging data.</p>
-        </a>
-        <a class="project-card" href="text-summariser.html">
-          <h3>Medical DB & AI</h3>
-          <p>Web database with OpenAI‑driven NLP summarisation.</p>
-        </a>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section style="margin-top:2rem;">
-      <h2>Education</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Monash University</h3>
-          <p><strong>MDataSci (Bioinformatics)</strong><br>Expected Dec 2025</p>
-        </div>
-        <div class="project-card">
-          <h3>Monash University</h3>
-          <p><strong>BCompSci (Data Science)</strong><br>Jul 2024</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section style="margin-top:2rem; margin-bottom:3rem;">
-      <h2>Get in Touch</h2>
-      <p style="text-align:center; color:#555;">
-        📍 Melbourne, VIC<br>
-        ✉️ <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a><br>
-        🔗 <a href="https://linkedin.com/in/zach--ng" target="_blank">LinkedIn</a><br>
-        💻 <a href="https://github.com/ZachNg01" target="_blank">GitHub</a>
-      </p>
-    </section>
   </main>
 
   <script src="main.js"></script>
