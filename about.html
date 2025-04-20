@@ -8,36 +8,52 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="main-nav">…same as above nav…</nav>
+  <nav class="main-nav">
+    <div class="logo">Zach Ng</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="skills.html">My Skillset</a></li>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
+        <ul class="dropdown">
+          <li><a href="image-classifier.html">Image Classifier</a></li>
+          <li><a href="object-detector.html">Object Detector</a></li>
+          <li><a href="text-summariser.html">Text Summariser</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </nav>
 
   <main class="container">
     <div class="card">
       <h1>About Me</h1>
       <p>I’m a Master of Data Science candidate at Monash University, specialising in bioinformatics and browser‑based ML tools.</p>
       <h2>Core Competencies</h2>
-      <div class="skills-tags">
-        <span class="tag">Python</span>
-        <span class="tag">R</span>
-        <span class="tag">SQL</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Machine Learning</span>
-        <span class="tag">NLP</span>
+      <div class="projects-grid">
+        <span class="project-card">Python</span>
+        <span class="project-card">R</span>
+        <span class="project-card">SQL</span>
+        <span class="project-card">JavaScript</span>
+        <span class="project-card">Machine Learning</span>
+        <span class="project-card">NLP</span>
       </div>
       <h2>Experience</h2>
-      <div class="grid-2">
-        <div class="card">
+      <div class="projects-grid">
+        <div class="project-card">
           <h3>Data Analyst @ IIPM</h3>
-          <ul><li>Automated 80% of data collection</li><li>Processed 6.5M census records</li></ul>
+          <p>Automated 80% of data collection; processed 6.5M census records.</p>
         </div>
-        <div class="card">
+        <div class="project-card">
           <h3>IT Intern @ Nera Telecom</h3>
-          <ul><li>Built API‑driven ticket automations</li><li>Created Looker Studio dashboards</li></ul>
+          <p>Built API‑driven ticket automations; created Looker Studio dashboards.</p>
         </div>
       </div>
       <h2>My Journey</h2>
-      <div class="timeline">
-        <div class="timeline-item"><h4>2018</h4><p>Started BCompSci (Data Science).</p></div>
-        <div class="timeline-item"><h4>2024</h4><p>Graduated & began MDataSci.</p></div>
+      <div class="projects-grid">
+        <div class="project-card"><h4>2018</h4><p>Started BCompSci (Data Science).</p></div>
+        <div class="project-card"><h4>2024</h4><p>Graduated & began Master’s.</p></div>
       </div>
       <h2>Contact</h2>
       <p style="text-align:center;">
