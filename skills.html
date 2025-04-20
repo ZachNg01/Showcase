@@ -2,32 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Skillset – Your Name</title>
+  <title>My Skillset – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav>
-    <div class="logo">Your Name</div>
+    <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li><a href="projects.html">My Projects</a></li>
+      <li>
+        <a href="projects.html">My Projects</a>
+        <ul class="dropdown">
+          <li><a href="image-classifier.html">Image Classifier</a></li>
+          <li><a href="object-detector.html">Object Detector</a></li>
+          <li><a href="text-summariser.html">Text Summariser</a></li>
+        </ul>
+      </li>
     </ul>
-    <div class="burger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="burger"><span></span><span></span><span></span></div>
   </nav>
 
   <main class="container">
-    <h1>My Skillset</h1>
-    <ul>
-      <li>HTML / CSS / JavaScript</li>
-      <li>Responsive & Animated UI</li>
-      <li>TensorFlow.js & ML in Browser</li>
-      <li>Node.js & Serverless APIs</li>
-    </ul>
+    <section class="fade-in" style="animation-delay:0.5s">
+      <h1>My Skillset</h1>
+      <ul>
+        <li>Python, R, SQL, JavaScript</li>
+        <li>Data Wrangling &amp; Warehousing</li>
+        <li>Machine Learning &amp; NLP</li>
+        <li>Tableau, Power BI, Looker Studio</li>
+        <li>API Integration &amp; Automation</li>
+        <li>NONMEM, Pmetrics, Monte Carlo</li>
+      </ul>
+    </section>
   </main>
 
   <script src="main.js"></script>
