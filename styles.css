@@ -1,230 +1,122 @@
-/* ——— Prevent any page overflow ——— */
+/* —— Reset & Base Styles —— */
 html, body {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
-  background: #faf8f5; /* parchment */
-  color: #1a1a1a;
-  font-family: 'Noto Sans JP', sans-serif;
+  overflow-x: hidden;         /* prevent horizontal scroll */
+  background: #faf5f2;         /* light parchment */
+  font-family: 'Noto Sans JP', sans-serif;  /* Japanese‑inspired */ 
+  color: #333;
+  line-height: 1.6;
 }
 
-/* ——— Variables ——— */
-:root {
-  --accent: #e60073;      /* sakura pink */
-  --subtle: #f0e9e1;      /* light wash */
-  --transition: 0.3s ease;
+/* —— Animated Gradient Background —— */
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+body {
+  background: linear-gradient(270deg, #faf5f2, #f0e0dc, #faf5f2);
+  background-size: 600% 600%;
+  animation: bgShift 20s ease infinite;  /* dynamic color flow */ :contentReference[oaicite:6]{index=6}
 }
 
-/* ——— Nav Container ——— */
-.main-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  background: rgba(250,248,245,0.95);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 1000;
-}
-
-/* ——— Logo ——— */
-.logo {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--accent);
-  cursor: pointer;
-  transition: transform var(--transition);
-}
-.logo:hover {
-  transform: scale(1.05);
-}
-
-/* ——— Links ——— */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links li {
-  position: relative;
-}
-.nav-links a,
-.drop-btn {
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  text-decoration: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: color var(--transition);
-}
-.nav-links a:hover,
-.drop-btn:hover {
-  color: var(--accent);
-}
-
-/* ——— Dropdown ——— */
-.has-dropdown .dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--subtle);
-  border-radius: 4px;
-  list-style: none;
-  padding: 0.5rem 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity var(--transition),
-              transform var(--transition),
-              visibility var(--transition);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  min-width: 10rem;
-}
-.has-dropdown:hover .dropdown,
-.has-dropdown.open .dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.has-dropdown .dropdown li {
-  white-space: nowrap;
-}
-.has-dropdown .dropdown a {
-  display: block;
-  padding: 0.5rem 1rem;
-}
-.has-dropdown .dropdown a:hover {
-  background: rgba(230,0,115,0.1);
-}
-
-/* ——— Hamburger ——— */
-.burger {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-  z-index: 1100;
-}
-.burger span {
-  width: 24px;
-  height: 3px;
-  background: #1a1a1a;
-  transition: transform var(--transition),
-              opacity var(--transition);
-}
-
-/* ——— Mobile ——— */
-@media (max-width: 768px) {
-  .nav-links {
-    position: fixed;
-    top: 0; right: 0;
-    height: 100vh;
-    width: 100vw;              /* fill the screen */
-    max-width: none;
-    flex-direction: column;
-    padding: 4rem 1.5rem;
-    gap: 1.5rem;
-    background: var(--bg);
-    transform: translateX(100%);
-    transition: transform var(--transition);
-  }
-  .nav-links.open {
-    transform: translateX(0);
-  }
-  .burger {
-    display: flex;
-  }
-  /* keep dropdown open in mobile menu */
-  .has-dropdown .dropdown {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    box-shadow: none;
-    background: transparent;
-    padding-left: 1rem;
-  }
-}
-
-/* ——— Main content container ——— */
+/* —— Container —— */
 .container {
-  padding: 6rem 1.5rem 2rem;
-  margin-top: 4rem;
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 0 1rem;
 }
 
-/* ——— Section Headers ——— */
-.section-title {
-  font-size: 1.6rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* ——— Two‑column grid ——— */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-@media (max-width:768px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ——— Card style ——— */
+/* —— Card —— */
 .card {
-  background: rgba(255,255,255,0.8);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(.22,.61,.36,1), box-shadow 0.4s;  /* springy lift */ :contentReference[oaicite:7]{index=7}
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
 }
 
-/* ——— Skill tags ——— */
-.skills-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-.tag {
-  background: var(--accent);
-  color: #fff;
-  padding: 0.3rem 0.7rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  display: inline-block;
-}
-
-/* ——— Timeline ——— */
-.timeline {
-  position: relative;
-  padding-left: 40px;
-  margin: 3rem 0;
-}
-.timeline::before {
+/* —— Ripple Effect on Click —— */
+.card::after {
   content: '';
   position: absolute;
-  top: 0; bottom: 0; left: 16px;
-  width: 4px;
-  background: var(--accent);
-}
-.timeline-item {
-  position: relative;
-  margin-bottom: 2rem;
-}
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -4px; top: 0;
-  width: 16px; height: 16px;
-  background: var(--bg);
-  border: 4px solid var(--accent);
   border-radius: 50%;
+  transform: scale(0);
+  opacity: 0.6;
+  background: rgba(230,0,115,0.3);   /* sakura accent */
+  transition: transform 0.6s, opacity 1s;
+}
+.card:active::after {
+  transform: scale(4);
+  opacity: 0;
+}
+
+/* —— Heading —— */
+.card h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+/* —— Textarea —— */
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;       /* focus microinteraction */ :contentReference[oaicite:8]{index=8}
+}
+textarea:focus {
+  border-color: #e60073;               /* sakura pink on focus */
+}
+
+/* —— Button with Morphing Hover —— */
+button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #e60073, #ff4da6);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-radius 0.4s ease;  /* shape morphing */ :contentReference[oaicite:9]{index=9}
+}
+button:hover {
+  transform: scale(1.05);
+  border-radius: 12px;  /* from pill → rounded square */ 
+}
+
+/* —— Status & Result Panels —— */
+#status {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+#result {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
 }
