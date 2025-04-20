@@ -2,48 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Me</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
 </head>
 <body>
-  <div id="top-menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html"class="active">About</a></li>
-      <li><a href="education.html">Education</a></li>
-      <li><a href="employment.html">Employment</a></li>
-      <li><a href="visualisations.html">Visualisations</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="cow.html">Cows</a></li>
-      <!-- Add more menu items as needed -->
-    </ul>
-  </div>
-  <marquee behavior="scroll" direction="left" scrollamount="15">
-    <h1> <u>About</u></h1>
-</marquee>
-  <div class="bg"></div>
-  <div class="bg bg2"></div>
-  <div class="bg bg3"></div>
+  <header>
+    <nav id="top-menu" role="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="employment.html">Employment</a></li>
+        <li><a href="visualisations.html">Visualisations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cow.html">Cows</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <main>
+    <section class="hero">
+      <h1>About Me</h1>
+    </section>
 
-        <div class="bigcard" >
-            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://lottie.host/ca3a9c6a-67f2-4e4b-875d-44c230d32897/wXQB3rxJBI.json" speed="1" style="width: 300px; height: 255px" loop  autoplay ></lottie-player>
-            <div class="card-content">
-                <h2>Email</h2>
-                <p>Send me an Email at <a href = "mailto: zachworkCS@gmail.com">zachworkCS@gmail.com</a></p>
+    <section class="bigcard contact-card">
+      <div class="card-animation">
+        <lottie-player 
+          src="https://lottie.host/ca3a9c6a-67f2-4e4b-875d-44c230d32897/wXQB3rxJBI.json"
+          background="transparent"
+          speed="1"
+          style="width: 300px; height: 300px;"
+          loop
+          autoplay>
+        </lottie-player>
+      </div>
+      <div class="card-content">
+        <h2>Get in Touch</h2>
+        <p>
+          Have questions or want to connect? Send me an email at
+          <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
-            </div>
-        </div>
-
-  
-        
-        <!-- Add more cards as needed -->
-
-
-    <script>
-        
-      
-  </script>
-
+  <footer>
+    <p>&copy; 2025 Zach Ng. All rights reserved.</p>
+  </footer>
 </body>
 </html>
