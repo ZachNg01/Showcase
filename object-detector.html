@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Object Detector – Your Name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TF.js + COCO-SSD -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { display:flex; justify-content:center; align-items:center; padding:4vw; }
+    .card {
+      width:100%; max-width:420px; background:#fff; border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.08); padding:clamp(16px,4vw,32px);
+      display:flex; flex-direction:column; gap:clamp(12px,4vw,18px);
+    }
+    #canvas {
+      display:none; width:100%; height:auto; border-radius:10px;
+      box-shadow:0 2px 10px rgba(0,0,0,.12);
+    }
+    label.btn {
+      background:var(--accent); color:#fff; padding:.55rem 1.2rem;
+      border-radius:8px; cursor:pointer; transition:background .2s;
+      text-align:center;
+    }
+    label.btn:hover{ background:#004ddb; }
+    #results {
+      display:flex; gap:8px; overflow-x:auto; margin-top:12px; padding-bottom:8px;
+    }
+    .crop-card {
+      flex:0 0 auto; background:#fff; border:1px solid #e5e7eb;
+      border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08);
+      text-align:center; font-size:.85rem;
+    }
+    .crop-card img {
+      display:block; max-width:120px; width:auto; height:auto;
+    }
+    .crop-label { padding:4px; color:var(--text); }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Your Name</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="skills.html">My Skillset</a></li>
+      <li><a href="projects.html">My Projects</a></li>
+    </ul>
+    <div class="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="card">
+    <h1>Object Detector (Lite)</h1>
+    <canvas id="canvas"></canvas>
+    <label class="btn" for="filePick">Choose Image</label>
+    <input type="file" id="filePick" accept="image/*" style="display:none">
+    <div id="status">Loading model…</div>
+    <div id="results"></div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    let model;
+    const picker  = document.getElementById('filePick');
+    const canvas  = document.getElementById('canvas');
+    const ctx     = canvas.getContext('2d');
+    const status  = document.getElementById('status');
+    const results = document.getElementById('results');
+
+    cocoSsd.load().then(m => {
+      model = m;
+      status.textContent = 'Model ready – pick an image.';
+    }).catch(e => status.textContent = 'Load error: '+e);
+
+    picker.addEventListener('change', async e => {
+      const file = e.target.files[0];
+      if (!file || !model) return;
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = async () => {
+        URL.revokeObjectURL(img.src);
+        canvas.width  = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.style.display = 'block';
+        ctx.drawImage(img, 0, 0);
+        status.textContent = 'Detecting…';
+        results.innerHTML = '';
+
+        const preds = await model.detect(canvas);
+        preds.forEach(p => {
+          const [x,y,w,h] = p.bbox;
+          ctx.strokeStyle = 'rgba(0,102,255,.9)';
+          ctx.lineWidth   = 4;
+          ctx.strokeRect(x,y,w,h);
+          const label = `${p.class} ${(p.score*100).toFixed(1)}%`;
+          ctx.font      = '18px sans-serif';
+          const textW   = ctx.measureText(label).width;
+          ctx.fillStyle = 'rgba(0,102,255,.9)';
+          ctx.fillRect(x, y-24, textW+8, 24);
+          ctx.fillStyle = '#fff';
+          ctx.fillText(label, x+4, y-4);
+
+          const c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(canvas, x,y,w,h, 0,0,w,h);
+          const thumb = document.createElement('img');
+          thumb.src = c.toDataURL();
+          const card = document.createElement('div');
+          card.className = 'crop-card';
+          card.appendChild(thumb);
+          const cap = document.createElement('div');
+          cap.className = 'crop-label';
+          cap.textContent = label;
+          card.appendChild(cap);
+          results.appendChild(card);
+        });
+
+        status.textContent = `Found ${preds.length} object(s).`;
+      };
+    });
+  </script>
