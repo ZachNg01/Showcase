@@ -2,20 +2,18 @@
 html, body {
   margin: 0; padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;  /* no horizontal scroll */ 
+  overflow-x: hidden;  /* prevent horizontal scroll */
   background: linear-gradient(270deg, #faf5f2, #f0e0dc, #faf5f2);
   background-size: 600% 600%;
-  animation: bgShift 25s ease infinite;  /* animated gradient */ 
+  animation: bgShift 25s ease infinite;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333; line-height: 1.6;
 }
+
 @keyframes bgShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
-
-body {
-  font-family: 'Noto Sans JP', sans-serif; /* Japanese style */
-  color: #333; line-height: 1.6;
 }
 
 /* —— Container —— */
@@ -33,19 +31,18 @@ body {
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   padding: 2rem;
   transition: transform 0.5s cubic-bezier(.22,.61,.36,1),
-              box-shadow 0.5s;  /* spring easing */ 
+              box-shadow 0.5s;
 }
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.15);
 }
-/* Ripple on click */
 .card::after {
   content: '';
   position: absolute; width: 20px; height: 20px;
-  background: rgba(230,0,115,0.3); /* sakura pink */
+  background: rgba(230,0,115,0.3);
   border-radius: 50%; transform: scale(0); opacity: 0.6;
-  transition: transform 0.6s, opacity 1s;  
+  transition: transform 0.6s, opacity 1s;
 }
 .card:active::after {
   transform: scale(30); opacity: 0;
@@ -64,7 +61,7 @@ textarea {
   width: 100%; min-height: 140px;
   padding: 1rem; border: 2px solid #ddd;
   border-radius: 8px; resize: vertical;
-  transition: border-color 0.3s;  
+  transition: border-color 0.3s;
 }
 textarea:focus { border-color: #e60073; }
 
@@ -75,11 +72,11 @@ button {
   background: linear-gradient(135deg, #e60073, #ff4da6);
   border: none; color: #fff;
   border-radius: 50px; cursor: pointer;
-  transition: transform 0.4s ease, border-radius 0.4s ease;  
+  transition: transform 0.4s ease, border-radius 0.4s ease;
 }
 button:hover {
   transform: scale(1.05);
-  border-radius: 12px;  /* pill→rounded square */
+  border-radius: 12px;
 }
 
 /* —— Status & Result Panel —— */
@@ -142,6 +139,14 @@ button:hover {
   opacity:1; visibility:visible; transform:translateY(0);
 }
 .dropdown li a { display:block; padding:.5rem 1rem; }
+.burger {
+  display:none; flex-direction:column; gap:5px;
+  cursor:pointer; z-index:1100;
+}
+.burger span {
+  width:24px; height:3px; background:#333;
+  transition:transform .3s,opacity .3s;
+}
 @media (max-width:768px) {
   .nav-links {
     position:fixed; top:0; right:0; width:100vw; height:100vh;
@@ -149,11 +154,7 @@ button:hover {
     transform:translateX(100%); transition:transform .3s;
   }
   .nav-links.open { transform:translateX(0); }
-  .burger { display:flex; flex-direction:column; gap:5px; cursor:pointer; }
-  .burger span {
-    width:24px; height:3px; background:#333;
-    transition:transform .3s,opacity .3s;
-  }
+  .burger { display:flex; }
   .has-dropdown .dropdown {
     position:static; opacity:1; visibility:visible; transform:none;
     background:transparent; padding-left:1rem;
