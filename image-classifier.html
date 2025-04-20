@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Classifier – Your Name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TF.js + MobileNet Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { display:flex; justify-content:center; align-items:center; padding:4vw; }
+    .card {
+      width:100%; max-width:420px; background:#fff; border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.08); padding:clamp(16px,4vw,32px);
+      text-align:center; display:flex; flex-direction:column; gap:clamp(12px,4vw,18px);
+    }
+    #preview{ display:none; width:100%; max-height:40vh; object-fit:contain;
+      border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.12);
+    }
+    label.btn {
+      display:inline-block; background:var(--accent); color:#fff;
+      padding:.55rem 1.2rem; border-radius:8px; cursor:pointer;
+      transition:background .2s; font-size:clamp(.9rem,3.5vw,1rem);
+    }
+    label.btn:hover{ background:#004ddb; }
+    .pred{ text-align:left; font-size:clamp(.85rem,3.2vw,.98rem); }
+    .bar-wrap{ background:#e5e7eb; border-radius:6px; overflow:hidden;
+      height:6px; margin-top:4px;
+    }
+    .bar{ height:100%; background:var(--accent); width:0; transition:width .6s; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Your Name</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="skills.html">My Skillset</a></li>
+      <li><a href="projects.html">My Projects</a></li>
+    </ul>
+    <div class="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="card">
+    <h1>Image Classifier (Lite)</h1>
+    <img id="preview" alt="preview">
+    <label class="btn" for="filePick">Choose Image</label>
+    <input type="file" id="filePick" accept="image/*" style="display:none">
+    <div id="result"></div>
+    <div id="status">Loading model…</div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    let model;
+    const filePick = document.getElementById('filePick');
+    const preview  = document.getElementById('preview');
+    const statusEl = document.getElementById('status');
+    const resultEl = document.getElementById('result');
+
+    mobilenet.load({ version:2, alpha:0.50 })
+      .then(m => { model = m; statusEl.textContent = 'Model ready – pick an image.'; })
+      .catch(e => statusEl.textContent = 'Load error: '+e);
+
+    filePick.addEventListener('change', e => {
+      const f = e.target.files[0];
+      if (!f || !model) return;
+      preview.src = URL.createObjectURL(f);
+      preview.style.display = 'block';
+      statusEl.textContent = 'Classifying…';
+      resultEl.innerHTML = '';
+      preview.onload = () => {
+        URL.revokeObjectURL(preview.src);
+        model.classify(preview, 3).then(preds => {
+          resultEl.innerHTML = '';
+          preds.forEach(p => {
+            const row = document.createElement('div');
+            row.className = 'pred';
+            row.innerHTML = `<strong>${p.className}</strong> – ${(p.probability*100).toFixed(1)}%`;
+            const wrap = document.createElement('div');
+            wrap.className = 'bar-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.width = `${(p.probability*100).toFixed(1)}%`;
+            wrap.appendChild(bar);
+            resultEl.appendChild(row);
+            resultEl.appendChild(wrap);
+          });
+          statusEl.textContent = 'Done ✔';
+        }).catch(err => statusEl.textContent = 'Error: '+err);
+      };
+    });
+  </script>
