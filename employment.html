@@ -1,188 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employment History</title>
 
-    <meta charset="UTF-8">
-    <!-- Add this link tag to the head of your HTML document -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    .wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  
-  background-color: #FFE0AF;
-  background-image:
-  linear-gradient(45deg, #FFDD88 25%, transparent 25%, transparent 75%, #FFDD88 75%, #FFDD88), 
-  linear-gradient(45deg, #FFDD88 25%, transparent 25%, transparent 75%, #FFDD88 75%, #FFDD88),
-  linear-gradient(45deg, transparent, transparent 50%, #FFC87F 50%, #FFC87F);
-  background-size: 100px 100px;
-  background-position: 0 0, 50px 50px, 50px 0px;
-  -webkit-animation: scroll 5s linear infinite;
-}
+<body class="pattern-bg">
+  <header>
+    <nav id="top-menu" role="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="employment.html" aria-current="page">Employment</a></li>
+        <li><a href="visualisations.html">Visualisations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cow.html">Cows</a></li>
+      </ul>
+    </nav>
+  </header>
 
-@-webkit-keyframes scroll {
-  from { background-position: 0 0, 50px 50px, 50px 0; }
-  to { background-position: -100px -100px, -50px -50px, -50px -100px; }
-}
-</style>
-    
-    <div id="top-menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="education.html">Education</a></li>
-            <li><a href="employment.html"class="active">Employment</a></li>
-            <li><a href="visualisations.html">Visualisations</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="cow.html">Cows</a></li>
-            <!-- Add more menu items as needed -->
-        </ul>
-    </div>
-<div class="wrapper"></div>
-    <body> 
-    <marquee behavior="scroll" direction="left" scrollamount="15">
-        <h1> <u>Employment History</u></h1>
-    </marquee>
-        
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Employment History</h1>
+    </section>
 
-    <div class="container">
-        <div class="horicontainer">
-        <div class="card" > 
-            <div class="card-content">
-                <h2><u>IT Intern</u> </h2>
-                <b><p>Nera Telecommunications</b>
-                <br>(Dec 2023 - Mar 2024)</p>
-                
-                    <li>Hands-on experience in <br> 
-                    &nbsp&nbsp&nbsp&nbsp IT daily operational work.</li> 
-                
-                    <li>Explore and work on front-end <br> 
-                    &nbsp&nbsp&nbsp&nbsp and back-end development.</li>
-                
-                    <li>Handling user requests and <br> 
-                    &nbsp&nbsp&nbsp&nbsp resolve  issues.</li>
-            </div>
+    <!-- Employment Cards -->
+    <section class="cards employment-cards">
+      <article class="card" data-aos="fade-up">
+        <div class="card-content">
+          <h2>IT Intern</h2>
+          <p class="company">Nera Telecommunications</p>
+          <p class="dates">Dec 2023 – Mar 2024</p>
+          <ul class="responsibilities">
+            <li>Hands‑on experience in IT daily operational work</li>
+            <li>Front‑end and back‑end development tasks</li>
+            <li>User support and issue resolution</li>
+          </ul>
         </div>
+      </article>
 
-        <div class="card" > 
-            <div class="card-content">
-                <h2><u>Administrator</u> </h2>
-                <b><p>IIPM Pty Ltd</b>
-                <br>(Oct 2023 - Dec 2023)</p>
-                
-                    <li>Involved with creating updating <br> 
-                    &nbsp&nbsp&nbsp&nbsp  physical and digital student files.  </li> 
-                
-                    <li>Assisting students and collegues <br> 
-                    &nbsp&nbsp&nbsp&nbsp with administrative and IT tasks.</li>
-                
-                    <li>Dealing with financial payment. <br> 
-                    &nbsp&nbsp&nbsp&nbsp </li>
-            </div>
+      <article class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-content">
+          <h2>Administrator</h2>
+          <p class="company">IIPM Pty Ltd</p>
+          <p class="dates">Oct 2023 – Dec 2023</p>
+          <ul class="responsibilities">
+            <li>Maintained and updated physical and digital student files</li>
+            <li>Assisted colleagues with administrative and IT tasks</li>
+            <li>Processed financial payments</li>
+          </ul>
         </div>
+      </article>
 
-        <div class="card" > 
-            <div class="card-content">
-                <h2><u>Cleaner</u> </h2>
-                <b><p>Kmart</b>
-                <br>(Oct 2023 - Dec 2023)</p>
-                
-                    <li>Handle industrail chemicals <br> 
-                    &nbsp&nbsp&nbsp&nbsp to clean surfaces. </li> 
-                
-                    <li>Use heavy machinery to clean, <br> 
-                    &nbsp&nbsp&nbsp&nbsp and buff floors</li>
-                
-                    
-            </div>
+      <article class="card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-content">
+          <h2>Cleaner</h2>
+          <p class="company">Kmart</p>
+          <p class="dates">Oct 2023 – Dec 2023</p>
+          <ul class="responsibilities">
+            <li>Handled industrial chemicals for surface cleaning</li>
+            <li>Operated heavy machinery to clean and buff floors</li>
+          </ul>
         </div>
-        
-        <div class="card" > 
-            <div class="card-content">
-                <h2><u>Waiter</u> </h2>
-                <b><p>Restaurants/Hotels in Singapore</b>
-                <br>(Dec 2017 - Dec 2019)</p>
-                
-                    <li>Take customer orders <br> 
-                    &nbsp&nbsp&nbsp&nbsp and serve their tables.  </li> 
-                
-                    <li>Clearing tables  <br> 
-                    &nbsp&nbsp&nbsp&nbsp and handle some minor food-prep</li>
-                
-                    <li>Cleaning of front-end of  <br> 
-                    &nbsp&nbsp&nbsp&nbsp the restaurant and hotel.</li>
-            </div>
+      </article>
+
+      <article class="card" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-content">
+          <h2>Waiter</h2>
+          <p class="company">Restaurants &amp; Hotels, Singapore</p>
+          <p class="dates">Dec 2017 – Dec 2019</p>
+          <ul class="responsibilities">
+            <li>Took customer orders and served tables</li>
+            <li>Cleared tables and assisted with minor food prep</li>
+            <li>Maintained cleanliness of front‑of‑house areas</li>
+          </ul>
         </div>
-        </div>
-    </div>
-   
+      </article>
+    </section>
+  </main>
 
-    <script>
-        
-        function handleCardClick(cardTitle, targetPage) {
-            window.location.href = targetPage;
-        }
+  <footer>
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+  </footer>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var cards = document.querySelectorAll('.card');
-        
-            // Function to add 'visible' class to each card with a delay
-            function showCardsSequentially(index) {
-                if (index < cards.length) {
-                    cards[index].classList.add('visible');
-                    setTimeout(function () {
-                        showCardsSequentially(index + 1);
-                    }, 200); // Adjust the delay as needed
-                }
-            }
-        
-            // Start showing cards sequentially when the page loads
-            showCardsSequentially(0);
-        });
-
-
-
-
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get the current page URL
-            var currentPage = window.location.pathname;
-        
-            // Get all menu items
-            var menuItems = document.querySelectorAll('#top-menu a');
-        
-            // Loop through each menu item
-            menuItems.forEach(function (menuItem) {
-                // Get the href attribute of the menu item
-                var menuItemHref = menuItem.getAttribute('href');
-        
-                // Check if the current page URL matches the menu item URL
-                if (currentPage === menuItemHref) {
-                    // Add the "active" class to highlight the menu item
-                    menuItem.classList.add('active');
-                }
-            });
-        
-            // Rest of your existing code...
-        
-            var cards = document.querySelectorAll('.card');
-            function showCardsSequentially(index) {
-                // ...
-            }
-            showCardsSequentially(0);
-        });
-        
-        AOS.init();
-    </script>
-
+  <!-- AOS (Animate On Scroll) -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({ duration: 600, once: true });
+    });
+  </script>
 </body>
 </html>
