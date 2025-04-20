@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>My Projects – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
+  <nav class="main-nav">
     <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li>
-        <a href="projects.html">My Projects</a>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
         <ul class="dropdown">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
@@ -26,7 +27,7 @@
   </nav>
 
   <main class="container">
-    <h1 class="fade-in" style="animation-delay:0.5s">My Projects</h1>
+    <h1 style="text-align:center; color:var(--accent); margin-bottom:1rem;">My Projects</h1>
     <div class="projects-grid">
       <a class="project-card" href="image-classifier.html">
         <h2>Image Classifier</h2>
@@ -34,7 +35,7 @@
       </a>
       <a class="project-card" href="object-detector.html">
         <h2>Object Detector</h2>
-        <p>COCO‑SSD detection with full image &amp; crop previews.</p>
+        <p>COCO‑SSD detection with full image & crop previews.</p>
       </a>
       <a class="project-card" href="text-summariser.html">
         <h2>Text Summariser</h2>

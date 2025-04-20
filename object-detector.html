@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>Object Detector – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
+  <nav class="main-nav">
     <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li>
-        <a href="projects.html">My Projects</a>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
         <ul class="dropdown">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
@@ -25,82 +26,57 @@
     <div class="burger"><span></span><span></span><span></span></div>
   </nav>
 
-  <div class="container">
-    <section class="card fade-in" style="animation-delay:0.5s">
+  <main class="container">
+    <section class="card" style="text-align:center;">
       <h1>Object Detector (Lite)</h1>
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas" style="max-width:100%; margin:1rem 0; display:none;"></canvas>
       <label class="btn" for="filePick">Choose Image</label>
-      <input type="file" id="filePick" accept="image/*" style="display:none">
+      <input type="file" id="filePick" accept="image/*" style="display:none;">
       <div id="status">Loading model…</div>
       <div id="results"></div>
     </section>
 
-    <section class="fade-in" style="animation-delay:0.8s; text-align:center; margin-top:2rem;">
+    <section style="text-align:center; margin-top:2rem;">
       <h2>View Other Projects</h2>
       <div class="projects-grid">
         <a class="project-card" href="image-classifier.html">Image Classifier</a>
         <a class="project-card" href="text-summariser.html">Text Summariser</a>
       </div>
     </section>
-  </div>
+  </main>
 
   <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
   <script>
     let model;
-    const picker  = document.getElementById('filePick');
-    const canvas  = document.getElementById('canvas');
-    const ctx     = canvas.getContext('2d');
-    const status  = document.getElementById('status');
-    const results = document.getElementById('results');
-
-    cocoSsd.load().then(m => {
-      model = m; status.textContent = 'Model ready – pick an image.';
-    }).catch(e => status.textContent = 'Load error: '+e);
-
+    const picker  = document.getElementById('filePick'),
+          canvas  = document.getElementById('canvas'),
+          ctx     = canvas.getContext('2d'),
+          status  = document.getElementById('status'),
+          results = document.getElementById('results');
+    cocoSsd.load().then(m => status.textContent='Model ready – pick an image.', model=m)
+      .catch(e=>status.textContent='Load error: '+e);
     picker.addEventListener('change', async e => {
-      const file = e.target.files[0];
-      if (!file || !model) return;
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      img.onload = async () => {
+      const f=e.target.files[0]; if(!f||!model)return;
+      const img=new Image();
+      img.src=URL.createObjectURL(f);
+      img.onload= async ()=>{
         URL.revokeObjectURL(img.src);
-        canvas.width  = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        canvas.style.display = 'block';
-        ctx.drawImage(img, 0, 0);
-        status.textContent = 'Detecting…';
-        results.innerHTML = '';
-        const preds = await model.detect(canvas);
-        preds.forEach(p => {
-          const [x,y,w,h] = p.bbox;
-          ctx.strokeStyle = 'rgba(0,102,255,0.9)';
-          ctx.lineWidth   = 4;
+        canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+        canvas.style.display='block'; ctx.drawImage(img,0,0);
+        status.textContent='Detecting…'; results.innerHTML='';
+        const preds=await model.detect(canvas);
+        preds.forEach(p=>{
+          const [x,y,w,h]=p.bbox;
+          ctx.strokeStyle='rgba(230,0,115,0.9)'; ctx.lineWidth=4;
           ctx.strokeRect(x,y,w,h);
-          const label = `${p.class} ${(p.score*100).toFixed(1)}%`;
-          ctx.font      = '18px sans-serif';
-          const textW   = ctx.measureText(label).width;   
-          ctx.fillStyle = 'rgba(0,102,255,0.9)';
-          ctx.fillRect(x, y-24, textW+8, 24);
-          ctx.fillStyle = '#fff';
-          ctx.fillText(label, x+4, y-4);
-          // crop
-          const c = document.createElement('canvas');
-          c.width = w; c.height = h;
-          c.getContext('2d').drawImage(canvas, x,y,w,h, 0,0,w,h);
-          const thumb = document.createElement('img');
-          thumb.src = c.toDataURL();
-          const card = document.createElement('div');
-          card.className = 'crop-card';
-          card.appendChild(thumb);
-          const cap = document.createElement('div');
-          cap.className = 'crop-label';
-          cap.textContent = label;
-          card.append(cap);
-          results.append(card);
+          const label=`${p.class} ${ (p.score*100).toFixed(1)}%`;
+          ctx.font='18px sans-serif'; const tw=ctx.measureText(label).width;
+          ctx.fillStyle='rgba(230,0,115,0.9)'; ctx.fillRect(x,y-24,tw+8,24);
+          ctx.fillStyle='#fff'; ctx.fillText(label,x+4,y-4);
         });
-        status.textContent = `Found ${preds.length} object(s).`;
+        status.textContent=`Found ${preds.length} object(s).`;
       };
     });
   </script>

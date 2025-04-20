@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>Image Classifier – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
+  <nav class="main-nav">
     <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li>
-        <a href="projects.html">My Projects</a>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
         <ul class="dropdown">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
@@ -25,64 +26,52 @@
     <div class="burger"><span></span><span></span><span></span></div>
   </nav>
 
-  <div class="container">
-    <section class="card fade-in" style="animation-delay:0.5s">
+  <main class="container">
+    <section class="card" style="text-align:center;">
       <h1>Image Classifier (Lite)</h1>
-      <img id="preview" alt="preview">
+      <img id="preview" alt="preview" style="max-width:100%; margin:1rem 0;">
       <label class="btn" for="filePick">Choose Image</label>
-      <input type="file" id="filePick" accept="image/*" style="display:none">
-      <div id="result"></div>
+      <input type="file" id="filePick" accept="image/*" style="display:none;">
       <div id="status">Loading model…</div>
+      <div id="result"></div>
     </section>
 
-    <!-- Other Projects -->
-    <section class="fade-in" style="animation-delay:0.8s; text-align:center; margin-top:2rem;">
+    <section style="text-align:center; margin-top:2rem;">
       <h2>View Other Projects</h2>
       <div class="projects-grid">
         <a class="project-card" href="object-detector.html">Object Detector</a>
         <a class="project-card" href="text-summariser.html">Text Summariser</a>
       </div>
     </section>
-  </div>
+  </main>
 
   <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
   <script>
     let model;
-    const filePick = document.getElementById('filePick');
-    const preview  = document.getElementById('preview');
-    const statusEl = document.getElementById('status');
-    const resultEl = document.getElementById('result');
-
+    const filePick = document.getElementById('filePick'),
+          preview  = document.getElementById('preview'),
+          statusEl = document.getElementById('status'),
+          resultEl = document.getElementById('result');
     mobilenet.load({ version:2, alpha:0.50 })
       .then(m => { model = m; statusEl.textContent = 'Model ready – pick an image.'; })
       .catch(e => statusEl.textContent = 'Load error: '+e);
-
     filePick.addEventListener('change', e => {
-      const f = e.target.files[0];
-      if (!f || !model) return;
-      preview.src = URL.createObjectURL(f);
-      preview.style.display = 'block';
-      statusEl.textContent = 'Classifying…';
-      resultEl.innerHTML = '';
+      const f = e.target.files[0]; if (!f||!model) return;
+      preview.src = URL.createObjectURL(f); preview.style.display='block';
+      statusEl.textContent='Classifying…'; resultEl.innerHTML='';
       preview.onload = () => {
         URL.revokeObjectURL(preview.src);
-        model.classify(preview, 3).then(preds => {
-          resultEl.innerHTML = '';
+        model.classify(preview,3).then(preds => {
+          resultEl.innerHTML='';        
           preds.forEach(p => {
-            const row = document.createElement('div');
-            row.innerHTML = `<strong>${p.className}</strong> – ${(p.probability*100).toFixed(1)}%`;
-            const barWrap = document.createElement('div');
-            barWrap.className = 'bar-wrap';
-            const bar = document.createElement('div');
-            bar.className = 'bar';
-            bar.style.width = `${(p.probability*100).toFixed(1)}%`;
-            barWrap.append(bar);
-            resultEl.append(row, barWrap);
+            const div=document.createElement('div');
+            div.innerHTML=`<strong>${p.className}</strong> – ${(p.probability*100).toFixed(1)}%`;
+            resultEl.append(div);
           });
-          statusEl.textContent = 'Done ✔';
-        }).catch(err => statusEl.textContent = 'Error: '+err);
+          statusEl.textContent='Done ✔';
+        }).catch(err=>statusEl.textContent='Error: '+err);
       };
     });
   </script>

@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>Text Summariser – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
+  <nav class="main-nav">
     <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li>
-        <a href="projects.html">My Projects</a>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
         <ul class="dropdown">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
@@ -25,46 +26,44 @@
     <div class="burger"><span></span><span></span><span></span></div>
   </nav>
 
-  <div class="container">
-    <section class="card fade-in" style="animation-delay:0.5s">
+  <main class="container">
+    <section class="card" style="text-align:center;">
       <h1>Text Summariser</h1>
-      <textarea id="input" placeholder="Paste or type text…"></textarea>
+      <textarea id="input" placeholder="Paste or type text…" style="width:100%; min-height:120px; margin-bottom:1rem;"></textarea>
       <button id="summariseBtn">Summarise</button>
-      <div id="status">Ready to summarise.</div>
+      <div id="status" style="margin:1rem 0;">Ready to summarise.</div>
       <div id="result"></div>
     </section>
 
-    <section class="fade-in" style="animation-delay:0.8s; text-align:center; margin-top:2rem;">
+    <section style="text-align:center; margin-top:2rem;">
       <h2>View Other Projects</h2>
       <div class="projects-grid">
         <a class="project-card" href="image-classifier.html">Image Classifier</a>
         <a class="project-card" href="object-detector.html">Object Detector</a>
       </div>
     </section>
-  </div>
+  </main>
 
   <script src="main.js"></script>
   <script>
     document.getElementById('summariseBtn').addEventListener('click', async () => {
-      const input = document.getElementById('input');
+      const txt = document.getElementById('input').value.trim();
       const status = document.getElementById('status');
       const result = document.getElementById('result');
-      const text = input.value.trim();
-      if (!text) return status.textContent = 'Please enter text.';
-      status.textContent = 'Generating summary…';
-      result.textContent = '';
+      if (!txt) return status.textContent='Please enter text.';
+      status.textContent='Generating summary…'; result.textContent='';
       try {
         const resp = await fetch('/api/summarise', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text })
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({text:txt})
         });
-        if (!resp.ok) throw new Error(resp.statusText);
+        if(!resp.ok) throw new Error(resp.statusText);
         const data = await resp.json();
         result.textContent = data[0]?.summary_text || 'No summary.';
         status.textContent = 'Done ✔';
-      } catch (err) {
-        status.textContent = 'Error: '+err.message;
+      } catch (e) {
+        status.textContent = 'Error: '+e.message;
       }
     });
   </script>

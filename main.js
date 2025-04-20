@@ -1,15 +1,15 @@
-const burger   = document.querySelector('.burger');
-const navMenu  = document.querySelector('.nav-links');
-const navLinks = document.querySelectorAll('.nav-links li');
-
+// Hamburger toggle
+const burger = document.querySelector('.burger');
+const nav     = document.querySelector('.nav-links');
 burger.addEventListener('click', () => {
-  navMenu.classList.toggle('nav-active');
-  navLinks.forEach((link, i) => {
-    if (link.style.animation) {
-      link.style.animation = '';
-    } else {
-      link.style.animation = `fadeInUp 0.5s ease forwards ${i/7 + 0.3}s`;
-    }
-  });
+  nav.classList.toggle('open');
   burger.classList.toggle('toggle');
+});
+
+// Dropdown toggle on mobile
+document.querySelectorAll('.has-dropdown .drop-btn')
+  .forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.currentTarget.parentElement.classList.toggle('open');
+    });
 });

@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <title>About Me – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav>
+  <nav class="main-nav">
     <div class="logo">Zach Ng</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Me</a></li>
       <li><a href="skills.html">My Skillset</a></li>
-      <li>
-        <a href="projects.html">My Projects</a>
+      <li class="has-dropdown">
+        <button class="drop-btn">My Projects ▼</button>
         <ul class="dropdown">
           <li><a href="image-classifier.html">Image Classifier</a></li>
           <li><a href="object-detector.html">Object Detector</a></li>
@@ -26,15 +27,15 @@
   </nav>
 
   <main class="container">
-    <!-- Intro -->
-    <section class="intro fade-in" style="animation-delay:0.3s">
-      <img src="path/to/profile.jpg" alt="Zach Ng" class="profile-pic">
-      <h1>Hello, I’m Zach Ng</h1>
+    <!-- Hero -->
+    <section style="text-align:center; margin-bottom:3rem;">
+      <img src="path/to/profile.jpg" alt="Zach Ng" style="width:160px; height:160px; border-radius:50%; border:4px solid var(--accent); margin-bottom:1rem;">
+      <h1 style="font-size:2rem; color:var(--text);">Hello, I’m Zach Ng</h1>
       <p>Master of Data Science candidate | Data Analyst | Bioinformatics Enthusiast</p>
     </section>
 
-    <!-- Skills -->
-    <section class="fade-in" style="animation-delay:0.5s">
+    <!-- Core Competencies -->
+    <section style="margin-bottom:2rem;">
       <h2 class="section-title">Core Competencies</h2>
       <div class="skills-tags">
         <span class="tag">Python</span>
@@ -42,43 +43,43 @@
         <span class="tag">SQL</span>
         <span class="tag">JavaScript</span>
         <span class="tag">Tableau</span>
-        <span class="tag">ML</span>
-        <span class="tag">NLP</span>
-        <span class="tag">Bioinformatics</span>
+        <span class="tag">Machine Learning</span>
       </div>
     </section>
 
-    <!-- Bio -->
-    <section class="fade-in" style="animation-delay:0.7s">
+    <!-- Professional Bio -->
+    <section style="margin-bottom:3rem;">
       <h2 class="section-title">Professional Bio</h2>
-      <p>Master of Data Science student at Monash University with one year of hands‑on experience in data analysis and pipeline automation. Turned 6.5M census records into strategic dashboards, integrated BoldDesk &amp; Looker Studio APIs, and championed browser‑based ML tools.</p>
+      <p>
+        Master of Data Science student at Monash University with hands‑on experience automating pipelines, visualising 6.5M census records, and building dashboards in Tableau & Looker Studio.
+      </p>
     </section>
 
-    <!-- Experience -->
-    <section class="fade-in" style="animation-delay:0.9s">
+    <!-- Experience & Expertise -->
+    <section style="margin-bottom:3rem;">
       <h2 class="section-title">Experience &amp; Expertise</h2>
       <div class="grid-2">
         <div class="card">
           <h3>Data Analyst @ IIPM</h3>
           <ul>
-            <li>Automated scraping (−80% manual effort)</li>
-            <li>6.5M record census ETL</li>
-            <li>Interactive Tableau dashboards</li>
+            <li>Automated web scrapes (−80% manual effort)</li>
+            <li>ETL of 6.5M census records</li>
+            <li>Interactive KPI dashboards</li>
           </ul>
         </div>
         <div class="card">
           <h3>IT Intern @ Nera Telecom</h3>
           <ul>
             <li>API‑driven ticket automation</li>
-            <li>Google Looker Studio adoption tracking</li>
+            <li>Looker Studio adoption tracking</li>
             <li>SQL pipeline development</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Timeline -->
-    <section class="fade-in" style="animation-delay:1.1s">
+    <!-- Journey Timeline -->
+    <section style="margin-bottom:3rem;">
       <h2 class="section-title">My Journey</h2>
       <div class="timeline">
         <div class="timeline-item">
@@ -91,54 +92,20 @@
         </div>
         <div class="timeline-item">
           <h4>Mar–Jul 2024</h4>
-          <p>Data Analyst @ IIPM (6.5M census ETL)</p>
+          <p>Data Analyst @ IIPM (6.5M ETL)</p>
         </div>
         <div class="timeline-item">
-          <h4>Jul 2024</h4>
-          <p>Graduated BCompSci (Data Science)</p>
-        </div>
-        <div class="timeline-item">
-          <h4>2024–2025</h4>
-          <p>Master of Data Science (Bioinformatics)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="fade-in" style="animation-delay:1.3s">
-      <h2 class="section-title">Selected Projects</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Spatial Transcriptomics AI</h3>
-          <p>Deep‑learning segmentation for Xenium imaging data.</p>
-        </div>
-        <div class="card">
-          <h3>Medical DB &amp; AI</h3>
-          <p>Web database with OpenAI‑driven NLP summarisation.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section class="fade-in" style="animation-delay:1.5s">
-      <h2 class="section-title">Education</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Monash University</h3>
-          <p><strong>MDataSci (Bioinformatics)</strong><br>Exp Dec 2025</p>
-        </div>
-        <div class="card">
-          <h3>Monash University</h3>
-          <p><strong>BCompSci (Data Science)</strong><br>Jul 2024</p>
+          <h4>2024–Present</h4>
+          <p>Master of Data Science (Bioinformatics) at Monash University</p>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
-    <section class="fade-in" style="animation-delay:1.7s">
+    <section>
       <h2 class="section-title">Get in Touch</h2>
-      <ul class="contact-list">
-        <li>📍 Melbourne, VIC</li>
+      <ul style="list-style:none; padding:0; text-align:center;">
+        <li>📍 Melbourne, VIC</li>
         <li>Email: <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a></li>
         <li>LinkedIn: <a href="https://linkedin.com/in/zach--ng" target="_blank">zach--ng</a></li>
         <li>GitHub: <a href="https://github.com/ZachNg01" target="_blank">ZachNg01</a></li>
