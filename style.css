@@ -1,388 +1,266 @@
-@import url('https://fonts.googleapis.com/css?family=YourFontName');
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
-#top-menu ul {
-  font-family: 'Roboto', sans-serif;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-weight: bold;
+/* ========================
+   CSS Variables
+   ======================== */
+:root {
+  --primary-color: #333;
+  --secondary-color: #fff;
+  --accent-color: #FF69B4;
+  --text-color: #555;
+  --bg-gradient-start: #ccc;
+  --bg-gradient-end: #f5f5f5;
+  --font-family: 'Roboto', sans-serif;
+  --transition-fast: 0.3s ease;
 }
 
-#top-menu {
-  background-color: #333;
-  overflow: hidden;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
+/* ========================
+   Global Reset & Base Styles
+   ======================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
-@media only screen and (max-width: 600px) {
-  #top-menu {
-    max-height: 150px; /* Adjust the maximum height as needed */
-    overflow-y: auto;
-    overflow-x: auto;
-  }
-  #top-menu li {
-    display: block;
-    width: 100%;
-  }
-  body {
-    padding-top: 120px; /* Adjust padding to accommodate fixed menu */
-  }
+html {
+  font-size: 100%;
+  height: 100%;
 }
-
-#top-menu li {
-  float: left;
-}
-
-#top-menu a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 25px 30px; /* Increased padding to make the menu items bigger */
-  text-decoration: none;
-  font-size: 18px; /* Increased font size for the menu items */
-}
-
-#top-menu a.active,
-#top-menu a:hover {
-  background-color: #f5f5f5;
-  color: black;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 600px) {
-  #top-menu a {
-    padding: 15px;
-  }
-}
-
-
-
-
 body {
-  font-family: 'Roboto', sans-serif;
-
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  line-height: 1.6;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+/* ========================
+   Header & Navigation
+   ======================== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--primary-color);
+  z-index: 1000;
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+nav ul {
+  display: flex;
   justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
   margin: 0;
 }
 
-iframe {
-  width: 100%;
-  height: 50%; /* Set height to 100% to make it non-scrollable */
-  border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
+nav a {
+  display: block;
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
 
-  clip: rect(1000, 0, 1000, 0);
+nav a:hover,
+nav a:focus,
+nav a.active {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
 
+/* Ensure content is not hidden under fixed header */
+main {
+  padding-top: 80px;
+  flex: 1;
 }
-#        <div class="card" > 
-<div class="card-content">
-    <h2><u>Administrator</u> </h2>
-    <b><p>IIPM Pty Ltd</b>
-    <br>(Oct 2023 - Dec 2023)</p>
-    
-        <li>Handle student requests <br> 
-        &nbsp&nbsp&nbsp&nbsp about their course  </li> 
-    
-        <li>Explore and work on front-end <br> 
-        &nbsp&nbsp&nbsp&nbsp and back-end development</li>
-    
-        <li>Handling user requests and <br> 
-        &nbsp&nbsp&nbsp&nbsp resolve  issues.</li>
-</div>
-</div> {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+/* ========================
+   Background Animation Layers
+   ======================== */
+.bg,
+.bg2,
+.bg3 {
+  position: fixed;
+  inset: 0;
+  opacity: 0.5;
+  background-image: linear-gradient(-60deg, var(--bg-gradient-start) 50%, var(--bg-gradient-end) 50%);
+  z-index: -1;
+  animation: slide 4s ease-in-out infinite alternate;
 }
-.card {
-  width: 300px;
-  margin: 20px;
-  background-color: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out, background-color 0.3s ease-in-out; /* Added background-color to the transition property */
-  animation: floatCard 3s infinite alternate;
+.bg2 { animation-direction: alternate-reverse; }
+.bg3 { animation-duration: 5s; }
+
+@keyframes slide {
+  from { transform: translateX(-25%); }
+  to   { transform: translateX(25%);  }
 }
+
+/* ========================
+   Card Layout
+   ======================== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.card,
 .bigcard {
-  width: 800px;
-  margin: 20px;
-  background-color: #fff;
-  border-radius: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out, background-color 0.3s ease-in-out; /* Added background-color to the transition property */
+  transition: transform 0.7s ease, box-shadow 0.7s ease;
   animation: floatCard 3s infinite alternate;
 }
-.card:hover {
-  background-color: #f0f0f0c2; /* Change the background color on hover */
-  border: 2px solid #000000; /* Change the border color and thickness on hover */
+.bigcard { width: 800px; max-width: 95%; }
+.card   { width: 300px; }
 
+.card:hover,
+.bigcard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
 @keyframes floatCard {
-  0% {
-      transform: translateY(0);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  100% {
-      transform: translateY(-20px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  }
-}
-
-
-.card.visible {
-    opacity: 1;
-    transform: translateY(0);
+  from { transform: translateY(0);   }
+  to   { transform: translateY(-20px);
+         box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 }
 
 .card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.card-content {
-    padding: 16px;
-}
-
-h2 {
-    margin-bottom: 8px;
-}
-
-h1{
-  font-family: 'Roboto', sans-serif;
-}
-
-p {
-    color: #555;font-family: 'Roboto', sans-serif;
-}
-
-#popup-container {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    z-index: 999;
-}
-
-#close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-/* Add this to your style.css file or within a <style> tag in the HTML head */
-
-
-
-
-
-
-
-#pagename {
-  background-color: #ffffff;
+  display: block;
   width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.card-content {
+  padding: 1.5rem;
+}
+.card-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.card-content p {
+  margin: 0;
 }
 
-
-li::before {  
-    transform: scaleX(0);
-    transform-origin: bottom right;
-  }
-  
-  li:hover::before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-  
-  li::before {
-    font-family: 'Roboto', sans-serif;
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    inset: 0 0 0 0;
-    background: #FF69B4(0, 99%, 37%);
-    z-index: -1;
-    transition: transform 1s ease;
-  }
-
-
-
-
-
-
-  
-html {
-    height:100%;
-  }
-  
-  body {
-    margin:0;
-  }
-  
-  .bg {
-    animation: slide 4s ease-in-out infinite alternate;
-    background-image: linear-gradient(-60deg, #ccc 50%, #f5f5f5 50%); /* Neutral tones */
-    bottom: 0;
-    left: -50%;
-    opacity: 0.5;
-    position: fixed;
-    right: -50%;
-    top: 0;
-    z-index: -1;
-  }
-  
-  li{
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 3px;  
-  }
-  .bg2 {
-    animation-direction:alternate-reverse;
-    animation-duration:4s;
-  }
-  
-  .bg3 {
-    animation-duration:5s;
-  }
-  
-  .content {
-    background-color:rgba(255,255,255,.8);
-    border-radius:.25em;
-    box-shadow:0 0 .25em rgba(0,0,0,.25);
-    box-sizing:border-box;
-    left:50%;
-    padding:10vmin;
-    position:fixed;
-    text-align:center;
-    top:50%;
-    transform:translate(-50%, -50%);
-  }
-
-  
-  @keyframes slide {
-    0% {
-      transform:translateX(-25%);
-    }
-    100% {
-      transform:translateX(25%);
-    }
-  }
-  
-
-
-  #container {
-    padding-top: 300px;
-    max-width: 1500px;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    margin: 0 auto; /* Center the container horizontally */
-    display: flex;
-    flex-direction: column; /* Ensure child elements are aligned in a column */
-    align-items: center; /* Center child elements horizontally */
+/* ========================
+   Popup Modal
+   ======================== */
+#popup-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+#popup-container .modal {
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  max-width: 90%;
+}
+#close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-
-/* Apply these styles to the scrollbar */
-::-webkit-scrollbar {
-  width: 10px; /* Set the width of the scrollbar */
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Change the color on hover */
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; /* Set the color of the scrollbar handle */
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Set the color of the scrollbar track */
-}
-
-
-
-HTML,BODY{cursor: url("https://downloads.totallyfreecursors.com/cursor_files/cow.ani"), url("https://downloads.totallyfreecursors.com/thumbnails/cow.gif"), auto;}
-
-
+/* ========================
+   Form & Button Styles
+   ======================== */
 form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 220px;
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 100%;
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
-input[type="range"] {
+input,
+textarea,
+select {
   width: 100%;
-  margin-bottom: 20px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-family: var(--font-family);
 }
 
 .button {
+  display: inline-block;
   background-color: #3498db;
-  color: #fff;
-  padding: 10px 15px;
+  color: var(--secondary-color);
+  padding: 0.75rem 1.25rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  font-size: 16px;
+  transition: background var(--transition-fast);
 }
-
 .button:hover {
   background-color: #2980b9;
 }
 
-.horicontainer {
-  display: flex;
-  overflow-x: auto; /* Enable vertical scrolling */
-  white-space: nowrap;
-  padding: 120px; /* Adjust as needed */
+/* ========================
+   Scrollbar Styling
+   ======================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
-@media screen and (max-width: 1500px) {
-  .horicontainer {
-    padding-top: 90px;
-    max-width: 1500px;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0 auto; /* Center the container horizontally */
-    display: flex;
-    flex-direction: column; /* Ensure child elements are aligned in a column */
-    align-items: center; /* Center child elements horizontally */
+/* ========================
+   Responsive Breakpoints
+   ======================== */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
   }
-
-
+  .card,
+  .bigcard {
+    width: 90%;
+  }
 }
