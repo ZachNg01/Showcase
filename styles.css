@@ -119,3 +119,48 @@ nav .nav-links a:hover::after {
   transform: translateY(-5px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
+
+
+/* …[your existing CSS up to the nav styles]… */
+
+/* NAV DROPDOWN */
+nav .nav-links li {
+  position: relative;
+}
+nav .nav-links .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  list-style: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+nav .nav-links .dropdown li {
+  margin: 0.3rem 0;
+}
+nav .nav-links .dropdown a {
+  color: var(--text);
+  font-weight: 400;
+}
+nav .nav-links li:hover > .dropdown {
+  display: block;
+}
+
+/* MOBILE: keep dropdown visible inside slide‑out menu */
+@media (max-width: 768px) {
+  nav .nav-links .dropdown {
+    position: static;
+    box-shadow: none;
+    padding-left: 1.5rem;
+  }
+  nav .nav-links li:hover > .dropdown,
+  nav .nav-links.nav-active .dropdown {
+    display: block;
+  }
+}
+
+/* …[rest of your styles—container, grid, etc.]… */
+
