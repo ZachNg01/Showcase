@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Home – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link href="styles.css" rel="stylesheet"/>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="config.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAVBAR -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- NAVBAR -->
+
   <div class="navbar">
     <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About Me</a>
@@ -34,34 +29,28 @@
       </div>
     </div>
   </div>
-
-
+  
   <main>
-    <div class="card">
+    <section class="card">
       <h1>Welcome to My Portfolio</h1>
-      <p style="text-align:center; margin-top:1rem;">
-        I’m Zach Ng—a Data Science student building AI tools & dashboards.
+      <p>
+        I’m Zach Ng—Master of Data Science student at Monash University (Expected Dec 2025) with hands‑on experience in data analysis, bioinformatics research, and AI tool development.
       </p>
-    </div>
+      <p>
+        Check out my skills, projects, and experience as you explore this site.
+      </p>
+    </section>
+    <section class="card">
+      <h2>Quick Links</h2>
+      <div class="projects-grid">
+        <a class="project-card" href="about.html"><h3>About Me</h3></a>
+        <a class="project-card" href="skills.html"><h3>Skills</h3></a>
+        <a class="project-card" href="projects.html"><h3>Projects</h3></a>
+      </div>
+    </section>
   </main>
 
   <footer>&copy; 2025 Zach Ng</footer>
-
-  <script>
-    function parseJwt(t){let b=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(atob(b))}
-    function handleCredentialResponse(r){
-      try{
-        const p=parseJwt(r.credential),n=p.name||p.email||'';
-        document.getElementById('greeting').textContent = n?`Hello, ${n}`:'Hello';
-      }catch{}
-    }
-    window.onload=()=>{
-      google.accounts.id.initialize({
-        client_id: window.GOOGLE_CLIENT_ID,
-        callback: handleCredentialResponse
-      });
-      google.accounts.id.prompt();
-    };
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>

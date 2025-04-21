@@ -2,19 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Image Classifier – Zach Ng</title>
+  <title>Responsive Image Classifier – Enhanced Info</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="styles.css" rel="stylesheet">
+
+  <!-- Google Font & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <!-- TensorFlow.js + MobileNet Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --nav-height: 64px;
+      --accent: #0066ff;
+      --bg: #f5f7fa;
+      --card-bg: #fff;
+      --text: #222;
+      --muted: #6b7280;
+      --shadow: 0 6px 18px rgba(0,0,0,.08);
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+    /* RESET + BODY */
+    * { box-sizing:border-box; margin:0; padding:0 }
+    html, body { height:100%; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      padding-top: var(--nav-height);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4vw;
+    }
+
+    /* CLASSIFIER CARD */
+    .card {
+      width:100%; max-width:420px;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(16px,4vw,32px);
+      display:flex;
+      flex-direction:column;
+      gap:clamp(12px,4vw,18px);
+      text-align:center;
+    }
+    .card + .info-card {
+      margin-top: clamp(24px,6vw,32px);
+    }
+    .card h1 { /* ...same as before...*/ }
+    /* ...rest of classifier styles unchanged... */
+
+    /* INFO CARD */
+    .info-card {
+      width:100%; max-width: 500px;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(16px,4vw,32px);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap:1.5rem;
+    }
+    .info-card h2 {
+      margin-bottom:0.5rem;
+      color:var(--accent);
+      font-size: clamp(1rem,4vw,1.2rem);
+      grid-column: 1 / -1;
+    }
+    .info-card section {
+      display:flex;
+      flex-direction:column;
+      gap:0.25rem;
+    }
+    .info-card section p {
+      margin:0;
+      font-size: clamp(.85rem,3vw,.95rem);
+      line-height:1.4;
+    }
+
+    @media (min-width: 600px) {
+      .info-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top:2rem;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+    label.btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.55rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+      font-size: clamp(.9rem, 3.5vw, 1rem);
+    }
+    label.btn:hover { background: #004ddb; }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- NAVBAR -->
+  <!-- Navbar (unchanged) -->
   <div class="navbar">
     <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About Me</a>
@@ -32,40 +134,101 @@
       </div>
     </div>
   </div>
-
-
   <main>
-    <section class="card" style="text-align:center;">
-      <h2>Image Classifier (Lite)</h2>
-      <img id="preview" style="display:none;max-width:100%;margin:1rem auto;" />
-      <input type="file" id="filePick" accept="image/*" hidden/>
-      <label for="filePick" class="btn">Choose Image</label>
-      <div id="status">Loading model…</div>
-      <div id="result"></div>
-    </section>
-  </main>
 
+  <!-- Classifier Card -->
+  <div class="card">
+    <h1>Image Classifier (Lite)</h1>
+    <img id="preview" alt="preview" style="display:none;width:100%;max-height:40vh;object-fit:contain;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);">
+    <label class="btn" for="filePick">Choose Image</label>
+    <input type="file" id="filePick" accept="image/*">
+    <div id="result"></div>
+    <div id="status">Loading model…</div>
+  </div>
+
+  <!-- Enhanced Info Card -->
+  <div class="info-card">
+    <h2>What this demo does</h2>
+    <section>
+      <p>Pick a photo. The page (no servers involved) quickly runs a small AI model to guess what the image is.</p>
+      <p>The top 3 guesses with animated confidence bars will be displayed.</p>
+    </section>
+    <h2>Why the guesses aren’t always perfect</h2>
+    <section>
+      <p>I used a tiny, fast version of the model so the page loads almost instantly.</p>
+      <p>It was trained on 1,000 everyday objects (ImageNet), e.g. pen, suit, etc. Photos outside that set or shot in odd lighting may confuse the model.</p>
+      <p><strong>You may upload an image once the widget states, “Model ready”.</strong></p>
+    </section>
+  </div>
+</main>
   <footer>&copy; 2025 Zach Ng</footer>
 
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+  <!-- Navbar Burger Script -->
   <script>
-    let model;const fp=document.getElementById('filePick'),pv=document.getElementById('preview'),st=document.getElementById('status'),rs=document.getElementById('result');
-    mobilenet.load({version:2,alpha:0.5})
-      .then(m=>{model=m;st.textContent='Model ready – pick an image.'})
-      .catch(()=>st.textContent='Error loading model.');
-    fp.addEventListener('change',e=>{
-      const f=e.target.files[0];if(!f||!model)return;
-      pv.src=URL.createObjectURL(f);pv.style.display='block';st.textContent='Classifying…';rs.innerHTML='';
-      pv.onload=()=>{
-        URL.revokeObjectURL(pv.src);
-        model.classify(pv,3).then(preds=>{
-          rs.innerHTML=preds.map(p=>`<div><strong>${p.className}</strong> — ${(p.probability*100).toFixed(1)}%</div>`).join('');
-          st.textContent='Done ✔';
-        }).catch(()=>st.textContent='Classification error.');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('burger')
+        .addEventListener('click', () => {
+          document.getElementById('nav-links').classList.toggle('open');
+        });
+    });
+  </script>
+
+  <!-- Classifier Logic -->
+  <script>
+    let model;
+    const filePick = document.getElementById('filePick');
+    const preview  = document.getElementById('preview');
+    const statusEl = document.getElementById('status');
+    const resultEl = document.getElementById('result');
+
+    // Load MobileNet v2 Lite
+    mobilenet.load({ version: 2, alpha: 0.50 })
+      .then(m => {
+        model = m;
+        statusEl.textContent = 'Model ready – pick an image.';
+      })
+      .catch(err => {
+        statusEl.textContent = 'Load error: ' + err;
+      });
+
+    filePick.addEventListener('change', e => {
+      const f = e.target.files[0];
+      if (!f || !model) return;
+
+      preview.src = URL.createObjectURL(f);
+      preview.style.display = 'block';
+      resultEl.innerHTML = '';
+      statusEl.textContent = 'Classifying…';
+
+      preview.onload = () => {
+        URL.revokeObjectURL(preview.src);
+        model.classify(preview, 3)
+          .then(show)
+          .catch(err => {
+            statusEl.textContent = 'Error: ' + err;
+          });
       };
     });
+
+    function show(preds) {
+      resultEl.innerHTML = '';
+      preds.forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'pred';
+        row.innerHTML = `<strong>${p.className}</strong> – ${(p.probability*100).toFixed(1)}%`;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'bar-wrap';
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.width = `${(p.probability*100).toFixed(1)}%`;
+        wrap.appendChild(bar);
+
+        resultEl.appendChild(row);
+        resultEl.appendChild(wrap);
+      });
+      statusEl.textContent = 'Done ✔';
+    }
   </script>
 </body>
 </html>

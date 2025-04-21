@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8">
   <title>About Me – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link href="styles.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAVBAR (same as above without greeting) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- NAVBAR -->
+
   <div class="navbar">
     <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About Me</a>
@@ -32,34 +29,66 @@
       </div>
     </div>
   </div>
-
+  
 
   <main>
-    <!-- Your About cards… -->
+    <section class="card">
+      <h1>Zach Ng</h1>
+      <p class="contact-info">
+        Melbourne, Victoria | +61 410 137 093 | 
+        <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a> | 
+        <a href="https://linkedin.com/in/zach--ng" target="_blank">linkedin.com/in/zach--ng</a>
+      </p>
+      <p>
+        Master of Data Science student skilled in Python, R, SQL, JavaScript, and AI tooling. Passionate about turning complex data into strategic insights and building interactive dashboards.
+      </p>
+    </section>
 
     <section class="card">
       <h2>Timeline</h2>
       <ul class="timeline">
         <li class="timeline-item">
-          <span class="date">Expected Dec 2025</span>
-          <p class="desc">Master of Data Science (Bioinformatics), Monash University</p>
+          <span class="date">Dec 2025</span>
+          <p class="desc"><strong>Master of Data Science</strong>, Monash University — Specializing in Bioinformatics :contentReference[oaicite:4]{index=4}&#8203;:contentReference[oaicite:5]{index=5}</p>
+        </li>
+        <li class="timeline-item">
+          <span class="date">Jul 2024</span>
+          <p class="desc"><strong>Bachelor of Computer Science (Data Science)</strong>, Monash University :contentReference[oaicite:6]{index=6}&#8203;:contentReference[oaicite:7]{index=7}</p>
         </li>
         <li class="timeline-item">
           <span class="date">Mar 2024 – Jul 2024</span>
-          <p class="desc">Data Analyst, IIPM Pty Ltd</p>
+          <p class="desc"><strong>Data Analyst</strong>, IIPM Pty Ltd — Automated scripts (–80% effort), processed 6.5M records, built Tableau dashboards :contentReference[oaicite:8]{index=8}&#8203;:contentReference[oaicite:9]{index=9}</p>
         </li>
         <li class="timeline-item">
-          <span class="date">July 2024</span>
-          <p class="desc">BCompSc (Data Science), Monash University</p>
+          <span class="date">Jun 2024 – Jul 2024</span>
+          <p class="desc"><strong>TeaMWork Intern</strong> — Calculated SROI for Zero Waste Malaysia :contentReference[oaicite:10]{index=10}&#8203;:contentReference[oaicite:11]{index=11}</p>
         </li>
         <li class="timeline-item">
-          <span class="date">2018</span>
-          <p class="desc">Moved from Malaysia to Melbourne</p>
+          <span class="date">Jun 2024</span>
+          <p class="desc"><strong>Medical Database Project</strong> — AI‑integrated patient DB via OpenAI API :contentReference[oaicite:12]{index=12}&#8203;:contentReference[oaicite:13]{index=13}</p>
         </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Skills & Tools</h2>
+      <p><strong>Languages:</strong> Python, R, SQL, JavaScript, Bash</p>
+      <p><strong>Data:</strong> ETL, Warehousing, Wrangling, Tableau, Power BI</p>
+      <p><strong>AI & ML:</strong> TensorFlow, PyTorch, LLMs, NLP, Bioinformatics</p>
+      <p><strong>Soft:</strong> Agile, Scrum, Communication, Google Workspace</p>
+    </section>
+
+    <section class="card">
+      <h2>Certifications</h2>
+      <ul>
+        <li>IELTS 8.0 — Mar 2025</li>
+        <li>IBM Cybersecurity Tools — Oct 2023</li>
+        <li>CITI Conflicts of Interest — Aug 2023–Aug 2027</li>
       </ul>
     </section>
   </main>
 
   <footer>&copy; 2025 Zach Ng</footer>
+  <script src="main.js"></script>
 </body>
 </html>

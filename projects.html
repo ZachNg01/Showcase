@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Projects – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link href="styles.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>My Projects – Zach Ng</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAVBAR -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- NAVBAR -->
   <div class="navbar">
     <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About Me</a>
@@ -32,28 +28,32 @@
       </div>
     </div>
   </div>
-
-
+  
   <main>
     <section class="card">
-      <h2>My Projects</h2>
+      <h2>Featured Projects</h2>
       <div class="projects-grid">
         <a class="project-card" href="image-classifier.html">
-          <h3>Image Classifier</h3><p>MobileNet Lite UI</p>
+          <h3>Image Classifier</h3>
+          <p>TensorFlow.js + MobileNet<br/>Live preview & probabilities.</p>
         </a>
         <a class="project-card" href="object-detector.html">
-          <h3>Object Detector</h3><p>COCO‑SSD preview</p>
+          <h3>Object Detector</h3>
+          <p>COCO‑SSD model overlayed on canvas.</p>
         </a>
         <a class="project-card" href="text-summariser.html">
-          <h3>Text Summariser</h3><p>Secure HF proxy</p>
+          <h3>Text Summariser</h3>
+          <p>HF proxy API, adjustable length & copy.</p>
         </a>
         <a class="project-card" href="tiles.html">
-          <h3>Tile Match Game</h3><p>6‑layer emoji puzzle</p>
+          <h3>Tile Match Game</h3>
+          <p>6‑layer emoji match‑3 clone with rack & merge bonuses.</p>
         </a>
       </div>
     </section>
   </main>
 
   <footer>&copy; 2025 Zach Ng</footer>
+  <script src="main.js"></script>
 </body>
 </html>
