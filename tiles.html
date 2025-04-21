@@ -9,20 +9,31 @@
 <body>
   <!-- NAVBAR -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <div class="navbar">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Me</a>
-    <a href="skills.html">Skills</a>
-    <div class="subnav">
-      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
-      <div class="subnav-content">
-        <a href="image-classifier.html">Image Classifier</a>
-        <a href="object-detector.html">Object Detector</a>
-        <a href="text-summariser.html">Text Summariser</a>
-        <a href="tiles.html">Tile Match Game</a>
-      </div>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Zach Ng</div>
+        <div class="burger" id="burger">
+        <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="skills.html">Skills</a>
+        <div class="subnav">
+            <button class="subnavbtn">
+            Projects <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="subnav-content">
+            <a href="image-classifier.html">Image Classifier</a>
+            <a href="object-detector.html">Object Detector</a>
+            <a href="text-summariser.html">Text Summariser</a>
+            <a href="tiles.html">Tile Match Game</a>
+            </div>
+        </div>
+        </div>
     </div>
-  </div>
+  
+  
 
   <script src="main.js"></script>
   <meta charset="UTF-8"/>
@@ -44,8 +55,8 @@
     }
     .board-wrapper {
       position: relative;
-      width: 100%; max-width: 600px;
-      height: 600px;
+      width: 100%; max-width: 500px;
+      height: 400px;
       background: rgba(255,255,255,0.4);
       border-radius: 12px;
       box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
