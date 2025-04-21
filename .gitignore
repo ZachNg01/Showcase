@@ -1,2 +1,5 @@
 .env
 node_modules/
+
+# Ignore the real Google client‑ID config
+config.js
