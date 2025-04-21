@@ -96,3 +96,118 @@ footer { text-align:center; padding:2rem 0 }
   .navbar { flex-wrap:wrap; }
   .subnav-content { position:static; box-shadow:none; }
 }
+
+
+/* ── Global Navbar + Hamburger ── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #007acc;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 1rem;
+}
+.nav-links a {
+  padding: 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  color: #007acc;
+}
+
+/* Subnav */
+.subnav {
+  position: relative;
+}
+.subnavbtn {
+  background: none; border: none; font: inherit;
+  padding: 1rem; cursor: pointer;
+  color: #333; font-weight: 500;
+}
+.subnavbtn i { margin-left: 0.25rem; }
+.subnav-content {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  min-width: 160px;
+}
+.subnav-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+}
+.subnav-content a:hover {
+  background: #f1f1f1;
+}
+.subnav:hover .subnav-content {
+  display: block;
+}
+
+/* Hamburger */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.burger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 3.5rem;  /* navbar height */
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70vw;
+    max-width: 300px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    gap: 0;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links a {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+  .subnav-content {
+    position: static;
+    box-shadow: none;
+    width: 100%;
+  }
+}
+
