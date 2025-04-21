@@ -1,74 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About Me – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"/>
+  <title>About Me – Zach Ng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="logo">Zach Ng</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="skills.html">My Skillset</a></li>
-      <li class="has-dropdown">
-        <button class="drop-btn" aria-haspopup="true">My Projects ▼</button>
-        <ul class="dropdown" role="menu">
-          <li><a href="image-classifier.html">Image Classifier</a></li>
-          <li><a href="object-detector.html">Object Detector</a></li>
-          <li><a href="text-summariser.html">Text Summariser</a></li>
-        </ul>
-      </li>
-    </ul>
-    <div class="burger" aria-label="Open Navigation"><span></span><span></span><span></span></div>
-  </nav>
-
-  <main class="container">
-    <div class="card">
-      <h1>About Me</h1>
-      <p class="text-center">I'm Zach Ng, a <strong>Master of Data Science</strong> student at Monash University, passionate about <strong>bioinformatics, machine learning</strong>, and <strong>browser-based AI tools</strong>.</p>
-
-      <h2>🌟 Career Highlights</h2>
-      <ul>
-        <li>📊 Automated 80% of data collection at IIPM Pty Ltd</li>
-        <li>📈 Processed & visualized 6.5M census records to support investment</li>
-        <li>📌 Developed Looker dashboards tracking company-wide software adoption</li>
-        <li>🔁 Integrated APIs (BoldDesk, Sophos) to automate ticketing & analytics</li>
-      </ul>
-
-      <h2>🧠 Core Competencies</h2>
-      <div class="skills-tags">
-        <span class="tag">Python</span>
-        <span class="tag">R</span>
-        <span class="tag">SQL</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Machine Learning</span>
-        <span class="tag">NLP</span>
-        <span class="tag">Tableau</span>
-        <span class="tag">Power BI</span>
-        <span class="tag">Looker Studio</span>
+  <!-- NAVBAR (same as above without greeting) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
       </div>
-
-      <h2>🚀 Projects & Research</h2>
-      <ul>
-        <li>📍 Bioinformatics Thesis: AI for spatial transcriptomics segmentation</li>
-        <li>🧬 Medical DB Project: Built with JS + Python + LLM APIs</li>
-        <li>🌱 SROI Model: Green Wira Programme impact assessment</li>
-      </ul>
-
-      <h2>📬 Contact</h2>
-      <p class="text-center">
-        Melbourne, VIC<br>
-        <a href="mailto:zachaus01@gmail.com">zachaus01@gmail.com</a><br>
-        <a href="https://linkedin.com/in/zach--ng" target="_blank">LinkedIn</a> |
-        <a href="https://github.com/ZachNg01" target="_blank">GitHub</a>
-      </p>
     </div>
+  </div>
+
+  <main>
+    <!-- Your About cards… -->
+
+    <section class="card">
+      <h2>Timeline</h2>
+      <ul class="timeline">
+        <li class="timeline-item">
+          <span class="date">Expected Dec 2025</span>
+          <p class="desc">Master of Data Science (Bioinformatics), Monash University</p>
+        </li>
+        <li class="timeline-item">
+          <span class="date">Mar 2024 – Jul 2024</span>
+          <p class="desc">Data Analyst, IIPM Pty Ltd</p>
+        </li>
+        <li class="timeline-item">
+          <span class="date">July 2024</span>
+          <p class="desc">BCompSc (Data Science), Monash University</p>
+        </li>
+        <li class="timeline-item">
+          <span class="date">2018</span>
+          <p class="desc">Moved from Malaysia to Melbourne</p>
+        </li>
+      </ul>
+    </section>
   </main>
 
-  <script src="main.js"></script>
+  <footer>&copy; 2025 Zach Ng</footer>
 </body>
 </html>

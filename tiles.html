@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Object Detector – Zach Ng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <meta charset="UTF-8"/>
+  <title>Centered 6‑Layer Match‑3 with New Game</title>
+  <style>
+    * { box-sizing:border-box; margin:0; padding:0 }
+    body {
+      background: #FCE8DC;
+      font-family: sans-serif;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 16px; overflow-x: hidden;
+    }
+    .header {
+      background: #D8B38B; color: #fff;
+      width: 100%; max-width: 600px;
+      padding: 12px; text-align: center; border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      margin-bottom: 16px;
+    }
+    .board-wrapper {
+      position: relative;
+      width: 100%; max-width: 600px;
+      height: 600px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 12px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+      overflow: visible;
+    }
+    #boardContent {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .tile {
+      position: absolute;
+      width: 60px; height: 80px;
+      transition: filter .2s, box-shadow .2s;
+    }
+    .tile .face {
+      width: 100%; height: 100%; background: #fff; border-radius: 8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .tile.covered .face { filter: brightness(0.5); }
+    .tile.top .face:hover { cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+
+    .rack {
+      width: 100%; max-width: 600px;
+      display:flex; justify-content:center;
+      margin-bottom: 16px; height: 100px;
+    }
+    .rack-slot {
+      width: 60px; height: 80px; margin: 0 4px;
+      background: rgba(255,255,255,0.2);
+      border: 2px dashed #aaa; border-radius: 8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 2rem; color: #333;
+    }
+
+    .merge-tile {
+      position: absolute; width:60px; height:80px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem; background:#fff; border-radius:8px;
+      box-shadow: 0 4px 12px rgba(255,215,0,0.8);
+      pointer-events: none;
+      transition: transform 1s ease-out, opacity 1s ease-out;
+      opacity: 1;
+    }
+
+    .footer {
+      width: 100%; max-width: 600px;
+      display:flex; justify-content: space-around;
+    }
+    .btn {
+      width:60px; height:60px;
+      background:#C0E1AF; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; color:#fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      cursor:pointer; user-select:none;
+    }
+    .btn:disabled { background:#888; cursor:default; }
+    .btn:active:not(:disabled){ transform: scale(0.95); }
+
+    .modal-backdrop {
+      position:fixed; top:0; left:0; right:0; bottom:0;
+      background:rgba(0,0,0,0.4);
+      display:none; align-items:center; justify-content:center;
+      z-index:1000;
+    }
+    .modal {
+      background:#fff; border-radius:12px;
+      padding:24px; max-width:320px; text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+    .modal h2 {
+      margin-bottom:16px; font-size:1.4rem; color:#333;
+    }
+    .modal .actions {
+      display:flex; justify-content:space-around;
+    }
+    .modal .actions button {
+      padding:8px 16px; border:none; border-radius:8px;
+      font-size:1rem; cursor:pointer;
+    }
+    .modal .yes { background:#7ED957; color:#fff; }
+    .modal .no  { background:#E07A5F; color:#fff; }
+  </style>
+</head>
+<body>
+  <div class="header">Tile Match Game</div>
+
+  <div class="board-wrapper">
+    <div id="boardContent"></div>
+  </div>
+
+  <div class="rack" id="rack"></div>
+
+  <div class="footer">
+    <button class="btn" id="newgame">🆕</button>
+    <button class="btn" id="shuffle">⇄</button>
+    <button class="btn" id="hint">💡</button>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal">
+      <h2 id="modal-msg"></h2>
+      <div class="actions">
+        <button class="yes" id="modal-yes">Play Again</button>
+        <button class="no"  id="modal-no">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const boardWrapper = document.querySelector('.board-wrapper'),
+          boardEl      = document.getElementById('boardContent'),
+          rackEl       = document.getElementById('rack'),
+          newBtn       = document.getElementById('newgame'),
+          shuffleBtn   = document.getElementById('shuffle'),
+          hintBtn      = document.getElementById('hint'),
+          backdrop     = document.getElementById('modal-backdrop'),
+          msgEl        = document.getElementById('modal-msg'),
+          yesBtn       = document.getElementById('modal-yes'),
+          noBtn        = document.getElementById('modal-no'),
+          tileW=60, tileH=80, gap=4, rackCap=7,
+          layerOffset = tileH * 0.25; // 20px
+
+    let hasShuffled=false, isAnimating=false;
+
+    // Six‑layer stepped layout (60 slots total)
+    const layout = [];
+    // base 6×4
+    for(let y=0;y<4;y++)for(let x=0;x<6;x++) layout.push({x,y,z:0});
+    // z=1 at (x+y)%2===0
+    for(let y=0;y<4;y++)for(let x=0;x<6;x++) if((x+y)%2===0) layout.push({x,y,z:1});
+    // z=2 at (x+y)%2===1
+    for(let y=0;y<4;y++)for(let x=0;x<6;x++) if((x+y)%2===1) layout.push({x,y,z:2});
+    // z=3 at (x+y)%3===0
+    for(let y=0;y<4;y++)for(let x=0;x<6;x++) if((x+y)%3===0) layout.push({x,y,z:3});
+    // two full cover stacks
+    [{x:1,y:1},{x:4,y:2}].forEach(pos=>{
+      [4,5].forEach(z=> layout.push({x:pos.x,y:pos.y,z}));
+    });
+
+    // Deck: 20 emojis ×3 =60
+    const emojis = [
+      '😊','🍎','🚗','⭐','🍦','🎵','🐄','🐮','🍉','🐶',
+      '🍇','🍓','🍋','🍌','🍍','🥝','🥛','🥑','🧀','🥕'
+    ];
+    let deck = [];
+    emojis.forEach(e=> deck.push(e,e,e));
+    deck.sort(()=>Math.random()-0.5);
+
+    // compute content size
+    const cols = Math.max(...layout.map(p=>p.x))+1;
+    const rows = Math.max(...layout.map(p=>p.y))+1;
+    const maxZ  = Math.max(...layout.map(p=>p.z));
+    const contentW = cols*(tileW+gap)+gap;
+    const contentH = rows*(tileH+gap)+gap + maxZ*layerOffset;
+
+    boardEl.style.width  = contentW + 'px';
+    boardEl.style.height = contentH + 'px';
+
+    // Render tiles
+    const tiles = [];
+    layout.forEach((pos,i)=>{
+      const el = document.createElement('div');
+      el.className='tile';
+      const left = pos.x*(tileW+gap)+gap;
+      const top  = pos.y*(tileH+gap)+gap - pos.z*layerOffset;
+      el.style.left   = `${left}px`;
+      el.style.top    = `${top}px`;
+      el.style.zIndex = pos.z;
+      const f = document.createElement('div');
+      f.className='face'; f.textContent=deck[i];
+      el.appendChild(f);
+      boardEl.appendChild(el);
+      tiles.push({pos,el,icon:deck[i],removed:false});
+    });
+
+    // Build rack
+    let rack=[];
+    const slotEls=[];
+    for(let i=0;i<rackCap;i++){
+      const s=document.createElement('div');
+      s.className='rack-slot'; rackEl.appendChild(s);
+      slotEls.push(s);
+    }
+    const renderRack = ()=> slotEls.forEach((s,i)=> s.textContent = rack[i]||'');
+
+    // Coverage (≥25% overlap)
+    const minOverlap = tileW*tileH*0.25;
+    function updateCoverage(){
+      const rects = tiles.map(t=> t.removed?null:t.el.getBoundingClientRect());
+      tiles.forEach((t,i)=>{
+        if(t.removed) return;
+        const r1 = rects[i];
+        let covered=false;
+        for(let j=0;j<tiles.length;j++){
+          const u=tiles[j];
+          if(u.removed||u.pos.z<=t.pos.z) continue;
+          const r2=rects[j];
+          const w=Math.min(r1.right,r2.right)-Math.max(r1.left,r2.left);
+          const h=Math.min(r1.bottom,r2.bottom)-Math.max(r1.top,r2.top);
+          if(w>0 && h>0 && w*h>=minOverlap){
+            covered=true; break;
+          }
+        }
+        t.el.classList.toggle('covered',covered);
+        t.el.classList.toggle('top',!covered);
+      });
+    }
+    window.addEventListener('load', updateCoverage);
+
+    // Slide to rack
+    function onTileClick(i){
+      if(isAnimating) return;
+      if(rack.length>=rackCap) return;
+      const t=tiles[i];
+      if(t.removed||!t.el.classList.contains('top')) return;
+      isAnimating=true;
+      const idx=rack.length;
+      const sl=slotEls[idx].getBoundingClientRect();
+      const tl=t.el.getBoundingClientRect();
+      const clone=t.el.cloneNode(true);
+      clone.style.position='fixed'; clone.style.margin='0';
+      clone.style.left=`${tl.left}px`; clone.style.top=`${tl.top}px`;
+      clone.style.transition='all .5s ease';
+      document.body.append(clone);
+
+      t.removed=true; t.el.remove(); updateCoverage();
+
+      requestAnimationFrame(()=>{
+        clone.style.left=`${sl.left}px`;
+        clone.style.top=`${sl.top}px`;
+        clone.style.width=`${sl.width}px`;
+        clone.style.height=`${sl.height}px`;
+      });
+
+      setTimeout(()=>{
+        clone.remove();
+        rack.push(t.icon);
+        renderRack();
+        isAnimating=false;
+        checkMerge();
+      },550);
+    }
+    tiles.forEach((_,i)=> tiles[i].el.addEventListener('click',()=>onTileClick(i)));
+
+    // Merge‑3
+    function checkMerge(){
+      const cnt={}; rack.forEach(e=>cnt[e]=(cnt[e]||0)+1);
+      for(const icon in cnt) if(cnt[icon]>=3){
+        const idxs=[];
+        rack.forEach((e,i)=> e===icon && idxs.length<3 && idxs.push(i));
+        idxs.forEach(i=> slotEls[i].textContent='');
+        idxs.forEach(i=>{
+          const sr=slotEls[i].getBoundingClientRect();
+          const m=document.createElement('div');
+          m.className='merge-tile'; m.textContent=icon;
+          document.body.append(m);
+          m.style.left=`${sr.left}px`; m.style.top=`${sr.top}px`;
+          requestAnimationFrame(()=>{
+            const cx=window.innerWidth/2-tileW/2,
+                  cy=window.innerHeight/2-tileH/2;
+            m.style.transform=`translate(${cx-sr.left}px,${cy-sr.top}px) scale(1.8) rotate(360deg)`;
+            m.style.opacity='0';
+          });
+          m.addEventListener('transitionend',()=>m.remove());
+        });
+        setTimeout(()=>{
+          idxs.sort((a,b)=>b-a).forEach(i=>rack.splice(i,1));
+          renderRack(); checkEnd();
+        },1000);
+        return;
+      }
+      checkEnd();
+    }
+
+    // Endgame
+    function checkEnd(){
+      if(rack.length>=rackCap){
+        showModal('Game Over!', ()=>location.reload());
+        return;
+      }
+      if(tiles.every(t=>t.removed)){
+        if(rack.length>0){
+          rack.forEach((icon,i)=>{
+            const sr=slotEls[i].getBoundingClientRect();
+            const m=document.createElement('div');
+            m.className='merge-tile'; m.textContent=icon;
+            document.body.append(m);
+            m.style.left=`${sr.left}px`; m.style.top=`${sr.top}px`;
+            requestAnimationFrame(()=>{
+              const cx=window.innerWidth/2-tileW/2,
+                    cy=window.innerHeight/2-tileH/2;
+              m.style.transform=`translate(${cx-sr.left}px,${cy-sr.top}px) scale(1.8) rotate(360deg)`;
+              m.style.opacity='0';
+            });
+            m.addEventListener('transitionend',()=>m.remove());
+          });
+          setTimeout(()=>{
+            rack=[]; renderRack();
+            showModal('You Win!', ()=>location.reload());
+          },1000);
+        } else {
+          showModal('You Win!', ()=>location.reload());
+        }
+      }
+    }
+
+    // New Game
+    newBtn.addEventListener('click', ()=>location.reload());
+
+    // One‑time shuffle
+    shuffleBtn.addEventListener('click',()=>{
+      if(hasShuffled) return;
+      hasShuffled=true; shuffleBtn.disabled=true;
+      const icons=tiles.filter(t=>!t.removed).map(t=>t.icon);
+      for(let i=icons.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [icons[i],icons[j]]=[icons[j],icons[i]];
+      }
+      let k=0;
+      tiles.forEach(t=>{
+        if(!t.removed){
+          t.icon=icons[k++];
+          t.el.querySelector('.face').textContent=t.icon;
+        }
+      });
+      updateCoverage();
+    });
+
+    // Hint
+    hintBtn.addEventListener('click',()=>{
+      const groups={};
+      tiles.forEach((t,i)=>{
+        if(!t.removed && t.el.classList.contains('top')){
+          (groups[t.icon]=groups[t.icon]||[]).push(i);
+        }
+      });
+      for(const icon in groups){
+        if(groups[icon].length>=3){
+          groups[icon].slice(0,3).forEach(i=>tiles[i].el.classList.add('selected'));
+          setTimeout(()=>groups[icon].slice(0,3).forEach(i=>tiles[i].el.classList.remove('selected')),600);
+          break;
+        }
+      }
+    });
+
+    // Modal helper
+    function showModal(text,onYes){
+      msgEl.textContent=text;
+      backdrop.style.display='flex';
+      yesBtn.onclick=()=>{ backdrop.style.display='none'; onYes(); };
+      noBtn.onclick =()=>{ backdrop.style.display='none'; };
+    }
+
+    renderRack();
+  })();
+  </script>
+</body>
+</html>
+<footer>&copy; 2025 Zach Ng</footer>

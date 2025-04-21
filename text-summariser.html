@@ -2,69 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Text Summariser – Zach Ng</title>
+  <title>Text Summariser – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="logo">Zach Ng</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="skills.html">My Skillset</a></li>
-      <li class="has-dropdown">
-        <button class="drop-btn">My Projects ▼</button>
-        <ul class="dropdown">
-          <li><a href="image-classifier.html">Image Classifier</a></li>
-          <li><a href="object-detector.html">Object Detector</a></li>
-          <li><a href="text-summariser.html">Text Summariser</a></li>
-        </ul>
-      </li>
-    </ul>
-    <div class="burger"><span></span><span></span><span></span></div>
-  </nav>
-
-  <main class="container">
-    <section class="card" style="text-align:center;">
-      <h1>Text Summariser</h1>
-      <textarea id="input" placeholder="Paste or type text…" style="width:100%; min-height:120px; margin-bottom:1rem;"></textarea>
-      <button id="summariseBtn">Summarise</button>
-      <div id="status" style="margin:1rem 0;">Ready to summarise.</div>
-      <div id="result"></div>
-    </section>
-
-    <section style="text-align:center; margin-top:2rem;">
-      <h2>View Other Projects</h2>
-      <div class="projects-grid">
-        <a class="project-card" href="image-classifier.html">Image Classifier</a>
-        <a class="project-card" href="object-detector.html">Object Detector</a>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
       </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="card">
+      <h2>Text Summariser</h2>
+      <textarea id="input" rows="6" placeholder="Paste text…"></textarea>
+      <div class="controls">
+        <label>Sentences:
+          <input type="range" id="lengthRange" min="1" max="8" value="3">
+          <span id="lengthValue">3</span>
+        </label>
+        <button id="summariseBtn" class="btn">Summarise</button>
+      </div>
+      <div id="status">Ready.</div>
+      <div id="result"></div>
     </section>
   </main>
 
+  <footer>&copy; 2025 Zach Ng</footer>
+
   <script src="main.js"></script>
   <script>
-    document.getElementById('summariseBtn').addEventListener('click', async () => {
-      const txt = document.getElementById('input').value.trim();
-      const status = document.getElementById('status');
-      const result = document.getElementById('result');
-      if (!txt) return status.textContent='Please enter text.';
-      status.textContent='Generating summary…'; result.textContent='';
-      try {
-        const resp = await fetch('/api/summarise', {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({text:txt})
-        });
-        if(!resp.ok) throw new Error(resp.statusText);
-        const data = await resp.json();
-        result.textContent = data[0]?.summary_text || 'No summary.';
-        status.textContent = 'Done ✔';
-      } catch (e) {
-        status.textContent = 'Error: '+e.message;
-      }
+    document.addEventListener('DOMContentLoaded',()=>{
+      const input=document.getElementById('input'),status=document.getElementById('status'),result=document.getElementById('result'),
+            btn=document.getElementById('summariseBtn'),range=document.getElementById('lengthRange'),
+            lengthValue=document.getElementById('lengthValue');
+      range.addEventListener('input',()=>lengthValue.textContent=range.value);
+      btn.addEventListener('click',async()=>{
+        const text=input.value.trim();if(!text)return status.textContent='Please enter text.';
+        btn.disabled=true;status.textContent='Summarising…';result.innerHTML='';
+        try{
+          const res=await fetch('/api/summarise',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,length:parseInt(range.value)})});
+          if(!res.ok)throw new Error(res.statusText);
+          const [data]=await res.json(),summary=data.summary_text||'No summary.';
+          result.innerHTML=`<button class="copy-btn">Copy</button><p>${summary}</p>`;
+          status.textContent='Done ✔';
+          result.querySelector('.copy-btn').addEventListener('click',()=>{
+            navigator.clipboard.writeText(summary);
+            status.textContent='Copied!';
+            setTimeout(()=>status.textContent='Done ✔',1500);
+          });
+        }catch(e){
+          status.textContent='Error: '+e.message;
+        }finally{btn.disabled=false;}
+      });
     });
   </script>
 </body>

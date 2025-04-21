@@ -2,81 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Object Detector – Zach Ng</title>
+  <title>Object Detector – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="logo">Zach Ng</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="skills.html">My Skillset</a></li>
-      <li class="has-dropdown">
-        <button class="drop-btn">My Projects ▼</button>
-        <ul class="dropdown">
-          <li><a href="image-classifier.html">Image Classifier</a></li>
-          <li><a href="object-detector.html">Object Detector</a></li>
-          <li><a href="text-summariser.html">Text Summariser</a></li>
-        </ul>
-      </li>
-    </ul>
-    <div class="burger"><span></span><span></span><span></span></div>
-  </nav>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
+      </div>
+    </div>
+  </div>
 
-  <main class="container">
+  <main>
     <section class="card" style="text-align:center;">
-      <h1>Object Detector (Lite)</h1>
-      <canvas id="canvas" style="max-width:100%; margin:1rem 0; display:none;"></canvas>
-      <label class="btn" for="filePick">Choose Image</label>
-      <input type="file" id="filePick" accept="image/*" style="display:none;">
+      <h2>Object Detector (Lite)</h2>
+      <canvas id="canvas" style="display:none;max-width:100%;margin:1rem auto;"></canvas>
+      <input type="file" id="filePick" accept="image/*" hidden/>
+      <label for="filePick" class="btn">Choose Image</label>
       <div id="status">Loading model…</div>
       <div id="results"></div>
     </section>
-
-    <section style="text-align:center; margin-top:2rem;">
-      <h2>View Other Projects</h2>
-      <div class="projects-grid">
-        <a class="project-card" href="image-classifier.html">Image Classifier</a>
-        <a class="project-card" href="text-summariser.html">Text Summariser</a>
-      </div>
-    </section>
   </main>
+
+  <footer>&copy; 2025 Zach Ng</footer>
 
   <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
   <script>
-    let model;
-    const picker  = document.getElementById('filePick'),
-          canvas  = document.getElementById('canvas'),
-          ctx     = canvas.getContext('2d'),
-          status  = document.getElementById('status'),
-          results = document.getElementById('results');
-    cocoSsd.load().then(m => status.textContent='Model ready – pick an image.', model=m)
-      .catch(e=>status.textContent='Load error: '+e);
-    picker.addEventListener('change', async e => {
-      const f=e.target.files[0]; if(!f||!model)return;
-      const img=new Image();
-      img.src=URL.createObjectURL(f);
-      img.onload= async ()=>{
+    let model;const pick=document.getElementById('filePick'),cnv=document.getElementById('canvas'),ctx=cnv.getContext('2d'),stt=document.getElementById('status'),rsl=document.getElementById('results');
+    cocoSsd.load().then(m=>{model=m;stt.textContent='Model ready';}).catch(()=>stt.textContent='Error loading model.');
+    pick.addEventListener('change',async e=>{
+      const f=e.target.files[0];if(!f||!model)return;
+      const img=new Image();img.src=URL.createObjectURL(f);
+      img.onload=async()=>{
         URL.revokeObjectURL(img.src);
-        canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
-        canvas.style.display='block'; ctx.drawImage(img,0,0);
-        status.textContent='Detecting…'; results.innerHTML='';
-        const preds=await model.detect(canvas);
+        cnv.width=img.naturalWidth;cnv.height=img.naturalHeight;cnv.style.display='block';ctx.drawImage(img,0,0);
+        stt.textContent='Detecting…';
+        const preds=await model.detect(cnv);
+        rsl.innerHTML=`<p>Found ${preds.length} object(s):</p>`;
         preds.forEach(p=>{
           const [x,y,w,h]=p.bbox;
-          ctx.strokeStyle='rgba(230,0,115,0.9)'; ctx.lineWidth=4;
-          ctx.strokeRect(x,y,w,h);
-          const label=`${p.class} ${ (p.score*100).toFixed(1)}%`;
-          ctx.font='18px sans-serif'; const tw=ctx.measureText(label).width;
-          ctx.fillStyle='rgba(230,0,115,0.9)'; ctx.fillRect(x,y-24,tw+8,24);
-          ctx.fillStyle='#fff'; ctx.fillText(label,x+4,y-4);
+          ctx.strokeStyle='rgba(0,122,204,0.8)';ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);
+          ctx.fillStyle='rgba(0,122,204,0.8)';ctx.font='16px sans-serif';
+          ctx.fillText(`${p.class} (${(p.score*100).toFixed(1)}%)`,x+4,y-6);
         });
-        status.textContent=`Found ${preds.length} object(s).`;
       };
     });
   </script>

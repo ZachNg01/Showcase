@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Skillset – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"/>
+  <title>Skills – Zach Ng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-  <nav class="main-nav">…same as above nav…</nav>
-  <main class="container">
-    <div class="card">
-      <h1>My Skillset</h1>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="card">
+      <h2>My Skillset</h2>
       <ul>
         <li>Python, R, SQL, JavaScript</li>
-        <li>Data Wrangling & ETL</li>
-        <li>Machine Learning & NLP</li>
-        <li>TensorFlow.js & Browser ML</li>
-        <li>Tableau, Power BI, Looker Studio</li>
+        <li>Data Wrangling, ETL, Warehousing</li>
+        <li>ML, NLP, AI, Statistical Analysis</li>
+        <li>Tableau, Power BI, Looker Studio</li>
+        <li>Power Automate & REST APIs</li>
       </ul>
-    </div>
+    </section>
   </main>
-  <script src="main.js"></script>
+
+  <footer>&copy; 2025 Zach Ng</footer>
 </body>
 </html>

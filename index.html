@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Home – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Home – Zach Ng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="styles.css" rel="stylesheet"/>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="config.js"></script>
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="logo">Zach Ng</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="skills.html">My Skillset</a></li>
-      <li class="has-dropdown">
-        <button class="drop-btn">My Projects ▼</button>
-        <ul class="dropdown">
-          <li><a href="image-classifier.html">Image Classifier</a></li>
-          <li><a href="object-detector.html">Object Detector</a></li>
-          <li><a href="text-summariser.html">Text Summariser</a></li>
-        </ul>
-      </li>
-    </ul>
-    <div class="burger"><span></span><span></span><span></span></div>
-  </nav>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
+      </div>
+    </div>
+    <div class="greeting" id="greeting">Hello</div>
+  </div>
 
-  <main class="container">
+  <main>
     <div class="card">
       <h1>Welcome to My Portfolio</h1>
       <p style="text-align:center; margin-top:1rem;">
-        I’m Zach Ng—a Data Science student and developer creating responsive, animated AI tools and data‑driven dashboards.
+        I’m Zach Ng—a Data Science student building AI tools & dashboards.
       </p>
     </div>
   </main>
 
-  <script src="main.js"></script>
+  <footer>&copy; 2025 Zach Ng</footer>
+
+  <script>
+    function parseJwt(t){let b=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(atob(b))}
+    function handleCredentialResponse(r){
+      try{
+        const p=parseJwt(r.credential),n=p.name||p.email||'';
+        document.getElementById('greeting').textContent = n?`Hello, ${n}`:'Hello';
+      }catch{}
+    }
+    window.onload=()=>{
+      google.accounts.id.initialize({
+        client_id: window.GOOGLE_CLIENT_ID,
+        callback: handleCredentialResponse
+      });
+      google.accounts.id.prompt();
+    };
+  </script>
 </body>
 </html>

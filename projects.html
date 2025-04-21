@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Projects – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"/>
+  <title>Projects – Zach Ng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-  <nav class="main-nav">…same as above nav…</nav>
-  <main class="container">
-    <h1>My Projects</h1>
-    <div class="projects-grid">
-      <a class="project-card" href="image-classifier.html">
-        <h2>Image Classifier</h2>
-        <p>MobileNet Lite, no‑scroll UI.</p>
-      </a>
-      <a class="project-card" href="object-detector.html">
-        <h2>Object Detector</h2>
-        <p>COCO‑SSD with crop previews.</p>
-      </a>
-      <a class="project-card" href="text-summariser.html">
-        <h2>Text Summariser</h2>
-        <p>Secure HF proxy summarisation.</p>
-      </a>
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <div class="subnav">
+      <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="image-classifier.html">Image Classifier</a>
+        <a href="object-detector.html">Object Detector</a>
+        <a href="text-summariser.html">Text Summariser</a>
+        <a href="tiles.html">Tile Match Game</a>
+      </div>
     </div>
+  </div>
+
+  <main>
+    <section class="card">
+      <h2>My Projects</h2>
+      <div class="projects-grid">
+        <a class="project-card" href="image-classifier.html">
+          <h3>Image Classifier</h3><p>MobileNet Lite UI</p>
+        </a>
+        <a class="project-card" href="object-detector.html">
+          <h3>Object Detector</h3><p>COCO‑SSD preview</p>
+        </a>
+        <a class="project-card" href="text-summariser.html">
+          <h3>Text Summariser</h3><p>Secure HF proxy</p>
+        </a>
+        <a class="project-card" href="tiles.html">
+          <h3>Tile Match Game</h3><p>6‑layer emoji puzzle</p>
+        </a>
+      </div>
+    </section>
   </main>
-  <script src="main.js"></script>
+
+  <footer>&copy; 2025 Zach Ng</footer>
 </body>
 </html>
