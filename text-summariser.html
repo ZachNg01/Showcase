@@ -34,7 +34,7 @@
   <main>
     <section class="card">
       <h2>Text Summariser</h2>
-      <textarea id="input" placeholder="Paste or type your text…" rows="6"></textarea>
+      <p>Work in Progress </p>
       <div class="controls">
         <label>Sentences:
           <input type="range" id="lengthRange" min="1" max="8" value="3">
@@ -48,45 +48,6 @@
   </main>
 
   <footer>&copy; 2025 Zach Ng</footer>
-  <script src="main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const input = document.getElementById('input'),
-            statusEl = document.getElementById('status'),
-            resultEl = document.getElementById('result'),
-            btn = document.getElementById('summariseBtn'),
-            range = document.getElementById('lengthRange'),
-            lengthValue = document.getElementById('lengthValue');
-
-      range.addEventListener('input', () => lengthValue.textContent = range.value);
-
-      btn.addEventListener('click', async () => {
-        const text=input.value.trim();
-        if(!text) return statusEl.textContent='Please enter text.';
-        btn.disabled=true; statusEl.textContent='Summarising…'; resultEl.innerHTML='';
-        try {
-          const res=await fetch('/api/summarise',{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({text,length:+range.value})
-          });
-          if(!res.ok) throw new Error(res.statusText);
-          const [data]=await res.json();
-          const summary=data.summary_text||'No summary.';
-          resultEl.innerHTML=`<button class="copy-btn">Copy</button><p>${summary}</p>`;
-          statusEl.textContent='Done ✔';
-          resultEl.querySelector('.copy-btn').addEventListener('click',()=>{
-            navigator.clipboard.writeText(summary);
-            statusEl.textContent='Copied!';
-            setTimeout(()=>statusEl.textContent='Done ✔',1500);
-          });
-        } catch(e){
-          statusEl.textContent='Error: '+e.message;
-        } finally {
-          btn.disabled=false;
-        }
-      });
-    });
-  </script>
+ 
 </body>
 </html>
