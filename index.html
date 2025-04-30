@@ -2,138 +2,285 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home – Zach Ng</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home – Zach Ng</title>
+  <!-- Tailwind CSS CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <!-- tsParticles for animated background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
+    }
+    #tsparticles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+    }
+    /* Animated gradient overlay for tech vibe */
+    .gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+      animation: overlayRotate 10s linear infinite;
+      pointer-events: none;
+      z-index: -5;
+    }
+    @keyframes overlayRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
-<body>
+<body class="relative text-gray-800 bg-gray-900">
+  <!-- Particles Background -->
+  <div id="tsparticles"></div>
+  <canvas class="gradient-overlay"></canvas>
 
-  <div class="navbar">
-    <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger"><span></span><span></span><span></span></div>
-    <div class="nav-links" id="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About Me</a>
-      <a href="skills.html">Projects</a>
-      <div class="subnav">
-        <button class="subnavbtn">
-          Projects <i class="fa fa-caret-down"></i>
+  <!-- Navbar -->
+  <header class="bg-white bg-opacity-20 backdrop-blur fixed w-full z-50 shadow">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
+      <nav>
+        <ul id="nav-links" class="hidden md:flex space-x-8">
+          <li><a href="index.html" class="text-gray-200 hover:text-white font-medium">Home</a></li>
+          <li><a href="zach.html" class="text-gray-200 hover:text-white font-medium">About Me</a></li>          
+          <li><a href="about.html" class="text-gray-200 hover:text-white font-medium">My Skillset</a></li>
+          <li><a href="skills.html" class="text-gray-200 hover:text-white font-medium">My Projects</a></li>
+
+        </ul>
+        <button id="burger" class="md:hidden focus:outline-none text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
         </button>
-        <div class="subnav-content">
-          <a href="image-classifier.html">Image Classifier</a>
-          <a href="object-detector.html">Object Detector</a>
-          <a href="text-summariser.html">Text Summariser</a>
-          <a href="tiles.html">Tile Match Game</a>
-        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-gray-800 bg-opacity-90 backdrop-blur fixed top-16 inset-x-0 shadow-lg z-40 hidden">
+    <ul class="flex flex-col space-y-2 p-4 text-gray-200">
+      <li><a href="index.html" class="block font-medium">Home</a></li>
+      <li><a href="zach.html" class="block font-medium">About Me</a></li>
+      <li><a href="about.html" class="block font-medium">My Skillset</a></li>
+
+      <li><a href="skills.html" class="block font-medium">My Projects</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 text-center">
+    <div class="container mx-auto px-6">
+      <h1 class="text-6xl font-extrabold text-white drop-shadow-lg mb-4 animate-fadeInUp">Welcome to My Portfolio</h1>
+      <p class="text-xl text-gray-200 mb-8 animate-fadeInUp delay-200">Explore my work, background, and skills in web development, machine learning, and design.</p>
+      <div class="space-x-4 animate-fadeInUp delay-400">
+        <a href="about.html" class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold transition">Learn More</a>
+        <a href="skills.html" class="border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white px-6 py-3 rounded-lg font-semibold transition">View Projects</a>
       </div>
     </div>
-  </div>
-  <div class="info-card">
-    <h3>About This Page</h3>
-    <p>
-      Welcome to my portfolio! Here you'll find a collection of my work, background, and skills in web development, machine learning, and design.
-      Explore the different sections to learn more about who I am and what I’ve built.
-    </p>
-  </div>
-  
-  <section>
-
-      <section class="articles">
-
-        <article>
-      
-          <div class="article-wrapper">
-            <figure>
-              <img src="https://picsum.photos/id/1005/800/450" alt="" />
-            </figure>
-            <div class="article-body">
-              <h2>About Zach</h2>
-              <p>
-                Click here to learn more about my background, education, and employment history
-                
-              </p>
-              <p>
-                <br>
-  
-                <br>
-              </p>
-  
-              <a href="about.html" class="read-more">
-                Read more <span class="sr-only">about this is some title</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-        <article>
-      
-          <div class="article-wrapper">
-            <figure>
-              <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2023/08/Screenshot-2024-11-01-at-11.39.29%E2%80%AFAM.png" alt="" />
-            </figure>
-            <div class="article-body">
-              <h2>My Skillset</h2>
-              <p>
-                Click here to learn more about my capabilites and what I professional skills I can provide for you and your company.
-                
-              </p>
-              <p>
-                <br>
-  
-                <br>
-              </p>
-  
-              <a href="about.html" class="read-more">
-                Read more <span class="sr-only">about this is some title</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-        <article>
-          <div class="article-wrapper">
-            <figure>
-              <img src="https://images.stockcake.com/public/1/8/4/1845c544-6532-4096-956e-b0167408f018_large/programmer-coding-late-stockcake.jpg" alt="" />
-            </figure>
-            <div class="article-body">
-              <h2>My Projects</h2>
-              <p>
-                Have a look and give my small projects a chance by playing around with them while you are here in my website portfolio.
-              </p>
-              <p>
-                <br>
-  
-                <br>
-              </p>
-              <a href="skills.html" class="read-more">
-                View my projects <span class="sr-only">about this is some title</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-  
-  
-        <article>
-      
-  
-        </article>
-      </section>
-
-
   </section>
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
 
-  <footer>&copy; 2025 Zach Ng</footer>
-  <script src="main.js"></script>
+  <!-- Featured Articles -->
+  <section id="projects" class="container mx-auto px-6 py-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-600">
+      <img src="https://picsum.photos/id/1005/600/400" alt="About Zach" class="rounded-lg mb-4 w-full h-40 object-cover">
+      <h2 class="text-2xl font-bold mb-2 text-white">About Zach</h2>
+      <p class="mb-4 text-gray-200">Discover my background, education, and journey as a data scientist and developer.</p>
+      <a href="zach.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
+    </article>
+    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-800">
+      <img src="https://t3.ftcdn.net/jpg/02/67/25/64/360_F_267256449_9zyyZVvLDI2CiNeuMAmMWGwDUXU9ZehZ.jpg" alt="My Skillset" class="rounded-lg mb-4 w-full h-40 object-cover">
+      <h2 class="text-2xl font-bold mb-2 text-white">My Skillset</h2>
+      <p class="mb-4 text-gray-200">Learn about the tools and technologies I excel at, from Python and SQL to AI and data visualization.</p>
+      <a href="about.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
+    </article>
+    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-1000">
+      <img src="https://images.stockcake.com/public/1/8/4/1845c544-6532-4096-956e-b0167408f018_large/programmer-coding-late-stockcake.jpg" alt="My Projects" class="rounded-lg mb-4 w-full h-40 object-cover">
+      <h2 class="text-2xl font-bold mb-2 text-white">My Projects</h2>
+      <p class="mb-4 text-gray-200">Explore a collection of interactive demos, AI models, and data dashboards I've built.</p>
+      <a href="skills.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
+    </article>
+  </section>
+<!-- Contact Section with Formspree integration -->
+<section id="contact" class="bg-gray-800 bg-opacity-80 backdrop-blur py-16 relative">
+  <div class="container mx-auto px-6 lg:w-1/2 animate-fadeIn delay-1200">
+    <h2 class="text-3xl font-bold mb-6 text-center text-white">Contact Me</h2>
+
+    <form action="https://formspree.io/f/mwpovndw" method="POST" class="space-y-6">
+      <!-- Tell Formspree to send an HTML email -->
+      <input type="hidden" name="_format" value="html" />
+    
+      <!-- Subject line for your notification email -->
+      <input type="hidden" name="_subject" value="New message from my portfolio" />
+    
+      <!--
+        Auto-response HTML:
+        - Uses inline CSS for broad email-client compatibility
+        - Includes buttons for LinkedIn, your Showcase site, and your GitHub
+      -->
+      <input
+        type="hidden"
+        name="_autoresponse"
+        value="<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+      <meta charset='UTF-8'>
+      <title>Thanks for Reaching Out!</title>
+    </head>
+    <body style='margin:0;padding:0;background:#f2f2f2;font-family:Arial,sans-serif;'>
+      <table width='100%' cellpadding='0' cellspacing='0' style='background:#f2f2f2;padding:40px 0;'>
+        <tr>
+          <td align='center'>
+            <table width='600' cellpadding='0' cellspacing='0' style='background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);'>
+              <!-- Header bar -->
+              <tr>
+                <td style='background:#4F46E5;padding:20px;text-align:center;'>
+                  <h1 style='color:#ffffff;font-size:24px;margin:0;'>Thanks for Reaching Out!</h1>
+                </td>
+              </tr>
+              <!-- Body content -->
+              <tr>
+                <td style='padding:30px;color:#333333;line-height:1.5;font-size:16px;'>
+                  <p>Hi there,</p>
+                  <p>Thank you for your message! I appreciate you taking the time to get in touch, and I’ll reply as soon as I can.</p>
+                  <p>In the meantime, feel free to connect with me:</p>
+                  <!-- LinkedIn button -->
+                  <p style='text-align:center;margin:30px 0;'>
+                    <a href='https://www.linkedin.com/in/zach--ng'
+                       style='display:inline-block;padding:12px 24px;background:#4F46E5;color:#ffffff;
+                              text-decoration:none;border-radius:4px;font-weight:bold;'>
+                      Connect on LinkedIn
+                    </a>
+                  </p>
+                  <!-- Showcase & GitHub buttons -->
+                  <p style='text-align:center;margin:20px 0;'>
+                    <a href='https://zachng01.github.io/Showcase/'
+                       style='display:inline-block;padding:10px 20px;background:#10b981;color:#ffffff;
+                              text-decoration:none;border-radius:4px;margin-right:8px;font-weight:bold;'>
+                      View My Showcase
+                    </a>
+                    <a href='https://github.com/ZachNg01'
+                       style='display:inline-block;padding:10px 20px;background:#333333;color:#ffffff;
+                              text-decoration:none;border-radius:4px;font-weight:bold;'>
+                      View My GitHub
+                    </a>
+                  </p>
+                  <p>Looking forward to talking soon!</p>
+                  <p>– Zach</p>
+                </td>
+              </tr>
+              <!-- Footer with portfolio link -->
+              <tr>
+                <td style='background:#f0f0f0;padding:20px;text-align:center;color:#888888;font-size:12px;'>
+                  © 2025 Zach Ng · 
+                  <a href='https://zachng01.github.io/Showcase/' style='color:#888888;text-decoration:underline;'>
+                    Visit my portfolio
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>"
+      />
+    
+      <!-- Tell Formspree which field contains the user's email for replies -->
+      <input type="hidden" name="_replyto" />
+    
+      <!-- User-facing fields -->
+      <div>
+        <label for="name" class="block text-gray-200 mb-2">Name</label>
+        <input type="text" id="name" name="name" required
+               class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
+                      focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"/>
+      </div>
+    
+      <div>
+        <label for="email" class="block text-gray-200 mb-2">Email</label>
+        <input type="email" id="email" name="email" required
+               class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
+                      focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"/>
+      </div>
+    
+      <div>
+        <label for="message" class="block text-gray-200 mb-2">Message</label>
+        <textarea id="message" name="message" rows="5" required
+                  class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
+                         focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"></textarea>
+      </div>
+    
+      <div class="text-center">
+        <button type="submit"
+                class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+          Send Message
+        </button>
+      </div>
+    </form>
+    
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 py-6 text-center text-gray-500">
+  &copy; 2025 Zach Ng
+</footer>
+
+<!-- Scripts -->
+<script>
+  /* Initialize tsParticles background */
+  tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    background: { color: "#000" },
+    particles: {
+      number: { value: 80, density: { enable: true, area: 800 } },
+      color: { value: "#888" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: { min: 1, max: 3 } },
+      links: { enable: true, distance: 150, color: "#888", opacity: 0.4, width: 1 },
+      move: { enable: true, speed: 1, direction: "none", outMode: "bounce" }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "grab" },
+        onClick: { enable: true, mode: "push" }
+      },
+      modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+    },
+    detectRetina: true
+  });
+
+  // Mobile menu toggle: show/hide menu on burger click
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Fade-in animations: adds classes to trigger Tailwind transitions
+  document.querySelectorAll('.animate-fadeInUp').forEach((el, i) => {
+    setTimeout(() => el.classList.add('opacity-100', 'translate-y-0'), i * 200);
+  });
+
+  // Active nav link indicator: underline current page link
+  const currentUrl = window.location.href;
+  document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+    if (link.href === currentUrl) {
+      link.classList.add('text-white', 'border-b-2', 'border-indigo-400');
+    }
+  });
+</script>
 </body>
 </html>
