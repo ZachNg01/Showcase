@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Me – Zach Ng</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Tailwind CSS for quick utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <!-- tsParticles for animated background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <!-- Leaflet CSS for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root {
+      --clr-bg: #111;
+      --clr-fg: #eee;
+      --clr-primary: #4F46E5;
+      --clr-secondary: #10B981;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body, html {
+      height: 100%; overflow-x: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--clr-fg);
+      position: relative;
+      /* Sakura tree background */
+      background: url('https://images.unsplash.com/photo-1522163182402-3bff2d4a46bc?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;
+    }
+    a { text-decoration: none; }
+
+    /* tsParticles */
+    #tsparticles {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -10;
+    }
+    /* Animated gradient overlay */
+    .gradient-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(45deg,
+        rgba(79,70,229,0.15) 0%,
+        rgba(16,185,129,0.15) 25%,
+        rgba(139,92,246,0.15) 50%,
+        rgba(224,170,255,0.15) 75%,
+        rgba(79,70,229,0.15) 100%);
+      animation: overlayRotate 30s linear infinite;
+      pointer-events: none; z-index: -5;
+    }
+    @keyframes overlayRotate {
+      from { transform: rotate(0deg) scale(1.2); }
+      to   { transform: rotate(360deg) scale(1.2); }
+    }
+
+    /* Navbar */
+    header {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      position: fixed; top: 0; width: 100%; z-index: 50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .container { max-width: 1280px; margin: 0 auto; }
+    nav a {
+      color: #000000; font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover, nav a.active {
+      color: #3111e7;
+    }
+    #mobile-menu {
+      background: rgba(31,41,55,0.9);
+      backdrop-filter: blur(8px);
+    }
+
+    /* About Me Card */
+    .info-card {
+      margin: 100px auto 2rem;
+      max-width: 800px;
+      background: rgba(31,41,55,0.8);
+      backdrop-filter: blur(8px);
+      padding: 2rem; border-radius: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      text-align: center;
+    }
+    .info-card h1 {
+      font-size: 2.5rem; color: var(--clr-primary); margin-bottom: 1rem;
+    }
+    .info-card p {
+      font-size: 1.125rem; line-height: 1.6; opacity: 0.9;
+    }
+
+    /* Map container */
+    #map {
+      width: 100%; height: 400px;
+      max-width: 1200px;
+      margin: 2rem auto;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+    }
+
+    /* Skillset Section */
+    .skills {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      padding: 2rem; max-width: 1200px; margin: 0 auto 4rem;
+    }
+    .skill-card {
+      flex: 1 1 280px;
+      background: rgba(31,41,55,0.9);
+      border-radius: 0.5rem; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+    }
+    .skill-header {
+      background: #1f2937; padding: 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .skill-header svg {
+      width: 2rem; height: 2rem; fill: var(--clr-secondary);
+    }
+    .skill-header h3 {
+      color: var(--clr-secondary); font-size: 1.25rem; margin: 0;
+    }
+    .skill-body {
+      padding: 1.5rem; flex: 1;
+      color: #d1d5db; line-height: 1.5;
+    }
+
+    /* Interests Section */
+    .interests {
+      max-width: 1200px; margin: 0 auto 4rem;
+      padding: 2rem; display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 2rem;
+    }
+    .interest-card {
+      background: rgba(31,41,55,0.9);
+      border-radius: 0.5rem; padding: 2rem 1rem;
+      text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .interest-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+    }
+    .interest-card h3 {
+      font-size: 1.5rem; color: var(--clr-primary); margin-bottom: 0.5rem;
+    }
+    .interest-card p {
+      color: #d1d5db; line-height: 1.5;
+    }
+
+    footer {
+      text-align: center; padding: 1rem;
+      background: rgba(255,255,255,0.1); color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Highly animated background -->
+  <div id="tsparticles"></div>
+  <div class="gradient-overlay"></div>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200">Zach Ng</a>
+      <nav class="hidden md:flex space-x-8" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="zach.html" class="active">About Me</a>
+        <a href="about.html">My Skillset</a>
+        <a href="skills.html">My Projects</a>
+      </nav>
+      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 z-40">
+    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur p-4 space-y-2 text-gray-200">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="zach.html">About Me</a></li>
+      <li><a href="about.html">My Skillset</a></li>
+      <li><a href="skills.html">My Projects</a></li>
+    </ul>
+  </div>
+
+  <!-- About Me Card -->
+  <div class="info-card">
+    <h1>About Me</h1>
+    <p>
+      I’m Zach Ng, a Master of Data Science student passionate about turning data into
+      actionable insights. With a background in web development and machine learning,
+      I enjoy crafting end-to-end solutions that blend elegant UIs with robust analytics.
+    </p>
+  </div>
+
+  <!-- Map Section -->
+  <section class="container mx-auto px-6">
+    <h2 class="text-2xl text-center text-indigo-400 mb-4">Where I’ve Been</h2>
+    <div id="map"></div>
+  </section>
+<!-- Interests Section -->
+<h2 class="text-2xl text-center text-indigo-400 mb-4">My Interests</h2>
+<section class="interests">
+  <div class="interest-card">
+    <h3>Gaming</h3>
+    <p>
+      Strategy, RPGs, and co-op adventures—optimizing builds, exploring narratives,
+      and streaming sessions with friends.
+    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/6f552dad-c788-4cda-82b2-0741da67df6c/hWHotfsFDz.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+  <div class="interest-card">
+    <h3>Badminton</h3>
+    <p>
+      Weekly matches and local tournaments—passionate about speed, agility,
+      and perfecting my smash.
+    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/b170b6c0-e7b9-4b64-840a-5cfcd810724c/R07m7Ebn5z.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+  <div class="interest-card">
+    <h3>Investing</h3>
+    <p>
+      Building diversified portfolios, analyzing markets, and staying ahead
+      of fintech innovations.
+    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/f6fcc23a-6810-4c7d-91de-6bd33b1216c9/aqY6NLA30V.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+</section>
+  <!-- Skillset Section -->
+  <section class="skills">
+    <!-- Python -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <svg viewBox="0 0 24 24"><path d="M12 0c-..."/></svg>
+        <h3>Python</h3>
+      </div>
+      <div class="skill-body">
+        Experienced in data analysis (Pandas), machine learning (scikit-learn, TensorFlow),
+        and scripting—automating workflows and building ML pipelines.
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <svg viewBox="0 0 24 24"><path d="M6 0h12v24H6z"/></svg>
+        <h3>JavaScript</h3>
+      </div>
+      <div class="skill-body">
+        Proficient in ES6+, React for dynamic UIs, and Node.js for RESTful APIs—crafting
+        full-stack web applications with modern tooling.
+      </div>
+    </div>
+    <!-- SQL -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <svg viewBox="0 0 24 24"><path d="M4 2h16v20H4z"/></svg>
+        <h3>SQL & Databases</h3>
+      </div>
+      <div class="skill-body">
+        Strong SQL skills (PostgreSQL, MySQL), database design, and experience with ORM
+        frameworks—ensuring data integrity at scale.
+      </div>
+    </div>
+    <!-- Data Viz -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <svg viewBox="0 0 24 24"><path d="M2 22h20v-2H2z"/></svg>
+        <h3>Data Visualization</h3>
+      </div>
+      <div class="skill-body">
+        Skilled with Matplotlib, D3.js, and Looker Studio to create interactive dashboards
+        and reports that tell compelling stories.
+      </div>
+    </div>
+    <!-- Automation -->
+    <div class="skill-card">
+      <div class="skill-header">
+        <svg viewBox="0 0 24 24"><path d="M12 4l4 4-4 4-4-4z"/></svg>
+        <h3>Automation</h3>
+      </div>
+      <div class="skill-body">
+        Building end-to-end automation using Python scripts and Microsoft Power Automate—
+        streamlining tasks, orchestrating workflows, and boosting productivity.
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer>&copy; 2025 Zach Ng</footer>
+
+  <script>
+    // tsParticles init: more shapes, faster movement
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: 120, density: { enable: true, area: 800 } },
+        color: { value: ['#4F46E5', '#10b981', '#8B5CF6'] },
+        shape: { type: ['circle','triangle','star'] },
+        opacity: { value: 0.4 },
+        size: { value: { min: 1, max: 6 } },
+        links: {
+          enable: true,
+          distance: 120,
+          color: '#888',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          random: true,
+          straight: false,
+          outModes: { default: 'bounce' },
+          attract: { enable: true, rotateX: 600, rotateY: 1200 }
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'bubble' },
+          onClick: { enable: true, mode: 'repulse' }
+        },
+        modes: {
+          bubble: { distance: 200, size: 8, duration: 2 },
+          repulse: { distance: 150, duration: 0.4 }
+        }
+      },
+      detectRetina: true
+    });
+
+    // Mobile menu toggle
+    document.getElementById('burger').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+  <!-- Leaflet JS for Map (unchanged) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+
+      // Burger toggle
+      document.getElementById('burger').addEventListener('click', ()=>{
+        document.getElementById('nav-links').classList.toggle('open');
+      });
+
+      // Initialize map
+      const map = L.map('map', {
+        center: [1,100],
+        zoom: 3,
+        scrollWheelZoom: false,
+        attributionControl: false
+      });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).addTo(map);
+
+      // Locations & tooltips
+      const places = [
+        { name:'Kuala Lumpur, Malaysia', coords:[3.1390,101.6869], note:'Where I was born' },
+        { name:'Singapore', coords:[1.3521,103.8198], note:'Grew up here from 2011 to 2020' },
+        { name:'New Delhi, India', coords:[28.6139,77.2090], note:'Spent my childhood here from 2007 to 2011' },
+        { name:'Tokyo, Japan', coords:[35.6895,139.6917], note:"Visited multiple times as I am foud of their food & culture" },
+        { name:'Abu Dhabi, UAE', coords:[24.4539,54.3773], note:'Family currently lives & works here' },
+        { name:'Melbourne, Australia', coords:[-37.8136,144.9631], note:'Currently based here' }
+      ];
+      const homeIcon = L.divIcon({
+        html: `<div style="
+          font-size:24px;
+          line-height:24px;
+          color:#007acc;
+          text-shadow:0 0 4px rgba(0,0,0,0.6);
+        ">🏠</div>`,
+        className: '',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+
+
+      const allCoords = [];
+      places.forEach(p=>{
+        const opts = p.name.includes('Melbourne') ? { icon: homeIcon } : {};
+        const marker = L.marker(p.coords, opts).addTo(map);
+        // bind a hover‑tooltip that shows both name & note
+        marker.bindTooltip(
+          `<strong>${p.name}</strong><br>${p.note}`,
+          { direction:'top', className:'my-tooltip', offset:[0,-10], sticky:true }
+        );
+        allCoords.push(p.coords);
+      });
+
+      map.fitBounds(allCoords, { padding:[40,40] });
+    });
+  </script>
+</body>
+</html>
