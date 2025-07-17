@@ -8,7 +8,7 @@ import fetch from 'node-fetch';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -17,11 +17,12 @@ app.post('/chat', async (req, res) => {
   const userMessage = req.body.message;
 
   try {
-    const geminiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + process.env.GEMINI, {
+    const geminiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + process.env.GEMINI, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: userMessage }] }]
+        contents: [{ parts: [{ text: userMessage }] }],
+        generationConfig: { temperature: 0.7 }
       })
     });
 
@@ -33,26 +34,6 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.post('/hug', async (req, res) => {
-  const userInput = req.body.prompt;
-
-  try {
-    const hfResponse = await fetch('https://api-inference.huggingface.co/models/gpt2', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.HUGGING}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ inputs: userInput })
-    });
-
-    const data = await hfResponse.json();
-    res.json({ reply: data?.[0]?.generated_text || 'No Hugging Face reply.' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/', (req, res) => res.send('Gemini + HuggingFace proxy is running'));
+app.get('/', (req, res) => res.send('Gemini proxy is running'));
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

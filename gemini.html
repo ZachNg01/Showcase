@@ -93,52 +93,45 @@
   </main>
 
   <footer class="mt-12">&copy; 2025 Zach Ng</footer>
+<!-- Only the relevant <script> part is changed for clarity -->
+<script>
+  tsParticles.load('tsparticles', {
+    fpsLimit: 60,
+    background: { color: 'transparent' },
+    particles: {
+      number: { value: 60, density: { enable: true, area: 800 } },
+      color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
+      shape: { type: 'circle' },
+      opacity: { value: 0.3 },
+      size: { value: { min: 1, max: 4 } },
+      links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
+      move: { enable: true, speed: 1, outModes: 'bounce' }
+    },
+    interactivity: {
+      events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+      modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+    },
+    detectRetina: true
+  });
 
-  <script>
-    tsParticles.load('tsparticles', {
-      fpsLimit: 60,
-      background: { color: 'transparent' },
-      particles: {
-        number: { value: 60, density: { enable: true, area: 800 } },
-        color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
-        shape: { type: 'circle' },
-        opacity: { value: 0.3 },
-        size: { value: { min: 1, max: 4 } },
-        links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
-        move: { enable: true, speed: 1, outModes: 'bounce' }
-      },
-      interactivity: {
-        events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
-        modes: { grab: { distance: 200 }, push: { quantity: 4 } }
-      },
-      detectRetina: true
-    });
+  document.getElementById('burger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
 
-    document.getElementById('burger').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
-    document.getElementById('send-btn').addEventListener('click', async () => {
-      const input = document.getElementById('user-input').value;
-      const resBox = document.getElementById('response');
-      resBox.textContent = 'Thinking…';
-      try {
-        const res = await fetch('https://showcase-0qvh.onrender.com/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: input })
-        });
-        const text = await res.text();
-        try {
-          const data = JSON.parse(text);
-          resBox.textContent = data.reply || 'No reply.';
-        } catch {
-          resBox.textContent = text;
-        }
-      } catch (err) {
-        resBox.textContent = 'Error: ' + err.message;
-      }
-    });
-  </script>
-</body>
-</html>
+  document.getElementById('send-btn').addEventListener('click', async () => {
+    const input = document.getElementById('user-input').value;
+    const resBox = document.getElementById('response');
+    resBox.textContent = 'Thinking…';
+    try {
+      const res = await fetch('https://showcase-0qvh.onrender.com/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input })
+      });
+      const data = await res.json();
+      resBox.textContent = data.reply || 'No reply generated.';
+    } catch (err) {
+      resBox.textContent = 'Error: ' + err.message;
+    }
+  });
+</script>
