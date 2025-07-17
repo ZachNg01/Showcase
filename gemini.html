@@ -123,13 +123,18 @@
       const resBox = document.getElementById('response');
       resBox.textContent = 'Thinking…';
       try {
-        const res = await fetch('https://showcase-0qvh.onrender.com', {
+        const res = await fetch('https://showcase-0qvh.onrender.com/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: input })
         });
-        const data = await res.json();
-        resBox.textContent = data.reply || 'No reply.';
+        const text = await res.text();
+        try {
+          const data = JSON.parse(text);
+          resBox.textContent = data.reply || 'No reply.';
+        } catch {
+          resBox.textContent = text;
+        }
       } catch (err) {
         resBox.textContent = 'Error: ' + err.message;
       }
