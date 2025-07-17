@@ -5,6 +5,7 @@
   <title>Gemini Career Advisor – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
@@ -37,101 +38,89 @@
       from { transform: rotate(0deg) scale(1.1); }
       to { transform: rotate(360deg) scale(1.1); }
     }
-    header {
-      background: rgba(255,255,255,0.2);
-      backdrop-blur: blur(10px);
-      position: fixed; width: 100%; z-index: 50;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    .container { max-width: 1280px; margin: 0 auto; }
-    nav a { color: #e5e7eb; font-weight: 500; }
-    nav a.active, nav a:hover { color: #fff; }
-    #mobile-menu { background: rgba(31,41,55,0.9); backdrop-filter: blur(8px); }
-    footer {
-      text-align: center; padding: 1rem;
-      background: rgba(255,255,255,0.1);
-      color: #e5e7eb;
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body class="relative">
   <div id="tsparticles"></div>
   <canvas class="gradient-overlay"></canvas>
-  <header>
-    <div class="container px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
-      <nav class="hidden md:flex space-x-8" id="nav-links">
+
+  <header class="bg-white/10 backdrop-blur fixed w-full z-50 shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200">Zach Ng</a>
+      <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="hover:text-white">Home</a>
         <a href="zach.html" class="hover:text-white">About Me</a>
         <a href="about.html" class="hover:text-white">My Skillset</a>
         <a href="skills.html" class="text-white font-semibold">My Projects</a>
       </nav>
-      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
     </div>
   </header>
-  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 shadow-lg z-40">
-    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur flex flex-col p-4 space-y-2 text-gray-200">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="zach.html">About Me</a></li>
-      <li><a href="about.html">My Skillset</a></li>
-      <li><a href="skills.html">My Projects</a></li>
-    </ul>
-  </div>
 
-  <main class="min-h-screen pt-32 flex flex-col items-center px-4 text-gray-200">
+  <main class="min-h-screen pt-32 px-4 flex flex-col items-center text-gray-200">
     <div class="bg-gray-800 bg-opacity-90 backdrop-blur-lg p-6 rounded-xl shadow-xl w-full max-w-2xl text-center">
       <h1 class="text-xl font-bold text-indigo-400 mb-4">Gemini Career Advisor</h1>
       <p class="text-sm text-gray-300 mb-6">Ask anything about careers, job applications, CV tips or pathways. Powered by Google's Gemini API. To use: type a question and click "Ask Gemini".</p>
       <textarea id="user-input" rows="4" placeholder="What career suits someone who enjoys both tech and biology?" class="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mb-4"></textarea>
       <button id="send-btn" class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-4 py-2 rounded mb-4">Ask Gemini</button>
-      <pre id="response" class="bg-black bg-opacity-40 text-left p-4 rounded border border-gray-700 whitespace-pre-wrap text-gray-100 min-h-[100px]">Waiting for input...</pre>
+      <div id="response" class="bg-black/40 text-left p-4 rounded border border-gray-700 text-gray-100 prose prose-invert max-w-none min-h-[100px]">Waiting for input...</div>
     </div>
   </main>
 
-  <footer class="mt-12">&copy; 2025 Zach Ng</footer>
-<!-- Only the relevant <script> part is changed for clarity -->
-<script>
-  tsParticles.load('tsparticles', {
-    fpsLimit: 60,
-    background: { color: 'transparent' },
-    particles: {
-      number: { value: 60, density: { enable: true, area: 800 } },
-      color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
-      shape: { type: 'circle' },
-      opacity: { value: 0.3 },
-      size: { value: { min: 1, max: 4 } },
-      links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
-      move: { enable: true, speed: 1, outModes: 'bounce' }
-    },
-    interactivity: {
-      events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
-      modes: { grab: { distance: 200 }, push: { quantity: 4 } }
-    },
-    detectRetina: true
-  });
+  <footer class="mt-12 text-center text-gray-300 p-4 bg-white/5 w-full">&copy; 2025 Zach Ng</footer>
 
-  document.getElementById('burger').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
-  });
+  <script>
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
+        shape: { type: 'circle' },
+        opacity: { value: 0.3 },
+        size: { value: { min: 1, max: 4 } },
+        links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1, outModes: 'bounce' }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+        modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+      },
+      detectRetina: true
+    });
 
-  document.getElementById('send-btn').addEventListener('click', async () => {
-    const input = document.getElementById('user-input').value;
-    const resBox = document.getElementById('response');
-    resBox.textContent = 'Thinking…';
-    try {
-      const res = await fetch('https://showcase-0qvh.onrender.com/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input })
-      });
-      const data = await res.json();
-      resBox.textContent = data.reply || 'No reply generated.';
-    } catch (err) {
-      resBox.textContent = 'Error: ' + err.message;
-    }
-  });
-</script>
+    document.getElementById('send-btn').addEventListener('click', async () => {
+      const input = document.getElementById('user-input').value.trim();
+      const responseEl = document.getElementById('response');
+
+      if (!input) {
+        responseEl.innerHTML = '<span class="text-red-400">❗ Please enter a career-related question.</span>';
+        return;
+      }
+
+      responseEl.innerHTML = '<em>Thinking...</em>';
+
+      try {
+        const res = await fetch('https://showcase-0qvh.onrender.com/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: input })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          responseEl.innerHTML = marked.parse(data.reply);
+        } else {
+          responseEl.innerHTML = `<span class="text-red-400">⚠️ ${data.reply || 'Something went wrong.'}</span>`;
+        }
+      } catch (error) {
+        responseEl.innerHTML = `<span class="text-red-400">⚠️ Error: ${error.message}</span>`;
+      }
+    });
+  </script>
+</body>
+</html>
