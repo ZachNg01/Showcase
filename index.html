@@ -40,6 +40,24 @@
       100% { transform: rotate(360deg); }
     }
   </style>
+  <style>
+  .carousel-track {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    animation: scroll-x 40s linear infinite;
+  }
+
+  @keyframes scroll-x {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
 </head>
 <body class="relative text-gray-800 bg-gray-900">
   <!-- Particles Background -->
@@ -79,7 +97,7 @@
   </div>
 
   <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 text-center">
+  <section class="relative pt-32 pb-0 text-center">
     <div class="container mx-auto px-6">
       <h1 class="text-6xl font-extrabold text-white drop-shadow-lg mb-4 animate-fadeInUp">Welcome to My Portfolio</h1>
       <p class="text-xl text-gray-200 mb-8 animate-fadeInUp delay-200">Explore my work, background, and skills in web development, machine learning, and design.</p>
@@ -89,15 +107,23 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- Featured Articles -->
   <section id="projects" class="container mx-auto px-6 py-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-600">
-      <img src="https://picsum.photos/id/1005/600/400" alt="About Zach" class="rounded-lg mb-4 w-full h-40 object-cover">
-      <h2 class="text-2xl font-bold mb-2 text-white">About Zach</h2>
-      <p class="mb-4 text-gray-200">Discover my background, education, and journey as a data scientist and developer.</p>
+    <article class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 p-6 animate-fadeIn delay-600">
+      <div class="overflow-hidden rounded-lg mb-4">
+        <img 
+          src="https://drive.google.com/thumbnail?id=1fGm6FfSaGAGQhQmAz04Uj3EOl6RulD0G&sz=w1000" 
+          alt="About Zach" 
+          class="w-full h-40 object-cover hover:scale-105 transition-transform duration-500 ease-in-out"
+        />
+      </div>
+      <h2 class="text-2xl font-bold  text-white">About Zach</h2>
+      <p class="mb-4 text-gray-300">Discover my background, education, and journey as a data scientist and developer.</p>
       <a href="zach.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
     </article>
+
+
     <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-800">
       <img src="https://t3.ftcdn.net/jpg/02/67/25/64/360_F_267256449_9zyyZVvLDI2CiNeuMAmMWGwDUXU9ZehZ.jpg" alt="My Skillset" class="rounded-lg mb-4 w-full h-40 object-cover">
       <h2 class="text-2xl font-bold mb-2 text-white">My Skillset</h2>
@@ -111,6 +137,80 @@
       <a href="skills.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
     </article>
   </section>
+
+<section class="w-full bg-white py-10 overflow-hidden">
+  <h2 class="text-center text-xl text-gray-800 font-semibold mb-6">Companies I've Worked With</h2>
+  <div class="relative w-full overflow-hidden">
+    <div class="carousel-track flex gap-12 animate-scroll">
+      <!-- Duplicated set of logos for infinite scroll -->
+      <template id="carousel-items">
+        <a href="https://www.playgrounded.co/" target="_blank">
+          <img src="https://images.squarespace-cdn.com/content/v1/65e53bf6dc30c56d7de89e84/40794cd7-12a4-4cc3-a278-9b619a44845c/Group+2245.png" alt="InternMatch" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>        
+        <a href="https://marketlytics.com.au" target="_blank">
+          <img src="https://staging.marketlytics.com.au/wp-content/uploads/2021/09/Marketlytics_logo__Sep_2021-3.png" alt="Marketlytics" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+        <a href="https://www1.nera.net/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSjjFjhuLswe7mzfYnUBkcyiVaVL8jarHyJg&s" alt="Nera Telecommunications" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+        <a href="https://www.iipm.edu.au/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_IVJFzu_OK5lNOdVhaOUyAM12SxN4L1lJAdrdC__NoEEpbtcmj79EcnKgvP-TdHazQFE&usqp=CAU" alt="IIIPM" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+        <a href="https://www.playgrounded.co/" target="_blank">
+          <img src="https://images.squarespace-cdn.com/content/v1/65e53bf6dc30c56d7de89e84/40794cd7-12a4-4cc3-a278-9b619a44845c/Group+2245.png" alt="InternMatch" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>        
+        <a href="https://marketlytics.com.au" target="_blank">
+          <img src="https://staging.marketlytics.com.au/wp-content/uploads/2021/09/Marketlytics_logo__Sep_2021-3.png" alt="Marketlytics" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+        <a href="https://www1.nera.net/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSjjFjhuLswe7mzfYnUBkcyiVaVL8jarHyJg&s" alt="Nera Telecommunications" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+        <a href="https://www.iipm.edu.au/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_IVJFzu_OK5lNOdVhaOUyAM12SxN4L1lJAdrdC__NoEEpbtcmj79EcnKgvP-TdHazQFE&usqp=CAU" alt="IIIPM" class="h-20 w-40 object-contain hover:scale-105 transition" />
+        </a>
+      </template>
+      <!-- Injected logos -->
+    </div>
+  </div>
+
+</section>
+  <section class="bg-black py-16 px-4" id="testimonials">
+    <h2 class="text-3xl text-center font-bold text-white mb-10">What Others Say</h2>
+
+    <div class="flex flex-col md:flex-row justify-center items-center gap-8 max-w-6xl mx-auto">
+
+      <!-- Recommendation 1: Stefan -->
+      <div class="w-full md:w-1/2">
+        <img 
+          src="images/reco/step.png" 
+          alt="Stefan Bramble Recommendation"
+          class="rounded-xl border border-gray-300 shadow-lg hover:shadow-xl transition w-full"
+        >
+      </div>
+
+      <!-- Recommendation 2: Georgina -->
+      <div class="w-full md:w-1/2">
+        <img 
+          src="images/reco/georg.png" 
+          alt="Georgina Robilliard Recommendation"
+          class="rounded-xl border border-gray-300 shadow-lg hover:shadow-xl transition w-full"
+        >
+      </div>
+
+    </div>
+
+    <!-- LinkedIn note -->
+    <p class="text-center text-sm text-gray-300 mt-8">
+      * See full recommendations on my
+      <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="inline-flex items-center text-indigo-300 hover:underline">
+        LinkedIn
+        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.28h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.76 1.37-1.56 2.83-1.56 3.02 0 3.57 1.99 3.57 4.57v5.63z"/>
+        </svg>
+      </a>
+    </p>
+  </section>
+  
 <!-- Contact Section with Formspree integration -->
 <section id="contact" class="bg-gray-800 bg-opacity-80 backdrop-blur py-16 relative">
   <div class="container mx-auto px-6 lg:w-1/2 animate-fadeIn delay-1200">
@@ -233,9 +333,22 @@
 </section>
 
 <!-- Footer -->
-<footer class="bg-gray-900 py-6 text-center text-gray-500">
-  &copy; 2025 Zach Ng
+<footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+  <span>&copy; 2025 Zach Ng</span>
+  <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-1 hover:text-indigo-400 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
+    </svg>
+    Email Me
+  </a>
+  <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="flex items-center gap-1 hover:text-indigo-400 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+      <path d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.3 20h-3v-11h3v11zm-1.5-12.3c-1 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7c0 .9-.7 1.7-1.7 1.7zm13.3 12.3h-3v-5.6c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8v5.7h-3v-11h3v1.5c.4-.7 1.2-1.7 2.9-1.7 2.1 0 3.5 1.4 3.5 4.3v6.9z"/>
+    </svg>
+    LinkedIn
+  </a>
 </footer>
+
 
 <!-- Scripts -->
 <script>
@@ -281,6 +394,20 @@
       link.classList.add('text-white', 'border-b-2', 'border-indigo-400');
     }
   });
+  
 </script>
+
+<script>
+  const container = document.querySelector('.carousel-track');
+  const template = document.getElementById('carousel-items');
+
+  // Duplicate logos to enable smooth infinite scroll
+  for (let i = 0; i < 2; i++) {
+    const nodes = template.content.cloneNode(true);
+    container.appendChild(nodes);
+  }
+</script>
+
+
 </body>
 </html>

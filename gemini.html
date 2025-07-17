@@ -48,18 +48,30 @@
   <div id="tsparticles"></div>
   <canvas class="gradient-overlay"></canvas>
 
-  <header class="bg-white/10 backdrop-blur fixed w-full z-50 shadow-md">
+    <header class="bg-white/10 backdrop-blur fixed w-full z-50 shadow-md">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200">Zach Ng</a>
-      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200">Zach Ng</a>
+        <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="hover:text-white">Home</a>
         <a href="zach.html" class="hover:text-white">About Me</a>
         <a href="about.html" class="hover:text-white">My Skillset</a>
         <a href="skills.html" class="text-white font-semibold">My Projects</a>
-      </nav>
+        </nav>
+        <!-- Hamburger icon -->
+        <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        </button>
     </div>
-  </header>
-
+    <!-- Mobile nav menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90 backdrop-blur text-center">
+        <a href="index.html" class="block px-4 py-2 text-gray-200 hover:text-white">Home</a>
+        <a href="zach.html" class="block px-4 py-2 text-gray-200 hover:text-white">About Me</a>
+        <a href="about.html" class="block px-4 py-2 text-gray-200 hover:text-white">My Skillset</a>
+        <a href="skills.html" class="block px-4 py-2 text-white font-semibold">My Projects</a>
+    </div>
+    </header>
   <main class="min-h-screen pt-32 px-4 flex flex-col items-center text-gray-200">
     <div class="bg-gray-800 bg-opacity-90 backdrop-blur-lg p-6 rounded-xl shadow-xl w-full max-w-2xl text-center">
       <h1 class="text-xl font-bold text-indigo-400 mb-4">Gemini Career Advisor</h1>
@@ -70,7 +82,22 @@
     </div>
   </main>
 
-  <footer class="mt-12 text-center text-gray-300 p-4 bg-white/5 w-full">&copy; 2025 Zach Ng</footer>
+  <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+    <span>&copy; 2025 Zach Ng</span>
+    <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-1 hover:text-indigo-400 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
+        </svg>
+        Email Me
+    </a>
+    <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="flex items-center gap-1 hover:text-indigo-400 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+        <path d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.3 20h-3v-11h3v11zm-1.5-12.3c-1 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7c0 .9-.7 1.7-1.7 1.7zm13.3 12.3h-3v-5.6c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8v5.7h-3v-11h3v1.5c.4-.7 1.2-1.7 2.9-1.7 2.1 0 3.5 1.4 3.5 4.3v6.9z"/>
+        </svg>
+        LinkedIn
+    </a>
+    </footer>
+
 
   <script>
     tsParticles.load('tsparticles', {
@@ -120,6 +147,35 @@
       } catch (error) {
         responseEl.innerHTML = `<span class="text-red-400">⚠️ Error: ${error.message}</span>`;
       }
+    });
+  </script>
+
+  
+  <script>
+    // tsParticles init
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
+        shape: { type: 'circle' },
+        opacity: { value: 0.3 },
+        size: { value: { min: 1, max: 4 } },
+        links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1, outModes: 'bounce' }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+        modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+      },
+      detectRetina: true
+    });
+
+    // Mobile menu toggle
+    document.getElementById('burger').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
     });
   </script>
 </body>
