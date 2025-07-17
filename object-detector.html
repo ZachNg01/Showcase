@@ -2,240 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Object Detector – Full Image & Crops</title>
+  <title>Object Detector – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google Font & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-  <!-- TensorFlow.js + COCO‑SSD -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.16.0/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
   <style>
-    :root {
-      --accent: #0066ff;
-      --bg: #f5f7fa;
-      --card-bg: #fff;
-      --text: #222;
-      --muted: #6b7280;
-      --shadow: 0 6px 18px rgba(0,0,0,.08);
-      --radius: 12px;
-      --nav-height: 64px;
+    body, html {
+      margin: 0; padding: 0; height: 100%; overflow-x: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #eee;
+      background: #111;
     }
-    /* RESET + BODY */
-    * { box-sizing:border-box; margin:0; padding:0 }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg);
-      padding-top: var(--nav-height);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+    #tsparticles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -10;
     }
-
-    /* NAVBAR */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-height);
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      padding: 0 1.5rem;
-      box-shadow: var(--shadow);
-      z-index: 1000;
+    .gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg,
+        rgba(79,70,229,0.2) 0%,
+        rgba(16,185,129,0.2) 25%,
+        rgba(139,92,246,0.2) 50%,
+        rgba(224,170,255,0.2) 75%,
+        rgba(79,70,229,0.2) 100%);
+      animation: overlayRotate 20s linear infinite;
+      pointer-events: none;
+      z-index: -5;
     }
-    .navbar .logo {
-      font-size: 1.5rem; font-weight:700;
-      color: var(--accent);
+    @keyframes overlayRotate {
+      from { transform: rotate(0deg) scale(1.1); }
+      to { transform: rotate(360deg) scale(1.1); }
     }
-    .navbar .burger {
-      margin-left: auto;
-      display: none;
-      flex-direction: column; gap:4px; cursor:pointer;
+    header {
+      background: rgba(255,255,255,0.2);
+      backdrop-blur: blur(10px);
+      position: fixed; width: 100%; z-index: 50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .navbar .burger span {
-      width:28px; height:3px; background:var(--text);
-      border-radius:2px;
-    }
-    .navbar .nav-links {
-      margin-left:auto;
-      display:flex; gap:1rem;
-    }
-    .navbar .nav-links a,
-    .navbar .nav-links .subnavbtn {
-      font-weight:500;
-      color:var(--text);
-      padding:0.75rem;
-      background:none; border:none;
-      cursor:pointer; transition: color .2s;
-      white-space:nowrap;
-    }
-    .navbar .nav-links a:hover,
-    .navbar .nav-links .subnav:hover .subnavbtn {
-      color:var(--accent);
-    }
-    .subnav { position:relative; }
-    .subnav-content {
-      position:absolute; top:100%; left:0;
-      background:var(--card-bg); border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      opacity:0; visibility:hidden;
-      transform:translateY(10px);
-      transition: opacity .3s, transform .3s, visibility .3s;
-    }
-    .subnav-content a {
-      display:block; padding:0.5rem 1rem;
-      color:var(--text); text-decoration:none;
-      transition: background .2s, color .2s;
-    }
-    .subnav-content a:hover {
-      background:var(--accent); color:#fff;
-    }
-    .subnav:hover .subnav-content {
-      opacity:1; visibility:visible; transform:translateY(0);
-    }
-    /* flip rightmost */
-    .nav-links .subnav:last-of-type .subnav-content {
-      left:auto; right:0;
-    }
-    /* mobile */
-    @media(max-width:768px){
-      .navbar .burger { display:flex; }
-      .navbar .nav-links {
-        position:fixed; top:var(--nav-height); right:0;
-        flex-direction:column;
-        background:var(--card-bg);
-        width:70vw; height:calc(100vh - var(--nav-height));
-        padding:1rem 0; gap:0;
-        transform:translateX(100%);
-        transition:transform .3s;
-      }
-      .navbar .nav-links.open { transform:translateX(0); }
-      .navbar .nav-links a,
-      .navbar .nav-links .subnavbtn {
-        width:100%; text-align:left; padding:1rem 1.5rem;
-      }
-      .subnav-content { position:static; box-shadow:none; }
-    }
-
-    /* CARD LAYOUT */
-    .card {
-      width:100%; max-width:420px;
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:clamp(16px,4vw,32px);
-      margin:4rem 0 2rem;
-      display:flex; flex-direction:column; gap:clamp(12px,4vw,18px);
-    }
-    .card h1 {
-      margin:0;
-      color:var(--text);
-      font-size:clamp(1.2rem,4vw,1.6rem);
-    }
-    input[type=file] { display:none; }
-    label.btn {
-      background:var(--accent);
-      color:#fff;
-      padding:.6rem 1.2rem;
-      border-radius:8px;
-      font-weight:600;
-      text-align:center;
-      cursor:pointer;
-      transition: background .2s;
-      font-size:clamp(.9rem,3.5vw,1rem);
-    }
-    label.btn:hover { background:#004ddb; }
-
-    /* CANVAS & RESULTS */
-    #canvas {
-      width:100%; height:auto; display:none;
-      border-radius:10px;
-      box-shadow:0 2px 10px rgba(0,0,0,.12);
-    }
-    #status {
-      color:var(--muted);
-      font-size:clamp(.8rem,3vw,.95rem);
-      text-align:center;
-    }
-    #results {
-      display:flex; gap:8px;
-      overflow-x:auto;
-      padding-bottom:8px;
-      margin-top:12px;
-    }
-    .crop-card {
-      flex:0 0 auto;
-      background:#fff; border:1px solid #e5e7eb;
-      border-radius:8px; overflow:hidden;
-      box-shadow:0 2px 6px rgba(0,0,0,.08);
-      text-align:center; font-size:.85rem;
-    }
-    .crop-card img {
-      display:block; width:auto; max-width:120px; height:auto;
-    }
-    .crop-label {
-      padding:4px; color:var(--text);
+    .container { max-width: 1280px; margin: 0 auto; }
+    nav a { color: #e5e7eb; font-weight: 500; }
+    nav a.active, nav a:hover { color: #fff; }
+    #mobile-menu { background: rgba(31,41,55,0.9); backdrop-filter: blur(8px); }
+    footer {
+      text-align: center; padding: 1rem;
+      background: rgba(255,255,255,0.1);
+      color: #e5e7eb;
     }
   </style>
 </head>
-<body>
-
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <div class="logo">Zach Ng</div>
-    <div class="burger" id="burger"><span></span><span></span><span></span></div>
-    <div class="nav-links" id="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Me</a>
-      <a href="skills.html">Projects</a>
-      <div class="subnav">
-        <button class="subnavbtn">Projects <i class="fa fa-caret-down"></i></button>
-        <div class="subnav-content">
-          <a href="image-classifier.html">Image Classifier</a>
-          <a href="text-summariser.html"class="active">Text Summariser</a>
-          <a href="tiles.html">Tile Match Game</a>
-        </div>
-      </div>
+<body class="relative">
+  <div id="tsparticles"></div>
+  <canvas class="gradient-overlay"></canvas>
+  <header>
+    <div class="container px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
+      <nav class="hidden md:flex space-x-8" id="nav-links">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="zach.html" class="hover:text-white">About Me</a>
+        <a href="about.html" class="hover:text-white">My Skillset</a>
+        <a href="skills.html" class="text-white font-semibold">My Projects</a>
+      </nav>
+      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
+  </header>
+  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 shadow-lg z-40">
+    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur flex flex-col p-4 space-y-2 text-gray-200">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="zach.html">About Me</a></li>
+      <li><a href="about.html">My Skillset</a></li>
+      <li><a href="skills.html">My Projects</a></li>
+    </ul>
   </div>
 
-  <!-- DETECTOR CARD -->
-  <div class="card">
-    <h1>Object Detector (Lite)</h1>
+  <main class="min-h-screen pt-32 flex flex-col items-center px-4 text-gray-200">
+    <div class="bg-gray-800 bg-opacity-90 backdrop-blur-lg p-6 rounded-xl shadow-xl w-full max-w-2xl text-center">
+      <h1 class="text-xl font-bold text-indigo-400 mb-4">Object Detector (Lite)</h1>
+      <p class="mb-6 text-sm text-gray-300">Upload an image to detect objects within it. The app runs entirely in your browser using a lightweight COCO-SSD model, drawing bounding boxes and labels over detected objects. A cropped preview of each detection will appear below.</p>
+      <canvas id="canvas" class="mx-auto mb-4 rounded-lg shadow max-w-full h-auto hidden"></canvas>
+      <label for="filePick" class="cursor-pointer bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded mb-4 inline-block">Choose Image</label>
+      <input type="file" id="filePick" accept="image/*" class="hidden">
+      <div id="status" class="mt-2 text-sm text-gray-400">Loading model…</div>
+      <div id="results" class="mt-4 flex gap-4 flex-wrap justify-center"></div>
+    </div>
+  </main>
 
-    <canvas id="canvas"></canvas>
+  <footer class="mt-12">&copy; 2025 Zach Ng</footer>
 
-    <label class="btn" for="filePick">Choose Image</label>
-    <input type="file" id="filePick" accept="image/*">
 
-    <div id="status">Loading model…</div>
-    <div id="results"></div>
-  </div>
-
-  <footer style="padding:1rem 0; color:var(--muted); font-size:.9rem;">
-    &copy; 2025 Zach Ng
-  </footer>
-
-  <!-- NAV BURGER SCRIPT -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('burger')
-        .addEventListener('click', () => {
-          document.getElementById('nav-links')
-            .classList.toggle('open');
-        });
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: ['#4F46E5','#10b981','#8B5CF6'] },
+        shape: { type: 'circle' },
+        opacity: { value: 0.3 },
+        size: { value: { min: 1, max: 4 } },
+        links: { enable: true, distance: 150, color: '#555', opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1, outModes: 'bounce' }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+        modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+      },
+      detectRetina: true
     });
-  </script>
 
-  <!-- OBJECT DETECTOR LOGIC -->
-  <script>
+    document.getElementById('burger').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
     let model;
     const picker  = document.getElementById('filePick');
     const canvas  = document.getElementById('canvas');
@@ -243,62 +131,50 @@
     const status  = document.getElementById('status');
     const results = document.getElementById('results');
 
-    // load model
     cocoSsd.load()
       .then(m => { model = m; status.textContent = 'Model ready – pick an image.'; })
       .catch(e => status.textContent = 'Load error: ' + e);
 
-    // handle upload
     picker.addEventListener('change', e => {
       const file = e.target.files[0];
       if (!file || !model) return;
 
       const img = new Image();
-      img.src = URL.createObjectURL(file);
       img.onload = async () => {
         URL.revokeObjectURL(img.src);
-
-        canvas.width  = img.naturalWidth;
+        canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
         canvas.style.display = 'block';
         ctx.drawImage(img, 0, 0);
-
         status.textContent = 'Detecting…';
-        results.innerHTML  = '';
-
+        results.innerHTML = '';
         const preds = await model.detect(canvas);
 
         preds.forEach(p => {
-          const [x,y,w,h] = p.bbox;
-          // draw box
+          const [x, y, w, h] = p.bbox;
           ctx.strokeStyle = 'rgba(0,102,255,0.9)';
           ctx.lineWidth = 4;
-          ctx.strokeRect(x,y,w,h);
+          ctx.strokeRect(x, y, w, h);
 
-          // label background
-          const label = `${p.class} ${(p.score*100).toFixed(1)}%`;
+          const label = `${p.class} ${(p.score * 100).toFixed(1)}%`;
           ctx.font = '18px sans-serif';
           const textW = ctx.measureText(label).width;
           ctx.fillStyle = 'rgba(0,102,255,0.9)';
           ctx.fillRect(x, y - 24, textW + 8, 24);
-
-          // label text
           ctx.fillStyle = '#fff';
           ctx.fillText(label, x + 4, y - 4);
 
-          // create crop thumbnail
           const c = document.createElement('canvas');
           c.width = w; c.height = h;
-          c.getContext('2d').drawImage(canvas, x,y,w,h, 0,0,w,h);
+          c.getContext('2d').drawImage(canvas, x, y, w, h, 0, 0, w, h);
           const thumb = document.createElement('img');
           thumb.src = c.toDataURL();
+          thumb.className = 'rounded-lg shadow max-w-[120px]';
 
-          // append crop card
           const card = document.createElement('div');
-          card.className = 'crop-card';
+          card.className = 'bg-gray-700 p-2 rounded-xl text-sm text-white text-center';
           card.appendChild(thumb);
           const cap = document.createElement('div');
-          cap.className = 'crop-label';
           cap.textContent = label;
           card.appendChild(cap);
           results.appendChild(card);
@@ -306,6 +182,7 @@
 
         status.textContent = `Found ${preds.length} object(s).`;
       };
+      img.src = URL.createObjectURL(file);
     });
   </script>
 </body>
