@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>About Me – Zach Ng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="About Zach Ng – Data Analyst & AI Researcher with experience in ETL, visualisation, automation, and spatial omics.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Extend with our custom keyframes/animation
     tailwind.config = {
       theme: {
+        fontFamily: {
+          sans: ['Noto Sans JP', 'sans-serif']
+        },
         extend: {
+          fontWeight: {
+            'medium-plus': '550'
+          },
+          colors: {
+            primary: '#3f3cbb',
+            accent: '#b794f4',
+            dark: '#1a202c',
+          },
           keyframes: {
             'gradient-move': {
-              '0%': { 'background-position': '0% 50%' },
-              '50%': { 'background-position': '100% 50%' },
-              '100%': { 'background-position': '0% 50%' },
-            },
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' }
+            }
           },
           animation: {
-            'gradient-x': 'gradient-move 15s ease infinite',
-          },
-        },
-      },
+            'gradient-x': 'gradient-move 15s ease infinite'
+          }
+        }
+      }
     }
   </script>
 
-  <!-- Google Font & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <!-- Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- tsParticles for subtle particles -->
+  <!-- Particle Background -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 </head>
-<body class="relative min-h-screen overflow-x-hidden font-sans text-gray-800">
 
-  <!-- Animated gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient-x"></div>
-  <!-- Subtle particles -->
-  <div id="tsparticles" class="absolute inset-0 pointer-events-none"></div>
+<body class="relative font-sans bg-gradient-to-br from-[#1e1b4b] via-[#312e81] to-[#1a202c] text-gray-100 min-h-screen">
+
+  <!-- Particles Background -->
+  <div id="tsparticles" class="absolute inset-0 pointer-events-none z-0"></div>
 
   <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 bg-white bg-opacity-20 backdrop-blur-md shadow-md">
+  <header class="fixed top-0 w-full z-50 bg-dark bg-opacity-40 backdrop-blur-lg shadow-md">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-purple-200 hover:text-white transition">Zach Ng</a>
-      <nav class="hidden md:flex space-x-8 text-white">
-        <a href="index.html" class="hover:text-red-200">Home</a>
-        <a href="zach.html" class="hover: text-red-200">About Me</a>
-
-        <a href="about.html" class="active text-red-200">My Skillset</a>
-        <a href="skills.html" class="hover:text-red-200">My Projects</a>
-
+      <a href="index.html" class="text-2xl font-bold text-accent hover:text-white transition">Zach Ng</a>
+      <nav class="hidden md:flex space-x-8 text-white font-semibold">
+        <a href="index.html" class="hover:text-accent">Home</a>
+        <a href="zach.html" class="text-accent">About Me</a>
+        <a href="about.html" class="hover:text-accent">My Skillset</a>
+        <a href="skills.html" class="hover:text-accent">My Projects</a>
       </nav>
       <button id="burger" class="md:hidden flex flex-col gap-1.5">
         <span class="w-6 h-0.5 bg-white"></span>
@@ -60,138 +67,136 @@
         <span class="w-6 h-0.5 bg-white"></span>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white bg-opacity-20 backdrop-blur-md">
-      <a href="index.html" class="block px-6 py-3 text-blue">Home</a>
-      <a href="zach.html" class="block px-6 py-3 text-blue">About Me</a>
-      <a href="about.html" class="block px-6 py-3 text-blue">My Skillset</a>
-
-      <a href="skills.html" class="block px-6 py-3 text-blue">Projects</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-dark bg-opacity-80 text-white">
+      <a href="index.html" class="block px-6 py-3">Home</a>
+      <a href="zach.html" class="block px-6 py-3">About Me</a>
+      <a href="about.html" class="block px-6 py-3">My Skillset</a>
+      <a href="skills.html" class="block px-6 py-3">Projects</a>
     </div>
   </header>
 
-  <main class="pt-24 pb-12">
+  <!-- Main Content -->
+  <main class="pt-28 px-4 pb-20 relative z-10 max-w-4xl mx-auto space-y-10">
+
     <!-- Intro -->
-    <section class="max-w-xl mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-lg p-8 mb-8">
-      <h1 class="text-3xl font-bold text-purple-600 mb-4 text-center">Zach Ng</h1>
-      <p class="text-center text-gray-700 mb-6">
-        Melbourne, Victoria | +61 0410 137 093 | 
-        <a href="mailto:zachaus01@gmail.com" class="text-purple-600 hover:underline">zachaus01@gmail.com</a>
+    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-2xl">
+      <h1 class="text-4xl font-bold text-accent text-center mb-4">Zach Ng</h1>
+      <p class="text-center text-gray-300 mb-4 font-medium-plus">
+        Melbourne, Victoria · +61 0410 137 093 · <a href="mailto:zachaus01@gmail.com" class="text-accent hover:underline">zachaus01@gmail.com</a>
       </p>
-      <p class="text-gray-700 mb-6">
-        Master of Data Science student with a year of data-analysis experience, transforming complex datasets into actionable insights. Proficient in SQL, Tableau & JavaScript; a track record of empowering decision-making and improving efficiency through innovative data solutions. Passionate about driving strategic advancements via analytical expertise.
+      <p class="text-gray-300 mb-6 font-medium-plus text-center">
+        Data Analyst & AI Researcher with experience in cleaning, automation, dashboarding & spatial transcriptomics. Skilled in SQL, Python, Power BI, Looker, and Google Apps Script.
       </p>
       <div class="flex justify-center gap-4">
-        <a href="https://linkedin.com/in/zach--ng" target="_blank" class="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition">LinkedIn</a>
-        <a href="https://drive.google.com/uc?export=download&amp;id=1UCrSnMDIf4wCtKIZ-qv9DRdb-0MCdSbv" download class="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition">Download CV</a>
+        <a href="https://linkedin.com/in/zach--ng" target="_blank" class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
+        <a href="https://drive.google.com/uc?export=download&id=1UCrSnMDIf4wCtKIZ-qv9DRdb-0MCdSbv" download class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fas fa-download mr-2"></i>Download CV</a>
       </div>
     </section>
 
     <!-- Education -->
-    <section class="max-w-xl mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-lg p-8 mb-8">
-      <h2 class="text-2xl font-bold text-purple-600 mb-4">Education</h2>
-      <ul class="list-disc list-inside text-gray-700 space-y-3">
-        <li><strong>Master of Data Science (Bioinformatics)</strong><br>
-            Monash University — Jul 2024 to Dec 2025 (Expected)</li>
-        <li><strong>Bachelor of Computer Science (Data Science)</strong><br>
-            Monash University — Jul 2021 to Jul 2024</li>
-            <li><strong>Higher Diploma</strong><br>
-              Monash University — Jul 2020 to Jul 2021</li>
-              <li><strong>Singapore A-Levels</strong><br>
-                Tampines Meridian Junior College — Feb 2018 to Nov 2019 </li>
-                <li><strong>Singapore O-Levels</strong><br>
-                Ngee Ann Secondary School — Feb 2013 to Nov 2017 </li>
+    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
+      <h2 class="text-2xl font-bold text-accent mb-4">Education</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-300 font-medium-plus">
+        <li><strong>Master of Data Science (Bioinformatics)</strong>, Monash University – Jul 2024 to Dec 2025 (Expected)</li>
+        <li><strong>Bachelor of Computer Science (Data Science)</strong>, Monash University – Jul 2021 to Jul 2024</li>
+        <li><strong>Higher Diploma</strong>, Monash University – Jul 2020 to Jul 2021</li>
+        <li><strong>Singapore A-Levels</strong>, Tampines Meridian JC – Feb 2018 to Nov 2019</li>
+        <li><strong>Singapore O-Levels</strong>, Ngee Ann Secondary – Feb 2013 to Nov 2017</li>
       </ul>
     </section>
 
     <!-- Work Experience -->
-    <section class="max-w-xl mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-lg p-8 mb-8">
-      <h2 class="text-2xl font-bold text-purple-600 mb-4">Work Experience</h2>
-      <ul class="list-disc list-inside text-gray-700 space-y-4">
-        <li><strong>Data Analyst</strong><br>
-            IIPM Pty Ltd (Mar 2024 – Jul 2024)<br>
-            Automated scraping (–80% manual effort), processed 6.5M census records, built KPI dashboards.</li>
-        <li><strong>IT Intern</strong><br>
-            Nera Telecommunications (Dec 2023 – Mar 2024)<br>
-            Built SQL logging pipelines, integrated APIs into Power Automate & Apps Script, created Looker Studio dashboard.</li>
-        <li><strong>Receptionist</strong><br>
-            IIPM Pty Ltd (Oct 2023 – Dec 2023)<br>
-            Managed student records (100% audit accuracy), provided IT support, authored employee handbook.</li>
-        <li><strong>Data Science Intern</strong><br>
-            KPMG Virtual Internship (Sep 2023)<br>
-            Simulated customer targeting, cleaned data, built insight dashboards.</li>
+    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
+      <h2 class="text-2xl font-bold text-accent mb-4">Work Experience</h2>
+      <div class="space-y-6 text-gray-300 font-medium-plus">
+
+        <div>
+          <h3 class="font-semibold text-lg">Remote Freelance IT Specialist</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Automated workflows using Apps Script & Zapier</li>
+            <li>Optimized websites and digital presence</li>
+            <li>Ran Google & Meta Ads campaigns</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">Data Analyst – IIPM Pty Ltd (Mar–Jul 2024)</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Cleaned 6.5M+ records</li>
+            <li>Built real-time dashboards for internal reporting</li>
+            <li>Automated ETL process, reducing 80% manual effort</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">Receptionist – IIPM Pty Ltd (Oct–Dec 2023)</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Managed student record systems</li>
+            <li>Drafted SOPs & training documentation</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">IT Intern – Nera Telecommunications (Dec 2023–Mar 2024)</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Built Looker dashboards</li>
+            <li>Integrated APIs using Google Apps Script</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">Data Science Intern – KPMG Virtual (Sep 2023)</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Created insights dashboard for customer targeting simulation</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
+      <h2 class="text-2xl font-bold text-accent mb-4">Projects</h2>
+      <ul class="list-disc list-inside text-gray-300 font-medium-plus space-y-3">
+        <li><strong>Bioinformatics AI Research (2025):</strong> Built diffusion models for spatial transcriptomics cell segmentation.</li>
+        <li><strong>TeaMWork Internship (2024):</strong> Estimated social return on investment for Green Wira Program.</li>
+        <li><strong>Medical Database Project:</strong> Patient records with OpenAI API integration for summary queries.</li>
       </ul>
     </section>
 
-    <!-- University Projects -->
-    <section class="max-w-xl mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-lg p-8 mb-8">
-      <h2 class="text-2xl font-bold text-purple-600 mb-4">University Projects</h2>
-      <ul class="list-disc list-inside text-gray-700 space-y-3">
-        <li><strong>Fragrance Allergen Calculator</strong> (Apr 2025 – Dec 2025) — Web app to flag product allergens.</li>
-        <li><strong>Bioinformatics AI Research</strong> (Jan 2025 – Dec 2025) — Cell segmentation on spatial transcriptomics.</li>
-        <li><strong>TeaMWork Internship</strong> (Jul 2024) — Calculated SROI for Zero Waste Malaysia’s Green Wira Programme.</li>
-        <li><strong>Medical Database Project</strong> (Jul 2023 – Jul 2024) — Built AI-integrated patient database with OpenAI API.</li>
+    <!-- Skills -->
+    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
+      <h2 class="text-2xl font-bold text-accent mb-4">Skills & Certifications</h2>
+      <ul class="list-disc list-inside text-gray-300 font-medium-plus space-y-2">
+        <li><strong>Languages:</strong> Python, R, SQL, JavaScript, Bash, Java</li>
+        <li><strong>Tools:</strong> Tableau, Power BI, Looker Studio, REST APIs, Apps Script</li>
+        <li><strong>Data Science:</strong> ETL, Statistical Modelling, Diffusion Models, NLP, AI, ML</li>
+        <li><strong>Certifications:</strong> IELTS 8.0 (2025), IBM Cybersecurity, CITI Conflicts of Interest (2023–2027)</li>
       </ul>
     </section>
 
-    <!-- Skills & Certifications -->
-    <section class="max-w-xl mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-lg p-8 mb-8">
-      <h2 class="text-2xl font-bold text-purple-600 mb-4">Skills & Tools</h2>
-      <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
-        <li>Python, R, SQL, JavaScript, Bash, Google Apps Script</li>
-        <li>ETL, Warehousing, Wrangling, Pipelines, Excel</li>
-        <li>Statistical Analysis, Diffusion Models, LLM, NLP, AI</li>
-        <li>Tableau, Power BI, Looker Studio, Power Automate & REST APIs</li>
-        <li>Teamwork, Communication, Agile (Scrum/Kanban)</li>
-      </ul>
-      <h2 class="text-2xl font-bold text-purple-600 mb-4">Certifications</h2>
-      <ul class="list-disc list-inside text-gray-700 space-y-2">
-        <li>IELTS 8.0 (Mar 2025)</li>
-        <li>IBM Cybersecurity Tools (Oct 2023)</li>
-        <li>CITI Conflicts of Interest (Aug 2023 – Aug 2027)</li>
-      </ul>
-    </section>  
-    
-    <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
-    <span>&copy; 2025 Zach Ng</span>
-    <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-1 hover:text-indigo-400 transition">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
-      </svg>
-      Email Me
-    </a>
-    <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="flex items-center gap-1 hover:text-indigo-400 transition">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
-        <path d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.3 20h-3v-11h3v11zm-1.5-12.3c-1 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7c0 .9-.7 1.7-1.7 1.7zm13.3 12.3h-3v-5.6c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8v5.7h-3v-11h3v1.5c.4-.7 1.2-1.7 2.9-1.7 2.1 0 3.5 1.4 3.5 4.3v6.9z"/>
-      </svg>
-      LinkedIn
-    </a>
-  </footer>
+    <!-- Footer -->
+    <footer class="text-center text-sm text-gray-400 mt-16 mb-6 space-x-4">
+      <span>&copy; 2025 Zach Ng</span>
+      <a href="mailto:zachaus01@gmail.com" class="hover:text-accent"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://linkedin.com/in/zach--ng" class="hover:text-accent" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </footer>
   </main>
 
-
-
-
   <script>
-    // tsParticles init
-    tsParticles.load('tsparticles', {
-      fpsLimit: 60,
-      background: { color: 'transparent' },
+    tsParticles.load("tsparticles", {
       particles: {
         number: { value: 60, density: { enable: true, area: 800 } },
-        color: { value: ['#ffd1dc','#fff0f6','#ffe4e1'] },
-        shape: { type: 'circle' },
-        opacity: { value: 0.6 },
-        size: { value: { min: 2, max: 4 } },
-        move: { enable: true, speed: 1, direction: 'bottom', outModes: 'out' }
-      },
-      detectRetina: true
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: { min: 1, max: 3 } },
+        move: { enable: true, speed: 1, direction: "bottom", outModes: "out" }
+      }
     });
 
-    // Mobile menu toggle
-    // Mobile menu toggle
-    document.getElementById('burger').addEventListener('click', () => {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
+    document.getElementById("burger").addEventListener("click", () => {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
     });
   </script>
 </body>
