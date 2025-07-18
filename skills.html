@@ -269,6 +269,14 @@
         el.style.animationDelay = `${i * 0.15}s`;
       });
     });
+
+      // Mobile menu toggle: show/hide menu on burger click
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
   </script>
+  
 </body>
 </html>
