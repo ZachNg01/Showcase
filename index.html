@@ -30,6 +30,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <!-- tsParticles for animated background -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -77,6 +81,10 @@
     }
   }
 </style>
+<!-- Page Loader -->
+<div id="page-loader" class="fixed inset-0 z-[999] flex items-center justify-center bg-[#1a202c] text-white text-xl font-semibold transition-opacity duration-700">
+ 
+</div>
 
 </head>
 <body class="relative text-gray-800 bg-gray-900">
@@ -119,7 +127,7 @@
   <!-- Hero Section -->
   <section class="relative pt-32 pb-0 text-center">
     <div class="container mx-auto px-6">
-      <h1 class="text-6xl font-extrabold text-white drop-shadow-lg mb-4 animate-fadeInUp">Welcome to My Portfolio</h1>
+      <h1 class="text-6xl font-extrabold text-white drop-shadow-lg mb-4 animate-fadeInUp">Welcome to Zach Portfolio</h1>
       <p class="text-xl text-gray-200 mb-8 animate-fadeInUp delay-200">My Projects, Skills & Code – All on One Platfrom. Programmed and Designed by Me</p>
       <div class="space-x-4 animate-fadeInUp delay-400">
         <a href="about.html" class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold transition">Learn More</a>
@@ -129,33 +137,38 @@
   </section>
  
   <!-- Featured Articles -->
+<!-- Featured Articles -->
   <section id="projects" class="container mx-auto px-6 py-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-    <article class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 p-6 animate-fadeIn delay-600">
+    <a href="zach.html" class="group block bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 p-6 animate-fadeIn delay-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">
       <div class="overflow-hidden rounded-lg mb-4">
         <img 
           src="https://drive.google.com/thumbnail?id=1fGm6FfSaGAGQhQmAz04Uj3EOl6RulD0G&sz=w1000" 
           alt="About Zach" 
-          class="w-full h-40 object-cover hover:scale-105 transition-transform duration-500 ease-in-out"
+          class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
         />
       </div>
-      <h2 class="text-2xl font-bold  text-white">About Zach</h2>
+      <h2 class="text-2xl font-bold text-white">About Zach</h2>
       <p class="mb-4 text-gray-300">Discover my background, education, and journey as a data scientist and developer.</p>
-      <a href="zach.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
-    </article>
+      <span class="text-indigo-300 font-medium group-hover:underline">Read more →</span>
+    </a>
+ 
 
-
-    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-800">
-      <img src="https://t3.ftcdn.net/jpg/02/67/25/64/360_F_267256449_9zyyZVvLDI2CiNeuMAmMWGwDUXU9ZehZ.jpg" alt="My Skillset" class="rounded-lg mb-4 w-full h-40 object-cover">
+    <!-- Skillset Card -->
+    <a href="about.html" class="group block bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-800 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      <img src="https://t3.ftcdn.net/jpg/02/67/25/64/360_F_267256449_9zyyZVvLDI2CiNeuMAmMWGwDUXU9ZehZ.jpg" alt="My Skillset" class="rounded-lg mb-4 w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
       <h2 class="text-2xl font-bold mb-2 text-white">My Skillset</h2>
       <p class="mb-4 text-gray-200">Learn about the tools and technologies I excel at, from Python and SQL to AI and data visualization.</p>
-      <a href="about.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
-    </article>
-    <article class="bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-1000">
-      <img src="https://images.stockcake.com/public/1/8/4/1845c544-6532-4096-956e-b0167408f018_large/programmer-coding-late-stockcake.jpg" alt="My Projects" class="rounded-lg mb-4 w-full h-40 object-cover">
+      <span class="text-indigo-300 font-medium group-hover:underline">Read more →</span>
+    </a>
+
+    <!-- Projects Card -->
+    <a href="skills.html" class="group block bg-white bg-opacity-20 backdrop-blur rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition p-6 animate-fadeIn delay-1000 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      <img src="https://images.stockcake.com/public/1/8/4/1845c544-6532-4096-956e-b0167408f018_large/programmer-coding-late-stockcake.jpg" alt="My Projects" class="rounded-lg mb-4 w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
       <h2 class="text-2xl font-bold mb-2 text-white">My Projects</h2>
       <p class="mb-4 text-gray-200">Explore a collection of interactive demos, AI models, and data dashboards I've built.</p>
-      <a href="skills.html" class="text-indigo-300 font-medium hover:underline">Read more →</a>
-    </article>
+      <span class="text-indigo-300 font-medium group-hover:underline">Read more →</span>
+    </a>
+
   </section>
 
 <section class="w-full bg-white py-10 overflow-hidden">
@@ -426,6 +439,20 @@
     const nodes = template.content.cloneNode(true);
     container.appendChild(nodes);
   }
+
+    // Remove loader on page load
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('page-loader');
+    loader.classList.add('opacity-0');
+    setTimeout(() => loader.remove(), 700);
+  });
+
+  // AOS scroll animations
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+
 </script>
 
 
