@@ -52,28 +52,36 @@
   <div id="tsparticles" class="absolute inset-0 pointer-events-none z-0"></div>
 
   <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 bg-dark bg-opacity-40 backdrop-blur-lg shadow-md">
+  <header class="bg-white bg-opacity-20 backdrop-blur fixed w-full z-50 shadow">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-accent hover:text-white transition">Zach Ng</a>
-      <nav class="hidden md:flex space-x-8 text-white font-semibold">
-        <a href="index.html" class="hover:text-accent">Home</a>
-        <a href="zach.html" class="text-accent">About Me</a>
-        <a href="about.html" class="hover:text-accent">My Skillset</a>
-        <a href="skills.html" class="hover:text-accent">My Projects</a>
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
+      <nav>
+        <ul id="nav-links" class="hidden md:flex space-x-8">
+          <li><a href="index.html" class="text-gray-200 hover:text-white font-medium">Home</a></li>
+          <li><a href="zach.html" class="text-gray-200 hover:text-white font-medium">About Me</a></li>          
+          <li><a href="about.html" class="text-gray-200 hover:text-white font-medium">My Skillset</a></li>
+          <li><a href="skills.html" class="text-gray-200 hover:text-white font-medium">My Projects</a></li>
+
+        </ul>
+        <button id="burger" class="md:hidden focus:outline-none text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
       </nav>
-      <button id="burger" class="md:hidden flex flex-col gap-1.5">
-        <span class="w-6 h-0.5 bg-white"></span>
-        <span class="w-6 h-0.5 bg-white"></span>
-        <span class="w-6 h-0.5 bg-white"></span>
-      </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-dark bg-opacity-80 text-white">
-      <a href="index.html" class="block px-6 py-3">Home</a>
-      <a href="zach.html" class="block px-6 py-3">About Me</a>
-      <a href="about.html" class="block px-6 py-3">My Skillset</a>
-      <a href="skills.html" class="block px-6 py-3">Projects</a>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-gray-800 bg-opacity-90 backdrop-blur fixed top-16 inset-x-0 shadow-lg z-40 hidden">
+    <ul class="flex flex-col space-y-2 p-4 text-gray-200">
+      <li><a href="index.html" class="block font-medium">Home</a></li>
+      <li><a href="zach.html" class="block font-medium">About Me</a></li>
+      <li><a href="about.html" class="block font-medium">My Skillset</a></li>
+
+      <li><a href="skills.html" class="block font-medium">My Projects</a></li>
+    </ul>
+  </div>
 
   <!-- Main Content -->
   <main class="pt-28 px-4 pb-20 relative z-10 max-w-4xl mx-auto space-y-10">
