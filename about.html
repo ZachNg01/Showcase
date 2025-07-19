@@ -101,17 +101,80 @@
       </div>
     </section>
 
-    <!-- Education -->
-    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
-      <h2 class="text-2xl font-bold text-accent mb-4">Education</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-300 font-medium-plus">
-        <li><strong>Master of Data Science (Bioinformatics)</strong>, Monash University – Jul 2024 to Dec 2025 (Expected)</li>
-        <li><strong>Bachelor of Computer Science (Data Science)</strong>, Monash University – Jul 2021 to Jul 2024</li>
-        <li><strong>Higher Diploma</strong>, Monash University – Jul 2020 to Jul 2021</li>
-        <li><strong>Singapore A-Levels</strong>, Tampines Meridian JC – Feb 2018 to Nov 2019</li>
-        <li><strong>Singapore O-Levels</strong>, Ngee Ann Secondary – Feb 2013 to Nov 2017</li>
-      </ul>
-    </section>
+<!-- Alpine Education Timeline Section -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<!-- Add this in your main HTML -->
+<section 
+  class="bg-gradient-to-br from-[#2a215d] to-[#1e1b4b] p-8 rounded-3xl shadow-xl text-white relative overflow-hidden"
+  x-data="carousel()"
+  x-init="startAutoScroll"
+>
+<div class="relative max-w-4xl mx-auto" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
+  <!-- Direction Labels -->
+  <div class="flex justify-between text-xs text-purple-300 mb-1 px-2">
+    <span>Most recent</span>
+    <span>Earliest</span>
+  </div>
+
+  <!-- Arrows -->
+  <button @click="prev" title="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-20">
+    <i class="fas fa-chevron-left text-white"></i>
+  </button>
+  <button @click="next" title="Next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-20">
+    <i class="fas fa-chevron-right text-white"></i>
+  </button>
+
+  <!-- Slide Container -->
+  <div class="overflow-hidden rounded-xl">
+    <div 
+      class="flex transition-transform duration-700 ease-in-out"
+      :style="`transform: translateX(-${current * 100}%);`"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+    >
+
+      <template x-for="(step, index) in steps" :key="index">
+        <div class="min-w-full p-6">
+          <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 text-center h-full flex flex-col justify-between">
+            <div>
+              <img 
+                :src="step.logo" 
+                alt="School logo" 
+                class="h-16 mx-auto mb-4 object-contain transition-transform duration-300 hover:scale-110"
+              />
+              <h3 class="text-2xl font-bold text-white mb-1" x-text="step.title"></h3>
+              <p class="text-purple-300 text-lg font-medium mb-2" x-text="step.time"></p>
+              <p class="text-gray-300 mb-4" x-text="step.school"></p>
+            </div>
+            <p class="text-sm text-gray-200 leading-relaxed" x-text="step.description"></p>
+          </div>
+
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <!-- Dot Indicators -->
+  <div class="flex justify-center mt-6 space-x-2">
+    <template x-for="(step, index) in steps" :key="'dot-' + index">
+      <div 
+        @click="current = index"
+        class="w-3 h-3 rounded-full transition-all duration-300 cursor-pointer"
+        :class="{
+          'bg-purple-400 scale-125 shadow': current === index,
+          'bg-purple-700': current !== index
+        }"
+      ></div>
+    </template>
+  </div>
+</div>
+
+</section>
+
+
+
 
     <!-- Work Experience -->
     <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
@@ -207,5 +270,78 @@
       document.getElementById("mobile-menu").classList.toggle("hidden");
     });
   </script>
+  <script>
+function carousel() {
+  return {
+    current: 0,
+    interval: null,
+    startX: 0,
+    endX: 0,
+    steps: [
+  {
+    title: 'Master of Data Science (Bioinformatics)',
+    time: '2024–2025',
+    school: 'Monash University',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
+    description: 'Combining spatial transcriptomics and AI for biomedical insights. Researching diffusion models for spatial transcriptomics segmentation.'
+  },
+  {
+    title: 'Bachelor of Computer Science (Data Science)',
+    time: '2021–2024',
+    school: 'Monash University',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
+    description: 'Gained expertise in machine learning, algorithms, databases, and big data. Built projects in Python, SQL, and R. Interned at Nera Telecommunications.'
+  },
+  {
+    title: 'Higher Education Diploma (IT)',
+    time: '2020–2021',
+    school: 'Monash University',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
+    description: 'Focused on bridging foundational computing and mathematics with critical thinking, teamwork, and software design principles.'
+  },
+  {
+    title: 'Singapore GCE A-Levels',
+    time: '2018–2019',
+    school: 'Tampines Meridian Junior College',
+    logo: 'https://tmseatfinder.herokuapp.com/static/tmjc.png',
+    description: 'Specialised in Physics, Chemistry, and Math. Developed research skills and presented a project on kidney failure in Singapore.'
+  },
+  {
+    title: 'Singapore GCE O-Levels',
+    time: '2013–2017',
+    school: 'Ngee Ann Secondary School',
+    logo: 'https://ngeeannsec.moe.edu.sg/images/small-school-Logo-No-background-2.png',
+    description: 'Built a strong academic foundation in sciences, math, and humanities. Was a Scout and led student council initiatives.'
+  }
+],next() {
+      this.current = (this.current + 1) % this.steps.length;
+    },
+    prev() {
+      this.current = (this.current - 1 + this.steps.length) % this.steps.length;
+    },
+    startAutoScroll() {
+      this.interval = setInterval(() => this.next(), 6000);
+    },
+    stopAutoScroll() {
+      clearInterval(this.interval);
+    },
+    handleTouchStart(e) {
+      this.startX = e.touches[0].clientX;
+    },
+    handleTouchMove(e) {
+      this.endX = e.touches[0].clientX;
+    },
+    handleTouchEnd() {
+      if (this.startX - this.endX > 50) {
+        this.next();
+      } else if (this.endX - this.startX > 50) {
+        this.prev();
+      }
+    }
+  };
+}
+</script>
+
+
 </body>
 </html>
