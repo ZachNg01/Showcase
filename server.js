@@ -71,7 +71,7 @@ app.post('/send-email', async (req, res) => {
   const { from_name, reply_to, message } = req.body;
 
   try {
-    const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -82,27 +82,27 @@ app.post('/send-email', async (req, res) => {
       })
     });
 
-    const raw = await emailResponse.text();
+    const raw = await response.text();
 
+    if (response.ok) {
+      return res.json({ status: '✅ Email sent successfully!' });
+    }
+
+    // If not ok, try to parse error
     try {
       const json = JSON.parse(raw);
-      if (!emailResponse.ok) {
-        return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
-      }
-      res.json({ status: '✅ Email sent successfully!' });
+      return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
     } catch {
-      // Response was plain text (like "OK")
-      if (emailResponse.ok) {
-        return res.json({ status: '✅ Email sent successfully!' });
-      } else {
-        return res.status(500).json({ error: 'EmailJS failed with non-JSON', details: raw });
-      }
+      return res.status(500).json({ error: 'EmailJS failed with non-JSON', details: raw });
     }
+
   } catch (err) {
     console.error('[EmailJS Error]', err);
     res.status(500).json({ error: err.message });
   }
 });
+
+
 
 // Health check
 app.get('/', (req, res) => res.send('🟢 Gemini & EmailJS server is running'));

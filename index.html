@@ -246,13 +246,41 @@
   
 <!-- Contact Section with Formspree integration -->
  
-<form id="contact-form">
-  <input type="text" name="from_name" placeholder="Your Name" required />
-  <input type="email" name="reply_to" placeholder="Your Email" required />
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send</button>
-</form>
-<p id="form-status" style="color: white; text-align: center;"></p>
+<section id="contact" class="py-20 px-6 bg-gray-900 text-white">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-6 text-indigo-400">Contact Me</h2>
+    <p class="mb-10 text-gray-300">Have a question or want to work together? Send me a message below.</p>
+
+    <form id="contact-form" class="space-y-6">
+      <div>
+        <label class="block text-left text-sm font-medium mb-1 text-gray-200" for="from_name">Your Name</label>
+        <input type="text" id="from_name" name="from_name" required
+          class="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/10 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-white placeholder-gray-400" 
+          placeholder="e.g. Zach Ng" />
+      </div>
+      <div>
+        <label class="block text-left text-sm font-medium mb-1 text-gray-200" for="reply_to">Your Email</label>
+        <input type="email" id="reply_to" name="reply_to" required
+          class="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/10 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-white placeholder-gray-400" 
+          placeholder="e.g. zach@example.com" />
+      </div>
+      <div>
+        <label class="block text-left text-sm font-medium mb-1 text-gray-200" for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required
+          class="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/10 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-white placeholder-gray-400" 
+          placeholder="Let me know how I can help..."></textarea>
+      </div>
+
+      <button type="submit"
+        class="w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition duration-200">
+        📧 Send Message
+      </button>
+    </form>
+
+    <p id="form-status" class="mt-6 text-sm text-center text-gray-300"></p>
+  </div>
+</section>
+
 
 
 <!-- Footer -->
@@ -346,39 +374,38 @@
 </script>
 
 <script>
-  document.getElementById('contact-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const status = document.getElementById('form-status');
 
-    const form = e.target;
-    const status = document.getElementById('form-status');
+  const data = {
+    from_name: form.from_name.value.trim(),
+    reply_to: form.reply_to.value.trim(),
+    message: form.message.value.trim(),
+  };
 
-    const data = {
-      from_name: form.from_name.value.trim(),
-      reply_to: form.reply_to.value.trim(),
-      message: form.message.value.trim(),
-    };
+  status.textContent = 'Sending...';
 
-    status.textContent = 'Sending...';
+  try {
+    const res = await fetch('https://showcase-0qvh.onrender.com/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
-    try {
-      const res = await fetch('https://showcase-0qvh.onrender.com/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (res.ok) {
-        status.textContent = result.status;
-        form.reset();
-      } else {
-        status.textContent = result.error || '❌ Something went wrong.';
-      }
-    } catch (err) {
-      status.textContent = '❌ Error: ' + err.message;
+    const result = await res.json();
+    if (res.ok) {
+      status.textContent = result.status;
+      form.reset();
+    } else {
+      status.textContent = result.error || '❌ Something went wrong.';
     }
-  });
+  } catch (err) {
+    status.textContent = '❌ Error: ' + err.message;
+  }
+});
+
 </script>
 
 </body>
