@@ -5,7 +5,21 @@
   <title>About Me – Zach Ng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="About Zach Ng – Data Analyst & AI Researcher with experience in ETL, visualisation, automation, and spatial omics.">
+  <style>
+    #page-loader {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.6s ease, visibility 0.6s;
+    }
+    #page-loader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+  </style>
 
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -37,6 +51,7 @@
       }
     }
   </script>
+
 
   <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -176,154 +191,215 @@
 
 
 
-    <!-- Work Experience -->
-    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
-      <h2 class="text-2xl font-bold text-accent mb-4">Work Experience</h2>
-      <div class="space-y-6 text-gray-300 font-medium-plus">
+<!-- Work Experience Carousel Section -->
+<section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur text-white" x-data="experienceCarousel()" x-init="startAutoScroll">
+  <h2 class="text-3xl font-bold text-accent mb-8 text-center">Work Experience</h2>
 
-        <div>
-          <h3 class="font-semibold text-lg">Remote Freelance IT Specialist</h3>
-          <ul class="list-disc list-inside ml-4">
-            <li>Automated workflows using Apps Script & Zapier</li>
-            <li>Optimized websites and digital presence</li>
-            <li>Ran Google & Meta Ads campaigns</li>
-          </ul>
+  <!-- Carousel Container -->
+  <div class="relative max-w-4xl mx-auto overflow-hidden">
+    <!-- Arrows -->
+    <button @click="prev" title="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-10">
+      <i class="fas fa-chevron-left text-white"></i>
+    </button>
+    <button @click="next" title="Next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-10">
+      <i class="fas fa-chevron-right text-white"></i>
+    </button>
+
+    <!-- Slides -->
+    <div class="flex transition-all duration-700 ease-out" :style="`transform: translateX(-${current * 100}%);`">
+      <template x-for="(job, index) in jobs" :key="index">
+        <div class="min-w-full px-6">
+          <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-xl h-full flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold mb-1" x-text="job.title"></h3>
+              <p class="text-sm text-purple-300 mb-3" x-text="job.company"></p>
+              <ul class="list-disc pl-5 text-gray-300 space-y-1">
+                <template x-for="point in job.bullets" :key="point">
+                  <li x-text="point"></li>
+                </template>
+              </ul>
+            </div>
+          </div>
         </div>
+      </template>
+    </div>
+  </div>
 
-        <div>
-          <h3 class="font-semibold text-lg">Data Analyst – IIPM Pty Ltd (Mar–Jul 2024)</h3>
-          <ul class="list-disc list-inside ml-4">
-            <li>Cleaned 6.5M+ records</li>
-            <li>Built real-time dashboards for internal reporting</li>
-            <li>Automated ETL process, reducing 80% manual effort</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-semibold text-lg">Receptionist – IIPM Pty Ltd (Oct–Dec 2023)</h3>
-          <ul class="list-disc list-inside ml-4">
-            <li>Managed student record systems</li>
-            <li>Drafted SOPs & training documentation</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-semibold text-lg">IT Intern – Nera Telecommunications (Dec 2023–Mar 2024)</h3>
-          <ul class="list-disc list-inside ml-4">
-            <li>Built Looker dashboards</li>
-            <li>Integrated APIs using Google Apps Script</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-semibold text-lg">Data Science Intern – KPMG Virtual (Sep 2023)</h3>
-          <ul class="list-disc list-inside ml-4">
-            <li>Created insights dashboard for customer targeting simulation</li>
-          </ul>
-        </div>
-
+  <!-- Dot Indicators -->
+  <div class="flex justify-center mt-6 space-x-2">
+    <template x-for="(job, index) in jobs" :key="'dot-' + index">
+      <div @click="current = index" class="w-3 h-3 rounded-full cursor-pointer transition-all duration-300"
+        :class="{ 'bg-purple-400 scale-125': current === index, 'bg-purple-700': current !== index }">
       </div>
-    </section>
+    </template>
+  </div>
+</section>
+
+<!-- Alpine Carousel Script -->
+<script>
+function experienceCarousel() {
+  return {
+    current: 0,
+    interval: null,
+    jobs: [
+      {
+        title: 'Remote Freelance IT Specialist',
+        company: 'Self-Employed · Melbourne CBD, Australia · Jul 2024 – Present',
+        bullets: [
+          'Providing consultation services and automating business processes using Google Apps Script, Zapier, etc.',
+          'Optimizing websites (e.g., Wix) for user experience and performance.',
+          'Running Meta Ads and Google Ads with performance tracking via Google Analytics.'
+        ]
+      },
+      {
+        title: 'Data Analyst',
+        company: 'IIPM Pty Ltd · Melbourne CBD, Australia · Mar 2024 – Jul 2024',
+        bullets: [
+          'Cleaned and consolidated 6.5M+ records to support business strategy.',
+          'Built interactive dashboards using Looker Studio and Excel.',
+          'Automated ETL workflows, cutting 80% manual effort.',
+          'Worked closely with stakeholders to tailor analytical solutions.',
+          'Maintained data integrity and report consistency.'
+        ]
+      },
+      {
+        title: 'Receptionist',
+        company: 'IIPM Pty Ltd · Melbourne CBD, Australia · Oct 2023 – Dec 2023',
+        bullets: [
+          'Maintained student records with 100% audit accuracy.',
+          'Resolved platform/IT issues and documented SOPs.'
+        ]
+      },
+      {
+        title: 'IT Intern',
+        company: 'Nera Telecommunications · Petaling Jaya, Malaysia · Dec 2023 – Mar 2024',
+        bullets: [
+          'Integrated BoldDesk, BoldSign, Sophos via Apps Script APIs.',
+          'Created Looker Studio dashboards for software adoption.',
+          'Enabled cross-department communication on reporting needs.'
+        ]
+      },
+      {
+        title: 'Data Science Intern',
+        company: 'KPMG Virtual Internship · Remote · Sep 2023',
+        bullets: [
+          'Simulated advisory for customer targeting strategy.',
+          'Prepared visual report with actionable recommendations.',
+          'Built dashboards to present findings clearly.'
+        ]
+      }
+    ],
+    next() {
+      this.current = (this.current + 1) % this.jobs.length;
+    },
+    prev() {
+      this.current = (this.current - 1 + this.jobs.length) % this.jobs.length;
+    },
+    startAutoScroll() {
+      this.interval = setInterval(() => this.next(), 6000);
+    },
+    stopAutoScroll() {
+      clearInterval(this.interval);
+    }
+  };
+}
+</script>
 
 
-    <!-- Flip Card Skills Section -->
-    <section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur">
-      <h2 class="text-2xl font-bold text-accent mb-8 text-center">Skills & Certifications</h2>
-      <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false] }">
 
-        <!-- Languages Card -->
-        <div class="perspective" @click="flipped[0] = !flipped[0]">
-          <div :class="flipped[0] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
-            <!-- Front -->
-            <div class="absolute inset-0 bg-purple-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
-              Programming Languages
-            </div>
-            <!-- Back -->
-            <div class="absolute inset-0 bg-purple-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-              <ul class="list-disc list-inside space-y-1">
-                <li>Python</li>
-                <li>R</li>
-                <li>SQL</li>
-                <li>JavaScript (Node & Browser)</li>
-                <li>Bash scripting</li>
-                <li>Java (basic)</li>
-              </ul>
-            </div>
-          </div>
+<!-- Flip Card Skills Section – Enhanced Resume Edition -->
+<section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur">
+  <h2 class="text-3xl font-bold text-accent mb-4 text-center">Skills & Certifications</h2>
+  <p class="text-center text-gray-300 mb-8">Click on each card to flip and explore Zach's expertise</p>
+  <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false] }">
+
+    <!-- Languages -->
+    <div class="perspective cursor-pointer" @click="flipped[0] = !flipped[0]">
+      <div :class="flipped[0] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
+          Programming Languages
         </div>
-        <style>
-          .perspective {
-            perspective: 1000px;
-          }
-          .preserve-3d {
-            transform-style: preserve-3d;
-          }
-          .backface-hidden {
-            backface-visibility: hidden;
-          }
-          .rotate-y-180 {
-            transform: rotateY(180deg);
-          }
-        </style>
-
-        <!-- Tools Card -->
-        <div class="perspective" @click="flipped[1] = !flipped[1]">
-          <div :class="flipped[1] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
-            <div class="absolute inset-0 bg-blue-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
-              Tools & Platforms
-            </div>
-            <div class="absolute inset-0 bg-blue-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-              <ul class="list-disc list-inside space-y-1">
-                <li>Power BI, Tableau</li>
-                <li>Looker Studio, Excel</li>
-                <li>Google Apps Script</li>
-                <li>REST APIs, JSON/XML</li>
-                <li>Linux CLI, GitHub Actions</li>
-                <li>Firebase, Google Cloud</li>
-              </ul>
-            </div>
-          </div>
+        <div class="absolute inset-0 bg-purple-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Python (Data Science, Automation)</li>
+            <li>R (Statistical Modeling)</li>
+            <li>SQL (PostgreSQL, MySQL)</li>
+            <li>JavaScript (Node.js, Web)</li>
+            <li>Bash scripting</li>
+            <li>Java  </li>
+            <li>HTML/CSS </li>
+          </ul>
         </div>
-
-        <!-- Data Science Card -->
-        <div class="perspective" @click="flipped[2] = !flipped[2]">
-          <div :class="flipped[2] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
-            <div class="absolute inset-0 bg-green-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
-              Data Science & AI
-            </div>
-            <div class="absolute inset-0 bg-green-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-              <ul class="list-disc list-inside space-y-1">
-                <li>ETL & Data Wrangling</li>
-                <li>Diffusion Models (DDPM/DDIM)</li>
-                <li>Machine Learning, NLP</li>
-                <li>Bioinformatics, Spatial Transcriptomics</li>
-                <li>Statistical Modeling</li>
-                <li>Prompt Engineering, LangChain</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certifications Card -->
-        <div class="perspective" @click="flipped[3] = !flipped[3]">
-          <div :class="flipped[3] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
-            <div class="absolute inset-0 bg-yellow-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
-              Certifications
-            </div>
-            <div class="absolute inset-0 bg-yellow-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-              <ul class="list-disc list-inside space-y-1">
-                <li>IELTS 8.0 (2025)</li>
-                <li>IBM Cybersecurity</li>
-                <li>CITI Conflict of Interest (2023–2027)</li>
-                <li>Google Data Studio Certification</li>
-                <li>DeepLearning.AI Diffusion Models</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </section>
+    </div>
+
+    <!-- Tools -->
+    <div class="perspective cursor-pointer" @click="flipped[1] = !flipped[1]">
+      <div :class="flipped[1] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
+          Tools & Platforms
+        </div>
+        <div class="absolute inset-0 bg-blue-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+          <ul class="list-disc list-inside space-y-1">
+            <li>Power BI, Tableau, Excel</li>
+            <li>Google Looker Studio</li>
+            <li>Apps Script, Power Automate</li>
+            <li>CRM: HubSpot, Monday.com</li>
+            <li>Cloud: Google Cloud, Snowflake</li>
+            <li>Version Control: GitHub Actions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Science -->
+    <div class="perspective cursor-pointer" @click="flipped[2] = !flipped[2]">
+      <div :class="flipped[2] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
+          Data Science & AI
+        </div>
+        <div class="absolute inset-0 bg-green-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+          <ul class="list-disc list-inside space-y-1">
+            <li>ETL, Wrangling, Modeling</li>
+            <li>Machine Learning, NLP, LLMs</li>
+            <li>Bioinformatics, Spatial Omics</li>
+            <li>DDPM/DDIM Diffusion Models</li>
+            <li>Pattern Detection, AI R&D</li>
+            <li>LangChain, Prompt Engineering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="perspective cursor-pointer" @click="flipped[3] = !flipped[3]">
+      <div :class="flipped[3] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
+        <div class="absolute inset-0 bg-gradient-to-br from-yellow-600 to-yellow-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
+          Certifications
+        </div>
+        <div class="absolute inset-0 bg-yellow-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+          <ul class="list-disc list-inside space-y-1">
+            <li>IELTS 8.0 (2025)</li>
+            <li>IBM Cybersecurity (Coursera)</li>
+            <li>CITI COI Certification (2023–2027)</li>
+            <li>DeepLearning.AI Diffusion Models</li>
+            <li>Google Data Studio Certification</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Flip Styles -->
+<style>
+  .perspective { perspective: 1000px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; }
+  .rotate-y-180 { transform: rotateY(180deg); }
+</style>
+
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-400 mt-16 mb-6 space-x-4">
@@ -419,6 +495,14 @@ function carousel() {
     }
   };
 }
+ 
+</script>
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("page-loader");
+    loader.classList.add("fade-out");
+    setTimeout(() => loader.remove(), 700); // matches transition duration
+  });
 </script>
 
 
