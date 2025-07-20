@@ -68,6 +68,7 @@ app.post('/chat', async (req, res) => {
 
 // EmailJS proxy route (secure)
 // Route: /send-email
+// EmailJS proxy route
 app.post('/send-email', async (req, res) => {
   const { from_name, reply_to, message } = req.body;
 
@@ -83,15 +84,18 @@ app.post('/send-email', async (req, res) => {
       })
     });
 
-    const raw = await response.text();
+    const text = await response.text(); // plain or JSON
 
-    if (response.ok) return res.json({ status: '✅ Email sent successfully!' });
+    if (response.ok) {
+      return res.json({ status: '✅ Email sent successfully!' });
+    }
 
+    // Try to parse JSON; fallback to raw text
     try {
-      const json = JSON.parse(raw);
+      const json = JSON.parse(text);
       return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
     } catch {
-      return res.status(500).json({ error: 'EmailJS failed with non-JSON', details: raw });
+      return res.status(500).json({ error: 'EmailJS failed with non-JSON', raw: text });
     }
 
   } catch (err) {
@@ -99,6 +103,7 @@ app.post('/send-email', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // Health check
 app.get('/', (req, res) => res.send('🟢 Gemini & EmailJS server is running'));
