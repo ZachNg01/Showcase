@@ -246,7 +246,14 @@
   
 <!-- Contact Section with Formspree integration -->
  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
- 
+<script>
+  (function () {
+    emailjs.init({
+      publicKey: 'shZAvenkC18-8FQ_l'
+    });
+  })();
+</script>
+
 <section id="contact" class="py-20 px-6 bg-gray-900 text-white">
   <div class="max-w-2xl mx-auto text-center">
     <h2 class="text-4xl font-bold mb-6 text-indigo-400">Contact Me</h2>
@@ -378,42 +385,25 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
   e.preventDefault();
   const form = e.target;
   const status = document.getElementById('form-status');
-  status.textContent = '📨 Sending...';
+
+  status.textContent = 'Sending...';
 
   try {
-    const response = await fetch('https://showcase-0qvh.onrender.com/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from_name: form.from_name.value.trim(),
-        reply_to: form.reply_to.value.trim(),
-        message: form.message.value.trim()
-      })
+    const result = await emailjs.send('service_hx8xto2', 'template_t86asmh', {
+      from_name: form.from_name.value.trim(),
+      reply_to: form.reply_to.value.trim(),
+      message: form.message.value.trim(),
     });
 
-    const resultText = await response.text();
-    let result;
-    try {
-      result = JSON.parse(resultText);
-    } catch {
-      result = { error: 'Non-JSON response', raw: resultText };
-    }
-
-    if (response.ok) {
-      status.textContent = '✅ Message sent successfully!';
-      form.reset();
-    } else {
-      console.error('[Frontend Error]', result);
-      status.textContent = `❌ ${result.error || 'Failed to send message.'}`;
-    }
+    console.log(result.text);
+    status.textContent = '✅ Message sent successfully!';
+    form.reset();
   } catch (error) {
-    console.error('[Network Error]', error);
+    console.error(error);
     status.textContent = '❌ Failed to send message.';
   }
 });
 </script>
-
-
 
 </body>
 </html>
