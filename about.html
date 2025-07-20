@@ -225,25 +225,104 @@
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
-      <h2 class="text-2xl font-bold text-accent mb-4">Projects</h2>
-      <ul class="list-disc list-inside text-gray-300 font-medium-plus space-y-3">
-        <li><strong>Bioinformatics AI Research (2025):</strong> Built diffusion models for spatial transcriptomics cell segmentation.</li>
-        <li><strong>TeaMWork Internship (2024):</strong> Estimated social return on investment for Green Wira Program.</li>
-        <li><strong>Medical Database Project:</strong> Patient records with OpenAI API integration for summary queries.</li>
-      </ul>
-    </section>
 
-    <!-- Skills -->
-    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-xl">
-      <h2 class="text-2xl font-bold text-accent mb-4">Skills & Certifications</h2>
-      <ul class="list-disc list-inside text-gray-300 font-medium-plus space-y-2">
-        <li><strong>Languages:</strong> Python, R, SQL, JavaScript, Bash, Java</li>
-        <li><strong>Tools:</strong> Tableau, Power BI, Looker Studio, REST APIs, Apps Script</li>
-        <li><strong>Data Science:</strong> ETL, Statistical Modelling, Diffusion Models, NLP, AI, ML</li>
-        <li><strong>Certifications:</strong> IELTS 8.0 (2025), IBM Cybersecurity, CITI Conflicts of Interest (2023–2027)</li>
-      </ul>
+    <!-- Flip Card Skills Section -->
+    <section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur">
+      <h2 class="text-2xl font-bold text-accent mb-8 text-center">Skills & Certifications</h2>
+      <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false] }">
+
+        <!-- Languages Card -->
+        <div class="perspective" @click="flipped[0] = !flipped[0]">
+          <div :class="flipped[0] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
+            <!-- Front -->
+            <div class="absolute inset-0 bg-purple-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
+              Programming Languages
+            </div>
+            <!-- Back -->
+            <div class="absolute inset-0 bg-purple-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+              <ul class="list-disc list-inside space-y-1">
+                <li>Python</li>
+                <li>R</li>
+                <li>SQL</li>
+                <li>JavaScript (Node & Browser)</li>
+                <li>Bash scripting</li>
+                <li>Java (basic)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <style>
+          .perspective {
+            perspective: 1000px;
+          }
+          .preserve-3d {
+            transform-style: preserve-3d;
+          }
+          .backface-hidden {
+            backface-visibility: hidden;
+          }
+          .rotate-y-180 {
+            transform: rotateY(180deg);
+          }
+        </style>
+
+        <!-- Tools Card -->
+        <div class="perspective" @click="flipped[1] = !flipped[1]">
+          <div :class="flipped[1] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
+            <div class="absolute inset-0 bg-blue-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
+              Tools & Platforms
+            </div>
+            <div class="absolute inset-0 bg-blue-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+              <ul class="list-disc list-inside space-y-1">
+                <li>Power BI, Tableau</li>
+                <li>Looker Studio, Excel</li>
+                <li>Google Apps Script</li>
+                <li>REST APIs, JSON/XML</li>
+                <li>Linux CLI, GitHub Actions</li>
+                <li>Firebase, Google Cloud</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Science Card -->
+        <div class="perspective" @click="flipped[2] = !flipped[2]">
+          <div :class="flipped[2] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
+            <div class="absolute inset-0 bg-green-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
+              Data Science & AI
+            </div>
+            <div class="absolute inset-0 bg-green-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+              <ul class="list-disc list-inside space-y-1">
+                <li>ETL & Data Wrangling</li>
+                <li>Diffusion Models (DDPM/DDIM)</li>
+                <li>Machine Learning, NLP</li>
+                <li>Bioinformatics, Spatial Transcriptomics</li>
+                <li>Statistical Modeling</li>
+                <li>Prompt Engineering, LangChain</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications Card -->
+        <div class="perspective" @click="flipped[3] = !flipped[3]">
+          <div :class="flipped[3] ? 'rotate-y-180' : ''" class="relative w-full h-48 transition-transform duration-700 transform-style preserve-3d">
+            <div class="absolute inset-0 bg-yellow-500 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-semibold backface-hidden">
+              Certifications
+            </div>
+            <div class="absolute inset-0 bg-yellow-800 text-white rounded-2xl shadow-xl p-4 text-sm backface-hidden rotate-y-180 overflow-y-auto">
+              <ul class="list-disc list-inside space-y-1">
+                <li>IELTS 8.0 (2025)</li>
+                <li>IBM Cybersecurity</li>
+                <li>CITI Conflict of Interest (2023–2027)</li>
+                <li>Google Data Studio Certification</li>
+                <li>DeepLearning.AI Diffusion Models</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
     <!-- Footer -->
@@ -300,14 +379,14 @@ function carousel() {
     description: 'Focused on bridging foundational computing and mathematics with critical thinking, teamwork, and software design principles.'
   },
   {
-    title: 'Singapore GCE A-Levels',
+    title: 'Singapore-Cambridge GCE A-Levels',
     time: '2018–2019',
     school: 'Tampines Meridian Junior College',
     logo: 'https://tmseatfinder.herokuapp.com/static/tmjc.png',
     description: 'Specialised in Physics, Chemistry, and Math. Developed research skills and presented a project on kidney failure in Singapore.'
   },
   {
-    title: 'Singapore GCE O-Levels',
+    title: 'Singapore-Cambridge GCE O-Levels',
     time: '2013–2017',
     school: 'Ngee Ann Secondary School',
     logo: 'https://ngeeannsec.moe.edu.sg/images/small-school-Logo-No-background-2.png',
