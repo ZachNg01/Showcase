@@ -245,125 +245,15 @@
   </section>
   
 <!-- Contact Section with Formspree integration -->
-<section id="contact" class="bg-gray-800 bg-opacity-80 backdrop-blur py-16 relative">
-  <div class="container mx-auto px-6 lg:w-1/2 animate-fadeIn delay-1200">
-    <h2 class="text-3xl font-bold mb-6 text-center text-white">Contact Me</h2>
+ 
+<form id="contact-form">
+  <input type="text" name="from_name" placeholder="Your Name" required />
+  <input type="email" name="reply_to" placeholder="Your Email" required />
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+<p id="form-status" style="color: white; text-align: center;"></p>
 
-    <form action="https://formspree.io/f/mwpovndw" method="POST" class="space-y-6">
-      <!-- Tell Formspree to send an HTML email -->
-      <input type="hidden" name="_format" value="html" />
-    
-      <!-- Subject line for your notification email -->
-      <input type="hidden" name="_subject" value="New message from my portfolio" />
-    
-      <!--
-        Auto-response HTML:
-        - Uses inline CSS for broad email-client compatibility
-        - Includes buttons for LinkedIn, your Showcase site, and your GitHub
-      -->
-      <input
-        type="hidden"
-        name="_autoresponse"
-        value="<!DOCTYPE html>
-    <html lang='en'>
-    <head>
-      <meta charset='UTF-8'>
-      <title>Thanks for Reaching Out!</title>
-    </head>
-    <body style='margin:0;padding:0;background:#f2f2f2;font-family:Arial,sans-serif;'>
-      <table width='100%' cellpadding='0' cellspacing='0' style='background:#f2f2f2;padding:40px 0;'>
-        <tr>
-          <td align='center'>
-            <table width='600' cellpadding='0' cellspacing='0' style='background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);'>
-              <!-- Header bar -->
-              <tr>
-                <td style='background:#4F46E5;padding:20px;text-align:center;'>
-                  <h1 style='color:#ffffff;font-size:24px;margin:0;'>Thanks for Reaching Out!</h1>
-                </td>
-              </tr>
-              <!-- Body content -->
-              <tr>
-                <td style='padding:30px;color:#333333;line-height:1.5;font-size:16px;'>
-                  <p>Hi there,</p>
-                  <p>Thank you for your message! I appreciate you taking the time to get in touch, and I’ll reply as soon as I can.</p>
-                  <p>In the meantime, feel free to connect with me:</p>
-                  <!-- LinkedIn button -->
-                  <p style='text-align:center;margin:30px 0;'>
-                    <a href='https://www.linkedin.com/in/zach--ng'
-                       style='display:inline-block;padding:12px 24px;background:#4F46E5;color:#ffffff;
-                              text-decoration:none;border-radius:4px;font-weight:bold;'>
-                      Connect on LinkedIn
-                    </a>
-                  </p>
-                  <!-- Showcase & GitHub buttons -->
-                  <p style='text-align:center;margin:20px 0;'>
-                    <a href='https://zachng01.github.io/Showcase/'
-                       style='display:inline-block;padding:10px 20px;background:#10b981;color:#ffffff;
-                              text-decoration:none;border-radius:4px;margin-right:8px;font-weight:bold;'>
-                      View My Showcase
-                    </a>
-                    <a href='https://github.com/ZachNg01'
-                       style='display:inline-block;padding:10px 20px;background:#333333;color:#ffffff;
-                              text-decoration:none;border-radius:4px;font-weight:bold;'>
-                      View My GitHub
-                    </a>
-                  </p>
-                  <p>Looking forward to talking soon!</p>
-                  <p>– Zach</p>
-                </td>
-              </tr>
-              <!-- Footer with portfolio link -->
-              <tr>
-                <td style='background:#f0f0f0;padding:20px;text-align:center;color:#888888;font-size:12px;'>
-                  © 2025 Zach Ng · 
-                  <a href='https://zachng01.github.io/Showcase/' style='color:#888888;text-decoration:underline;'>
-                    Visit my portfolio
-                  </a>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>"
-      />
-    
-      <!-- Tell Formspree which field contains the user's email for replies -->
-      <input type="hidden" name="_replyto" />
-    
-      <!-- User-facing fields -->
-      <div>
-        <label for="name" class="block text-gray-200 mb-2">Name</label>
-        <input type="text" id="name" name="name" required
-               class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
-                      focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"/>
-      </div>
-    
-      <div>
-        <label for="email" class="block text-gray-200 mb-2">Email</label>
-        <input type="email" id="email" name="email" required
-               class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
-                      focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"/>
-      </div>
-    
-      <div>
-        <label for="message" class="block text-gray-200 mb-2">Message</label>
-        <textarea id="message" name="message" rows="5" required
-                  class="w-full px-4 py-2 border border-gray-600 bg-gray-700 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"></textarea>
-      </div>
-    
-      <div class="text-center">
-        <button type="submit"
-                class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold transition">
-          Send Message
-        </button>
-      </div>
-    </form>
-    
-  </div>
-</section>
 
 <!-- Footer -->
 <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
@@ -455,6 +345,41 @@
 
 </script>
 
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const status = document.getElementById('form-status');
+
+    const data = {
+      from_name: form.from_name.value.trim(),
+      reply_to: form.reply_to.value.trim(),
+      message: form.message.value.trim(),
+    };
+
+    status.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('https://showcase-0qvh.onrender.com/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        status.textContent = result.status;
+        form.reset();
+      } else {
+        status.textContent = result.error || '❌ Something went wrong.';
+      }
+    } catch (err) {
+      status.textContent = '❌ Error: ' + err.message;
+    }
+  });
+</script>
 
 </body>
 </html>

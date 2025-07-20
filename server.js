@@ -13,7 +13,7 @@ const port = process.env.PORT || 10000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Helper: Check if the message is career-related using fuzzy matching
+// 📌 Career keyword matcher for Gemini AI
 const isCareerRelated = (message) => {
   const careerKeywords = [
     'career', 'carer', 'carrer', 'carere', 'carrear',
@@ -33,10 +33,10 @@ const isCareerRelated = (message) => {
     'interview tips', 'job hunt', 'resume tips', 'cv tips', 'career options'
   ];
 
-  const lowerMessage = message.toLowerCase();
-  return careerKeywords.some(kw => lowerMessage.includes(kw));
+  return careerKeywords.some(kw => message.toLowerCase().includes(kw));
 };
 
+// ✨ Gemini AI chat route
 app.post('/chat', async (req, res) => {
   const userMessage = req.body.message;
 
@@ -61,10 +61,50 @@ app.post('/chat', async (req, res) => {
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No reply generated.';
     res.json({ reply });
   } catch (err) {
+    console.error('[Gemini Error]', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.get('/', (req, res) => res.send('Gemini proxy is running'));
+// EmailJS endpoint
+app.post('/send-email', async (req, res) => {
+  const { from_name, reply_to, message } = req.body;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+  try {
+    const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_ID,
+        user_id: process.env.EMAILJS_USER_ID,
+        template_params: { from_name, reply_to, message }
+      })
+    });
+
+    const raw = await emailResponse.text();
+
+    try {
+      const json = JSON.parse(raw);
+      if (!emailResponse.ok) {
+        return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
+      }
+      res.json({ status: '✅ Email sent successfully!' });
+    } catch {
+      // Response was plain text (like "OK")
+      if (emailResponse.ok) {
+        return res.json({ status: '✅ Email sent successfully!' });
+      } else {
+        return res.status(500).json({ error: 'EmailJS failed with non-JSON', details: raw });
+      }
+    }
+  } catch (err) {
+    console.error('[EmailJS Error]', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Health check
+app.get('/', (req, res) => res.send('🟢 Gemini & EmailJS server is running'));
+
+app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
