@@ -66,9 +66,7 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// EmailJS proxy route (secure)
-// Route: /send-email
-// EmailJS proxy route
+// ✅ EmailJS proxy route (secure)
 app.post('/send-email', async (req, res) => {
   const { from_name, reply_to, message } = req.body;
 
@@ -84,20 +82,23 @@ app.post('/send-email', async (req, res) => {
       })
     });
 
-    const text = await response.text(); // plain or JSON
+    const text = await response.text();
+    let result;
+
+    try {
+      result = JSON.parse(text); // Try parse as JSON
+    } catch {
+      result = { raw: text }; // Fallback: plain text
+    }
 
     if (response.ok) {
-      return res.json({ status: '✅ Email sent successfully!' });
+      return res.json({ success: true, result });
+    } else {
+      return res.status(500).json({
+        error: result.error || 'EmailJS failed with non-JSON',
+        details: result
+      });
     }
-
-    // Try to parse JSON; fallback to raw text
-    try {
-      const json = JSON.parse(text);
-      return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
-    } catch {
-      return res.status(500).json({ error: 'EmailJS failed with non-JSON', raw: text });
-    }
-
   } catch (err) {
     console.error('[EmailJS Error]', err);
     res.status(500).json({ error: err.message });
