@@ -105,8 +105,8 @@
 
     /* Skillset Section */
     .skills {
-      display: flex; flex-wrap: wrap; gap: 2rem;
-      padding: 2rem; max-width: 1200px; margin: 0 auto 4rem;
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      padding: 1rem; max-width: 1200px; margin: 0 auto 4rem;
     }
     .skill-card {
       flex: 1 1 280px;
@@ -154,8 +154,11 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.8);
     }
     .interest-card h3 {
-      font-size: 1.5rem; color: var(--clr-primary); margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      color: yellow;
+      margin-bottom: 0.5rem;
     }
+
     .interest-card p {
       color: #d1d5db; line-height: 1.5;
     }
@@ -175,7 +178,8 @@
   <!-- Navbar -->
   <header>
     <div class="container px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200">Zach Ng</a>
+      <a href="index.html" class="text-2xl font-bold text-fuchsia-400 hover:text-fuchsia-300">Zach Ng</a>
+
       <nav class="hidden md:flex space-x-8" id="nav-links">
         <a href="index.html">Home</a>
         <a href="zach.html" class="active">About Me</a>
@@ -203,21 +207,22 @@
 
   <!-- About Me Card -->
   <div class="info-card">
-    <h1><b>About Me</b></h1>
+    <h1 class="text-white-400 text-3xl font-bold mb-4">About Me</h1>
     <p>
-      I’m Zach Ng, a Master of Data Science student passionate about turning data into
-      actionable insights. With a background in web development and machine learning,
+      I’m <span class="text-rose-400 font-semibold">Zach Ng</span>, a Master of Data Science student passionate about turning
+      <span class="text-emerald-400 font-semibold">data into actionable insights</span>. With a background in web development and machine learning,
       I enjoy crafting end-to-end solutions that blend elegant UIs with robust analytics.
     </p>
   </div>
 
   <!-- Map Section -->
   <section class="container mx-auto px-6">
-    <h2 class="text-2xl text-center text-indigo-400 mb-4">Where I’ve Been</h2>
+    <h1 class="text-2xl text-center text-fuchsia-400 drop-shadow-md mb-4"><b>Where I’ve Been</b></h1>
+
     <div id="map"></div>
   </section>
 <!-- Interests Section -->
-<h2 class="text-2xl text-center text-indigo-400 mb-4">My Interests</h2>
+<h1 class="text-2xl text-center text-fuchsia-400 drop-shadow-md mb-4"><b>My Interests</b></h1>
 <section class="interests">
   <div class="interest-card">
     <h3>Gaming</h3>
@@ -227,14 +232,14 @@
     </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <dotlottie-player src="https://lottie.host/6f552dad-c788-4cda-82b2-0741da67df6c/hWHotfsFDz.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
   </div>
-  <div class="interest-card">
-    <h3>Badminton</h3>
+    <div class="interest-card">
+    <h3>Web-Development</h3>
     <p>
-      Weekly matches and local tournaments—passionate about speed, agility,
-      and perfecting my smash.
-    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    <dotlottie-player src="https://lottie.host/b170b6c0-e7b9-4b64-840a-5cfcd810724c/R07m7Ebn5z.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+     I enjoy building clean, responsive websites. Turning ideas into interactive tools is my thing.
+    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-player src="https://lottie.host/0167fd7f-b86c-4a3c-8029-30ca89e541ea/pPqUxBxSx8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
   </div>
+  
   <div class="interest-card">
     <h3>Investing</h3>
     <p>
@@ -243,67 +248,30 @@
     </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <dotlottie-player src="https://lottie.host/f6fcc23a-6810-4c7d-91de-6bd33b1216c9/aqY6NLA30V.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
   </div>
-</section>
-  <!-- Skillset Section -->
-  <section class="skills">
-    <!-- Python -->
-    <div class="skill-card">
-      <div class="skill-header">
-        <svg viewBox="0 0 24 24"><path d="M12 0c-..."/></svg>
-        <h3>Python</h3>
-      </div>
-      <div class="skill-body">
-        Experienced in data analysis (Pandas), machine learning (scikit-learn, TensorFlow),
-        and scripting—automating workflows and building ML pipelines.
-      </div>
-    </div>
-    <!-- JavaScript -->
-    <div class="skill-card">
-      <div class="skill-header">
-        <svg viewBox="0 0 24 24"><path d="M6 0h12v24H6z"/></svg>
-        <h3>JavaScript</h3>
-      </div>
-      <div class="skill-body">
-        Proficient in ES6+, React for dynamic UIs, and Node.js for RESTful APIs—crafting
-        full-stack web applications with modern tooling.
-      </div>
-    </div>
-    <!-- SQL -->
-    <div class="skill-card">
-      <div class="skill-header">
-        <svg viewBox="0 0 24 24"><path d="M4 2h16v20H4z"/></svg>
-        <h3>SQL & Databases</h3>
-      </div>
-      <div class="skill-body">
-        Strong SQL skills (PostgreSQL, MySQL), database design, and experience with ORM
-        frameworks—ensuring data integrity at scale.
-      </div>
-    </div>
-    <!-- Data Viz -->
-    <div class="skill-card">
-      <div class="skill-header">
-        <svg viewBox="0 0 24 24"><path d="M2 22h20v-2H2z"/></svg>
-        <h3>Data Visualization</h3>
-      </div>
-      <div class="skill-body">
-        Skilled with Matplotlib, D3.js, and Looker Studio to create interactive dashboards
-        and reports that tell compelling stories.
-      </div>
-    </div>
-    <!-- Automation -->
-    <div class="skill-card">
-      <div class="skill-header">
-        <svg viewBox="0 0 24 24"><path d="M12 4l4 4-4 4-4-4z"/></svg>
-        <h3>Automation</h3>
-      </div>
-      <div class="skill-body">
-        Building end-to-end automation using Python scripts and Microsoft Power Automate—
-        streamlining tasks, orchestrating workflows, and boosting productivity.
-      </div>
-    </div>
   </section>
-
-  
+<section class="interests">
+  <div class="interest-card">
+    <h3>Anime & Manga</h3>
+    <p>
+     Always enjoy a great story that blend strong storytelling with unique art styles. Favorites include <b>Silent Voice,  Dandadan, and One Piece</b>.
+    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-player src="https://lottie.host/f5275dc0-cf94-44c0-9686-cb4ce81ebf4f/x0jb4rVsS8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+  <div class="interest-card">
+    <h3>Foodie</h3>
+    <p>
+      I love exploring local eats and street food. Always on the hunt for new flavours and hidden gems.
+    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-player src="https://lottie.host/2388af6f-64b3-4fd4-a178-d222e2d7524e/yKpmxCTMES.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+<div class="interest-card">
+    <h3>Badminton</h3>
+    <p>
+      Always up for a friendly game. Been eyeing on pickle-ball recently.
+    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/b170b6c0-e7b9-4b64-840a-5cfcd810724c/R07m7Ebn5z.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+  </div>
+</section>
 
   <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
     <span>&copy; 2025 Zach Ng</span>
@@ -389,12 +357,18 @@
       // Locations & tooltips
       const places = [
         { name:'Kuala Lumpur, Malaysia', coords:[3.1390,101.6869], note:'Where I was born' },
-        { name:'Singapore', coords:[1.3521,103.8198], note:'Grew up here from 2011 to 2020' },
-        { name:'New Delhi, India', coords:[28.6139,77.2090], note:'Spent my childhood here from 2007 to 2011' },
-        { name:'Tokyo, Japan', coords:[35.6895,139.6917], note:"Visited multiple times as I am foud of their food & culture" },
+        { name:'Singapore', coords:[1.3521,103.8198], note:'Grew up here from 2011 to 2020' },
+        { name:'New Delhi, India', coords:[28.6139,77.2090], note:'Spent my childhood here from 2007 to 2011' },
+        { name:'Tokyo, Japan', coords:[35.6895,139.6917], note:"Visited multiple times — I love the food & culture" },
         { name:'Abu Dhabi, UAE', coords:[24.4539,54.3773], note:'Family currently lives & works here' },
-        { name:'Melbourne, Australia', coords:[-37.8136,144.9631], note:'Currently based here' }
+        { name:'Melbourne, Australia', coords:[-37.8136,144.9631], note:'Currently based here' },
+        { name:'Seoul, South Korea', coords:[37.5665,126.9780], note:'Loved the street food and modern design culture' },
+        { name:'Bangkok, Thailand', coords:[13.7563,100.5018], note:'Enjoyed night markets and Thai cuisine' },
+        { name:'London, UK', coords:[51.5072,-0.1276], note:'Fascinated by the museums and historic sites' },
+        { name:'Paris, France', coords:[48.8566,2.3522], note:'Admired the art, architecture, and pastries' },
+        { name:'Taipei, Taiwan', coords:[25.0330,121.5654], note:'Night markets, bubble tea, and friendly locals' }
       ];
+
       const homeIcon = L.divIcon({
         html: `<div style="
           font-size:24px;
