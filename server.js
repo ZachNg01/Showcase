@@ -46,7 +46,7 @@ app.post('/chat', async (req, res) => {
 
   try {
     const geminiResponse = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + process.env.GEMINI,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -66,7 +66,7 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// EmailJS endpoint
+// EmailJS proxy route (secure)
 app.post('/send-email', async (req, res) => {
   const { from_name, reply_to, message } = req.body;
 
@@ -88,7 +88,6 @@ app.post('/send-email', async (req, res) => {
       return res.json({ status: '✅ Email sent successfully!' });
     }
 
-    // If not ok, try to parse error
     try {
       const json = JSON.parse(raw);
       return res.status(500).json({ error: json.message || 'EmailJS error', details: json });
@@ -101,8 +100,6 @@ app.post('/send-email', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 
 // Health check
 app.get('/', (req, res) => res.send('🟢 Gemini & EmailJS server is running'));

@@ -245,6 +245,7 @@
   </section>
   
 <!-- Contact Section with Formspree integration -->
+ <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
  
 <section id="contact" class="py-20 px-6 bg-gray-900 text-white">
   <div class="max-w-2xl mx-auto text-center">
@@ -372,41 +373,49 @@
   });
 
 </script>
-
 <script>
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.target;
   const status = document.getElementById('form-status');
 
-  const data = {
-    from_name: form.from_name.value.trim(),
-    reply_to: form.reply_to.value.trim(),
-    message: form.message.value.trim(),
-  };
-
-  status.textContent = 'Sending...';
+  status.textContent = '📨 Sending...';
 
   try {
-    const res = await fetch('https://showcase-0qvh.onrender.com/send-email', {
+    const response = await fetch('https://showcase-0qvh.onrender.com/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        from_name: form.from_name.value.trim(),
+        reply_to: form.reply_to.value.trim(),
+        message: form.message.value.trim()
+      })
     });
 
-    const result = await res.json();
-    if (res.ok) {
-      status.textContent = result.status;
+    let resultText = await response.text();
+    let result;
+
+    try {
+      result = JSON.parse(resultText);
+    } catch {
+      result = { error: 'Non-JSON response from server', raw: resultText };
+    }
+
+    if (response.ok) {
+      status.textContent = '✅ Message sent successfully!';
       form.reset();
     } else {
-      status.textContent = result.error || '❌ Something went wrong.';
+      console.error('[Frontend Error]', result);
+      status.textContent = `❌ ${result.error || 'Failed to send message.'}`;
     }
-  } catch (err) {
-    status.textContent = '❌ Error: ' + err.message;
+  } catch (error) {
+    console.error('[Network Error]', error);
+    status.textContent = '❌ Failed to send message.';
   }
 });
 
 </script>
+
 
 </body>
 </html>
