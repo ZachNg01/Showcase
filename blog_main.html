@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="DghrFVx5WV0l3pr_CFkNWWzStNfYTbAu_dbMzQH_93I" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home – Zach Ng</title>
+  <meta name="description" content="News, Throughts and Ideas written by the owner of the Site, Zach Ng.">
+  <meta name="keywords" content="Zach Ng, Data Scientist, Developer, Portfolio, Machine Learning, Career Tools, AI, Web Development, Bioinformatics, Blog">
+  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1fGm6FfSaGAGQhQmAz04Uj3EOl6RulD0G&sz=w1000">
+
+  <meta name="author" content="Zach Ng">
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="News, Throughts and Ideas written by the owner of the Site, Zach Ng.">
+  <meta property="og:description" content="Explore AI projects, dashboards, and career tools. Built with passion by Zach Ng.">
+  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1fGm6FfSaGAGQhQmAz04Uj3EOl6RulD0G&sz=w1000">
+  <meta property="og:url" content="https://zachng01.github.io/Showcase/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zach Ng – Data Scientist & Developer Portfolio">
+  <meta name="twitter:description" content="Explore AI projects, dashboards, and career tools. Built with passion by Zach Ng.">
+  <meta name="twitter:image" content="https://drive.google.com/thumbnail?id=1fGm6FfSaGAGQhQmAz04Uj3EOl6RulD0G&sz=w1000">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <title>Home – Zach Ng</title>
+  <!-- Tailwind CSS CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <!-- tsParticles for animated background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
+    }
+    #tsparticles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+    }
+    /* Animated gradient overlay for tech vibe */
+    .gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+      animation: overlayRotate 10s linear infinite;
+      pointer-events: none;
+      z-index: -5;
+    }
+    @keyframes overlayRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <style>
+  .carousel-track {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    animation: scroll-x 40s linear infinite;
+  }
+
+  @keyframes scroll-x {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+
+  
+</style>
+<!-- Page Loader -->
+ 
+
+</head>
+<body class="relative text-gray-800 bg-gray-900">
+  <!-- Particles Background -->
+  <div id="tsparticles"></div>
+  <canvas class="gradient-overlay"></canvas>
+
+  <!-- Navbar -->
+  <header class="bg-white bg-opacity-20 backdrop-blur fixed w-full z-50 shadow">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
+      <nav>
+        <ul id="nav-links" class="hidden md:flex space-x-8">
+          <li><a href="index.html" class="text-gray-200 hover:text-white font-medium">Home</a></li>
+          <li><a href="zach.html" class="text-gray-200 hover:text-white font-medium">About Me</a></li>          
+          <li><a href="about.html" class="text-gray-200 hover:text-white font-medium">My Skillset</a></li>
+          <li><a href="skills.html" class="text-gray-200 hover:text-white font-medium">My Projects</a></li>
+          <li><a href="skills.html" class="text-gray-200 hover:text-white font-medium">My Projects</a></li>
+          <li><a href="blog_main.html" class="text-gray-200 hover:text-white font-medium">Blog</a></li>
+
+        </ul>
+        <button id="burger" class="md:hidden focus:outline-none text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-gray-800 bg-opacity-90 backdrop-blur fixed top-16 inset-x-0 shadow-lg z-40 hidden">
+    <ul class="flex flex-col space-y-2 p-4 text-gray-200">
+      <li><a href="index.html" class="block font-medium">Home</a></li>
+      <li><a href="zach.html" class="block font-medium">About Me</a></li>
+      <li><a href="about.html" class="block font-medium">My Skillset</a></li>
+
+      <li><a href="skills.html" class="block font-medium">My Projects</a></li>
+      <li><a href="blog_main.html" class="block font-medium">Blog</a></li>
+    </ul>
+  </div>
+
+
+  
+<!-- Footer -->
+<footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+  <span>&copy; 2025 Zach Ng</span>
+  <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-1 hover:text-indigo-400 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
+    </svg>
+    Email Me
+  </a>
+  <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="flex items-center gap-1 hover:text-indigo-400 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+      <path d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.3 20h-3v-11h3v11zm-1.5-12.3c-1 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7c0 .9-.7 1.7-1.7 1.7zm13.3 12.3h-3v-5.6c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8v5.7h-3v-11h3v1.5c.4-.7 1.2-1.7 2.9-1.7 2.1 0 3.5 1.4 3.5 4.3v6.9z"/>
+    </svg>
+    LinkedIn
+  </a>
+</footer>
+
+
+<!-- Scripts -->
+<script>
+  /* Initialize tsParticles background */
+  tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    background: { color: "#000" },
+    particles: {
+      number: { value: 80, density: { enable: true, area: 800 } },
+      color: { value: "#888" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: { min: 1, max: 3 } },
+      links: { enable: true, distance: 150, color: "#888", opacity: 0.4, width: 1 },
+      move: { enable: true, speed: 1, direction: "none", outMode: "bounce" }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "grab" },
+        onClick: { enable: true, mode: "push" }
+      },
+      modes: { grab: { distance: 200 }, push: { quantity: 4 } }
+    },
+    detectRetina: true
+  });
+
+  // Mobile menu toggle: show/hide menu on burger click
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Fade-in animations: adds classes to trigger Tailwind transitions
+  document.querySelectorAll('.animate-fadeInUp').forEach((el, i) => {
+    setTimeout(() => el.classList.add('opacity-100', 'translate-y-0'), i * 200);
+  });
+
+  // Active nav link indicator: underline current page link
+  const currentUrl = window.location.href;
+  document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+    if (link.href === currentUrl) {
+      link.classList.add('text-white', 'border-b-2', 'border-indigo-400');
+    }
+  });
+  
+</script>
+
+<script>
+  const container = document.querySelector('.carousel-track');
+  const template = document.getElementById('carousel-items');
+
+  // Duplicate logos to enable smooth infinite scroll
+  for (let i = 0; i < 2; i++) {
+    const nodes = template.content.cloneNode(true);
+    container.appendChild(nodes);
+  }
+
+    // Remove loader on page load
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('page-loader');
+    loader.classList.add('opacity-0');
+    setTimeout(() => loader.remove(), 700);
+  });
+
+  // AOS scroll animations
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+
+</script>
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const status = document.getElementById('form-status');
+
+  status.textContent = 'Sending...';
+
+  try {
+    const result = await emailjs.send('service_hx8xto2', 'template_t86asmh', {
+      from_name: form.from_name.value.trim(),
+      reply_to: form.reply_to.value.trim(),
+      message: form.message.value.trim(),
+    });
+
+    console.log(result.text);
+    status.textContent = '✅ Message sent successfully!';
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    status.textContent = '❌ Failed to send message.';
+  }
+});
+</script>
+
+</body>
+</html>
