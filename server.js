@@ -110,3 +110,44 @@ app.post('/send-email', async (req, res) => {
 app.get('/', (req, res) => res.send('🟢 Gemini & EmailJS server is running'));
 
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
+
+
+// 🏡 Microburbs Property Proxy Route (with NaN fix)
+app.get('/api/properties', async (req, res) => {
+  const suburb = req.query.suburb || 'Belmont North';
+  const url = `https://www.microburbs.com.au/report_generator/api/suburb/properties?suburb=${encodeURIComponent(suburb)}`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer test',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const rawText = await response.text();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: 'Microburbs API error', details: rawText });
+    }
+
+    // 🧼 Sanitize invalid JSON tokens before parsing
+    const safeText = rawText
+      .replace(/\bNaN\b/g, 'null')
+      .replace(/\bInfinity\b/g, 'null')
+      .replace(/\b-Infinity\b/g, 'null');
+
+    let data;
+    try {
+      data = JSON.parse(safeText);
+    } catch (err) {
+      console.error('[JSON Parse Error]', err);
+      return res.status(500).json({ error: 'Failed to parse Microburbs data', details: err.message });
+    }
+
+    res.json(data);
+  } catch (err) {
+    console.error('[Microburbs Error]', err);
+    res.status(500).json({ error: 'Failed to fetch Microburbs data', details: err.message });
+  }
+});

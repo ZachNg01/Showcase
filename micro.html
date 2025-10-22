@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Insights Dashboard | Zach Ng</title>
+
+  <!-- Tailwind & fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body,html{margin:0;padding:0;height:100%;font-family:'Noto Sans JP',sans-serif;color:#eee;background:#111;overflow-x:hidden;}
+    #tsparticles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-10;}
+    .gradient-overlay{position:fixed;inset:0;z-index:-5;background:linear-gradient(45deg,rgba(79,70,229,.15),rgba(16,185,129,.15),rgba(139,92,246,.15));animation:spin 30s linear infinite;}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    header{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);position:fixed;top:0;width:100%;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+    nav a{color:#000;font-weight:500;transition:color .3s;}
+    nav a:hover,nav a.active{color:#3111e7;}
+    #mobile-menu{background:rgba(31,41,55,0.9);backdrop-filter:blur(8px);}
+    #map{height:400px;border-radius:1rem;}
+    .highlight{border:2px solid #60a5fa;box-shadow:0 0 12px #60a5fa;}
+  </style>
+</head>
+<body class="p-6">
+  <div id="tsparticles"></div>
+  <div class="gradient-overlay"></div>
+
+  <!-- Navbar (same as About page, no added item) -->
+  <header>
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-fuchsia-400 hover:text-fuchsia-300">Zach Ng</a>
+      <nav class="hidden md:flex space-x-8" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="zach.html">About Me</a>
+        <a href="about.html">My Skillset</a>
+        <a href="skills.html">My Projects</a>
+        <a href="blog_main.html">My Updates</a>
+      </nav>
+      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 z-40">
+    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur p-4 space-y-2 text-gray-200">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="zach.html">About Me</a></li>
+      <li><a href="about.html">My Skillset</a></li>
+      <li><a href="skills.html">My Projects</a></li>
+      <li><a href="blog_main.html">My Updates</a></li>
+    </ul>
+  </div>
+
+  <!-- Page content -->
+  <div class="mt-24">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-400">🏡 Microburbs Property Dashboard</h1>
+
+    <!-- Search -->
+    <div class="flex justify-center mb-4">
+      <input id="suburbInput" type="text" placeholder="Enter suburb e.g. Belmont North"
+        class="border border-gray-300 rounded-l-lg p-2 w-1/2 focus:outline-none text-black" />
+      <button id="fetchBtn" class="bg-blue-600 text-white px-4 rounded-r-lg hover:bg-blue-700">Search</button>
+    </div>
+
+    <!-- Map -->
+    <div id="map" class="mb-6 shadow-md"></div>
+
+    <!-- Stats + Results -->
+    <div id="stats" class="text-center text-gray-300 mb-4"></div>
+    <div id="results" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+
+  <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full">
+    &copy; 2025 Zach Ng • Built with Tailwind & Leaflet
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Particles + mobile menu
+    tsParticles.load('tsparticles',{fpsLimit:60,particles:{number:{value:80},color:{value:['#4F46E5','#10b981','#8B5CF6']},shape:{type:['circle','triangle','star']},opacity:{value:.4},size:{value:{min:1,max:5}},move:{enable:true,speed:2,outModes:{default:'bounce'}}}});
+    document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+  </script>
+
+  <script>
+    const btn=document.getElementById("fetchBtn");
+    const suburbInput=document.getElementById("suburbInput");
+    const resultsDiv=document.getElementById("results");
+    const statsDiv=document.getElementById("stats");
+
+    const map=L.map("map").setView([-33.016,151.67],13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:'&copy; OpenStreetMap'}).addTo(map);
+
+    btn.addEventListener("click",async()=>{
+      const suburb=suburbInput.value.trim()||"Belmont North";
+      resultsDiv.innerHTML="<p class='text-center text-gray-400'>Loading data...</p>";
+      statsDiv.textContent="";
+      try{
+        const proxy="https://corsproxy.io/?";
+        const url=`https://www.microburbs.com.au/report_generator/api/suburb/properties?suburb=${encodeURIComponent(suburb)}`;
+        const res=await fetch(proxy+encodeURIComponent(url),{headers:{"Authorization":"Bearer test","Content-Type":"application/json"}});
+        const raw=await res.text();
+        const safe=raw.replace(/\bNaN\b/g,"null").replace(/\bInfinity\b/g,"null").replace(/\b-Infinity\b/g,"null");
+        const data=JSON.parse(safe);
+        const results=data.results||[];
+        resultsDiv.innerHTML="";
+        map.eachLayer(l=>{if(l instanceof L.Marker)map.removeLayer(l)});
+        if(!results.length){resultsDiv.innerHTML=`<p class='text-center text-red-400'>No listings found for ${suburb}.</p>`;return;}
+        const avg=Math.round(results.reduce((a,b)=>a+(b.price||0),0)/results.length);
+        statsDiv.innerHTML=`<p class="font-semibold text-lg">Found <span class="text-blue-400">${results.length}</span> properties in <span class="text-blue-400">${suburb}</span>. Average price ≈ <span class="text-green-400">$${avg.toLocaleString()}</span></p>`;
+
+        // Map marker + card rendering
+        results.forEach((p,idx)=>{
+          const {area_name,attributes,price,listing_date,coordinates,property_type}=p;
+          const priceStr=price?`$${price.toLocaleString()}`:"N/A";
+          const coords=[coordinates.latitude,coordinates.longitude];
+          const directions=`https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}`;
+
+          // Card HTML
+          const card=document.createElement("div");
+          card.className="bg-gray-900/80 rounded-xl shadow hover:shadow-lg transition p-4";
+          card.id=`card-${idx}`;
+          card.innerHTML=`
+            <h2 class="text-xl font-bold text-indigo-300 mb-2">${area_name}</h2>
+            <p class="text-sm text-gray-400 mb-1">${property_type} • ${attributes.bedrooms||'?'} 🛏 • ${attributes.bathrooms||'?'} 🛁 • ${attributes.garage_spaces||0} 🚗</p>
+            <p class="text-blue-400 font-semibold mb-1">${priceStr}</p>
+            <p class="text-xs text-gray-500 mb-2">Listed ${listing_date}</p>
+            <div class="description hidden text-sm text-gray-300 mb-2">${attributes.description?.replace(/\n/g,'<br>')||'No description available'}</div>
+            <div class="flex justify-between items-center">
+              <button class="text-indigo-400 hover:text-indigo-200 text-sm underline read-more">Read More</button>
+              <a href="${directions}" target="_blank" class="text-green-400 hover:text-green-200 text-sm underline">Get Directions</a>
+            </div>`;
+          resultsDiv.appendChild(card);
+
+          // Marker + tooltip linking
+          const marker=L.marker(coords).addTo(map);
+          const tooltipHtml=`<strong>${area_name}</strong><br>${priceStr}<br>${property_type}<br>
+            <a href='${directions}' target='_blank' style='color:#4ade80;text-decoration:underline'>Get Directions</a>`;
+          marker.bindTooltip(tooltipHtml);
+          marker.on('click',()=>{
+            const el=document.getElementById(`card-${idx}`);
+            if(el){
+              el.scrollIntoView({behavior:'smooth',block:'center'});
+              document.querySelectorAll('.highlight').forEach(c=>c.classList.remove('highlight'));
+              el.classList.add('highlight');
+              setTimeout(()=>el.classList.remove('highlight'),2000);
+            }
+          });
+
+          // Read more toggle
+          card.querySelector('.read-more').addEventListener('click',()=>{
+            const desc=card.querySelector('.description');
+            desc.classList.toggle('hidden');
+          });
+        });
+        map.fitBounds(L.latLngBounds(results.map(p=>[p.coordinates.latitude,p.coordinates.longitude])));
+      }catch(e){
+        console.error(e);
+        resultsDiv.innerHTML="<p class='text-center text-red-400'>Error loading data.</p>";
+      }
+    });
+    btn.click();
+  </script>
+</body>
+</html>
