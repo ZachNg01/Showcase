@@ -127,128 +127,154 @@
       </p>
       <div class="flex justify-center gap-4">
         <a href="https://linkedin.com/in/zach--ng" target="_blank" class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
-        <a href="https://drive.google.com/uc?export=download&id=1kXVEmKtFzmFU4MOE-3paTtwlHPlRfduy" download class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fas fa-download mr-2"></i>Download CV</a>
+        <a href="https://drive.google.com/file/d/1Hyc4SX6T4pokgvk7T7pegPqxt7fdPx2B/view?usp=sharing" download class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fas fa-download mr-2"></i>Download CV</a>
       </div>
     </section>
 
-<!-- Alpine Education Timeline Section -->
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-<!-- Add this in your main HTML -->
-<section 
-  class="bg-gradient-to-br from-[#2a215d] to-[#1e1b4b] p-8 rounded-3xl shadow-xl text-white relative overflow-hidden"
-  x-data="carousel()"
-  x-init="startAutoScroll"
->
-<div class="relative max-w-4xl mx-auto" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
-  <!-- Direction Labels -->
-  <div class="flex justify-between text-xs text-purple-300 mb-1 px-2">
-    <span>Most recent</span>
-    <span>Earliest</span>
-  </div>
-
-  <!-- Arrows -->
-  <button @click="prev" title="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-20">
-    <i class="fas fa-chevron-left text-white"></i>
-  </button>
-  <button @click="next" title="Next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-20">
-    <i class="fas fa-chevron-right text-white"></i>
-  </button>
-
-  <!-- Slide Container -->
-  <div class="overflow-hidden rounded-xl">
-    <div 
-      class="flex transition-transform duration-700 ease-in-out"
-      :style="`transform: translateX(-${current * 100}%);`"
-      @touchstart="handleTouchStart"
-      @touchmove="handleTouchMove"
-      @touchend="handleTouchEnd"
-    >
-
-      <template x-for="(step, index) in steps" :key="index">
-        <div class="min-w-full p-6">
-          <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 text-center h-full flex flex-col justify-between">
-            <div>
-              <img 
-                :src="step.logo" 
-                alt="School logo" 
-                class="h-16 mx-auto mb-4 object-contain transition-transform duration-300 hover:scale-110"
-              />
-              <h3 class="text-2xl font-bold text-white mb-1" x-text="step.title"></h3>
-              <p class="text-purple-300 text-lg font-medium mb-2" x-text="step.time"></p>
-              <p class="text-gray-300 mb-4" x-text="step.school"></p>
-            </div>
-            <p class="text-sm text-gray-200 leading-relaxed" x-text="step.description"></p>
-          </div>
-
-        </div>
-      </template>
-    </div>
-  </div>
-
-  <!-- Dot Indicators -->
-  <div class="flex justify-center mt-6 space-x-2">
-    <template x-for="(step, index) in steps" :key="'dot-' + index">
-      <div 
-        @click="current = index"
-        class="w-3 h-3 rounded-full transition-all duration-300 cursor-pointer"
-        :class="{
-          'bg-purple-400 scale-125 shadow': current === index,
-          'bg-purple-700': current !== index
-        }"
-      ></div>
-    </template>
-  </div>
-</div>
-
-</section>
-
-
-
-
 <!-- Work Experience Carousel Section -->
-<section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur text-white" x-data="experienceCarousel()" x-init="startAutoScroll">
-  <h2 class="text-3xl font-bold text-accent mb-8 text-center">Work Experience</h2>
+<section class="work-section p-6 md:p-8 rounded-3xl shadow-2xl bg-white/10 backdrop-blur text-white border border-white/10" x-data="experienceCarousel()" x-init="startAutoScroll">
+  <div class="text-center mb-8">
+    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Career Timeline</p>
+    <h2 class="text-3xl md:text-4xl font-bold text-accent">Work Experience</h2>
+    <p class="text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+      A snapshot of Zach's experience across operations, analytics, growth marketing, web development, and technical automation.
+    </p>
+  </div>
 
   <!-- Carousel Container -->
-  <div class="relative max-w-4xl mx-auto overflow-hidden">
+  <div class="relative max-w-5xl mx-auto overflow-hidden" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
     <!-- Arrows -->
-    <button @click="prev" title="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-10">
+    <button @click="prev" title="Previous role" class="work-arrow left-1 md:left-2">
       <i class="fas fa-chevron-left text-white"></i>
     </button>
-    <button @click="next" title="Next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600 hover:bg-purple-500 rounded-full p-2 z-10">
+    <button @click="next" title="Next role" class="work-arrow right-1 md:right-2">
       <i class="fas fa-chevron-right text-white"></i>
     </button>
 
     <!-- Slides -->
-    <div class="flex transition-all duration-700 ease-out" :style="`transform: translateX(-${current * 100}%);`">
+    <div class="flex transition-transform duration-700 ease-out" :style="`transform: translateX(-${current * 100}%);`">
       <template x-for="(job, index) in jobs" :key="index">
-        <div class="min-w-full px-6">
-          <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-xl h-full flex flex-col justify-between">
-            <div>
-              <h3 class="text-xl font-bold mb-1" x-text="job.title"></h3>
-              <p class="text-sm text-purple-300 mb-3" x-text="job.company"></p>
-              <ul class="list-disc pl-5 text-gray-300 space-y-1">
-                <template x-for="point in job.bullets" :key="point">
-                  <li x-text="point"></li>
+        <div class="min-w-full px-8 md:px-12">
+          <article class="experience-card group">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-5">
+              <div class="flex items-start gap-4">
+                <div class="work-icon">
+                  <i :class="job.icon"></i>
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-[0.2em] text-purple-300 mb-2" x-text="job.period"></p>
+                  <h3 class="text-2xl font-bold text-white leading-tight" x-text="job.title"></h3>
+                  <p class="text-sm md:text-base text-purple-200 mt-2" x-text="job.company"></p>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2 md:justify-end">
+                <template x-for="tag in job.tags" :key="tag">
+                  <span class="skill-pill" x-text="tag"></span>
                 </template>
-              </ul>
+              </div>
             </div>
-          </div>
+
+            <ul class="space-y-3 text-gray-200 leading-relaxed">
+              <template x-for="point in job.bullets" :key="point">
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-purple-300 flex-shrink-0"></span>
+                  <span x-text="point"></span>
+                </li>
+              </template>
+            </ul>
+          </article>
         </div>
       </template>
     </div>
   </div>
 
   <!-- Dot Indicators -->
-  <div class="flex justify-center mt-6 space-x-2">
+  <div class="flex justify-center mt-7 space-x-2">
     <template x-for="(job, index) in jobs" :key="'dot-' + index">
-      <div @click="current = index" class="w-3 h-3 rounded-full cursor-pointer transition-all duration-300"
-        :class="{ 'bg-purple-400 scale-125': current === index, 'bg-purple-700': current !== index }">
-      </div>
+      <button @click="current = index" class="h-2.5 rounded-full cursor-pointer transition-all duration-300"
+        :class="current === index ? 'bg-purple-300 w-8 shadow-lg shadow-purple-500/30' : 'bg-purple-800 w-2.5 hover:bg-purple-500'"
+        :aria-label="`Go to ${job.title}`">
+      </button>
     </template>
   </div>
 </section>
+
+<!-- Work Experience Styling -->
+<style>
+  .work-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .work-section::before {
+    content: "";
+    position: absolute;
+    inset: -35% auto auto -20%;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(183, 148, 244, 0.24), transparent 65%);
+    pointer-events: none;
+  }
+  .experience-card {
+    min-height: 360px;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+      radial-gradient(circle at top right, rgba(183, 148, 244, 0.18), transparent 35%);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+  }
+  .work-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.95), rgba(79, 70, 229, 0.9));
+    box-shadow: 0 12px 30px rgba(109, 40, 217, 0.35);
+    flex-shrink: 0;
+  }
+  .skill-pill {
+    font-size: 0.72rem;
+    line-height: 1rem;
+    color: #ede9fe;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid rgba(221, 214, 254, 0.28);
+    background: rgba(91, 33, 182, 0.28);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .work-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 999px;
+    background: rgba(124, 58, 237, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .work-arrow:hover {
+    background: rgba(168, 85, 247, 0.95);
+    transform: translateY(-50%) scale(1.06);
+  }
+  @media (max-width: 640px) {
+    .experience-card {
+      min-height: 450px;
+      padding: 1.35rem;
+    }
+    .work-icon {
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+  }
+</style>
 
 <!-- Alpine Carousel Script -->
 <script>
@@ -258,49 +284,75 @@ function experienceCarousel() {
     interval: null,
     jobs: [
       {
-        title: 'Remote Freelance IT Specialist',
-        company: 'Self-Employed · Melbourne CBD, Australia · Jul 2024 – Present',
+        title: 'Operations Support Specialist',
+        company: 'Uber · Rider Operations / Membership · ANZ · 2026 – Present',
+        period: '2026 – Present',
+        icon: 'fas fa-route',
+        tags: ['Operations', 'SQL', 'Dashboards'],
         bullets: [
-          'Providing consultation services and automating business processes using Google Apps Script, Zapier, etc.',
-          'Optimizing websites (e.g., Wix) for user experience and performance.',
-          'Running Meta Ads and Google Ads with performance tracking via Google Analytics.'
+          'Support Uber One membership growth initiatives across ANZ through campaign setup, testing, execution, and quality control.',
+          'Use SQL and dynamic Google Sheets dashboards to surface insights on subscription rates, rideshare usage, and campaign performance.',
+          'Work with cross-functional teams to identify product, pricing, and CRM opportunities that improve member engagement and usage.'
+        ]
+      },
+      {
+        title: 'Geographical Data Collector',
+        company: 'Crossmark / Retail Data Acquisition Services · Melbourne · Aug 2025 – Present',
+        period: 'Aug 2025 – Present',
+        icon: 'fas fa-location-dot',
+        tags: ['Field Data', 'QA', 'Retail'],
+        bullets: [
+          'Collect and validate location-based retail data across assigned Melbourne areas to support accurate geographic and commercial datasets.',
+          'Maintain high data quality by following structured collection workflows, checking inconsistencies, and submitting timely updates.',
+          'Apply strong attention to detail and route planning to complete field assignments efficiently across changing retail environments.'
+        ]
+      },
+      {
+        title: 'Freelance Marketing Campaign Assistant',
+        company: 'Marketlytics · Remote / Perth · Jul 2025 – Present',
+        period: 'Jul 2025 – Present',
+        icon: 'fas fa-chart-line',
+        tags: ['Meta Ads', 'GA4', 'Reporting'],
+        bullets: [
+          'Assist with paid media campaign strategy and execution across Meta Ads, supporting audience targeting, creative testing, and optimisation.',
+          'Track marketing performance using Google Analytics and campaign dashboards to monitor traffic, conversions, and engagement trends.',
+          'Prepare performance reports and A/B testing insights to help improve campaign efficiency and client decision-making.'
+        ]
+      },
+      {
+        title: 'Web Developer Intern',
+        company: 'Oak Leaf Institute · Melbourne CBD · Aug 2025 – Sep 2025',
+        period: 'Aug 2025 – Sep 2025',
+        icon: 'fas fa-code',
+        tags: ['WordPress', 'SEO', 'APIs'],
+        bullets: [
+          'Updated and maintained WordPress website content, improving page structure, usability, and consistency across key site sections.',
+          'Conducted SEO research and implemented on-page improvements to support discoverability, content quality, and search performance.',
+          'Built and adjusted HTML, CSS, JavaScript, and API integrations while contributing to social media and digital content workflows.'
         ]
       },
       {
         title: 'Data Analyst',
-        company: 'IIPM Pty Ltd · Melbourne CBD, Australia · Mar 2024 – Jul 2024',
+        company: 'IIPM Pty Ltd · Melbourne CBD · Oct 2023 – Jul 2024',
+        period: 'Oct 2023 – Jul 2024',
+        icon: 'fas fa-database',
+        tags: ['Power BI', 'Looker', 'ETL'],
         bullets: [
-          'Cleaned and consolidated 6.5M+ records to support business strategy.',
-          'Built interactive dashboards using Looker Studio and Excel.',
-          'Automated ETL workflows, cutting 80% manual effort.',
-          'Worked closely with stakeholders to tailor analytical solutions.',
-          'Maintained data integrity and report consistency.'
-        ]
-      },
-      {
-        title: 'Receptionist',
-        company: 'IIPM Pty Ltd · Melbourne CBD, Australia · Oct 2023 – Dec 2023',
-        bullets: [
-          'Maintained student records with 100% audit accuracy.',
-          'Resolved platform/IT issues and documented SOPs.'
+          'Gathered client requirements across housing and energy sector projects, translating business needs into analytical reporting outputs.',
+          'Built dashboards in Power BI and Looker Studio to communicate trends, operational metrics, and insights for stakeholder decisions.',
+          'Cleaned, transformed, and consolidated datasets while maintaining reporting consistency, data integrity, and repeatable analysis workflows.'
         ]
       },
       {
         title: 'IT Intern',
         company: 'Nera Telecommunications · Petaling Jaya, Malaysia · Dec 2023 – Mar 2024',
+        period: 'Dec 2023 – Mar 2024',
+        icon: 'fas fa-screwdriver-wrench',
+        tags: ['Apps Script', 'APIs', 'Automation'],
         bullets: [
-          'Integrated BoldDesk, BoldSign, Sophos via Apps Script APIs.',
-          'Created Looker Studio dashboards for software adoption.',
-          'Enabled cross-department communication on reporting needs.'
-        ]
-      },
-      {
-        title: 'Data Science Intern',
-        company: 'KPMG Virtual Internship · Remote · Sep 2023',
-        bullets: [
-          'Simulated advisory for customer targeting strategy.',
-          'Prepared visual report with actionable recommendations.',
-          'Built dashboards to present findings clearly.'
+          'Developed a visitor registry using JavaScript and SQL to support internal tracking, data entry, and operational record keeping.',
+          'Integrated Power Automate workflows with BoldDesk to streamline support processes and reduce repetitive administrative steps.',
+          'Worked with Sophos Central API integrations to support security reporting, system visibility, and cross-team technical communication.'
         ]
       }
     ],
@@ -311,94 +363,202 @@ function experienceCarousel() {
       this.current = (this.current - 1 + this.jobs.length) % this.jobs.length;
     },
     startAutoScroll() {
-      this.interval = setInterval(() => this.next(), 6000);
+      this.stopAutoScroll();
+      this.interval = setInterval(() => this.next(), 6500);
     },
     stopAutoScroll() {
-      clearInterval(this.interval);
+      if (this.interval) clearInterval(this.interval);
     }
   };
 }
 </script>
 
+<!-- Alpine Education Timeline Section -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+<section class="education-section p-6 md:p-8 rounded-3xl shadow-2xl text-white relative overflow-hidden border border-white/10" x-data="carousel()" x-init="startAutoScroll">
+  <div class="text-center mb-8">
+    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Academic Pathway</p>
+    <h2 class="text-3xl md:text-4xl font-bold text-accent">Education</h2>
+    <p class="text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+      A progression from computing foundations to data science, big data, and applied AI research in bioinformatics.
+    </p>
+  </div>
 
-<!-- Flip Card Skills Section – Enhanced Resume Edition -->
-<section class="p-8 rounded-2xl shadow-xl bg-white/10 backdrop-blur">
-  <h2 class="text-3xl font-bold text-accent mb-4 text-center">Skills & Certifications</h2>
-  <p class="text-center text-gray-300 mb-8">Click on each card to flip and explore Zach's expertise</p>
-  <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false] }">
+  <div class="relative max-w-5xl mx-auto" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
+    <div class="flex justify-between text-xs text-purple-300 mb-3 px-2">
+      <span>Most recent</span>
+      <span>Earliest</span>
+    </div>
 
-    <!-- Languages -->
+    <button @click="prev" title="Previous education" class="edu-arrow left-1 md:left-2">
+      <i class="fas fa-chevron-left text-white"></i>
+    </button>
+    <button @click="next" title="Next education" class="edu-arrow right-1 md:right-2">
+      <i class="fas fa-chevron-right text-white"></i>
+    </button>
+
+    <div class="overflow-hidden rounded-2xl">
+      <div
+        class="flex transition-transform duration-700 ease-in-out"
+        :style="`transform: translateX(-${current * 100}%);`"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+      >
+        <template x-for="(step, index) in steps" :key="index">
+          <div class="min-w-full px-8 md:px-12 py-2">
+            <article class="education-card">
+              <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div class="edu-logo-wrap">
+                  <img :src="step.logo" alt="Institution logo" class="h-16 w-16 object-contain" />
+                </div>
+                <div class="flex-1">
+                  <p class="text-xs uppercase tracking-[0.22em] text-purple-300 mb-2" x-text="step.time"></p>
+                  <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" x-text="step.title"></h3>
+                  <p class="text-purple-200 text-base md:text-lg font-medium mt-2" x-text="step.school"></p>
+                  <p class="text-gray-200 mt-4 leading-relaxed" x-text="step.description"></p>
+                  <div class="flex flex-wrap gap-2 justify-center md:justify-start mt-5">
+                    <template x-for="tag in step.tags" :key="tag">
+                      <span class="skill-pill" x-text="tag"></span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-7 space-x-2">
+      <template x-for="(step, index) in steps" :key="'edu-dot-' + index">
+        <button
+          @click="current = index"
+          class="h-2.5 rounded-full cursor-pointer transition-all duration-300"
+          :class="current === index ? 'bg-purple-300 w-8 shadow-lg shadow-purple-500/30' : 'bg-purple-800 w-2.5 hover:bg-purple-500'"
+          :aria-label="`Go to ${step.title}`">
+        </button>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- Skills & Certifications Section -->
+<section class="skills-section p-6 md:p-8 rounded-3xl shadow-2xl bg-white/10 backdrop-blur border border-white/10">
+  <div class="text-center mb-8">
+    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Capabilities</p>
+    <h2 class="text-3xl md:text-4xl font-bold text-accent">Skills & Certifications</h2>
+    <p class="text-center text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+      Click each card to flip through Zach's technical stack, analytics toolkit, AI research focus, and credentials.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false, false, false] }">
+
     <div class="perspective cursor-pointer" @click="flipped[0] = !flipped[0]">
-      <div :class="flipped[0] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
-          Programming Languages
+      <div :class="flipped[0] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-purple-600 to-purple-900">
+          <i class="fas fa-code text-4xl mb-4"></i>
+          <h3>Programming & Web</h3>
+          <p>Core languages for analytics, automation, and web delivery.</p>
         </div>
-        <div class="absolute inset-0 bg-purple-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-          <ul class="list-disc list-inside space-y-1">
-            <li>Python (Data Science, Automation)</li>
-            <li>R (Statistical Modeling)</li>
-            <li>SQL (PostgreSQL, MySQL)</li>
-            <li>JavaScript (Node.js, Web)</li>
-            <li>Bash scripting</li>
-            <li>Java  </li>
-            <li>HTML/CSS </li>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>Python for data science, automation, scripting, and ML workflows</li>
+            <li>SQL across PostgreSQL, MySQL, Snowflake-style analytics, and dashboard queries</li>
+            <li>JavaScript, HTML, CSS, FastAPI, WordPress, and API integration work</li>
+            <li>R, Bash, Java, GitHub Actions, and reproducible project workflows</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Tools -->
     <div class="perspective cursor-pointer" @click="flipped[1] = !flipped[1]">
-      <div :class="flipped[1] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
-          Tools & Platforms
+      <div :class="flipped[1] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-blue-600 to-indigo-900">
+          <i class="fas fa-chart-pie text-4xl mb-4"></i>
+          <h3>Analytics & BI</h3>
+          <p>Turning business data into decisions, dashboards, and reports.</p>
         </div>
-        <div class="absolute inset-0 bg-blue-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-          <ul class="list-disc list-inside space-y-1">
-            <li>Power BI, Tableau, Excel</li>
-            <li>Google Looker Studio</li>
-            <li>Apps Script, Power Automate</li>
-            <li>CRM: HubSpot, Monday.com</li>
-            <li>Cloud: Google Cloud, Snowflake</li>
-            <li>Version Control: GitHub Actions</li>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>Power BI, Google Looker Studio, Tableau, Excel, and dynamic Google Sheets</li>
+            <li>ETL, data cleaning, stakeholder reporting, KPI tracking, and insight storytelling</li>
+            <li>Google Analytics, Meta Ads reporting, A/B testing, and campaign performance analysis</li>
+            <li>Operational dashboards for subscription, usage, marketing, and field data quality</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Data Science -->
     <div class="perspective cursor-pointer" @click="flipped[2] = !flipped[2]">
-      <div :class="flipped[2] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
-        <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
-          Data Science & AI
+      <div :class="flipped[2] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-emerald-600 to-green-900">
+          <i class="fas fa-brain text-4xl mb-4"></i>
+          <h3>Data Science & AI</h3>
+          <p>Applied ML, research, and modelling for real-world datasets.</p>
         </div>
-        <div class="absolute inset-0 bg-green-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-          <ul class="list-disc list-inside space-y-1">
-            <li>ETL, Wrangling, Modeling</li>
-            <li>Machine Learning, NLP, LLMs</li>
-            <li>Bioinformatics, Spatial Omics</li>
-            <li>DDPM/DDIM Diffusion Models</li>
-            <li>Pattern Detection, AI R&D</li>
-            <li>LangChain, Prompt Engineering</li>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>Machine learning, NLP, LLM workflows, clustering, decision trees, and model evaluation</li>
+            <li>PyTorch, scikit-image, SciPy, and diffusion model experimentation</li>
+            <li>Spatial omics and bioimage segmentation research using U-Net and MedSegDiff-style pipelines</li>
+            <li>Big data processing with PySpark, Spark SQL, streaming concepts, and data pipelines</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Certifications -->
     <div class="perspective cursor-pointer" @click="flipped[3] = !flipped[3]">
-      <div :class="flipped[3] ? 'rotate-y-180' : ''" class="relative w-full h-64 transition-transform duration-700 transform-style preserve-3d">
-        <div class="absolute inset-0 bg-gradient-to-br from-yellow-600 to-yellow-800 text-white rounded-2xl shadow-xl flex items-center justify-center text-xl font-bold backface-hidden">
-          Certifications
+      <div :class="flipped[3] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-pink-600 to-fuchsia-900">
+          <i class="fas fa-gears text-4xl mb-4"></i>
+          <h3>Automation & Platforms</h3>
+          <p>Reducing manual work through integrations and workflow design.</p>
         </div>
-        <div class="absolute inset-0 bg-yellow-950 text-white rounded-2xl shadow-xl p-5 text-sm backface-hidden rotate-y-180 overflow-y-auto">
-          <ul class="list-disc list-inside space-y-1">
-            <li>IELTS 8.0 (2025)</li>
-            <li>IBM Cybersecurity (Coursera)</li>
-            <li>CITI COI Certification (2023–2027)</li>
-            <li>DeepLearning.AI Diffusion Models</li>
-            <li>Google Data Studio Certification</li>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>Google Apps Script, Power Automate, Zapier-style workflows, and REST APIs</li>
+            <li>BoldDesk, BoldSign, Sophos Central API, HubSpot, Monday.com, and CRM integrations</li>
+            <li>Neon PostgreSQL, Railway deployment, Google Cloud familiarity, and Snowflake exposure</li>
+            <li>Quality control, documentation, SOPs, troubleshooting, and stakeholder handover</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="perspective cursor-pointer" @click="flipped[4] = !flipped[4]">
+      <div :class="flipped[4] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-orange-500 to-yellow-800">
+          <i class="fas fa-bullhorn text-4xl mb-4"></i>
+          <h3>Digital & Growth</h3>
+          <p>Campaign support, web optimisation, and performance tracking.</p>
+        </div>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>Meta Ads, Google Ads fundamentals, audience targeting, and creative testing support</li>
+            <li>SEO research, on-page updates, WordPress maintenance, and content improvements</li>
+            <li>Campaign dashboards, conversion tracking, engagement monitoring, and client reporting</li>
+            <li>Operational growth support for membership, pricing, CRM, and product experiments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="perspective cursor-pointer" @click="flipped[5] = !flipped[5]">
+      <div :class="flipped[5] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
+        <div class="skill-card-front from-slate-600 to-gray-900">
+          <i class="fas fa-certificate text-4xl mb-4"></i>
+          <h3>Certifications</h3>
+          <p>Credentials supporting research, analytics, and communication.</p>
+        </div>
+        <div class="skill-card-back rotate-y-180">
+          <ul>
+            <li>IELTS 8.0, completed in 2025</li>
+            <li>IBM Cybersecurity certification through Coursera</li>
+            <li>CITI Conflict of Interest certification, 2023 to 2027</li>
+            <li>DeepLearning.AI diffusion models and Google Data Studio / Looker Studio certification</li>
           </ul>
         </div>
       </div>
@@ -407,14 +567,140 @@ function experienceCarousel() {
   </div>
 </section>
 
-<!-- Flip Styles -->
+<!-- Education and Skills Styling -->
 <style>
+  .education-section {
+    background:
+      radial-gradient(circle at top left, rgba(183, 148, 244, 0.22), transparent 34%),
+      linear-gradient(135deg, rgba(42, 33, 93, 0.95), rgba(30, 27, 75, 0.95));
+  }
+  .education-card {
+    min-height: 330px;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06)),
+      radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.2), transparent 38%);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+  }
+  .edu-logo-wrap {
+    width: 5.3rem;
+    height: 5.3rem;
+    border-radius: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+  }
+  .edu-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 999px;
+    background: rgba(124, 58, 237, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .edu-arrow:hover {
+    background: rgba(168, 85, 247, 0.95);
+    transform: translateY(-50%) scale(1.06);
+  }
+  .skills-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .skills-section::after {
+    content: "";
+    position: absolute;
+    right: -160px;
+    bottom: -190px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.2), transparent 65%);
+    pointer-events: none;
+  }
+  .skill-flip-card {
+    transform-style: preserve-3d;
+  }
+  .skill-card-front,
+  .skill-card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.26);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .skill-card-front {
+    padding: 1.5rem;
+    color: #fff;
+    background-image: linear-gradient(135deg, var(--tw-gradient-stops));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .skill-card-front h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 0.55rem;
+  }
+  .skill-card-front p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .skill-card-back {
+    background: rgba(24, 18, 55, 0.96);
+    padding: 1.35rem;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    overflow-y: auto;
+  }
+  .skill-card-back ul {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .skill-card-back li {
+    position: relative;
+    padding-left: 1.2rem;
+  }
+  .skill-card-back li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: #c4b5fd;
+  }
   .perspective { perspective: 1000px; }
   .preserve-3d { transform-style: preserve-3d; }
   .backface-hidden { backface-visibility: hidden; }
   .rotate-y-180 { transform: rotateY(180deg); }
+  @media (max-width: 640px) {
+    .education-card {
+      min-height: 430px;
+      padding: 1.35rem;
+    }
+    .skill-flip-card {
+      height: 21rem;
+    }
+  }
 </style>
-
 
     <!-- Footer -->
     <footer class="text-center text-sm text-gray-400 mt-16 mb-6 space-x-4">
@@ -449,39 +735,44 @@ function carousel() {
     endX: 0,
     steps: [
   {
-    title: 'Master of Data Science (Bioinformatics)',
+    title: 'Master of Data Science',
     time: '2024–2025',
-    school: 'Monash University',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
-    description: 'Combining spatial transcriptomics and AI for biomedical insights. Researching diffusion models for spatial transcriptomics segmentation.'
+    school: 'Monash University · Bioinformatics and Data Science focus',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
+    description: 'Focused on advanced data science, big data processing, machine learning, and bioinformatics research, including spatial transcriptomics cell segmentation using diffusion-model and U-Net style approaches.',
+    tags: ['Bioinformatics', 'Machine Learning', 'Big Data']
   },
   {
-    title: 'Bachelor of Computer Science (Data Science)',
+    title: 'Bachelor of Computer Science',
     time: '2021–2024',
-    school: 'Monash University',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
-    description: 'Gained expertise in machine learning, algorithms, databases, and big data. Built projects in Python, SQL, and R. Interned at Nera Telecommunications.'
+    school: 'Monash University · Data Science specialisation',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
+    description: 'Built a strong base in algorithms, databases, machine learning, analytics, and software development through projects in Python, SQL, R, Java, and web technologies.',
+    tags: ['Data Science', 'Algorithms', 'Databases']
   },
   {
-    title: 'Higher Education Diploma (IT)',
+    title: 'Higher Education Diploma in IT',
     time: '2020–2021',
     school: 'Monash University',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Monash_University_logo.svg/2560px-Monash_University_logo.svg.png',
-    description: 'Focused on bridging foundational computing and mathematics with critical thinking, teamwork, and software design principles.'
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
+    description: 'Completed foundational computing, mathematics, programming, systems analysis, and teamwork units that created the pathway into computer science and data science studies.',
+    tags: ['Computing Foundations', 'Programming', 'Mathematics']
   },
   {
     title: 'Singapore-Cambridge GCE A-Levels',
     time: '2018–2019',
     school: 'Tampines Meridian Junior College',
     logo: 'https://tmseatfinder.herokuapp.com/static/tmjc.png',
-    description: 'Specialised in Physics, Chemistry, and Math. Developed research skills and presented a project on kidney failure in Singapore.'
+    description: 'Developed a science-oriented academic foundation across Physics, Chemistry, and Mathematics while building research, presentation, and problem-solving skills.',
+    tags: ['Physics', 'Chemistry', 'Mathematics']
   },
   {
     title: 'Singapore-Cambridge GCE O-Levels',
     time: '2013–2017',
     school: 'Ngee Ann Secondary School',
     logo: 'https://ngeeannsec.moe.edu.sg/images/small-school-Logo-No-background-2.png',
-    description: 'Built a strong academic foundation in sciences, math, and humanities. Was a Scout and led student council initiatives.'
+    description: 'Completed secondary education with a broad foundation across science, mathematics, humanities, and co-curricular leadership experiences.',
+    tags: ['Science', 'Leadership', 'Foundations']
   }
 ],next() {
       this.current = (this.current + 1) % this.steps.length;
@@ -515,6 +806,7 @@ function carousel() {
 <script>
   window.addEventListener("load", () => {
     const loader = document.getElementById("page-loader");
+    if (!loader) return;
     loader.classList.add("fade-out");
     setTimeout(() => loader.remove(), 700); // matches transition duration
   });
