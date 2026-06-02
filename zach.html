@@ -1,415 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Me – Zach Ng</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Tailwind CSS for quick utilities -->
+  <meta name="description" content="Learn more about Zach Ng's background, interests, journey, and experience across data science, AI, web development, and analytics." />
+  <meta name="keywords" content="Zach Ng, About, Education, Career, Data Scientist, Developer, Data Analyst, AI Researcher, Portfolio" />
+  <meta property="og:title" content="About Me – Zach Ng" />
+  <meta property="og:description" content="Learn about Zach Ng's education, background, interests, and career journey in data science and development." />
+  <meta property="og:image" content="https://zachng01.github.io/Showcase/images/about-preview.png" />
+  <meta property="og:url" content="https://zachng01.github.io/Showcase/zach.html" />
+  <meta property="og:type" content="profile" />
+  <meta name="twitter:title" content="About Me – Zach Ng" />
+  <meta name="twitter:description" content="Learn about Zach Ng's education, background, interests, and career journey in data science and development." />
+  <meta name="twitter:image" content="https://zachng01.github.io/Showcase/images/about-preview.png" />
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <!-- tsParticles for animated background -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif']
+          },
+          colors: {
+            neon: '#a78bfa',
+            cyanGlow: '#22d3ee',
+            pinkGlow: '#f472b6'
+          },
+          animation: {
+            'float-slow': 'float 7s ease-in-out infinite',
+            'float-medium': 'float 5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.8s ease-in-out infinite',
+            'gradient-pan': 'gradientPan 12s ease infinite',
+            'marquee': 'marquee 24s linear infinite',
+            'spin-slow': 'spin 18s linear infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-18px)' }
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 22px rgba(167,139,250,.28)' },
+              '50%': { boxShadow: '0 0 55px rgba(34,211,238,.45)' }
+            },
+            gradientPan: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-  <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <title>About Me – Zach Ng</title>
-  <meta name="description" content="Learn more about Zach Ng.">
-  <meta name="keywords" content="Zach Ng, About, Education, Career, Data Scientist, Developer">
-  <meta property="og:title" content="About Me – Zach Ng">
-  <meta property="og:description" content="Learn about Zach Ng's education, background, and career journey in data science and development.">
-  <meta property="og:image" content="https://zachng01.github.io/Showcase/images/about-preview.png">
-  <meta property="og:url" content="https://zachng01.github.io/Showcase/about.html">
-  <meta property="og:type" content="profile">
-  <meta name="twitter:title" content="About Me – Zach Ng">
-  <meta name="twitter:description" content="Learn about Zach Ng's education, background, and career journey in data science and development.">
-  <meta name="twitter:image" content="https://zachng01.github.io/Showcase/images/about-preview.png">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
   <style>
-    :root {
-      --clr-bg: #111;
-      --clr-fg: #eee;
-      --clr-primary: #4F46E5;
-      --clr-secondary: #10B981;
-    }
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-    }
-    body, html {
-      height: 100%; overflow-x: hidden;
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(244, 114, 182, .22), transparent 34%),
+        radial-gradient(circle at 80% 18%, rgba(34, 211, 238, .18), transparent 32%),
+        radial-gradient(circle at 50% 90%, rgba(167, 139, 250, .22), transparent 40%),
+        linear-gradient(135deg, #07081a 0%, #111827 42%, #1e1b4b 100%);
+      color: #f8fafc;
       font-family: 'Noto Sans JP', sans-serif;
-      color: var(--clr-fg);
-      position: relative;
-      /* Sakura tree background */
-      background: url('https://images.unsplash.com/photo-1522163182402-3bff2d4a46bc?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;
     }
-    a { text-decoration: none; }
 
-    /* tsParticles */
     #tsparticles {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: fixed;
+      inset: 0;
+      z-index: -20;
+    }
+
+    .aurora {
+      position: fixed;
+      inset: -25%;
+      z-index: -15;
+      background: linear-gradient(115deg,
+        rgba(79,70,229,.22),
+        rgba(34,211,238,.14),
+        rgba(244,114,182,.16),
+        rgba(16,185,129,.12),
+        rgba(79,70,229,.22));
+      background-size: 300% 300%;
+      filter: blur(55px);
+      opacity: .88;
+      animation: gradientPan 16s ease infinite, auroraDrift 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraDrift {
+      from { transform: rotate(0deg) scale(1.05) translate3d(-2%, -1%, 0); }
+      to { transform: rotate(10deg) scale(1.2) translate3d(3%, 2%, 0); }
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
       z-index: -10;
-    }
-    /* Animated gradient overlay */
-    .gradient-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(45deg,
-        rgba(79,70,229,0.15) 0%,
-        rgba(16,185,129,0.15) 25%,
-        rgba(139,92,246,0.15) 50%,
-        rgba(224,170,255,0.15) 75%,
-        rgba(79,70,229,0.15) 100%);
-      animation: overlayRotate 30s linear infinite;
-      pointer-events: none; z-index: -5;
-    }
-    @keyframes overlayRotate {
-      from { transform: rotate(0deg) scale(1.2); }
-      to   { transform: rotate(360deg) scale(1.2); }
+      pointer-events: none;
+      opacity: .08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Navbar */
-    header {
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      position: fixed; top: 0; width: 100%; z-index: 50;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    .container { max-width: 1280px; margin: 0 auto; }
-    nav a {
-      color: #000000; font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover, nav a.active {
-      color: #3111e7;
-    }
-    #mobile-menu {
-      background: rgba(31,41,55,0.9);
-      backdrop-filter: blur(8px);
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 24px 80px rgba(0,0,0,.32);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
-    /* About Me Card */
-    .info-card {
-      margin: 100px auto 2rem;
-      max-width: 800px;
-      background: rgba(31,41,55,0.8);
-      backdrop-filter: blur(8px);
-      padding: 2rem; border-radius: 0.5rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-      text-align: center;
-    }
-    .info-card h1 {
-      font-size: 2.5rem; color: var(--clr-primary); margin-bottom: 1rem;
-    }
-    .info-card p {
-      font-size: 1.125rem; line-height: 1.6; opacity: 0.9;
+    .nav-glass {
+      background: rgba(8, 10, 25, .62);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
-    /* Map container */
+    .gradient-text {
+      background: linear-gradient(90deg, #e879f9, #22d3ee, #a78bfa, #f472b6);
+      background-size: 260% 260%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientPan 8s ease infinite;
+    }
+
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine::before {
+      content: '';
+      position: absolute;
+      top: -80%;
+      left: -120%;
+      width: 70%;
+      height: 260%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.24), transparent);
+      transform: rotate(25deg);
+      transition: left .8s ease;
+    }
+    .shine:hover::before { left: 140%; }
+
+    .magnetic-card {
+      transform-style: preserve-3d;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+    .magnetic-card:hover {
+      transform: translateY(-10px) rotateX(3deg) rotateY(-3deg);
+      border-color: rgba(34,211,238,.48);
+      box-shadow: 0 28px 90px rgba(34,211,238,.16), 0 24px 80px rgba(0,0,0,.35);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(.2px);
+      opacity: .8;
+      pointer-events: none;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 90px;
+      height: 4px;
+      margin: 14px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f472b6, #22d3ee, #a78bfa);
+      box-shadow: 0 0 26px rgba(34,211,238,.45);
+    }
+
     #map {
-      width: 100%; height: 400px;
-      max-width: 1200px;
-      margin: 2rem auto;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      width: 100%;
+      height: 470px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
     }
 
-    /* Skillset Section */
-    .skills {
-      display: flex; flex-wrap: wrap; gap: 1rem;
-      padding: 1rem; max-width: 1200px; margin: 0 auto 4rem;
-    }
-    .skill-card {
-      flex: 1 1 280px;
-      background: rgba(31,41,55,0.9);
-      border-radius: 0.5rem; overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex; flex-direction: column;
-    }
-    .skill-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.8);
-    }
-    .skill-header {
-      background: #1f2937; padding: 1rem;
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .skill-header svg {
-      width: 2rem; height: 2rem; fill: var(--clr-secondary);
-    }
-    .skill-header h3 {
-      color: var(--clr-secondary); font-size: 1.25rem; margin: 0;
-    }
-    .skill-body {
-      padding: 1.5rem; flex: 1;
-      color: #d1d5db; line-height: 1.5;
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      background: rgba(15, 23, 42, .92);
+      color: #f8fafc;
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(10px);
     }
 
-    /* Interests Section */
-    .interests {
-      max-width: 1200px; margin: 0 auto 4rem;
-      padding: 2rem; display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-      gap: 2rem;
-    }
-    .interest-card {
-      background: rgba(31,41,55,0.9);
-      border-radius: 0.5rem; padding: 2rem 1rem;
-      text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .interest-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.8);
-    }
-    .interest-card h3 {
-      font-size: 1.5rem;
-      color: yellow;
-      margin-bottom: 0.5rem;
+    .leaflet-tooltip.my-tooltip {
+      background: rgba(15, 23, 42, .9);
+      color: #f8fafc;
+      border: 1px solid rgba(34,211,238,.35);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.28);
     }
 
-    .interest-card p {
-      color: #d1d5db; line-height: 1.5;
-    }
+    .ticker-track { width: max-content; }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
 
-    footer {
-      text-align: center; padding: 1rem;
-      background: rgba(255,255,255,0.1); color: #e5e7eb;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
 <body>
   <script src="//code.tidio.co/nitgtcn6l7l9b5epjifpws9lzhrdvs7d.js" async></script>
 
-  <!-- Highly animated background -->
   <div id="tsparticles"></div>
-  <div class="gradient-overlay"></div>
+  <div class="aurora"></div>
+  <div class="noise"></div>
 
-  <!-- Navbar -->
-  <header>
-    <div class="container px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-fuchsia-400 hover:text-fuchsia-300">Zach Ng</a>
+  <div class="fixed top-28 left-6 w-28 h-28 bg-cyan-400/20 rounded-full blur-2xl animate-float-slow"></div>
+  <div class="fixed bottom-28 right-8 w-36 h-36 bg-pink-400/20 rounded-full blur-2xl animate-float-medium"></div>
 
-      <nav class="hidden md:flex space-x-8" id="nav-links">
-        <a href="index.html">Home</a>
-        <a href="zach.html" class="active">About Me</a>
-        <a href="about.html">My Skillset</a>
-        <a href="skills.html">My Projects</a>
-        <a href="blog_main.html">My Updates</a>
+  <header class="nav-glass fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-black tracking-tight gradient-text">Zach Ng</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-200">
+        <a href="index.html" class="hover:text-cyanGlow transition">Home</a>
+        <a href="zach.html" class="text-cyanGlow">About Me</a>
+        <a href="about.html" class="hover:text-cyanGlow transition">My Skillset</a>
+        <a href="skills.html" class="hover:text-cyanGlow transition">My Projects</a>
+        <a href="blog_main.html" class="hover:text-cyanGlow transition">My Updates</a>
       </nav>
-      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+      <button id="burger" class="md:hidden text-slate-100 focus:outline-none" aria-label="Open mobile menu">
+        <i class="fa-solid fa-bars text-2xl"></i>
       </button>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 z-40">
-    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur p-4 space-y-2 text-gray-200">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="zach.html">About Me</a></li>
-      <li><a href="about.html">My Skillset</a></li>
-      <li><a href="skills.html">My Projects</a></li>
-      <li><a href="blog_main.html">My Updates</a></li>
-
+  <div id="mobile-menu" class="hidden md:hidden fixed top-[72px] inset-x-0 z-40 nav-glass">
+    <ul class="p-5 space-y-3 text-slate-100 font-semibold">
+      <li><a href="index.html" class="block">Home</a></li>
+      <li><a href="zach.html" class="block text-cyanGlow">About Me</a></li>
+      <li><a href="about.html" class="block">My Skillset</a></li>
+      <li><a href="skills.html" class="block">My Projects</a></li>
+      <li><a href="blog_main.html" class="block">My Updates</a></li>
     </ul>
   </div>
 
-  <!-- About Me Card -->
-  <div class="info-card">
-    <h1 class="text-white-400 text-3xl font-bold mb-4">About Me</h1>
-    <p>
-      I’m <span class="text-rose-400 font-semibold">Zach Ng</span>, a Master of Data Science student passionate about turning
-      <span class="text-emerald-400 font-semibold">data into actionable insights</span>. With a background in web development and machine learning,
-      I enjoy crafting end-to-end solutions that blend elegant UIs with robust analytics.
-    </p>
-  </div>
+  <main class="relative z-10">
+    <section class="min-h-[92vh] flex items-center pt-28 pb-16 px-6">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+        <div data-aos="fade-right" data-aos-duration="900">
+          <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-cyanGlow text-sm font-bold mb-6 animate-pulse-glow">
+            <i class="fa-solid fa-sparkles"></i> Data · AI · Web · Analytics
+          </p>
+          <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+            Hi, I’m <span class="gradient-text">Zach Ng</span>.
+          </h1>
+          <p class="text-lg md:text-xl text-slate-200 leading-relaxed max-w-3xl mb-8">
+            I’m a Melbourne-based Data Science and AI practitioner from Malaysia who enjoys turning messy problems into useful systems, clean dashboards, interactive web tools, and research-driven machine learning projects.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#journey" class="shine bg-cyan-400 text-slate-950 font-bold px-6 py-3 rounded-2xl hover:scale-105 transition shadow-lg shadow-cyan-500/20">
+              Explore my story <i class="fa-solid fa-arrow-down ml-2"></i>
+            </a>
+            <a href="about.html" class="shine glass px-6 py-3 rounded-2xl font-bold text-white hover:scale-105 transition">
+              View skillset <i class="fa-solid fa-layer-group ml-2"></i>
+            </a>
+          </div>
+        </div>
 
-  <!-- Map Section -->
-  <section class="container mx-auto px-6">
-    <h1 class="text-2xl text-center text-fuchsia-400 drop-shadow-md mb-4"><b>Where I’ve Been</b></h1>
+        <div class="relative" data-aos="zoom-in" data-aos-duration="1000">
+          <div class="orb -top-8 -left-8 w-24 h-24 bg-pink-400/40 animate-float-medium"></div>
+          <div class="orb bottom-6 -right-6 w-32 h-32 bg-cyan-400/30 animate-float-slow"></div>
+          <div class="glass rounded-[2rem] p-6 md:p-8 animate-float-slow shine">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="glass rounded-3xl p-5 text-center">
+                <p class="text-4xl font-black gradient-text">AI</p>
+                <p class="text-sm text-slate-300 mt-1">Research</p>
+              </div>
+              <div class="glass rounded-3xl p-5 text-center">
+                <p class="text-4xl font-black gradient-text">BI</p>
+                <p class="text-sm text-slate-300 mt-1">Dashboards</p>
+              </div>
+              <div class="glass rounded-3xl p-5 text-center">
+                <p class="text-4xl font-black gradient-text">SQL</p>
+                <p class="text-sm text-slate-300 mt-1">Insights</p>
+              </div>
+              <div class="glass rounded-3xl p-5 text-center">
+                <p class="text-4xl font-black gradient-text">Web</p>
+                <p class="text-sm text-slate-300 mt-1">Builds</p>
+              </div>
+            </div>
+            <div class="rounded-3xl bg-slate-950/55 border border-white/10 p-5">
+              <p class="text-sm uppercase tracking-[.3em] text-cyanGlow font-bold mb-3">Current focus</p>
+              <p class="text-slate-200 leading-relaxed">Building practical data products and AI workflows that connect business problems, automation, dashboards, and user-friendly design.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div id="map"></div>
-  </section>
-<!-- Interests Section -->
-<h1 class="text-2xl text-center text-fuchsia-400 drop-shadow-md mb-4"><b>My Interests</b></h1>
-<section class="interests">
-  <div class="interest-card">
-    <h3>Gaming</h3>
-    <p>
-      Strategy, RPGs, and co-op adventures—optimizing builds, exploring narratives,
-      and streaming sessions with friends.
-    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    <dotlottie-player src="https://lottie.host/6f552dad-c788-4cda-82b2-0741da67df6c/hWHotfsFDz.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-    <div class="interest-card">
-    <h3>Web-Development</h3>
-    <p>
-     I enjoy building clean, responsive websites. Turning ideas into interactive tools is my thing.
-    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-    <dotlottie-player src="https://lottie.host/0167fd7f-b86c-4a3c-8029-30ca89e541ea/pPqUxBxSx8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-  
-  <div class="interest-card">
-    <h3>Investing</h3>
-    <p>
-      Building diversified portfolios, analyzing markets, and staying ahead
-      of fintech innovations.
-    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    <dotlottie-player src="https://lottie.host/f6fcc23a-6810-4c7d-91de-6bd33b1216c9/aqY6NLA30V.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-  </section>
-<section class="interests">
-  <div class="interest-card">
-    <h3>Anime & Manga</h3>
-    <p>
-     Always enjoy a great story that blend strong storytelling with unique art styles. Favorites include <b>Silent Voice,  Dandadan, and One Piece</b>.
-    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-    <dotlottie-player src="https://lottie.host/f5275dc0-cf94-44c0-9686-cb4ce81ebf4f/x0jb4rVsS8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-  <div class="interest-card">
-    <h3>Foodie</h3>
-    <p>
-      I love exploring local eats and street food. Always on the hunt for new flavours and hidden gems.
-    </p><script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-    <dotlottie-player src="https://lottie.host/2388af6f-64b3-4fd4-a178-d222e2d7524e/yKpmxCTMES.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-<div class="interest-card">
-    <h3>Badminton</h3>
-    <p>
-      Always up for a friendly game. Been eyeing on pickle-ball recently.
-    </p><script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    <dotlottie-player src="https://lottie.host/b170b6c0-e7b9-4b64-840a-5cfcd810724c/R07m7Ebn5z.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
-  </div>
-</section>
+    <section id="journey" class="px-6 py-12">
+      <div class="max-w-6xl mx-auto glass rounded-[2rem] p-8 md:p-10 relative overflow-hidden" data-aos="fade-up">
+        <div class="absolute -right-16 -top-16 w-52 h-52 rounded-full bg-cyan-400/15 blur-3xl"></div>
+        <div class="absolute -left-16 -bottom-16 w-52 h-52 rounded-full bg-pink-400/15 blur-3xl"></div>
+        <h2 class="section-title text-3xl md:text-4xl font-black text-center mb-8">About Me</h2>
+        <div class="grid md:grid-cols-3 gap-6 relative">
+          <div class="md:col-span-2 text-slate-200 text-lg leading-relaxed space-y-4">
+            <p>
+              I’m <span class="font-bold text-pinkGlow">Zach Ng</span>, a Data Science student and builder with experience across analytics, web development, automation, and AI research. I like creating work that feels useful, visual, and easy to understand.
+            </p>
+            <p>
+              My work sits between technical implementation and real-world problem solving: cleaning data, building dashboards, automating workflows, experimenting with machine learning models, and designing interfaces that make insights easier to act on.
+            </p>
+          </div>
+          <div class="grid gap-4">
+            <div class="glass rounded-3xl p-5 magnetic-card">
+              <i class="fa-solid fa-location-dot text-cyanGlow text-2xl mb-3"></i>
+              <h3 class="font-bold text-white">Based in Melbourne</h3>
+              <p class="text-sm text-slate-300 mt-1">Studied here, now working and building from Australia.</p>
+            </div>
+            <div class="glass rounded-3xl p-5 magnetic-card">
+              <i class="fa-solid fa-rocket text-pinkGlow text-2xl mb-3"></i>
+              <h3 class="font-bold text-white">Builder mindset</h3>
+              <p class="text-sm text-slate-300 mt-1">From dashboards to web apps to AI experiments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="mt-12 text-center text-gray-300 p-6 bg-white/5 w-full flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
-    <span>&copy; 2025 Zach Ng</span>
-    <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-1 hover:text-indigo-400 transition">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
-      </svg>
-      Email Me
-    </a>
-    <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" class="flex items-center gap-1 hover:text-indigo-400 transition">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
-        <path d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.3 20h-3v-11h3v11zm-1.5-12.3c-1 0-1.7-.8-1.7-1.7s.8-1.7 1.7-1.7 1.7.8 1.7 1.7c0 .9-.7 1.7-1.7 1.7zm13.3 12.3h-3v-5.6c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8v5.7h-3v-11h3v1.5c.4-.7 1.2-1.7 2.9-1.7 2.1 0 3.5 1.4 3.5 4.3v6.9z"/>
-      </svg>
-      LinkedIn
-    </a>
+    <section class="px-6 py-12">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="section-title text-3xl md:text-4xl font-black text-center mb-10" data-aos="fade-up">Where I’ve Been</h2>
+        <div class="glass rounded-[2rem] p-4 md:p-6" data-aos="zoom-in-up">
+          <div id="map"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-12">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="section-title text-3xl md:text-4xl font-black text-center mb-4" data-aos="fade-up">My Interests</h2>
+        <p class="text-center text-slate-300 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+          A few things that keep me curious outside work and study.
+        </p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="0">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Gaming</h3>
+              <i class="fa-solid fa-gamepad text-cyanGlow text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">Strategy, RPGs, and co-op adventures. I enjoy optimizing builds, exploring narratives, and playing with friends.</p>
+            <dotlottie-player src="https://lottie.host/6f552dad-c788-4cda-82b2-0741da67df6c/hWHotfsFDz.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Web Development</h3>
+              <i class="fa-solid fa-code text-pinkGlow text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">I enjoy building clean, responsive websites and turning ideas into interactive tools people can actually use.</p>
+            <dotlottie-player src="https://lottie.host/0167fd7f-b86c-4a3c-8029-30ca89e541ea/pPqUxBxSx8.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Investing</h3>
+              <i class="fa-solid fa-chart-line text-emerald-300 text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">Following markets, learning portfolio strategy, and keeping an eye on fintech and technology trends.</p>
+            <dotlottie-player src="https://lottie.host/f6fcc23a-6810-4c7d-91de-6bd33b1216c9/aqY6NLA30V.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="0">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Anime & Manga</h3>
+              <i class="fa-solid fa-book-open text-cyanGlow text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">I enjoy stories with strong emotion and unique art styles. Favorites include A Silent Voice, Dandadan, and One Piece.</p>
+            <dotlottie-player src="https://lottie.host/f5275dc0-cf94-44c0-9686-cb4ce81ebf4f/x0jb4rVsS8.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Foodie</h3>
+              <i class="fa-solid fa-utensils text-pinkGlow text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">I love exploring local eats, street food, hidden gems, and new flavours wherever I go.</p>
+            <dotlottie-player src="https://lottie.host/2388af6f-64b3-4fd4-a178-d222e2d7524e/yKpmxCTMES.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+
+          <article class="glass magnetic-card rounded-[2rem] p-6 shine" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-black text-white">Badminton</h3>
+              <i class="fa-solid fa-table-tennis-paddle-ball text-emerald-300 text-2xl"></i>
+            </div>
+            <p class="text-slate-300 leading-relaxed mb-4">Always up for a friendly game, and I have been eyeing pickleball recently too.</p>
+            <dotlottie-player src="https://lottie.host/b170b6c0-e7b9-4b64-840a-5cfcd810724c/R07m7Ebn5z.lottie" background="transparent" speed="1" style="width:100%;height:220px" loop autoplay></dotlottie-player>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-12 overflow-hidden">
+      <div class="max-w-7xl mx-auto glass rounded-[2rem] p-8" data-aos="fade-up">
+        <h2 class="section-title text-3xl md:text-4xl font-black text-center mb-8">Things I Build With</h2>
+        <div class="ticker overflow-hidden py-4">
+          <div class="ticker-track flex gap-4 animate-marquee">
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Python</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">SQL</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-emerald-300">Power BI</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Looker Studio</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">JavaScript</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-emerald-300">PyTorch</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Automation</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">Dashboards</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Python</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">SQL</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-emerald-300">Power BI</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Looker Studio</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">JavaScript</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-emerald-300">PyTorch</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-cyanGlow">Automation</span>
+            <span class="glass rounded-full px-5 py-3 font-bold text-pinkGlow">Dashboards</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 mt-10 text-center text-slate-300 p-8 glass rounded-t-[2rem] mx-4 md:mx-8">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+      <span>&copy; 2026 Zach Ng</span>
+      <a href="mailto:zachaus01@gmail.com" class="flex items-center gap-2 hover:text-cyanGlow transition"><i class="fa-solid fa-envelope"></i>Email Me</a>
+      <a href="https://www.linkedin.com/in/zach--ng/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-cyanGlow transition"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+    </div>
   </footer>
 
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // tsParticles init: more shapes, faster movement
+    AOS.init({ once: false, duration: 800, easing: 'ease-out-cubic', offset: 80 });
+
     tsParticles.load('tsparticles', {
       fpsLimit: 60,
       background: { color: 'transparent' },
       particles: {
-        number: { value: 120, density: { enable: true, area: 800 } },
-        color: { value: ['#4F46E5', '#10b981', '#8B5CF6'] },
-        shape: { type: ['circle','triangle','star'] },
-        opacity: { value: 0.4 },
-        size: { value: { min: 1, max: 6 } },
-        links: {
-          enable: true,
-          distance: 120,
-          color: '#888',
-          opacity: 0.2,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          random: true,
-          straight: false,
-          outModes: { default: 'bounce' },
-          attract: { enable: true, rotateX: 600, rotateY: 1200 }
-        }
+        number: { value: 115, density: { enable: true, area: 900 } },
+        color: { value: ['#22d3ee', '#a78bfa', '#f472b6', '#34d399'] },
+        shape: { type: ['circle', 'triangle', 'star'] },
+        opacity: { value: { min: 0.18, max: 0.55 } },
+        size: { value: { min: 1, max: 5 } },
+        links: { enable: true, distance: 125, color: '#a78bfa', opacity: 0.18, width: 1 },
+        move: { enable: true, speed: 1.8, random: true, straight: false, outModes: { default: 'bounce' }, attract: { enable: true, rotateX: 600, rotateY: 1200 } }
       },
       interactivity: {
-        events: {
-          onHover: { enable: true, mode: 'bubble' },
-          onClick: { enable: true, mode: 'repulse' }
-        },
-        modes: {
-          bubble: { distance: 200, size: 8, duration: 2 },
-          repulse: { distance: 150, duration: 0.4 }
-        }
+        events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+        modes: { grab: { distance: 180, links: { opacity: 0.35 } }, push: { quantity: 4 } }
       },
       detectRetina: true
     });
 
-    // Mobile menu toggle
-    document.getElementById('burger').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
-  <!-- Leaflet JS for Map (unchanged) -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-      // Burger toggle
-      document.getElementById('burger').addEventListener('click', ()=>{
-        document.getElementById('nav-links').classList.toggle('open');
+    document.addEventListener('mousemove', (e) => {
+      const cards = document.querySelectorAll('.magnetic-card');
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      cards.forEach((card, idx) => {
+        if (!card.matches(':hover')) return;
+        card.style.transform = `translateY(-10px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`;
       });
+    });
 
-      // Initialize map
+    document.querySelectorAll('.magnetic-card').forEach(card => {
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
       const map = L.map('map', {
-        center: [1,100],
+        center: [1, 100],
         zoom: 3,
         scrollWheelZoom: false,
         attributionControl: false
       });
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).addTo(map);
 
-      // Locations & tooltips
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 6 }).addTo(map);
+
       const places = [
-        { name:'Kuala Lumpur, Malaysia', coords:[3.1390,101.6869], note:'Where I was born' },
-        { name:'Singapore', coords:[1.3521,103.8198], note:'Grew up here from 2011 to 2020' },
-        { name:'New Delhi, India', coords:[28.6139,77.2090], note:'Spent my childhood here from 2007 to 2011' },
-        { name:'Tokyo, Japan', coords:[35.6895,139.6917], note:"Visited multiple times — I love the food & culture" },
-        { name:'Abu Dhabi, UAE', coords:[24.4539,54.3773], note:'Family currently lives & works here' },
-        { name:'Melbourne, Australia', coords:[-37.8136,144.9631], note:'Currently based here' },
-        { name:'Seoul, South Korea', coords:[37.5665,126.9780], note:'Loved the street food and modern design culture' },
-        { name:'Bangkok, Thailand', coords:[13.7563,100.5018], note:'Enjoyed night markets and Thai cuisine' },
-        { name:'London, UK', coords:[51.5072,-0.1276], note:'Fascinated by the museums and historic sites' },
-        { name:'Paris, France', coords:[48.8566,2.3522], note:'Admired the art, architecture, and pastries' },
-        { name:'Taipei, Taiwan', coords:[25.0330,121.5654], note:'Night markets, bubble tea, and friendly locals' }
+        { name: 'Kuala Lumpur, Malaysia', coords: [3.1390,101.6869], note: 'Where I was born', icon: '🌏' },
+        { name: 'Singapore', coords: [1.3521,103.8198], note: 'Grew up here from 2011 to 2020', icon: '🏙️' },
+        { name: 'New Delhi, India', coords: [28.6139,77.2090], note: 'Spent my childhood here from 2007 to 2011', icon: '🕌' },
+        { name: 'Tokyo, Japan', coords: [35.6895,139.6917], note: 'Visited multiple times — I love the food and culture', icon: '🍜' },
+        { name: 'Abu Dhabi, UAE', coords: [24.4539,54.3773], note: 'Family currently lives and works here', icon: '🏜️' },
+        { name: 'Melbourne, Australia', coords: [-37.8136,144.9631], note: 'Currently based here', icon: '🏠' },
+        { name: 'Seoul, South Korea', coords: [37.5665,126.9780], note: 'Loved the street food and modern design culture', icon: '🥘' },
+        { name: 'Bangkok, Thailand', coords: [13.7563,100.5018], note: 'Enjoyed night markets and Thai cuisine', icon: '🌶️' },
+        { name: 'London, UK', coords: [51.5072,-0.1276], note: 'Fascinated by the museums and historic sites', icon: '🏛️' },
+        { name: 'Paris, France', coords: [48.8566,2.3522], note: 'Admired the art, architecture, and pastries', icon: '🥐' },
+        { name: 'Taipei, Taiwan', coords: [25.0330,121.5654], note: 'Night markets, bubble tea, and friendly locals', icon: '🧋' }
       ];
 
-      const homeIcon = L.divIcon({
-        html: `<div style="
-          font-size:24px;
-          line-height:24px;
-          color:#007acc;
-          text-shadow:0 0 4px rgba(0,0,0,0.6);
-        ">🏠</div>`,
-        className: '',
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
-      });
-
-
       const allCoords = [];
-      places.forEach(p=>{
-        const opts = p.name.includes('Melbourne') ? { icon: homeIcon } : {};
-        const marker = L.marker(p.coords, opts).addTo(map);
-        // bind a hover‑tooltip that shows both name & note
-        marker.bindTooltip(
-          `<strong>${p.name}</strong><br>${p.note}`,
-          { direction:'top', className:'my-tooltip', offset:[0,-10], sticky:true }
-        );
+      places.forEach((p, index) => {
+        const customIcon = L.divIcon({
+          html: `<div style="width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 25px rgba(34,211,238,.35);font-size:20px;animation: markerPulse 2.6s ease-in-out infinite; animation-delay:${index * 0.12}s;">${p.icon}</div>`,
+          className: '',
+          iconSize: [38, 38],
+          iconAnchor: [19, 19]
+        });
+        const marker = L.marker(p.coords, { icon: customIcon }).addTo(map);
+        marker.bindTooltip(`<strong>${p.name}</strong><br>${p.note}`, { direction: 'top', className: 'my-tooltip', offset: [0, -12], sticky: true });
+        marker.bindPopup(`<strong>${p.name}</strong><br>${p.note}`);
         allCoords.push(p.coords);
       });
 
-      map.fitBounds(allCoords, { padding:[40,40] });
+      const style = document.createElement('style');
+      style.textContent = `@keyframes markerPulse { 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.12); } }`;
+      document.head.appendChild(style);
+
+      map.fitBounds(allCoords, { padding: [45, 45] });
     });
   </script>
 </body>
