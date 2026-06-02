@@ -19,6 +19,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body, html {
       margin: 0;
@@ -132,42 +133,293 @@
       background: rgba(255,255,255,0.05);
       color: #e5e7eb;
     }
+
+    /* Shared portfolio header - consistent across Home, About Me, Skillset and Projects pages */
+    .site-header {
+      height: 72px;
+      background: rgba(8, 13, 32, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 14px 42px rgba(15, 23, 42, 0.24);
+    }
+
+    .site-header-inner {
+      width: min(1180px, calc(100% - 2rem));
+      height: 72px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-brand {
+      font-size: 1.5rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      text-decoration: none;
+      background: linear-gradient(90deg, #ffffff, #c7d2fe, #93c5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .site-brand:hover {
+      transform: translateY(-1px);
+      filter: drop-shadow(0 0 18px rgba(147, 197, 253, 0.38));
+    }
+
+    .site-desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .site-nav-link {
+      position: relative;
+      color: rgba(226, 232, 240, 0.86);
+      font-size: 0.92rem;
+      line-height: 1;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.22s ease, transform 0.22s ease;
+    }
+
+    .site-nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -11px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa, #22d3ee);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.22s ease;
+    }
+
+    .site-nav-link:hover,
+    .site-nav-link.active {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .site-nav-link:hover::after,
+    .site-nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    .site-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .site-menu-button:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .site-mobile-menu {
+      background: rgba(8, 13, 32, 0.96);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .site-mobile-nav {
+      width: min(1180px, calc(100% - 2rem));
+      margin-inline: auto;
+      display: grid;
+      gap: 0.4rem;
+      padding: 1rem 0 1.15rem;
+    }
+
+    .site-mobile-link {
+      display: block;
+      padding: 0.85rem 0.95rem;
+      border-radius: 14px;
+      color: rgba(226, 232, 240, 0.88);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .site-mobile-link:hover,
+    .site-mobile-link.active {
+      color: #ffffff;
+      background: rgba(129, 140, 248, 0.16);
+      transform: translateX(3px);
+    }
+
+    /* Projects page polish */
+    .info-card {
+      margin-top: 7.75rem;
+      max-width: 940px;
+      border-radius: 1.75rem;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)),
+        radial-gradient(circle at top right, rgba(99,102,241,0.22), transparent 34%);
+      box-shadow: 0 26px 80px rgba(0,0,0,0.42);
+    }
+
+    .info-card h3 {
+      font-size: clamp(2.15rem, 4vw, 3.6rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ffffff, #c4b5fd, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .info-card p {
+      color: rgba(226,232,240,0.9);
+      line-height: 1.75;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.75rem;
+      padding-top: 1rem;
+      padding-bottom: 4rem;
+    }
+
+    .articles > article {
+      display: flex;
+      min-width: 0;
+    }
+
+    .article-wrapper {
+      width: 100%;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(145deg, rgba(17,24,39,0.94), rgba(30,41,59,0.78));
+      box-shadow: 0 22px 60px rgba(0,0,0,0.32);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4px;
+      background: linear-gradient(90deg, #a78bfa, #22d3ee, #10b981);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .article-wrapper:hover::after {
+      transform: scaleX(1);
+    }
+
+    .article-body h2 {
+      color: #a7f3d0;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .article-body p {
+      color: rgba(226,232,240,0.86);
+      line-height: 1.62;
+    }
+
+    .read-more {
+      color: #c4b5fd;
+      transition: color 0.22s ease, transform 0.22s ease;
+    }
+
+    .article-wrapper:hover .read-more {
+      color: #67e8f9;
+      transform: translateX(3px);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(14px);
+    }
+
+    @media (max-width: 767px) {
+      .site-desktop-nav { display: none; }
+      .site-menu-button { display: inline-flex; }
+      .site-header,
+      .site-header-inner { height: 68px; }
+      .site-brand { font-size: 1.35rem; }
+      .info-card {
+        margin-top: 6.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding: 1.45rem;
+      }
+      .articles {
+        padding-inline: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
   </style>
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
   <script src="//code.tidio.co/nitgtcn6l7l9b5epjifpws9lzhrdvs7d.js" async></script>
 
   <div id="tsparticles"></div>
   <div class="gradient-overlay"></div>
+  <!-- Consistent Portfolio Header -->
+  <header class="site-header fixed top-0 inset-x-0 z-50">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-brand" aria-label="Go to Zach Ng home page">Zach Ng</a>
 
-  <!-- NAVBAR (unchanged) -->
-  <header>
-    <div class="container px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
-      <nav class="hidden md:flex space-x-8" id="nav-links">
-        <a href="index.html">Home</a>
-        <a href="zach.html">About Me</a>
-        <a href="about.html">My Skillset</a>
-        <a href="skills.html">My Projects</a>
-        <a href="blog_main.html">My Updates</a>
-
+      <nav class="site-desktop-nav" aria-label="Primary navigation">
+        <a href="index.html" class="site-nav-link">Home</a>
+        <a href="zach.html" class="site-nav-link">About Me</a>
+        <a href="about.html" class="site-nav-link">My Skillset</a>
+        <a href="skills.html" class="site-nav-link active" aria-current="page">My Projects</a>
+        <a href="blog_main.html" class="site-nav-link">My Updates</a>
       </nav>
-      <button id="burger" class="md:hidden text-gray-200 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+
+      <button id="burger" class="site-menu-button" aria-label="Open mobile menu" aria-controls="mobile-menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
     </div>
+
+    <div id="mobile-menu" class="site-mobile-menu hidden">
+      <nav class="site-mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html" class="site-mobile-link">Home</a>
+        <a href="zach.html" class="site-mobile-link">About Me</a>
+        <a href="about.html" class="site-mobile-link">My Skillset</a>
+        <a href="skills.html" class="site-mobile-link active" aria-current="page">My Projects</a>
+        <a href="blog_main.html" class="site-mobile-link">My Updates</a>
+      </nav>
+    </div>
   </header>
-
-  <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 shadow-lg z-40">
-    <ul class="bg-gray-800 bg-opacity-90 backdrop-blur flex flex-col p-4 space-y-2 text-gray-200">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="zach.html">About Me</a></li>
-      <li><a href="about.html">My Skillset</a></li>
-      <li><a href="skills.html">My Projects</a></li>
-      <li><a href="blog_main.html">My Updates</a></li>
-
-    </ul>
-  </div>
 
   <div class="info-card">
     <h3><b>My Projects</b></h3>
@@ -197,46 +449,9 @@
   </a>
 </article>
 <!-- Image Classifier -->
-<article>
-  <a href="" class="article-wrapper block">
-    <figure class="relative w-full" style="padding-top: 56.25%;">
-      <dotlottie-wc src="https://lottie.host/2d3c5662-48db-4aa4-a6ff-72dc90680fd4/E9hSTX0XJW.lottie"
-                    class="absolute top-0 left-0 w-full h-full"
-                    speed="1" autoplay loop></dotlottie-wc>
-    </figure>
-    <div class="article-body">
-      <h2>Microburbs Dashboard</h2>
-      <p>Microburbs Assessment showcase. (No longer available due to dataseet host taking down the access to the data</p>
-      <span class="read-more">
-        Click to try it out
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/>
-        </svg>
-      </span>
-    </div>
-  </a>
-</article>
 
 
-  <!-- Gemini Career Advisor -->
-  <article>
-    <a href="gemini.html" class="article-wrapper block">
-      <figure class="relative w-full" style="padding-top: 56.25%">
-        <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-        <dotlottie-wc src="https://lottie.host/0fe721eb-2a3b-4bc9-8458-8c72ac0115b9/g0IptaFEL1.lottie" class="absolute top-0 left-0 w-full h-full" speed="1" autoplay loop></dotlottie-wc>
-      </figure>
-      <div class="article-body">
-        <h2>Gemini Career Advisor</h2>
-        <p>Ask career-related questions and get AI-powered guidance using Google's Gemini API. Ideal for exploring career paths, job tips, and CV help.</p>
-        <span class="read-more">
-          Click to try it out
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-  </article>
+
 
 
      
@@ -334,25 +549,7 @@
   </a>
 </article>
 
-<!-- In Development Project -->
-<article>
-  <a href="https://web-production-71ea7.up.railway.app/" class="article-wrapper block">
-    <figure>
-      <script src="hhttps://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-      <dotlottie-wc src="https://lottie.host/f5fbfd0d-1a09-48d2-8543-21f523aa03c0/0FcjegIAQJ.lottie" class="absolute top-0 left-0 w-full h-full" speed="1" autoplay loop></dotlottie-wc>
-    </figure>
-    <div class="article-body">
-      <h2>Educational Survey</h2>
-      <p>Demonstrates my ability to deploy FastAPI and PostGresSQL applications.</p>
-      <span class="read-more">
-        Click to try it out
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/>
-        </svg>
-      </span>
-    </div>
-  </a>
-</article>
+
 
 
 </section>
@@ -375,19 +572,59 @@
   </footer>
 
   <script>
-    // Reveal animation delay for articles
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".articles > article").forEach((el, i) => {
-        el.style.animationDelay = `${i * 0.15}s`;
+        el.style.animationDelay = `${i * 0.12}s`;
       });
+
+      const burger = document.getElementById("burger");
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (burger && mobileMenu && burger.dataset.headerReady !== "true") {
+        burger.dataset.headerReady = "true";
+        burger.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          burger.setAttribute("aria-expanded", String(!mobileMenu.classList.contains("hidden")));
+        });
+      }
     });
 
-      // Mobile menu toggle: show/hide menu on burger click
-  const burger = document.getElementById('burger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  burger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
+    if (window.tsParticles) {
+      tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        particles: {
+          number: { value: 70, density: { enable: true, area: 900 } },
+          color: { value: ["#a78bfa", "#60a5fa", "#22d3ee"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.28 },
+          size: { value: { min: 1, max: 3 } },
+          links: {
+            enable: true,
+            distance: 125,
+            color: "#a78bfa",
+            opacity: 0.16,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 1.1,
+            random: true,
+            straight: false,
+            outModes: { default: "out" }
+          }
+        },
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: "grab" },
+            onClick: { enable: true, mode: "push" }
+          },
+          modes: {
+            grab: { distance: 140, links: { opacity: 0.28 } },
+            push: { quantity: 2 }
+          }
+        },
+        detectRetina: true
+      });
+    }
   </script>
   
 </body>
