@@ -725,7 +725,152 @@
       }
     }
 
-  </style>
+  
+
+/* Shared portfolio header - consistent across Home, About Me, and Skillset pages */
+.site-header {
+  height: 72px;
+  background: rgba(8, 13, 32, 0.78);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 14px 42px rgba(15, 23, 42, 0.24);
+}
+
+.site-header-inner {
+  width: min(1180px, calc(100% - 2rem));
+  height: 72px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-brand {
+  font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(90deg, #ffffff, #c7d2fe, #93c5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.site-brand:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 18px rgba(147, 197, 253, 0.38));
+}
+
+.site-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-nav-link {
+  position: relative;
+  color: rgba(226, 232, 240, 0.86);
+  font-size: 0.92rem;
+  line-height: 1;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.22s ease, transform 0.22s ease;
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -11px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #22d3ee);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.site-nav-link:hover,
+.site-nav-link.active {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.site-nav-link:hover::after,
+.site-nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.site-menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.site-menu-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.site-mobile-menu {
+  background: rgba(8, 13, 32, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.site-mobile-nav {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem 0 1.15rem;
+}
+
+.site-mobile-link {
+  display: block;
+  padding: 0.85rem 0.95rem;
+  border-radius: 14px;
+  color: rgba(226, 232, 240, 0.88);
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.site-mobile-link:hover,
+.site-mobile-link.active {
+  color: #ffffff;
+  background: rgba(129, 140, 248, 0.16);
+  transform: translateX(3px);
+}
+
+@media (max-width: 767px) {
+  .site-desktop-nav { display: none; }
+  .site-menu-button { display: inline-flex; }
+  .site-header,
+  .site-header-inner {
+    height: 68px;
+  }
+  .site-brand {
+    font-size: 1.35rem;
+  }
+}
+
+</style>
 </head>
 <body x-data>
   <div class="aurora"></div>
@@ -734,28 +879,31 @@
   <div class="blob blob-three"></div>
   <div id="tsparticles"></div>
 
-  <header class="nav-glass fixed top-0 inset-x-0 z-50">
-    <div class="shell py-4 flex items-center justify-between">
-      <a href="index.html" class="font-mono text-xl md:text-2xl font-black tracking-tight gradient-text">Zach Ng</a>
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="zach.html" class="nav-link">About Me</a>
-        <a href="about.html" class="nav-link active">My Skillset</a>
-        <a href="skills.html" class="nav-link">My Projects</a>
-        <a href="blog_main.html" class="nav-link">My Updates</a>
+  <header class="site-header fixed top-0 inset-x-0 z-50">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-brand" aria-label="Go to Zach Ng home page">Zach Ng</a>
+
+      <nav class="site-desktop-nav" aria-label="Primary navigation">
+        <a href="index.html" class="site-nav-link">Home</a>
+        <a href="zach.html" class="site-nav-link">About Me</a>
+        <a href="about.html" class="site-nav-link active" aria-current="page">My Skillset</a>
+        <a href="skills.html" class="site-nav-link">My Projects</a>
+        <a href="blog_main.html" class="site-nav-link">My Updates</a>
       </nav>
-      <button id="burger" class="md:hidden w-11 h-11 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-white" aria-label="Open mobile menu">
-        <i class="fa-solid fa-bars"></i>
+
+      <button id="burger" class="site-menu-button" aria-label="Open mobile menu" aria-controls="mobile-menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-slate-950/90 backdrop-blur-xl">
-      <div class="shell py-4 grid gap-3 text-slate-200 font-semibold">
-        <a href="index.html">Home</a>
-        <a href="zach.html">About Me</a>
-        <a href="about.html">My Skillset</a>
-        <a href="skills.html">My Projects</a>
-        <a href="blog_main.html">My Updates</a>
-      </div>
+
+    <div id="mobile-menu" class="site-mobile-menu hidden">
+      <nav class="site-mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html" class="site-mobile-link">Home</a>
+        <a href="zach.html" class="site-mobile-link">About Me</a>
+        <a href="about.html" class="site-mobile-link active" aria-current="page">My Skillset</a>
+        <a href="skills.html" class="site-mobile-link">My Projects</a>
+        <a href="blog_main.html" class="site-mobile-link">My Updates</a>
+      </nav>
     </div>
   </header>
 
@@ -1015,10 +1163,6 @@
       };
     }
 
-    document.getElementById('burger').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
     if (window.tsParticles) {
       tsParticles.load('tsparticles', {
         fpsLimit: 60,
@@ -1046,5 +1190,19 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (!burger || !mobileMenu || burger.dataset.headerReady === "true") return;
+    burger.dataset.headerReady = "true";
+    burger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      burger.setAttribute("aria-expanded", String(!mobileMenu.classList.contains("hidden")));
+    });
+  });
+</script>
+
 </body>
 </html>
