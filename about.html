@@ -2,816 +2,1049 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
- 
-
-  <title>My Skillset – Zach Ng</title>
-  <meta name="description" content="Explore Zach Ng's education, career path, technical and creative skills – from Python, SQL, and AI to Web Design, DataViz, and Dashboards.">
-  <meta name="keywords" content="Zach Ng, Monash, Education, Zach, Wee, Wee Horng, Ng, Monash University, Tampines Meridian Junior College, TMJC, Ngee Ann Secondary, Python, SQL, AI, DataViz, Web Development, Tailwind">
-  <meta property="og:title" content="My Skillset – Zach Ng">
-  <meta property="og:description" content="Explore Zach Ng's technical and creative skills – from Python, SQL, and AI to Web Design, DataViz, and Dashboards.">
-  <meta property="og:image" content="https://zachng01.github.io/Showcase/images/skills-preview.png">
-  <meta property="og:url" content="https://zachng01.github.io/Showcase/skills.html">
-  <meta property="og:type" content="website">
-  <meta name="twitter:title" content="My Skillset – Zach Ng">
-  <meta name="twitter:description" content="Explore Zach Ng's technical and creative skills – from Python, SQL, and AI to Web Design, DataViz, and Dashboards.">
-  <meta name="twitter:image" content="https://zachng01.github.io/Showcase/images/skills-preview.png">
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="About Zach Ng – Data Analyst & AI Researcher with experience in ETL, visualisation, automation, and spatial omics.">
-  <style>
-    #page-loader {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.6s ease, visibility 0.6s;
-    }
-    #page-loader.fade-out {
-      opacity: 0;
-      visibility: hidden;
-    }
-  </style>
+  <title>My Skillset – Zach Ng</title>
+  <meta name="description" content="Zach Ng's career, education, skills, certifications, analytics projects, AI research, and technical capabilities." />
+  <meta name="keywords" content="Zach Ng, Data Analyst, AI Researcher, Monash University, Python, SQL, Power BI, Looker Studio, Data Science, Bioinformatics, Web Development" />
+  <meta property="og:title" content="My Skillset – Zach Ng" />
+  <meta property="og:description" content="Explore Zach Ng's work experience, education, analytics skills, AI research focus, and certifications." />
+  <meta property="og:image" content="https://zachng01.github.io/Showcase/images/skills-preview.png" />
+  <meta property="og:url" content="https://zachng01.github.io/Showcase/about.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="My Skillset – Zach Ng" />
+  <meta name="twitter:description" content="Explore Zach Ng's technical and creative skills across analytics, automation, AI, and web development." />
+  <meta name="twitter:image" content="https://zachng01.github.io/Showcase/images/skills-preview.png" />
 
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        fontFamily: {
-          sans: ['Noto Sans JP', 'sans-serif']
-        },
-        extend: {
-          fontWeight: {
-            'medium-plus': '550'
-          },
-          colors: {
-            primary: '#3f3cbb',
-            accent: '#b794f4',
-            dark: '#1a202c',
-          },
-          keyframes: {
-            'gradient-move': {
-              '0%': { backgroundPosition: '0% 50%' },
-              '50%': { backgroundPosition: '100% 50%' },
-              '100%': { backgroundPosition: '0% 50%' }
-            }
-          },
-          animation: {
-            'gradient-x': 'gradient-move 15s ease infinite'
-          }
-        }
-      }
-    }
-  </script>
-
-
-  <!-- Fonts and Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Particle Background -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg: #070812;
+      --panel: rgba(13, 18, 35, 0.74);
+      --panel-strong: rgba(19, 25, 47, 0.92);
+      --line: rgba(148, 163, 184, 0.22);
+      --text: #eef2ff;
+      --muted: #aeb9d4;
+      --cyan: #22d3ee;
+      --lime: #a3e635;
+      --pink: #f472b6;
+      --violet: #8b5cf6;
+      --orange: #fb923c;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 5%, rgba(34, 211, 238, 0.18), transparent 34rem),
+        radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.16), transparent 32rem),
+        radial-gradient(circle at 30% 90%, rgba(163, 230, 53, 0.12), transparent 34rem),
+        linear-gradient(145deg, #050611 0%, #080b1d 45%, #111827 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+      mix-blend-mode: screen;
+    }
+
+    #tsparticles {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .aurora {
+      position: fixed;
+      inset: -20%;
+      z-index: -5;
+      pointer-events: none;
+      background:
+        conic-gradient(from 90deg at 50% 50%, rgba(34,211,238,0.12), rgba(139,92,246,0.12), rgba(244,114,182,0.12), rgba(163,230,53,0.10), rgba(34,211,238,0.12));
+      filter: blur(70px);
+      animation: spinAurora 24s linear infinite;
+    }
+
+    @keyframes spinAurora {
+      from { transform: rotate(0deg) scale(1.08); }
+      to { transform: rotate(360deg) scale(1.08); }
+    }
+
+    .blob {
+      position: fixed;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: 0.23;
+      pointer-events: none;
+      z-index: -1;
+      animation: floatBlob 12s ease-in-out infinite alternate;
+    }
+    .blob-one { left: -8rem; top: 18rem; background: var(--cyan); }
+    .blob-two { right: -8rem; top: 6rem; background: var(--pink); animation-delay: -4s; }
+    .blob-three { left: 45%; bottom: -10rem; background: var(--lime); animation-delay: -8s; }
+
+    @keyframes floatBlob {
+      from { transform: translate3d(0, 0, 0) scale(0.95); }
+      to { transform: translate3d(38px, -44px, 0) scale(1.12); }
+    }
+
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .nav-glass {
+      background: rgba(7, 8, 18, 0.68);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      backdrop-filter: blur(22px);
+    }
+
+    .nav-link {
+      position: relative;
+      color: #cbd5e1;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: color .25s ease;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+    .nav-link:hover, .nav-link.active { color: #fff; }
+    .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+    .shell {
+      width: min(1180px, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+      backdrop-filter: blur(24px);
+    }
+
+    .panel-strong {
+      background: var(--panel-strong);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+      backdrop-filter: blur(28px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff 0%, #67e8f9 28%, #f9a8d4 58%, #bef264 100%);
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textFlow 7s ease infinite;
+    }
+
+    @keyframes textFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .scan-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .scan-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, transparent 38%, rgba(255,255,255,0.15) 48%, transparent 58%, transparent 100%);
+      transform: translateX(-120%);
+      transition: transform .8s ease;
+      pointer-events: none;
+    }
+    .scan-card:hover::before { transform: translateX(120%); }
+
+    .btn-primary, .btn-ghost {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .82rem 1.05rem;
+      border-radius: 1rem;
+      font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      overflow: hidden;
+    }
+    .btn-primary {
+      color: #031018;
+      background: linear-gradient(135deg, var(--cyan), #d9f99d);
+      box-shadow: 0 16px 36px rgba(34, 211, 238, 0.22);
+    }
+    .btn-ghost {
+      color: #e2e8f0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(148,163,184,0.22);
+    }
+    .btn-primary:hover, .btn-ghost:hover { transform: translateY(-3px); }
+    .btn-ghost:hover { border-color: rgba(34,211,238,0.5); box-shadow: 0 16px 35px rgba(34,211,238,0.12); }
+
+    .section-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .role-track { transition: transform .72s cubic-bezier(.2,.8,.2,1); }
+
+    .timeline-card {
+      min-height: 430px;
+      position: relative;
+      background:
+        linear-gradient(145deg, rgba(15,23,42,.92), rgba(30,41,59,.66)),
+        radial-gradient(circle at 85% 12%, rgba(34,211,238,.16), transparent 30%);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 26px 75px rgba(0,0,0,.38);
+    }
+    .timeline-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--lime));
+    }
+
+    .terminal-bar {
+      display: flex;
+      gap: .45rem;
+      padding: .9rem 1rem;
+      border-bottom: 1px solid rgba(148,163,184,.16);
+      background: rgba(2, 6, 23, .48);
+    }
+    .dot { width: .72rem; height: .72rem; border-radius: 999px; }
+    .dot.red { background: #fb7185; }
+    .dot.yellow { background: #facc15; }
+    .dot.green { background: #4ade80; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .42rem .68rem;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 800;
+      color: #cffafe;
+      border: 1px solid rgba(34,211,238,.25);
+      background: rgba(34,211,238,.08);
+    }
+
+    .arrow-btn {
+      width: 2.65rem;
+      height: 2.65rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,.26);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .arrow-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      border-color: rgba(34,211,238,.6);
+      background: rgba(34,211,238,.15);
+    }
+
+    .edu-card {
+      border-radius: 1.6rem;
+      border: 1px solid rgba(148,163,184,.22);
+      background: rgba(15, 23, 42, .72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 68px rgba(0,0,0,.34);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .edu-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(34,211,238,.46);
+      box-shadow: 0 28px 80px rgba(34,211,238,.10), 0 22px 55px rgba(0,0,0,.36);
+    }
+
+    .skill-card {
+      height: 310px;
+      perspective: 1200px;
+    }
+    .skill-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .75s cubic-bezier(.2,.8,.2,1);
+    }
+    .skill-card.is-flipped .skill-inner { transform: rotateY(180deg); }
+    .skill-face {
+      position: absolute;
+      inset: 0;
+      padding: 1.45rem;
+      border-radius: 1.65rem;
+      border: 1px solid rgba(148,163,184,.22);
+      backface-visibility: hidden;
+      overflow: hidden;
+      box-shadow: 0 22px 62px rgba(0,0,0,.34);
+    }
+    .skill-front {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(145deg, rgba(15,23,42,.94), rgba(30,41,59,.70));
+    }
+    .skill-front::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -40% -30%;
+      height: 56%;
+      background: radial-gradient(circle, var(--accent), transparent 62%);
+      opacity: .25;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .skill-card:hover .skill-front::after { opacity: .42; transform: translateY(-12px); }
+    .skill-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, rgba(2,6,23,.96), rgba(15,23,42,.92));
+      color: #dbeafe;
+      overflow-y: auto;
+    }
+    .skill-back li {
+      position: relative;
+      padding-left: 1.05rem;
+      margin-bottom: .75rem;
+      line-height: 1.45;
+      color: #dbeafe;
+      font-size: .91rem;
+    }
+    .skill-back li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .62rem;
+      width: .42rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-block: 1px solid rgba(148,163,184,.16);
+      background: rgba(255,255,255,.035);
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: scrollTicker 26s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    @keyframes scrollTicker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(.98);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .footer-link { color: #cbd5e1; transition: color .2s ease; }
+    .footer-link:hover { color: var(--cyan); }
+
+    @media (max-width: 768px) {
+      .title-row { align-items: start; flex-direction: column; }
+      .timeline-card { min-height: 560px; }
+      .skill-card { height: 350px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+
+    /* Bright Product Dashboard Refresh */
+    :root {
+      --bg: #f8fbff;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-strong: rgba(255, 255, 255, 0.92);
+      --line: rgba(15, 23, 42, 0.10);
+      --text: #0f172a;
+      --muted: #475569;
+      --cyan: #0891b2;
+      --lime: #65a30d;
+      --pink: #db2777;
+      --violet: #7c3aed;
+      --orange: #ea580c;
+    }
+
+    body {
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(14, 165, 233, 0.22), transparent 28rem),
+        radial-gradient(circle at 92% 14%, rgba(168, 85, 247, 0.18), transparent 30rem),
+        radial-gradient(circle at 48% 92%, rgba(34, 197, 94, 0.14), transparent 30rem),
+        linear-gradient(145deg, #f8fbff 0%, #eef7ff 45%, #fff7ed 100%);
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at center, black, transparent 84%);
+    }
+
+    body::after {
+      opacity: 0.055;
+      mix-blend-mode: multiply;
+    }
+
+    .aurora {
+      opacity: 0.65;
+      background:
+        conic-gradient(from 90deg at 50% 50%, rgba(56,189,248,0.20), rgba(167,139,250,0.18), rgba(244,114,182,0.14), rgba(134,239,172,0.16), rgba(56,189,248,0.20));
+      filter: blur(90px);
+    }
+
+    .blob { opacity: 0.12; filter: blur(55px); }
+
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.07);
+    }
+
+    .nav-link { color: #475569; }
+    .nav-link:hover, .nav-link.active { color: #0f172a; }
+    #mobile-menu { background: rgba(255, 255, 255, 0.94) !important; }
+    #mobile-menu a { color: #0f172a; }
+
+    .panel,
+    .panel-strong,
+    .edu-card,
+    .timeline-card,
+    .skill-face,
+    footer.panel {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.10);
+      color: #0f172a;
+    }
+
+    .panel-strong {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.94), rgba(255,255,255,0.76)),
+        radial-gradient(circle at 90% 10%, rgba(14,165,233,.16), transparent 32%);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #0f172a 0%, #0284c7 26%, #7c3aed 58%, #16a34a 100%);
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-kicker { color: #0369a1; }
+    .text-slate-400 { color: #64748b !important; }
+    .text-slate-300, .text-slate-200 { color: #475569 !important; }
+    .text-cyan-300, .text-cyan-200 { color: #0369a1 !important; }
+    .text-pink-300 { color: #be185d !important; }
+    .text-lime-300 { color: #4d7c0f !important; }
+    .text-orange-300 { color: #c2410c !important; }
+
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, #0284c7, #7c3aed);
+      box-shadow: 0 18px 42px rgba(2, 132, 199, 0.24);
+    }
+    .btn-ghost {
+      color: #0f172a;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(15,23,42,0.14);
+    }
+    .btn-ghost:hover { border-color: rgba(2,132,199,.45); box-shadow: 0 16px 35px rgba(2,132,199,.12); }
+
+    .terminal-bar {
+      background: rgba(248, 250, 252, 0.85);
+      border-bottom: 1px solid rgba(15, 23, 42, .08);
+    }
+
+    .timeline-card {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(241,245,249,.74)),
+        radial-gradient(circle at 85% 12%, rgba(14,165,233,.12), transparent 30%);
+    }
+
+    .timeline-card::after {
+      background: linear-gradient(90deg, #0284c7, #7c3aed, #22c55e);
+    }
+
+    .tag {
+      color: #075985;
+      border: 1px solid rgba(2,132,199,.18);
+      background: rgba(14,165,233,.08);
+    }
+
+    .arrow-btn {
+      background: rgba(255,255,255,.82);
+      color: #0f172a;
+      border: 1px solid rgba(15,23,42,.12);
+      box-shadow: 0 12px 28px rgba(15,23,42,.08);
+    }
+    .arrow-btn:hover { background: rgba(224,242,254,.95); border-color: rgba(2,132,199,.35); }
+
+    .edu-card {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.88), rgba(248,250,252,.72)),
+        radial-gradient(circle at top right, rgba(168,85,247,.10), transparent 30%);
+    }
+    .edu-card:hover {
+      border-color: rgba(2,132,199,.34);
+      box-shadow: 0 28px 80px rgba(2,132,199,.10), 0 22px 55px rgba(15,23,42,.12);
+    }
+
+    .skill-front {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.94), rgba(248,250,252,.78)),
+        radial-gradient(circle at 80% 110%, var(--accent), transparent 56%);
+    }
+    .skill-front::after { opacity: .12; }
+    .skill-card:hover .skill-front::after { opacity: .22; }
+    .skill-back {
+      background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(239,246,255,.94));
+      color: #0f172a;
+    }
+    .skill-back li { color: #334155; }
+    .skill-card { filter: drop-shadow(0 18px 32px rgba(15,23,42,.08)); }
+
+    .ticker {
+      border-block: 1px solid rgba(15,23,42,.08);
+      background: rgba(255,255,255,.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .footer-link { color: #475569; }
+    .footer-link:hover { color: #0369a1; }
+
+    .current-role-widget {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem;
+      padding: 1.25rem;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.96), rgba(240,249,255,.82)),
+        radial-gradient(circle at 85% 20%, rgba(2,132,199,.16), transparent 34%);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: 0 26px 70px rgba(15,23,42,.12);
+      backdrop-filter: blur(22px);
+    }
+    .current-role-widget::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, rgba(2,132,199,.55), rgba(124,58,237,.42), rgba(34,197,94,.35));
+      opacity: .55;
+      z-index: -1;
+      animation: roleBorder 7s ease infinite alternate;
+    }
+    @keyframes roleBorder {
+      from { filter: hue-rotate(0deg); transform: scale(1); }
+      to { filter: hue-rotate(28deg); transform: scale(1.03); }
+    }
+    .uber-logo-card {
+      width: 6.75rem;
+      height: 6.75rem;
+      border-radius: 1.55rem;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,.20);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .uber-logo-card::after {
+      content: "";
+      position: absolute;
+      inset: -45%;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.24), transparent 65%);
+      transform: translateX(-90%) rotate(12deg);
+      animation: logoShine 4.8s ease-in-out infinite;
+    }
+    @keyframes logoShine {
+      0%, 55% { transform: translateX(-90%) rotate(12deg); }
+      100% { transform: translateX(90%) rotate(12deg); }
+    }
+    .uber-wordmark {
+      color: #fff;
+      font-size: 2.15rem;
+      font-weight: 800;
+      letter-spacing: -0.08em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .role-stat {
+      border-radius: 1.25rem;
+      padding: 1rem;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 12px 28px rgba(15,23,42,.06);
+    }
+    .role-pulse {
+      width: .7rem;
+      height: .7rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.45);
+      animation: rolePulse 1.8s infinite;
+    }
+    @keyframes rolePulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.45); }
+      75% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    @media (max-width: 768px) {
+      .current-role-widget { padding: 1rem; }
+      .uber-logo-card { width: 5.4rem; height: 5.4rem; }
+      .uber-wordmark { font-size: 1.75rem; }
+    }
+
+
+    /* Final polish: softer brightness, tighter top spacing, manual-only work carousel */
+    body {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(14, 165, 233, 0.14), transparent 27rem),
+        radial-gradient(circle at 92% 14%, rgba(168, 85, 247, 0.11), transparent 28rem),
+        radial-gradient(circle at 48% 92%, rgba(34, 197, 94, 0.09), transparent 28rem),
+        linear-gradient(145deg, #f3f7fb 0%, #e9f1f8 48%, #f6efe7 100%);
+    }
+    .aurora { opacity: 0.42; filter: blur(105px); }
+    .blob { opacity: 0.075; }
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.055);
+    }
+    .panel,
+    .panel-strong,
+    .edu-card,
+    .timeline-card,
+    .skill-face,
+    footer.panel {
+      background-color: rgba(255, 255, 255, 0.70);
+      box-shadow: 0 20px 54px rgba(15, 23, 42, 0.085);
+    }
+    .panel-strong {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.86), rgba(246,248,251,0.70)),
+        radial-gradient(circle at 90% 10%, rgba(14,165,233,.10), transparent 32%);
+    }
+    .current-role-widget {
+      padding: 1rem;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.88), rgba(238,246,252,.74)),
+        radial-gradient(circle at 85% 20%, rgba(2,132,199,.10), transparent 34%);
+      box-shadow: 0 20px 52px rgba(15,23,42,.10);
+    }
+    .current-role-widget::before { opacity: .28; }
+    .scan-card::before { background: linear-gradient(115deg, transparent 0%, transparent 40%, rgba(255,255,255,0.10) 49%, transparent 58%, transparent 100%); }
+    .ticker { background: rgba(255,255,255,.38); }
+    @media (max-width: 768px) {
+      main { padding-top: 4.75rem !important; }
+    }
+
+    /* Layout guard: prevent the Uber current-role widget from overlapping the hero/cards above it */
+    section[aria-label="Current role widget"] {
+      clear: both;
+      isolation: isolate;
+    }
+    section[aria-label="Current role widget"] .current-role-widget {
+      margin-top: 0;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 1024px) {
+      section[aria-label="Current role widget"] {
+        margin-top: 2rem !important;
+      }
+    }
+
+  </style>
 </head>
+<body x-data>
+  <div class="aurora"></div>
+  <div class="blob blob-one"></div>
+  <div class="blob blob-two"></div>
+  <div class="blob blob-three"></div>
+  <div id="tsparticles"></div>
 
-<body class="relative font-sans bg-gradient-to-br from-[#1e1b4b] via-[#312e81] to-[#1a202c] text-gray-100 min-h-screen">
-
-  <!-- Particles Background -->
-  <div id="tsparticles" class="absolute inset-0 pointer-events-none z-0"></div>
-
-  <!-- Navbar -->
-  <header class="bg-white bg-opacity-20 backdrop-blur fixed w-full z-50 shadow">
-    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-2xl font-bold text-indigo-400 hover:text-indigo-200 transition">Zach Ng</a>
-      <nav>
-        <ul id="nav-links" class="hidden md:flex space-x-8">
-          <li><a href="index.html" class="text-gray-200 hover:text-white font-medium">Home</a></li>
-          <li><a href="zach.html" class="text-gray-200 hover:text-white font-medium">About Me</a></li>          
-          <li><a href="about.html" class="text-gray-200 hover:text-white font-medium">My Skillset</a></li>
-          <li><a href="skills.html" class="text-gray-200 hover:text-white font-medium">My Projects</a></li>
-          <li><a href="blog_main.html" class="text-gray-200 hover:text-white font-medium">My Updates</a></li>
-
-        </ul>
-        <button id="burger" class="md:hidden focus:outline-none text-gray-200">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+  <header class="nav-glass fixed top-0 inset-x-0 z-50">
+    <div class="shell py-4 flex items-center justify-between">
+      <a href="index.html" class="font-mono text-xl md:text-2xl font-black tracking-tight gradient-text">Zach Ng</a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="zach.html" class="nav-link">About Me</a>
+        <a href="about.html" class="nav-link active">My Skillset</a>
+        <a href="skills.html" class="nav-link">My Projects</a>
+        <a href="blog_main.html" class="nav-link">My Updates</a>
       </nav>
+      <button id="burger" class="md:hidden w-11 h-11 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-white" aria-label="Open mobile menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-slate-950/90 backdrop-blur-xl">
+      <div class="shell py-4 grid gap-3 text-slate-200 font-semibold">
+        <a href="index.html">Home</a>
+        <a href="zach.html">About Me</a>
+        <a href="about.html">My Skillset</a>
+        <a href="skills.html">My Projects</a>
+        <a href="blog_main.html">My Updates</a>
+      </div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="md:hidden bg-gray-800 bg-opacity-90 backdrop-blur fixed top-16 inset-x-0 shadow-lg z-40 hidden">
-    <ul class="flex flex-col space-y-2 p-4 text-gray-200">
-      <li><a href="index.html" class="block font-medium">Home</a></li>
-      <li><a href="zach.html" class="block font-medium">About Me</a></li>
-      <li><a href="about.html" class="block font-medium">My Skillset</a></li>
+  <main class="pt-20 pb-20">
+    <section class="shell min-h-[42vh] grid lg:grid-cols-[1.1fr_.9fr] gap-6 items-center reveal mb-6 md:mb-8">
+      <div class="panel-strong scan-card rounded-[2rem] p-6 md:p-8">
+        <p class="section-kicker mb-4">Data • AI • Automation • Growth</p>
+        <h1 class="text-4xl md:text-6xl font-black leading-[.95] tracking-tight mb-5">
+          Learn More<br><span class="gradient-text">About My Skillset.</span>
+        </h1>
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl mb-6">
+          A brighter view of my analytics, operations, automation, web, and AI experience, designed like a clean product dashboard with motion and interactive sections.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <span class="tag"><i class="fa-solid fa-location-dot"></i> Melbourne, VIC</span>
+          <span class="tag"><i class="fa-solid fa-chart-line"></i> Analytics & BI</span>
+          <span class="tag"><i class="fa-solid fa-brain"></i> AI Research</span>
+          <span class="tag"><i class="fa-solid fa-bolt"></i> Automation</span>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn-primary" href="https://linkedin.com/in/zach--ng" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a class="btn-ghost" href="https://drive.google.com/file/d/1Hyc4SX6T4pokgvk7T7pegPqxt7fdPx2B/view?usp=sharing" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-arrow-down"></i> View CV</a>
+          <a class="btn-ghost" href="mailto:zachaus01@gmail.com"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+        </div>
+      </div>
 
-      <li><a href="skills.html" class="block font-medium">My Projects</a></li>
-    </ul>
-  </div>
-
-  <!-- Main Content -->
-  <main class="pt-28 px-4 pb-20 relative z-10 max-w-4xl mx-auto space-y-10">
-
-    <!-- Intro -->
-    <section class="bg-white/10 backdrop-blur p-8 rounded-2xl shadow-2xl">
-      <h1 class="text-4xl font-bold text-accent text-center mb-4">Zach Ng</h1>
-      <p class="text-center text-gray-300 mb-4 font-medium-plus">
-        Melbourne, Victoria · +61 0410 137 093 · <a href="mailto:zachaus01@gmail.com" class="text-accent hover:underline">zachaus01@gmail.com</a>
-      </p>
-      <p class="text-gray-300 mb-6 font-medium-plus text-center">
-        Data Analyst & AI Researcher with experience in cleaning, automation, dashboarding & spatial transcriptomics. Skilled in SQL, Python, Power BI, Looker, and Google Apps Script.
-      </p>
-      <div class="flex justify-center gap-4">
-        <a href="https://linkedin.com/in/zach--ng" target="_blank" class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
-        <a href="https://drive.google.com/file/d/1Hyc4SX6T4pokgvk7T7pegPqxt7fdPx2B/view?usp=sharing" download class="bg-accent text-white px-5 py-2 rounded hover:bg-purple-400"><i class="fas fa-download mr-2"></i>Download CV</a>
+      <div class="grid gap-4">
+        <div class="panel rounded-[1.75rem] p-6 scan-card">
+          <div class="terminal-bar -mx-6 -mt-6 mb-5 rounded-t-[1.75rem]"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+          <p class="font-mono text-cyan-300 text-sm mb-3">zach.current_stack()</p>
+          <div class="space-y-3 font-mono text-sm text-slate-300">
+            <p><span class="text-lime-300">role</span>: Operations + Analytics + AI</p>
+            <p><span class="text-lime-300">stack</span>: Python, SQL, Power BI, Looker, PySpark</p>
+            <p><span class="text-lime-300">research</span>: diffusion models for spatial omics segmentation</p>
+            <p><span class="text-lime-300">focus</span>: dashboards, automation, campaign analytics</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="panel rounded-3xl p-5 scan-card"><p class="text-4xl font-black text-cyan-300">6</p><p class="text-slate-300 mt-1">career roles</p></div>
+          <div class="panel rounded-3xl p-5 scan-card"><p class="text-4xl font-black text-pink-300">5</p><p class="text-slate-300 mt-1">education steps</p></div>
+          <div class="panel rounded-3xl p-5 scan-card"><p class="text-4xl font-black text-lime-300">AI</p><p class="text-slate-300 mt-1">research focus</p></div>
+          <div class="panel rounded-3xl p-5 scan-card"><p class="text-4xl font-black text-orange-300">BI</p><p class="text-slate-300 mt-1">dashboarding</p></div>
+        </div>
       </div>
     </section>
 
-<!-- Work Experience Carousel Section -->
-<section class="work-section p-6 md:p-8 rounded-3xl shadow-2xl bg-white/10 backdrop-blur text-white border border-white/10" x-data="experienceCarousel()" x-init="startAutoScroll">
-  <div class="text-center mb-8">
-    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Career Timeline</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-accent">Work Experience</h2>
-    <p class="text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
-      A snapshot of Zach's experience across operations, analytics, growth marketing, web development, and technical automation.
-    </p>
-  </div>
 
-  <!-- Carousel Container -->
-  <div class="relative max-w-5xl mx-auto overflow-hidden" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
-    <!-- Arrows -->
-    <button @click="prev" title="Previous role" class="work-arrow left-1 md:left-2">
-      <i class="fas fa-chevron-left text-white"></i>
-    </button>
-    <button @click="next" title="Next role" class="work-arrow right-1 md:right-2">
-      <i class="fas fa-chevron-right text-white"></i>
-    </button>
 
-    <!-- Slides -->
-    <div class="flex transition-transform duration-700 ease-out" :style="`transform: translateX(-${current * 100}%);`">
-      <template x-for="(job, index) in jobs" :key="index">
-        <div class="min-w-full px-8 md:px-12">
-          <article class="experience-card group">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-5">
-              <div class="flex items-start gap-4">
-                <div class="work-icon">
-                  <i :class="job.icon"></i>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-purple-300 mb-2" x-text="job.period"></p>
-                  <h3 class="text-2xl font-bold text-white leading-tight" x-text="job.title"></h3>
-                  <p class="text-sm md:text-base text-purple-200 mt-2" x-text="job.company"></p>
-                </div>
-              </div>
-              <div class="flex flex-wrap gap-2 md:justify-end">
-                <template x-for="tag in job.tags" :key="tag">
-                  <span class="skill-pill" x-text="tag"></span>
-                </template>
-              </div>
+    <section class="shell mt-6 md:mt-8 mb-10 reveal relative z-10" aria-label="Current role widget">
+      <div class="current-role-widget scan-card">
+        <div class="grid lg:grid-cols-[auto_1fr_auto] gap-6 items-center">
+          <div class="uber-logo-card" aria-label="Uber logo">
+            <span class="uber-wordmark">Uber</span>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 text-xs font-black uppercase tracking-widest">
+                <span class="role-pulse"></span> Current Role
+              </span>
+              <span class="font-mono text-xs text-slate-400 uppercase tracking-widest">ANZ Membership Operations</span>
             </div>
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-2">Operations Support Specialist</h2>
+            <p class="text-slate-300 leading-relaxed max-w-3xl">
+              Supporting Uber One growth across ANZ through campaign setup, testing, quality control, SQL-driven insights, and dynamic reporting dashboards.
+            </p>
+          </div>
 
-            <ul class="space-y-3 text-gray-200 leading-relaxed">
-              <template x-for="point in job.bullets" :key="point">
-                <li class="flex gap-3">
-                  <span class="mt-2 h-2 w-2 rounded-full bg-purple-300 flex-shrink-0"></span>
-                  <span x-text="point"></span>
-                </li>
-              </template>
-            </ul>
-          </article>
+          <div class="grid grid-cols-2 lg:grid-cols-1 gap-3 min-w-[210px]">
+            <div class="role-stat">
+              <p class="font-mono text-xs text-slate-400 uppercase tracking-widest">Focus</p>
+              <p class="font-black text-lg">Uber One</p>
+            </div>
+            <div class="role-stat">
+              <p class="font-mono text-xs text-slate-400 uppercase tracking-widest">Tools</p>
+              <p class="font-black text-lg">SQL + Sheets</p>
+            </div>
+          </div>
         </div>
-      </template>
-    </div>
-  </div>
+      </div>
+    </section>
 
-  <!-- Dot Indicators -->
-  <div class="flex justify-center mt-7 space-x-2">
-    <template x-for="(job, index) in jobs" :key="'dot-' + index">
-      <button @click="current = index" class="h-2.5 rounded-full cursor-pointer transition-all duration-300"
-        :class="current === index ? 'bg-purple-300 w-8 shadow-lg shadow-purple-500/30' : 'bg-purple-800 w-2.5 hover:bg-purple-500'"
-        :aria-label="`Go to ${job.title}`">
-      </button>
-    </template>
-  </div>
-</section>
+    <section class="ticker my-10 py-4 reveal" aria-label="Skill ticker">
+      <div class="ticker-track font-mono text-sm uppercase tracking-widest text-slate-300">
+        <span class="mx-6">Python</span><span class="mx-6">SQL</span><span class="mx-6">Power BI</span><span class="mx-6">Looker Studio</span><span class="mx-6">PyTorch</span><span class="mx-6">PySpark</span><span class="mx-6">Apps Script</span><span class="mx-6">WordPress</span><span class="mx-6">Meta Ads</span><span class="mx-6">GA4</span>
+        <span class="mx-6">Python</span><span class="mx-6">SQL</span><span class="mx-6">Power BI</span><span class="mx-6">Looker Studio</span><span class="mx-6">PyTorch</span><span class="mx-6">PySpark</span><span class="mx-6">Apps Script</span><span class="mx-6">WordPress</span><span class="mx-6">Meta Ads</span><span class="mx-6">GA4</span>
+      </div>
+    </section>
 
-<!-- Work Experience Styling -->
-<style>
-  .work-section {
-    position: relative;
-    overflow: hidden;
-  }
-  .work-section::before {
-    content: "";
-    position: absolute;
-    inset: -35% auto auto -20%;
-    width: 420px;
-    height: 420px;
-    background: radial-gradient(circle, rgba(183, 148, 244, 0.24), transparent 65%);
-    pointer-events: none;
-  }
-  .experience-card {
-    min-height: 360px;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
-      radial-gradient(circle at top right, rgba(183, 148, 244, 0.18), transparent 35%);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(18px);
-  }
-  .work-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    background: linear-gradient(135deg, rgba(167, 139, 250, 0.95), rgba(79, 70, 229, 0.9));
-    box-shadow: 0 12px 30px rgba(109, 40, 217, 0.35);
-    flex-shrink: 0;
-  }
-  .skill-pill {
-    font-size: 0.72rem;
-    line-height: 1rem;
-    color: #ede9fe;
-    padding: 0.35rem 0.65rem;
-    border: 1px solid rgba(221, 214, 254, 0.28);
-    background: rgba(91, 33, 182, 0.28);
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .work-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
-    width: 2.55rem;
-    height: 2.55rem;
-    border-radius: 999px;
-    background: rgba(124, 58, 237, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .work-arrow:hover {
-    background: rgba(168, 85, 247, 0.95);
-    transform: translateY(-50%) scale(1.06);
-  }
-  @media (max-width: 640px) {
-    .experience-card {
-      min-height: 450px;
-      padding: 1.35rem;
-    }
-    .work-icon {
-      width: 2.6rem;
-      height: 2.6rem;
-    }
-  }
-</style>
+    <section id="experience" class="shell reveal" x-data="experienceCarousel()">
+      <div class="title-row">
+        <div>
+          <p class="section-kicker mb-3">Career Timeline</p>
+          <h2 class="text-4xl md:text-5xl font-black tracking-tight">Work Experience</h2>
+          <p class="text-slate-300 mt-3 max-w-2xl">A carousel of roles across operations, analytics, marketing, field data, web development, and automation.</p>
+        </div>
+        <div class="flex gap-3">
+          <button class="arrow-btn" @click="prev" aria-label="Previous experience"><i class="fa-solid fa-arrow-left"></i></button>
+          <button class="arrow-btn" @click="next" aria-label="Next experience"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
 
-<!-- Alpine Carousel Script -->
-<script>
-function experienceCarousel() {
-  return {
-    current: 0,
-    interval: null,
-    jobs: [
-      {
-        title: 'Operations Support Specialist',
-        company: 'Uber · Rider Operations / Membership · ANZ · 2026 – Present',
-        period: '2026 – Present',
-        icon: 'fas fa-route',
-        tags: ['Operations', 'SQL', 'Dashboards'],
-        bullets: [
-          'Support Uber One membership growth initiatives across ANZ through campaign setup, testing, execution, and quality control.',
-          'Use SQL and dynamic Google Sheets dashboards to surface insights on subscription rates, rideshare usage, and campaign performance.',
-          'Work with cross-functional teams to identify product, pricing, and CRM opportunities that improve member engagement and usage.'
-        ]
-      },
-      {
-        title: 'Geographical Data Collector',
-        company: 'Crossmark / Retail Data Acquisition Services · Melbourne · Aug 2025 – Present',
-        period: 'Aug 2025 – Present',
-        icon: 'fas fa-location-dot',
-        tags: ['Field Data', 'QA', 'Retail'],
-        bullets: [
-          'Collect and validate location-based retail data across assigned Melbourne areas to support accurate geographic and commercial datasets.',
-          'Maintain high data quality by following structured collection workflows, checking inconsistencies, and submitting timely updates.',
-          'Apply strong attention to detail and route planning to complete field assignments efficiently across changing retail environments.'
-        ]
-      },
-      {
-        title: 'Freelance Marketing Campaign Assistant',
-        company: 'Marketlytics · Remote / Perth · Jul 2025 – Present',
-        period: 'Jul 2025 – Present',
-        icon: 'fas fa-chart-line',
-        tags: ['Meta Ads', 'GA4', 'Reporting'],
-        bullets: [
-          'Assist with paid media campaign strategy and execution across Meta Ads, supporting audience targeting, creative testing, and optimisation.',
-          'Track marketing performance using Google Analytics and campaign dashboards to monitor traffic, conversions, and engagement trends.',
-          'Prepare performance reports and A/B testing insights to help improve campaign efficiency and client decision-making.'
-        ]
-      },
-      {
-        title: 'Web Developer Intern',
-        company: 'Oak Leaf Institute · Melbourne CBD · Aug 2025 – Sep 2025',
-        period: 'Aug 2025 – Sep 2025',
-        icon: 'fas fa-code',
-        tags: ['WordPress', 'SEO', 'APIs'],
-        bullets: [
-          'Updated and maintained WordPress website content, improving page structure, usability, and consistency across key site sections.',
-          'Conducted SEO research and implemented on-page improvements to support discoverability, content quality, and search performance.',
-          'Built and adjusted HTML, CSS, JavaScript, and API integrations while contributing to social media and digital content workflows.'
-        ]
-      },
-      {
-        title: 'Data Analyst',
-        company: 'IIPM Pty Ltd · Melbourne CBD · Oct 2023 – Jul 2024',
-        period: 'Oct 2023 – Jul 2024',
-        icon: 'fas fa-database',
-        tags: ['Power BI', 'Looker', 'ETL'],
-        bullets: [
-          'Gathered client requirements across housing and energy sector projects, translating business needs into analytical reporting outputs.',
-          'Built dashboards in Power BI and Looker Studio to communicate trends, operational metrics, and insights for stakeholder decisions.',
-          'Cleaned, transformed, and consolidated datasets while maintaining reporting consistency, data integrity, and repeatable analysis workflows.'
-        ]
-      },
-      {
-        title: 'IT Intern',
-        company: 'Nera Telecommunications · Petaling Jaya, Malaysia · Dec 2023 – Mar 2024',
-        period: 'Dec 2023 – Mar 2024',
-        icon: 'fas fa-screwdriver-wrench',
-        tags: ['Apps Script', 'APIs', 'Automation'],
-        bullets: [
-          'Developed a visitor registry using JavaScript and SQL to support internal tracking, data entry, and operational record keeping.',
-          'Integrated Power Automate workflows with BoldDesk to streamline support processes and reduce repetitive administrative steps.',
-          'Worked with Sophos Central API integrations to support security reporting, system visibility, and cross-team technical communication.'
-        ]
-      }
-    ],
-    next() {
-      this.current = (this.current + 1) % this.jobs.length;
-    },
-    prev() {
-      this.current = (this.current - 1 + this.jobs.length) % this.jobs.length;
-    },
-    startAutoScroll() {
-      this.stopAutoScroll();
-      this.interval = setInterval(() => this.next(), 6500);
-    },
-    stopAutoScroll() {
-      if (this.interval) clearInterval(this.interval);
-    }
-  };
-}
-</script>
-
-<!-- Alpine Education Timeline Section -->
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-<section class="education-section p-6 md:p-8 rounded-3xl shadow-2xl text-white relative overflow-hidden border border-white/10" x-data="carousel()" x-init="startAutoScroll">
-  <div class="text-center mb-8">
-    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Academic Pathway</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-accent">Education</h2>
-    <p class="text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
-      A progression from computing foundations to data science, big data, and applied AI research in bioinformatics.
-    </p>
-  </div>
-
-  <div class="relative max-w-5xl mx-auto" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll">
-    <div class="flex justify-between text-xs text-purple-300 mb-3 px-2">
-      <span>Most recent</span>
-      <span>Earliest</span>
-    </div>
-
-    <button @click="prev" title="Previous education" class="edu-arrow left-1 md:left-2">
-      <i class="fas fa-chevron-left text-white"></i>
-    </button>
-    <button @click="next" title="Next education" class="edu-arrow right-1 md:right-2">
-      <i class="fas fa-chevron-right text-white"></i>
-    </button>
-
-    <div class="overflow-hidden rounded-2xl">
-      <div
-        class="flex transition-transform duration-700 ease-in-out"
-        :style="`transform: translateX(-${current * 100}%);`"
-        @touchstart="handleTouchStart"
-        @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd"
-      >
-        <template x-for="(step, index) in steps" :key="index">
-          <div class="min-w-full px-8 md:px-12 py-2">
-            <article class="education-card">
-              <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
-                <div class="edu-logo-wrap">
-                  <img :src="step.logo" alt="Institution logo" class="h-16 w-16 object-contain" />
-                </div>
-                <div class="flex-1">
-                  <p class="text-xs uppercase tracking-[0.22em] text-purple-300 mb-2" x-text="step.time"></p>
-                  <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" x-text="step.title"></h3>
-                  <p class="text-purple-200 text-base md:text-lg font-medium mt-2" x-text="step.school"></p>
-                  <p class="text-gray-200 mt-4 leading-relaxed" x-text="step.description"></p>
-                  <div class="flex flex-wrap gap-2 justify-center md:justify-start mt-5">
-                    <template x-for="tag in step.tags" :key="tag">
-                      <span class="skill-pill" x-text="tag"></span>
+      <div class="overflow-hidden">
+        <div class="role-track flex" :style="`transform: translateX(-${current * 100}%);`">
+          <template x-for="(job, index) in jobs" :key="job.title">
+            <article class="min-w-full px-1">
+              <div class="timeline-card scan-card">
+                <div class="terminal-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="font-mono text-xs text-slate-400 ml-2" x-text="`experience_${index + 1}.json`"></span></div>
+                <div class="p-6 md:p-9 grid lg:grid-cols-[.72fr_1fr] gap-8">
+                  <div>
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" :style="`background: ${job.gradient}; box-shadow: 0 18px 40px ${job.glow};`">
+                      <i :class="job.icon" class="text-2xl text-white"></i>
+                    </div>
+                    <p class="font-mono text-cyan-300 text-sm uppercase tracking-widest" x-text="job.period"></p>
+                    <h3 class="text-3xl md:text-4xl font-black leading-tight mt-3" x-text="job.title"></h3>
+                    <p class="text-slate-300 mt-3" x-text="job.company"></p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                      <template x-for="tag in job.tags" :key="tag"><span class="tag" x-text="tag"></span></template>
+                    </div>
+                  </div>
+                  <div class="space-y-4">
+                    <template x-for="point in job.bullets" :key="point">
+                      <div class="panel rounded-2xl p-4 flex gap-4 items-start">
+                        <span class="mt-1 w-7 h-7 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-cyan-300 flex-shrink-0"><i class="fa-solid fa-check text-xs"></i></span>
+                        <p class="text-slate-200 leading-relaxed" x-text="point"></p>
+                      </div>
                     </template>
                   </div>
                 </div>
               </div>
             </article>
+          </template>
+        </div>
+      </div>
+      <div class="flex justify-center gap-2 mt-6">
+        <template x-for="(job, index) in jobs" :key="`exp-dot-${index}`">
+          <button @click="current = index" class="h-2.5 rounded-full transition-all" :class="current === index ? 'w-10 bg-cyan-300' : 'w-2.5 bg-slate-600 hover:bg-slate-400'" :aria-label="`Go to ${job.title}`"></button>
+        </template>
+      </div>
+    </section>
+
+    <section id="education" class="shell mt-20 reveal" x-data="educationTimeline()">
+      <div class="title-row">
+        <div>
+          <p class="section-kicker mb-3">Academic Pathway</p>
+          <h2 class="text-4xl md:text-5xl font-black tracking-tight">Education</h2>
+          <p class="text-slate-300 mt-3 max-w-2xl">A vertical, interactive academic timeline from computing foundations to data science and applied AI research.</p>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="hidden md:block absolute left-8 top-8 bottom-8 w-px bg-gradient-to-b from-cyan-300 via-pink-300 to-lime-300"></div>
+        <div class="grid gap-5">
+          <template x-for="(step, index) in steps" :key="step.title">
+            <article class="edu-card scan-card p-5 md:p-6 md:ml-20 relative">
+              <div class="hidden md:flex absolute -left-[4.75rem] top-7 w-14 h-14 rounded-2xl bg-slate-950 border border-cyan-300/30 items-center justify-center shadow-xl shadow-cyan-500/10">
+                <span class="font-mono font-bold text-cyan-300" x-text="String(index + 1).padStart(2, '0')"></span>
+              </div>
+              <div class="flex flex-col md:flex-row gap-5 md:items-center">
+                <div class="w-20 h-20 rounded-2xl bg-white p-3 flex items-center justify-center flex-shrink-0">
+                  <img :src="step.logo" :alt="`${step.school} logo`" class="w-full h-full object-contain" />
+                </div>
+                <div class="flex-1">
+                  <p class="font-mono text-sm text-pink-300 uppercase tracking-widest" x-text="step.time"></p>
+                  <h3 class="text-2xl md:text-3xl font-black mt-1" x-text="step.title"></h3>
+                  <p class="text-cyan-200 font-semibold mt-1" x-text="step.school"></p>
+                  <p class="text-slate-300 mt-3 leading-relaxed" x-text="step.description"></p>
+                  <div class="flex flex-wrap gap-2 mt-4"><template x-for="tag in step.tags" :key="tag"><span class="tag" x-text="tag"></span></template></div>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="shell mt-20 reveal" x-data="skillsGrid()">
+      <div class="title-row">
+        <div>
+          <p class="section-kicker mb-3">Capabilities</p>
+          <h2 class="text-4xl md:text-5xl font-black tracking-tight">Skills & Certifications</h2>
+          <p class="text-slate-300 mt-3 max-w-2xl">Flip each tile to reveal the practical tools, platforms, and credentials behind the portfolio.</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <template x-for="(skill, index) in skills" :key="skill.title">
+          <div class="skill-card cursor-pointer" :class="flipped[index] ? 'is-flipped' : ''" @click="flipped[index] = !flipped[index]" @keyup.enter="flipped[index] = !flipped[index]" role="button" tabindex="0" :aria-label="`Flip ${skill.title}`" :style="`--accent:${skill.accent};`">
+            <div class="skill-inner">
+              <div class="skill-face skill-front scan-card">
+                <div>
+                  <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" :style="`background:${skill.accent}; box-shadow: 0 18px 35px ${skill.glow};`"><i :class="skill.icon" class="text-2xl text-slate-950"></i></div>
+                  <h3 class="text-2xl font-black" x-text="skill.title"></h3>
+                  <p class="text-slate-300 mt-3 leading-relaxed" x-text="skill.summary"></p>
+                </div>
+                <p class="font-mono text-xs text-slate-400 uppercase tracking-widest">Click to inspect</p>
+              </div>
+              <div class="skill-face skill-back">
+                <h3 class="text-xl font-black mb-4" x-text="skill.title"></h3>
+                <ul><template x-for="item in skill.items" :key="item"><li x-text="item"></li></template></ul>
+              </div>
+            </div>
           </div>
         </template>
       </div>
-    </div>
+    </section>
 
-    <div class="flex justify-center mt-7 space-x-2">
-      <template x-for="(step, index) in steps" :key="'edu-dot-' + index">
-        <button
-          @click="current = index"
-          class="h-2.5 rounded-full cursor-pointer transition-all duration-300"
-          :class="current === index ? 'bg-purple-300 w-8 shadow-lg shadow-purple-500/30' : 'bg-purple-800 w-2.5 hover:bg-purple-500'"
-          :aria-label="`Go to ${step.title}`">
-        </button>
-      </template>
-    </div>
-  </div>
-</section>
-
-<!-- Skills & Certifications Section -->
-<section class="skills-section p-6 md:p-8 rounded-3xl shadow-2xl bg-white/10 backdrop-blur border border-white/10">
-  <div class="text-center mb-8">
-    <p class="uppercase tracking-[0.35em] text-xs text-purple-300 mb-3">Capabilities</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-accent">Skills & Certifications</h2>
-    <p class="text-center text-gray-300 mt-3 max-w-2xl mx-auto text-sm md:text-base">
-      Click each card to flip through Zach's technical stack, analytics toolkit, AI research focus, and credentials.
-    </p>
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-6" x-data="{ flipped: [false, false, false, false, false, false] }">
-
-    <div class="perspective cursor-pointer" @click="flipped[0] = !flipped[0]">
-      <div :class="flipped[0] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-purple-600 to-purple-900">
-          <i class="fas fa-code text-4xl mb-4"></i>
-          <h3>Programming & Web</h3>
-          <p>Core languages for analytics, automation, and web delivery.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>Python for data science, automation, scripting, and ML workflows</li>
-            <li>SQL across PostgreSQL, MySQL, Snowflake-style analytics, and dashboard queries</li>
-            <li>JavaScript, HTML, CSS, FastAPI, WordPress, and API integration work</li>
-            <li>R, Bash, Java, GitHub Actions, and reproducible project workflows</li>
-          </ul>
-        </div>
+    <footer class="shell mt-20 panel rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+      <span>&copy; 2026 Zach Ng</span>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="mailto:zachaus01@gmail.com" class="footer-link"><i class="fas fa-envelope mr-1"></i>Email</a>
+        <a href="https://linkedin.com/in/zach--ng" class="footer-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-1"></i>LinkedIn</a>
+        <a href="https://drive.google.com/file/d/1Hyc4SX6T4pokgvk7T7pegPqxt7fdPx2B/view?usp=sharing" class="footer-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines mr-1"></i>CV</a>
       </div>
-    </div>
-
-    <div class="perspective cursor-pointer" @click="flipped[1] = !flipped[1]">
-      <div :class="flipped[1] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-blue-600 to-indigo-900">
-          <i class="fas fa-chart-pie text-4xl mb-4"></i>
-          <h3>Analytics & BI</h3>
-          <p>Turning business data into decisions, dashboards, and reports.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>Power BI, Google Looker Studio, Tableau, Excel, and dynamic Google Sheets</li>
-            <li>ETL, data cleaning, stakeholder reporting, KPI tracking, and insight storytelling</li>
-            <li>Google Analytics, Meta Ads reporting, A/B testing, and campaign performance analysis</li>
-            <li>Operational dashboards for subscription, usage, marketing, and field data quality</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="perspective cursor-pointer" @click="flipped[2] = !flipped[2]">
-      <div :class="flipped[2] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-emerald-600 to-green-900">
-          <i class="fas fa-brain text-4xl mb-4"></i>
-          <h3>Data Science & AI</h3>
-          <p>Applied ML, research, and modelling for real-world datasets.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>Machine learning, NLP, LLM workflows, clustering, decision trees, and model evaluation</li>
-            <li>PyTorch, scikit-image, SciPy, and diffusion model experimentation</li>
-            <li>Spatial omics and bioimage segmentation research using U-Net and MedSegDiff-style pipelines</li>
-            <li>Big data processing with PySpark, Spark SQL, streaming concepts, and data pipelines</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="perspective cursor-pointer" @click="flipped[3] = !flipped[3]">
-      <div :class="flipped[3] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-pink-600 to-fuchsia-900">
-          <i class="fas fa-gears text-4xl mb-4"></i>
-          <h3>Automation & Platforms</h3>
-          <p>Reducing manual work through integrations and workflow design.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>Google Apps Script, Power Automate, Zapier-style workflows, and REST APIs</li>
-            <li>BoldDesk, BoldSign, Sophos Central API, HubSpot, Monday.com, and CRM integrations</li>
-            <li>Neon PostgreSQL, Railway deployment, Google Cloud familiarity, and Snowflake exposure</li>
-            <li>Quality control, documentation, SOPs, troubleshooting, and stakeholder handover</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="perspective cursor-pointer" @click="flipped[4] = !flipped[4]">
-      <div :class="flipped[4] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-orange-500 to-yellow-800">
-          <i class="fas fa-bullhorn text-4xl mb-4"></i>
-          <h3>Digital & Growth</h3>
-          <p>Campaign support, web optimisation, and performance tracking.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>Meta Ads, Google Ads fundamentals, audience targeting, and creative testing support</li>
-            <li>SEO research, on-page updates, WordPress maintenance, and content improvements</li>
-            <li>Campaign dashboards, conversion tracking, engagement monitoring, and client reporting</li>
-            <li>Operational growth support for membership, pricing, CRM, and product experiments</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="perspective cursor-pointer" @click="flipped[5] = !flipped[5]">
-      <div :class="flipped[5] ? 'rotate-y-180' : ''" class="skill-flip-card relative w-full h-72 transition-transform duration-700 transform-style preserve-3d">
-        <div class="skill-card-front from-slate-600 to-gray-900">
-          <i class="fas fa-certificate text-4xl mb-4"></i>
-          <h3>Certifications</h3>
-          <p>Credentials supporting research, analytics, and communication.</p>
-        </div>
-        <div class="skill-card-back rotate-y-180">
-          <ul>
-            <li>IELTS 8.0, completed in 2025</li>
-            <li>IBM Cybersecurity certification through Coursera</li>
-            <li>CITI Conflict of Interest certification, 2023 to 2027</li>
-            <li>DeepLearning.AI diffusion models and Google Data Studio / Looker Studio certification</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Education and Skills Styling -->
-<style>
-  .education-section {
-    background:
-      radial-gradient(circle at top left, rgba(183, 148, 244, 0.22), transparent 34%),
-      linear-gradient(135deg, rgba(42, 33, 93, 0.95), rgba(30, 27, 75, 0.95));
-  }
-  .education-card {
-    min-height: 330px;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06)),
-      radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.2), transparent 38%);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(18px);
-  }
-  .edu-logo-wrap {
-    width: 5.3rem;
-    height: 5.3rem;
-    border-radius: 1.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-    flex-shrink: 0;
-  }
-  .edu-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
-    width: 2.55rem;
-    height: 2.55rem;
-    border-radius: 999px;
-    background: rgba(124, 58, 237, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .edu-arrow:hover {
-    background: rgba(168, 85, 247, 0.95);
-    transform: translateY(-50%) scale(1.06);
-  }
-  .skills-section {
-    position: relative;
-    overflow: hidden;
-  }
-  .skills-section::after {
-    content: "";
-    position: absolute;
-    right: -160px;
-    bottom: -190px;
-    width: 420px;
-    height: 420px;
-    background: radial-gradient(circle, rgba(129, 140, 248, 0.2), transparent 65%);
-    pointer-events: none;
-  }
-  .skill-flip-card {
-    transform-style: preserve-3d;
-  }
-  .skill-card-front,
-  .skill-card-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 1.5rem;
-    backface-visibility: hidden;
-    overflow: hidden;
-    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.26);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-  }
-  .skill-card-front {
-    padding: 1.5rem;
-    color: #fff;
-    background-image: linear-gradient(135deg, var(--tw-gradient-stops));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .skill-card-front h3 {
-    font-size: 1.35rem;
-    font-weight: 800;
-    margin-bottom: 0.55rem;
-  }
-  .skill-card-front p {
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 0.92rem;
-    line-height: 1.5;
-  }
-  .skill-card-back {
-    background: rgba(24, 18, 55, 0.96);
-    padding: 1.35rem;
-    color: #e5e7eb;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    overflow-y: auto;
-  }
-  .skill-card-back ul {
-    list-style: none;
-    display: grid;
-    gap: 0.75rem;
-  }
-  .skill-card-back li {
-    position: relative;
-    padding-left: 1.2rem;
-  }
-  .skill-card-back li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.65rem;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 999px;
-    background: #c4b5fd;
-  }
-  .perspective { perspective: 1000px; }
-  .preserve-3d { transform-style: preserve-3d; }
-  .backface-hidden { backface-visibility: hidden; }
-  .rotate-y-180 { transform: rotateY(180deg); }
-  @media (max-width: 640px) {
-    .education-card {
-      min-height: 430px;
-      padding: 1.35rem;
-    }
-    .skill-flip-card {
-      height: 21rem;
-    }
-  }
-</style>
-
-    <!-- Footer -->
-    <footer class="text-center text-sm text-gray-400 mt-16 mb-6 space-x-4">
-      <span>&copy; 2025 Zach Ng</span>
-      <a href="mailto:zachaus01@gmail.com" class="hover:text-accent"><i class="fas fa-envelope"></i> Email</a>
-      <a href="https://linkedin.com/in/zach--ng" class="hover:text-accent" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
     </footer>
   </main>
 
   <script>
-    tsParticles.load("tsparticles", {
-      particles: {
-        number: { value: 60, density: { enable: true, area: 800 } },
-        color: { value: "#ffffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.3 },
-        size: { value: { min: 1, max: 3 } },
-        move: { enable: true, speed: 1, direction: "bottom", outModes: "out" }
-      }
-    });
-
-    document.getElementById("burger").addEventListener("click", () => {
-      document.getElementById("mobile-menu").classList.toggle("hidden");
-    });
-  </script>
-  <script>
-function carousel() {
-  return {
-    current: 0,
-    interval: null,
-    startX: 0,
-    endX: 0,
-    steps: [
-  {
-    title: 'Master of Data Science',
-    time: '2024–2025',
-    school: 'Monash University · Bioinformatics and Data Science focus',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
-    description: 'Focused on advanced data science, big data processing, machine learning, and bioinformatics research, including spatial transcriptomics cell segmentation using diffusion-model and U-Net style approaches.',
-    tags: ['Bioinformatics', 'Machine Learning', 'Big Data']
-  },
-  {
-    title: 'Bachelor of Computer Science',
-    time: '2021–2024',
-    school: 'Monash University · Data Science specialisation',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
-    description: 'Built a strong base in algorithms, databases, machine learning, analytics, and software development through projects in Python, SQL, R, Java, and web technologies.',
-    tags: ['Data Science', 'Algorithms', 'Databases']
-  },
-  {
-    title: 'Higher Education Diploma in IT',
-    time: '2020–2021',
-    school: 'Monash University',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg',
-    description: 'Completed foundational computing, mathematics, programming, systems analysis, and teamwork units that created the pathway into computer science and data science studies.',
-    tags: ['Computing Foundations', 'Programming', 'Mathematics']
-  },
-  {
-    title: 'Singapore-Cambridge GCE A-Levels',
-    time: '2018–2019',
-    school: 'Tampines Meridian Junior College',
-    logo: 'https://tmseatfinder.herokuapp.com/static/tmjc.png',
-    description: 'Developed a science-oriented academic foundation across Physics, Chemistry, and Mathematics while building research, presentation, and problem-solving skills.',
-    tags: ['Physics', 'Chemistry', 'Mathematics']
-  },
-  {
-    title: 'Singapore-Cambridge GCE O-Levels',
-    time: '2013–2017',
-    school: 'Ngee Ann Secondary School',
-    logo: 'https://ngeeannsec.moe.edu.sg/images/small-school-Logo-No-background-2.png',
-    description: 'Completed secondary education with a broad foundation across science, mathematics, humanities, and co-curricular leadership experiences.',
-    tags: ['Science', 'Leadership', 'Foundations']
-  }
-],next() {
-      this.current = (this.current + 1) % this.steps.length;
-    },
-    prev() {
-      this.current = (this.current - 1 + this.steps.length) % this.steps.length;
-    },
-    startAutoScroll() {
-      this.interval = setInterval(() => this.next(), 6000);
-    },
-    stopAutoScroll() {
-      clearInterval(this.interval);
-    },
-    handleTouchStart(e) {
-      this.startX = e.touches[0].clientX;
-    },
-    handleTouchMove(e) {
-      this.endX = e.touches[0].clientX;
-    },
-    handleTouchEnd() {
-      if (this.startX - this.endX > 50) {
-        this.next();
-      } else if (this.endX - this.startX > 50) {
-        this.prev();
-      }
+    function experienceCarousel() {
+      return {
+        current: 0,
+        interval: null,
+        jobs: [
+          { title: 'Operations Support Specialist', company: 'Uber · ANZ', period: '2026 – Present', icon: 'fas fa-route', gradient: 'linear-gradient(135deg,#22d3ee,#0f172a)', glow: 'rgba(34,211,238,.26)', tags: ['Operations', 'SQL', 'Dashboards'], bullets: ['Support Uber One membership growth initiatives across ANZ through campaign setup, testing, execution, and quality control.', 'Use SQL and dynamic Google Sheets dashboards to surface insights on subscription rates, rideshare usage, and campaign performance.', 'Work with cross-functional teams to identify product, pricing, and CRM opportunities that improve member engagement and usage.'] },
+          { title: 'Geographical Data Collector', company: 'Crossmark / Retail Data Acquisition Services · Melbourne', period: 'Aug 2025 – Nov 2025', icon: 'fas fa-location-dot', gradient: 'linear-gradient(135deg,#a3e635,#14532d)', glow: 'rgba(163,230,53,.24)', tags: ['Field Data', 'QA', 'Retail'], bullets: ['Collect and validate location-based retail data across assigned Melbourne areas to support accurate geographic and commercial datasets.', 'Maintain high data quality by following structured collection workflows, checking inconsistencies, and submitting timely updates.', 'Apply strong attention to detail and route planning to complete field assignments efficiently across changing retail environments.'] },
+          { title: 'Freelance Marketing Campaign Assistant', company: 'Marketlytics · Remote / Perth', period: 'Jul 2025 – Present', icon: 'fas fa-chart-line', gradient: 'linear-gradient(135deg,#f472b6,#831843)', glow: 'rgba(244,114,182,.24)', tags: ['Meta Ads', 'GA4', 'Reporting'], bullets: ['Assist with paid media campaign strategy and execution across Meta Ads, supporting audience targeting, creative testing, and optimisation.', 'Track marketing performance using Google Analytics and campaign dashboards to monitor traffic, conversions, and engagement trends.', 'Prepare performance reports and A/B testing insights to help improve campaign efficiency and client decision-making.'] },
+          { title: 'Web Developer Intern', company: 'Oak Leaf Institute · Melbourne CBD', period: 'Aug 2025 – Sep 2025', icon: 'fas fa-code', gradient: 'linear-gradient(135deg,#fb923c,#7c2d12)', glow: 'rgba(251,146,60,.24)', tags: ['WordPress', 'SEO', 'APIs'], bullets: ['Updated and maintained WordPress website content, improving page structure, usability, and consistency across key site sections.', 'Conducted SEO research and implemented on-page improvements to support discoverability, content quality, and search performance.', 'Built and adjusted HTML, CSS, JavaScript, and API integrations while contributing to social media and digital content workflows.'] },
+          { title: 'Data Analyst', company: 'IIPM Pty Ltd · Melbourne CBD', period: 'Oct 2023 – Jul 2024', icon: 'fas fa-database', gradient: 'linear-gradient(135deg,#8b5cf6,#312e81)', glow: 'rgba(139,92,246,.26)', tags: ['Power BI', 'Looker', 'ETL'], bullets: ['Gathered client requirements across housing and energy sector projects, translating business needs into analytical reporting outputs.', 'Built dashboards in Power BI and Looker Studio to communicate trends, operational metrics, and insights for stakeholder decisions.', 'Cleaned, transformed, and consolidated datasets while maintaining reporting consistency, data integrity, and repeatable analysis workflows.'] },
+          { title: 'IT Intern', company: 'Nera Telecommunications · Petaling Jaya, Malaysia', period: 'Dec 2023 – Mar 2024', icon: 'fas fa-screwdriver-wrench', gradient: 'linear-gradient(135deg,#38bdf8,#1e3a8a)', glow: 'rgba(56,189,248,.24)', tags: ['Apps Script', 'APIs', 'Automation'], bullets: ['Developed a visitor registry using JavaScript and SQL to support internal tracking, data entry, and operational record keeping.', 'Integrated Power Automate workflows with BoldDesk to streamline support processes and reduce repetitive administrative steps.', 'Worked with Sophos Central API integrations to support security reporting, system visibility, and cross-team technical communication.'] }
+        ],
+        next() { this.current = (this.current + 1) % this.jobs.length; },
+        prev() { this.current = (this.current - 1 + this.jobs.length) % this.jobs.length; },
+        startAutoScroll() { /* autoplay disabled by design */ },
+        stopAutoScroll() { if (this.interval) clearInterval(this.interval); this.interval = null; }
+      };
     }
-  };
-}
- 
-</script>
-<script>
-  window.addEventListener("load", () => {
-    const loader = document.getElementById("page-loader");
-    if (!loader) return;
-    loader.classList.add("fade-out");
-    setTimeout(() => loader.remove(), 700); // matches transition duration
-  });
-</script>
 
+    function educationTimeline() {
+      return { steps: [
+        { title: 'Master of Data Science', time: '2024–2025', school: 'Monash University · Bioinformatics and Data Science focus', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg', description: 'Focused on advanced data science, big data processing, machine learning, and bioinformatics research, including spatial transcriptomics cell segmentation using diffusion-model and U-Net style approaches.', tags: ['Bioinformatics', 'Machine Learning', 'Big Data'] },
+        { title: 'Bachelor of Computer Science', time: '2021–2024', school: 'Monash University · Data Science specialisation', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg', description: 'Built a strong base in algorithms, databases, machine learning, analytics, and software development through projects in Python, SQL, R, Java, and web technologies.', tags: ['Data Science', 'Algorithms', 'Databases'] },
+        { title: 'Higher Education Diploma in IT', time: '2020–2021', school: 'Monash University', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg', description: 'Completed foundational computing, mathematics, programming, systems analysis, and teamwork units that created the pathway into computer science and data science studies.', tags: ['Computing Foundations', 'Programming', 'Mathematics'] },
+        { title: 'Singapore-Cambridge GCE A-Levels', time: '2018–2019', school: 'Tampines Meridian Junior College', logo: 'https://tmseatfinder.herokuapp.com/static/tmjc.png', description: 'Developed a science-oriented academic foundation across Physics, Chemistry, and Mathematics while building research, presentation, and problem-solving skills.', tags: ['Physics', 'Chemistry', 'Mathematics'] },
+        { title: 'Singapore-Cambridge GCE O-Levels', time: '2013–2017', school: 'Ngee Ann Secondary School', logo: 'https://ngeeannsec.moe.edu.sg/images/small-school-Logo-No-background-2.png', description: 'Completed secondary education with a broad foundation across science, mathematics, humanities, and co-curricular leadership experiences.', tags: ['Science', 'Leadership', 'Foundations'] }
+      ]};
+    }
 
+    function skillsGrid() {
+      return {
+        flipped: [false, false, false, false, false, false],
+        skills: [
+          { title: 'Programming & Web', icon: 'fas fa-code', accent: '#22d3ee', glow: 'rgba(34,211,238,.28)', summary: 'Core languages for analytics, automation, and web delivery.', items: ['Python for data science, automation, scripting, and ML workflows', 'SQL across PostgreSQL, MySQL, Snowflake-style analytics, and dashboard queries', 'JavaScript, HTML, CSS, FastAPI, WordPress, and API integration work', 'R, Bash, Java, GitHub Actions, and reproducible project workflows'] },
+          { title: 'Analytics & BI', icon: 'fas fa-chart-pie', accent: '#f472b6', glow: 'rgba(244,114,182,.28)', summary: 'Turning business data into decisions, dashboards, and reports.', items: ['Power BI, Google Looker Studio, Tableau, Excel, and dynamic Google Sheets', 'ETL, data cleaning, stakeholder reporting, KPI tracking, and insight storytelling', 'Google Analytics, Meta Ads reporting, A/B testing, and campaign performance analysis', 'Operational dashboards for subscription, usage, marketing, and field data quality'] },
+          { title: 'Data Science & AI', icon: 'fas fa-brain', accent: '#a3e635', glow: 'rgba(163,230,53,.28)', summary: 'Applied ML, research, and modelling for real-world datasets.', items: ['Machine learning, NLP, LLM workflows, clustering, decision trees, and model evaluation', 'PyTorch, scikit-image, SciPy, and diffusion model experimentation', 'Spatial omics and bioimage segmentation research using U-Net and MedSegDiff-style pipelines', 'Big data processing with PySpark, Spark SQL, streaming concepts, and data pipelines'] },
+          { title: 'Automation & Platforms', icon: 'fas fa-gears', accent: '#fb923c', glow: 'rgba(251,146,60,.28)', summary: 'Reducing manual work through integrations and workflow design.', items: ['Google Apps Script, Power Automate, Zapier-style workflows, and REST APIs', 'BoldDesk, BoldSign, Sophos Central API, HubSpot, Monday.com, and CRM integrations', 'Neon PostgreSQL, Railway deployment, Google Cloud familiarity, and Snowflake exposure', 'Quality control, documentation, SOPs, troubleshooting, and stakeholder handover'] },
+          { title: 'Digital & Growth', icon: 'fas fa-bullhorn', accent: '#8b5cf6', glow: 'rgba(139,92,246,.28)', summary: 'Campaign support, web optimisation, and performance tracking.', items: ['Meta Ads, Google Ads fundamentals, audience targeting, and creative testing support', 'SEO research, on-page updates, WordPress maintenance, and content improvements', 'Campaign dashboards, conversion tracking, engagement monitoring, and client reporting', 'Operational growth support for membership, pricing, CRM, and product experiments'] },
+          { title: 'Certifications', icon: 'fas fa-certificate', accent: '#67e8f9', glow: 'rgba(103,232,249,.28)', summary: 'Credentials supporting research, analytics, and communication.', items: ['IELTS 8.0, completed in 2025', 'IBM Cybersecurity certification through Coursera', 'CITI Conflict of Interest certification, 2023 to 2027', 'DeepLearning.AI diffusion models and Google Data Studio / Looker Studio certification'] }
+        ]
+      };
+    }
+
+    document.getElementById('burger').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    if (window.tsParticles) {
+      tsParticles.load('tsparticles', {
+        fpsLimit: 60,
+        particles: {
+          number: { value: 78, density: { enable: true, area: 900 } },
+          color: { value: ['#22d3ee', '#f472b6', '#a3e635', '#8b5cf6'] },
+          shape: { type: ['circle', 'triangle'] },
+          opacity: { value: { min: 0.12, max: 0.42 } },
+          size: { value: { min: 1, max: 4 } },
+          links: { enable: true, distance: 140, color: '#67e8f9', opacity: 0.12, width: 1 },
+          move: { enable: true, speed: 1.2, random: true, outModes: { default: 'bounce' } }
+        },
+        interactivity: {
+          events: { onHover: { enable: true, mode: 'grab' }, onClick: { enable: true, mode: 'push' } },
+          modes: { grab: { distance: 180, links: { opacity: 0.28 } }, push: { quantity: 3 } }
+        },
+        detectRetina: true
+      });
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
