@@ -348,6 +348,51 @@
 }
 
 </style>
+
+
+<!-- Mobile header click fix -->
+<style>
+  .site-header {
+    pointer-events: auto;
+  }
+  .site-header-inner {
+    position: relative;
+    z-index: 70;
+  }
+  .site-menu-button {
+    position: relative;
+    z-index: 90;
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .site-menu-button i {
+    pointer-events: none;
+  }
+  .site-mobile-menu {
+    position: relative;
+    z-index: 65;
+    pointer-events: auto;
+  }
+  @media (max-width: 767px) {
+    .site-desktop-nav {
+      display: none !important;
+    }
+    .site-menu-button {
+      display: inline-flex !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .site-menu-button {
+      display: none !important;
+    }
+    .site-mobile-menu {
+      display: none !important;
+    }
+  }
+</style>
+
 </head>
 
 <body class="relative text-white bg-ink">
@@ -787,6 +832,64 @@
       burger.setAttribute("aria-expanded", String(!mobileMenu.classList.contains("hidden")));
     });
   });
+</script>
+
+
+
+<!-- Reliable mobile menu toggle -->
+<script>
+  (() => {
+    function initialiseMobileHeader() {
+      const oldButton = document.getElementById('burger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (!oldButton || !mobileMenu) return;
+
+      // Replace the button to remove any older duplicate click handlers from previous page versions.
+      const button = oldButton.cloneNode(true);
+      oldButton.parentNode.replaceChild(button, oldButton);
+
+      const icon = button.querySelector('i');
+      const setMenuState = (isOpen) => {
+        mobileMenu.classList.toggle('hidden', !isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.setAttribute('aria-label', isOpen ? 'Close mobile menu' : 'Open mobile menu');
+        if (icon) {
+          icon.classList.toggle('fa-bars', !isOpen);
+          icon.classList.toggle('fa-xmark', isOpen);
+        }
+      };
+
+      setMenuState(false);
+
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setMenuState(mobileMenu.classList.contains('hidden'));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenuState(false));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!mobileMenu.classList.contains('hidden') &&
+            !mobileMenu.contains(event.target) &&
+            !button.contains(event.target)) {
+          setMenuState(false);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) setMenuState(false);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initialiseMobileHeader);
+    } else {
+      initialiseMobileHeader();
+    }
+  })();
 </script>
 
 </body>
