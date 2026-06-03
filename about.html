@@ -239,7 +239,9 @@
       margin-bottom: 1.75rem;
     }
 
-    .role-track { transition: transform .72s cubic-bezier(.2,.8,.2,1); }
+    .role-track { transition: transform .72s cubic-bezier(.2,.8,.2,1); will-change: transform; }
+    .touch-pan-y { touch-action: pan-y; }
+    .select-none { user-select: none; -webkit-user-select: none; }
 
     .timeline-card {
       min-height: 430px;
@@ -1051,8 +1053,22 @@
         </div>
       </div>
 
-      <div class="overflow-hidden">
-        <div class="role-track flex" :style="`transform: translateX(-${current * 100}%);`">
+      <div
+        class="overflow-hidden cursor-grab active:cursor-grabbing select-none touch-pan-y"
+        x-ref="roleViewport"
+        tabindex="0"
+        aria-label="Swipe or drag work experience carousel"
+        @keydown.arrow-left.prevent="prev"
+        @keydown.arrow-right.prevent="next"
+        @pointerdown="dragStart($event)"
+        @pointermove.window="dragMove($event)"
+        @pointerup.window="dragEnd($event)"
+        @pointercancel.window="dragEnd($event)"
+      >
+        <div
+          class="role-track flex"
+          :style="`transform: translateX(calc(-${current * 100}% + ${dragOffset}px)); transition: ${isDragging ? 'none' : 'transform .72s cubic-bezier(.2,.8,.2,1)'};`"
+        >
           <template x-for="(job, index) in jobs" :key="job.title">
             <article class="min-w-full px-1">
               <div class="timeline-card scan-card">
@@ -1169,6 +1185,9 @@
       return {
         current: 0,
         interval: null,
+        isDragging: false,
+        startX: 0,
+        dragOffset: 0,
         jobs: [
           { title: 'Operations Support Specialist', company: 'Uber · ANZ', period: '2026 – Present', icon: 'fas fa-route', gradient: 'linear-gradient(135deg,#22d3ee,#0f172a)', glow: 'rgba(34,211,238,.26)', tags: ['Operations', 'SQL', 'Dashboards'], bullets: ['Support Uber One membership growth initiatives across ANZ through campaign setup, testing, execution, and quality control.', 'Use SQL and dynamic Google Sheets dashboards to surface insights on subscription rates, rideshare usage, and campaign performance.', 'Work with cross-functional teams to identify product, pricing, and CRM opportunities that improve member engagement and usage.'] },
           { title: 'Geographical Data Collector', company: 'Crossmark / Retail Data Acquisition Services · Melbourne', period: 'Aug 2025 – Nov 2025', icon: 'fas fa-location-dot', gradient: 'linear-gradient(135deg,#a3e635,#14532d)', glow: 'rgba(163,230,53,.24)', tags: ['Field Data', 'QA', 'Retail'], bullets: ['Collect and validate location-based retail data across assigned Melbourne areas to support accurate geographic and commercial datasets.', 'Maintain high data quality by following structured collection workflows, checking inconsistencies, and submitting timely updates.', 'Apply strong attention to detail and route planning to complete field assignments efficiently across changing retail environments.'] },
@@ -1179,6 +1198,29 @@
         ],
         next() { this.current = (this.current + 1) % this.jobs.length; },
         prev() { this.current = (this.current - 1 + this.jobs.length) % this.jobs.length; },
+        dragStart(event) {
+          if (event.button !== undefined && event.button !== 0) return;
+          this.isDragging = true;
+          this.startX = event.clientX;
+          this.dragOffset = 0;
+          event.currentTarget?.setPointerCapture?.(event.pointerId);
+        },
+        dragMove(event) {
+          if (!this.isDragging) return;
+          const viewportWidth = this.$refs.roleViewport?.offsetWidth || 1;
+          const maxDrag = viewportWidth * 0.36;
+          const movement = event.clientX - this.startX;
+          this.dragOffset = Math.max(-maxDrag, Math.min(maxDrag, movement));
+        },
+        dragEnd() {
+          if (!this.isDragging) return;
+          const viewportWidth = this.$refs.roleViewport?.offsetWidth || 1;
+          const threshold = Math.min(120, viewportWidth * 0.18);
+          if (this.dragOffset <= -threshold) this.next();
+          else if (this.dragOffset >= threshold) this.prev();
+          this.isDragging = false;
+          this.dragOffset = 0;
+        },
         startAutoScroll() { /* autoplay disabled by design */ },
         stopAutoScroll() { if (this.interval) clearInterval(this.interval); this.interval = null; }
       };
