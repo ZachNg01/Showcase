@@ -1,105 +1,56 @@
-const wheel = document.getElementById("wheel");
-const spinBtn = document.getElementById("spin-btn");
-const finalValue = document.getElementById("final-value");
-//Object that stores values of minimum and maximum angle for a value
-const rotationValues = [
-  { minDegree: 0, maxDegree: 30, value: 2 },
-  { minDegree: 31, maxDegree: 90, value: 1 },
-  { minDegree: 91, maxDegree: 150, value: 6 },
-  { minDegree: 151, maxDegree: 210, value: 5 },
-  { minDegree: 211, maxDegree: 270, value: 4 },
-  { minDegree: 271, maxDegree: 330, value: 3 },
-  { minDegree: 331, maxDegree: 360, value: 2 },
-];
-//Size of each piece
-const data = [16, 16, 16, 16, 16, 16];
-//background color for each piece
-var pieColors = [
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-];
-//Create chart
-let myChart = new Chart(wheel, {
-  //Plugin for displaying text on pie chart
-  plugins: [ChartDataLabels],
-  //Chart Type Pie
-  type: "pie",
-  data: {
-    //Labels(values which are to be displayed on chart)
-    labels: [1, 2, 3, 4, 5, 6],
-    //Settings for dataset/pie
-    datasets: [
-      {
-        backgroundColor: pieColors,
-        data: data,
-      },
-    ],
-  },
-  options: {
-    //Responsive chart
-    responsive: true,
-    animation: { duration: 0 },
-    plugins: {
-      //hide tooltip and legend
-      tooltip: false,
-      legend: {
-        display: false,
-      },
-      //display labels inside pie chart
-      datalabels: {
-        color: "#ffffff",
-        formatter: (_, context) => context.chart.data.labels[context.dataIndex],
-        font: { size: 24 },
-      },
-    },
-  },
-});
-//display value based on the randomAngle
-const valueGenerator = (angleValue) => {
-  for (let i of rotationValues) {
-    //if the angleValue is between min and max then display it
-    if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
-      spinBtn.disabled = false;
-      break;
-    }
-  }
-};
+const $ = (selector) => document.querySelector(selector);
 
-//Spinner count
-let count = 0;
-//100 rotations for animation and last rotation for result
-let resultValue = 101;
-//Start spinning
-spinBtn.addEventListener("click", () => {
-  spinBtn.disabled = true;
-  //Empty final value
-  finalValue.innerHTML = `<p>Good Luck!</p>`;
-  //Generate random degrees to stop at
-  let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
-  //Interval for rotation animation
-  let rotationInterval = window.setInterval(() => {
-    //Set rotation for piechart
-    /*
-    Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
-    */
-    myChart.options.rotation = myChart.options.rotation + resultValue;
-    //Update chart with new value;
-    myChart.update();
-    //If rotation>360 reset it back to 0
-    if (myChart.options.rotation >= 360) {
-      count += 1;
-      resultValue -= 5;
-      myChart.options.rotation = 0;
-    } else if (count > 15 && myChart.options.rotation == randomDegree) {
-      valueGenerator(randomDegree);
-      clearInterval(rotationInterval);
-      count = 0;
-      resultValue = 101;
-    }
-  }, 10);
+const curtainHost = $("#curtains");
+for (let i = 0; i < 6; i += 1) {
+  const panel = document.createElement("div");
+  panel.className = "curtain";
+  panel.style.left = `${i * 16.66}%`;
+  curtainHost.appendChild(panel);
+}
+
+const zipperLayout = [
+  [48, 18, 17, 0.02, false], [55, 26, -41, 0.16, true],
+  [25, 52, 67, 0.08, false], [54, 63, -12, 0.28, true],
+  [72, 76, 38, 0.2, false], [78, 42, -69, 0.36, true],
+  [36, 88, 5, 0.12, false]
+];
+const zipHost = $("#zipField");
+zipperLayout.forEach(([x, y, rotation, delay, reverse]) => {
+  const zip = document.createElement("div");
+  zip.className = `zip${reverse ? " reverse" : ""}`;
+  zip.style.cssText = `--x:${x}%;--y:${y}%;--r:${rotation}deg;--d:${delay}s`;
+  const teeth = Array.from({ length: 140 }, () => '<i class="tooth"></i>').join("");
+  zip.innerHTML = `<div class="teeth a">${teeth}</div><div class="teeth b">${teeth}</div><div class="slider"><span>CL</span><b></b></div>`;
+  zipHost.appendChild(zip);
+});
+window.setTimeout(() => $("#loader").classList.add("done"), 3000);
+
+const updateCountdown = () => {
+  const target = new Date("2026-10-03T00:00:00+10:00").getTime();
+  const left = Math.max(0, target - Date.now());
+  const values = {
+    days: Math.floor(left / 86400000),
+    hours: Math.floor(left / 3600000) % 24,
+    minutes: Math.floor(left / 60000) % 60,
+    seconds: Math.floor(left / 1000) % 60
+  };
+  Object.entries(values).forEach(([id, value]) => {
+    $(`#${id}`).textContent = String(value).padStart(2, "0");
+  });
+};
+updateCountdown();
+window.setInterval(updateCountdown, 1000);
+
+const drawer = $("#drawer");
+const shade = $("#shade");
+const closeMenu = () => { drawer.classList.remove("open"); shade.classList.remove("on"); };
+$("#menuOpen").addEventListener("click", () => { drawer.classList.add("open"); shade.classList.add("on"); });
+$("#menuClose").addEventListener("click", closeMenu);
+shade.addEventListener("click", closeMenu);
+drawer.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+$("#signup").addEventListener("submit", (event) => {
+  event.preventDefault();
+  $("#formStatus").textContent = "SIGNAL RECEIVED / 登録完了";
+  event.currentTarget.reset();
 });
