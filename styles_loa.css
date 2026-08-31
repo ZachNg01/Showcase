@@ -24,3 +24,30 @@
   footer{padding:35px 7vw;min-height:230px}
 }
 .hero-art{background-image:url('assets/lily-meadow_loa.png')}
+
+.result-genre{font-size:9px;line-height:1.8;letter-spacing:.12em;text-transform:uppercase;color:#607b84}
+.synopsis-toggle{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:30px}
+.synopsis-toggle summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:17px 0;cursor:pointer;text-transform:uppercase;letter-spacing:.16em;font-size:9px}
+.synopsis-toggle summary::-webkit-details-marker{display:none}
+.synopsis-toggle summary b{font-size:18px;font-weight:300;transition:transform .25s}
+.synopsis-toggle[open] summary b{transform:rotate(45deg)}
+.synopsis-toggle .synopsis{padding:0 0 22px;margin:0;white-space:pre-line}
+.library-tools{display:grid;grid-template-columns:1.4fr 1fr auto;gap:18px;align-items:end;padding:35px 8vw;background:#0a2938;color:#edf4f4;border-bottom:1px solid #dae9ef38}
+.library-tools label{display:grid;gap:9px}
+.library-tools label>span{font-size:9px;text-transform:uppercase;letter-spacing:.17em;color:#a8c0c8}
+.library-tools input,.library-tools select{width:100%;height:52px;border:1px solid #b8ccd052;background:#071e317d;color:#edf4f4;padding:0 16px;font-family:'Noto Serif JP',serif;font-size:13px;outline:none}
+.library-tools input::placeholder{color:#9ab0b8}
+.library-tools input:focus,.library-tools select:focus{border-color:#b9cbe3;box-shadow:0 0 0 2px #b9cbe326}
+.library-tools select option{background:#0a2938;color:#edf4f4}
+.library-tools button{height:52px;border:1px solid #b8ccd052;background:transparent;color:#edf4f4;padding:0 24px;text-transform:uppercase;letter-spacing:.15em;font-size:9px;cursor:pointer}
+.library-tools button:hover{background:#edf4f4;color:#102a3b}
+.genre-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.genre-chips span{border:1px solid #b9cbe34d;padding:6px 9px;color:#b9cbe3;font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.missing-cover{width:180px;height:260px;display:grid;place-items:center;text-align:center;border:1px solid #b9cbe34d;color:#9eb6c1;font-size:9px;text-transform:uppercase;letter-spacing:.12em}
+.library-empty{text-align:center;padding:80px 20px;color:#b9cbe3}
+.library-empty h2{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:400;margin:0 0 10px}
+@media(max-width:800px){
+  .library-tools{grid-template-columns:1fr;padding:26px 7vw}
+  .library-tools button{width:100%}
+  .missing-cover{width:135px;height:200px}
+}
