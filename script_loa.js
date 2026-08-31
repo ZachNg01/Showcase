@@ -1,31 +1,9 @@
-const SHEET_CSV = "https://docs.google.com/spreadsheets/d/1ydtjVh-7CiVkD9uhb2DTKh848-U9QkVXh_AcsqvW7DA/gviz/tq?tqx=out:csv&gid=0";
+const SHEET_ID = "1ydtjVh-7CiVkD9uhb2DTKh848-U9QkVXh_AcsqvW7DA";
+const SHEET_GID = "0";
+const SHEET_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+const SHEET_XLSX = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx&gid=${SHEET_GID}`;
 
-const COVER_BY_GOODREADS_ID = {
-  "58613224": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1627042661i/58613224.jpg",
-  "169354": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1403025725i/169354.jpg"
-};
-
-// Used when the Google Sheet cannot be reached, such as when opening the HTML directly.
-const SHEET_SNAPSHOT = [
-  {
-    goodreadsUrl: "https://www.goodreads.com/book/show/58613224-harry-potter-and-the-deathly-hallows",
-    title: "Harry Potter and the Deathly Hallows (Harry Potter, #7)",
-    author: "J.K. Rowling",
-    synopsis: "It is no longer safe for Harry at Hogwarts, so he and his best friends, Ron and Hermione, are on the run. Dumbledore has left them clues about what they must do to defeat Lord Voldemort, but they must decipher those clues while evading capture. Their friendship, courage, and sense of right and wrong are tested as the final battle between good and evil returns them to Hogwarts.",
-    genre: "Fantasy, Fiction, Young Adult, Harry Potter, Magic, Audiobook, Childrens, Adventure, Middle Grade, Classics",
-    cover: COVER_BY_GOODREADS_ID["58613224"]
-  },
-  {
-    goodreadsUrl: "https://www.goodreads.com/book/show/169354.The_Prize",
-    title: "The Prize: The Epic Quest for Oil, Money, and Power",
-    author: "Daniel Yergin",
-    synopsis: "The Prize recounts the panoramic history of oil and the struggle for wealth and power that has always surrounded it. From the first well in Pennsylvania through two world wars, the Iraqi invasion of Kuwait, and Operation Desert Storm, it is as much a history of the twentieth century as it is a history of the oil industry.",
-    genre: "History, Nonfiction, Economics, Business, Politics, Middle East, Science, World History, Finance, Environment",
-    cover: COVER_BY_GOODREADS_ID["169354"]
-  }
-];
-
-let books = [...SHEET_SNAPSHOT];
+let books = [];
 let selected = 0;
 
 function parseCSV(text) {
@@ -52,13 +30,30 @@ function parseCSV(text) {
   return rows;
 }
 
-function goodreadsId(url = "") {
-  return url.match(/(?:book\/show\/|\/show\/)(\d+)/i)?.[1] || "";
+function coverURL(value = "") {
+  const direct = value.match(/https:\/\/m\.media-amazon\.com\/[^"'\)\s<>]+\.jpg/i)?.[0];
+  return direct || "";
 }
 
-function coverURL(value = "", goodreadsUrl = "") {
-  const direct = value.match(/https:\/\/m\.media-amazon\.com\/[^"'\)\s<>]+\.jpg/i)?.[0];
-  return direct || COVER_BY_GOODREADS_ID[goodreadsId(goodreadsUrl)] || "";
+function goodreadsId(value = "") {
+  return value.match(/(?:book\/show\/|\/show\/)(\d+)/i)?.[1] ||
+    value.match(/i\/(\d+)\.jpg/i)?.[1] || "";
+}
+
+async function fetchCoverFormulas() {
+  const response = await fetch(SHEET_XLSX, { cache: "no-store" });
+  if (!response.ok) throw new Error("Spreadsheet download failed");
+  const files = fflate.unzipSync(new Uint8Array(await response.arrayBuffer()));
+  const sheetFile = files["xl/worksheets/sheet1.xml"];
+  if (!sheetFile) return new Map();
+
+  const coversByBookId = new Map();
+  const sheetXml = fflate.strFromU8(sheetFile);
+  sheetXml.match(/https:\/\/m\.media-amazon\.com\/[^&"'\)\s<>]+\.jpg/gi)?.forEach(url => {
+    const bookId = goodreadsId(url);
+    if (url && bookId) coversByBookId.set(bookId, url);
+  });
+  return coversByBookId;
 }
 
 function genresFor(book) {
@@ -67,25 +62,37 @@ function genresFor(book) {
 
 async function fetchBooks() {
   try {
-    const response = await fetch(SHEET_CSV, { cache: "no-store" });
+    const [response, coversByBookId] = await Promise.all([
+      fetch(SHEET_CSV, { cache: "no-store" }),
+      fetchCoverFormulas()
+    ]);
     if (!response.ok) throw new Error("Sheet request failed");
     const rows = parseCSV(await response.text());
     const headers = rows.shift().map(value => value.trim());
+    const seenBooks = new Set();
     const loaded = rows
-      .map(values => Object.fromEntries(headers.map((header, index) => [header, values[index] || ""])))
-      .filter(row => row.Title && row.Author)
-      .map(row => ({
+      .map(values => ({ values: Object.fromEntries(headers.map((header, index) => [header, values[index] || ""])) }))
+      .filter(row => row.values.Title && row.values.Author)
+      .filter(({ values: row }) => {
+        const key = goodreadsId(row["Goodreads URL"]) || `${row.Title}|${row.Author}`.toLocaleLowerCase();
+        if (seenBooks.has(key)) return false;
+        seenBooks.add(key);
+        return true;
+      })
+      .map(({ values: row }) => ({
         goodreadsUrl: row["Goodreads URL"],
         title: row.Title.trim(),
         author: row.Author.trim(),
         synopsis: (row.Synopsis || "").replace(/<br\s*\/?\s*>/gi, "\n").trim(),
         genre: (row.Genre || "").trim(),
-        cover: coverURL(row.Cover, row["Goodreads URL"])
+        cover: coverURL(row.Cover) || coversByBookId.get(goodreadsId(row["Goodreads URL"])) || ""
       }));
-    if (loaded.length) books = loaded;
+    if (!loaded.length) throw new Error("No book rows found");
+    books = loaded;
     return true;
-  } catch {
-    books = [...SHEET_SNAPSHOT];
+  } catch (error) {
+    console.error("Could not load the Google Sheet:", error);
+    books = [];
     return false;
   }
 }
@@ -241,16 +248,27 @@ async function start() {
   const homePage = document.querySelector("#random-button");
   if (!libraryPage && !homePage) return;
   const synced = await fetchBooks();
+  if (!synced) {
+    if (libraryPage) {
+      libraryPage.innerHTML = "<div class=\"library-empty\"><h2>The shelf could not be loaded</h2><p>Check that the Google Sheet is shared publicly, then refresh this page.</p></div>";
+      document.querySelector("#library-status").textContent = "Google Sheet unavailable";
+    } else {
+      document.querySelector("#sync-status").textContent = "Google Sheet unavailable · Try refreshing";
+      document.querySelector("#monthly-title").textContent = "The shelf could not be loaded";
+      document.querySelector("#monthly-author").textContent = "Please refresh in a moment";
+      document.querySelector("#monthly-synopsis").textContent = "Lauren’s list is always read live from Google Sheets.";
+      homePage.disabled = true;
+    }
+    return;
+  }
   if (libraryPage) {
     renderFullLibrary();
     setupLibraryFilters();
-    if (!synced) document.querySelector("#library-status").textContent += " · Offline snapshot";
     return;
   }
   renderHome();
   setupRandomiser();
-  document.querySelector("#sync-status").textContent =
-    (synced ? books.length + " books synced" : "Offline snapshot") + " · Showing the latest five";
+  document.querySelector("#sync-status").textContent = books.length + " books synced · Showing the latest five";
 }
 
 start();
